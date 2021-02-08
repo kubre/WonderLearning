@@ -1,4 +1,4 @@
-<x-website-layout title='Home'>
+<x-website-layout title='Home' index="true">
 
     <!--Main Slider-->
     <section class="main-slider style-two">
@@ -558,7 +558,7 @@
                             data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>">
                         </div>
                     </div> --}}
-                    <div class="caption-box"><h3>Call to enrol your child 666 8888 000</h3></div>
+                    <div class="caption-box"><h3>Call today at 726 480 9024</h3></div>
                 </div>
                 
             </div>

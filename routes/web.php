@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'website.home');
 Route::view('/home', 'website.home');
 Route::view('/programs', 'website.programs');
+Route::view('/services', 'website.services');
 Route::view('/testimonials', 'website.testimonials');
 Route::view('/awards', 'website.awards'); 
 Route::view('/gallery', 'website.gallery');
@@ -26,4 +27,4 @@ Route::view('/franchise', 'website.franchise');
 Route::post('/contact-us', function(Request $request) {
     dd($request);
 });
-Route::view('/contact-us', 'website.contact-us');
+Route::view('/contact-us', 'website.contact');

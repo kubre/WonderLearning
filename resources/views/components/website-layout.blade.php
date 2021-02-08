@@ -34,8 +34,9 @@
     <!-- Preloader -->
     <div class="preloader"></div>
 
-    <header class="main-header header-style-two">
+    <header class="main-header {{ isset($index) ? 'header-style-two' : '' }}">
         <!-- Header Top -->
+        @if(isset($index))
         <div class="header-top">
             <div class="auto-container">
                 <div class="clearfix">
@@ -59,9 +60,6 @@
                 </div>
             </div>
         </div>
-        <!-- Header Top -->
-
-        <!-- Header Upper -->
         <div class="header-lower">
             <div class="auto-container clearfix">
                 <!--Info-->
@@ -102,7 +100,74 @@
                 </div>
             </div>
         </div>
-        <!--End Header Upper-->
+        @else
+        <div class="header-upper">
+            <div class="auto-container">
+                <div class="nav-outer clearfix">
+                    {{-- <ul class="info-box clearfix">
+                        <li><a href="tel:6668880000">666 888 0000 <span class="fa fa-phone-square"></span></a></li>    <li><a href="mailto:info@bebio.com"><span class="fa fa-envelope"></span>info@bebio.com</a></li>
+                    </ul> --}}
+
+                    <div class="responsive-logo"><a href="index.html"><img style="max-height: 50px;" src="images/logo.png" alt="" title="Bebio - Kinder Garten HTML Template"></a></div>
+
+                    <!-- Main Menu -->
+                    <nav class="main-menu navbar-expand-md navbar-light">
+                        <div class="navbar-header">
+                            <!-- Togg le Button -->      
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="icon flaticon-menu-button"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+                            <ul class="navigation clearfix">
+                                <li class="{{ (Request::is('/') ? 'current' : '') }}">
+                                    <a href="{{url('/')}}">Home</a>
+                                    <ul>
+                                        <li><a href="/#about-section">About Us</a></li>
+                                        <li><a href="#vision-and-mission">Vision & Mission</a></li>
+                                    </ul>
+                                </li>
+                                <li class="{{ (Request::is('programs') ? 'current' : '') }}"><a href="{{ url('/programs')}}">Programs</a></li>
+                                <li class="{{ Request::is('services') ? 'current' : '' }}"><a href="services">Services</a>
+                                <li class="{{ Request::is('testimonials') ? 'current' : '' }}"><a href='{{ url('testimonials') }}'>Testimonials</a></li>
+                                <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
+                                <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
+                                <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li>
+                                <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li>
+                                <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <!-- Main Menu End-->
+                </div>
+            </div>
+        </div>
+        <div class="header-lower">
+            <div class="auto-container">
+                <div class="outer-box">
+                    <!-- Option Box -->
+                    <div class="option-box">
+                        <ul class="clearfix">
+                           {{-- <li class="search-box-btn"><span class="icon fa fa-search"></span></li>  --}}
+                           <li><a href="mailto:help@wonderlearning.in"><span class="fa fa-envelope"></span></a></li>
+                        </ul>
+                    </div>
+
+                    <!--Logo-->
+                    <div class="logo-outer">
+                        <div class="logo"><a href="/"><img style="max-height: 50px;" src="images/logo.png" alt="" title=""></a></div>
+                    </div>
+
+                    <ul class="social-icon-colored">
+                        <li><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                        {{-- <li><a href="#"><span class="fab fa-twitter"></span></a></li>
+                        <li><a href="#"><span class="fab fa-youtube"></span></a></li> --}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <!-- Sticky Header  -->
         <div class="sticky-header">
@@ -320,11 +385,12 @@
 <script src="js/jquery.countdown.js"></script>
 <script src="js/wow.js"></script>
 <script src="js/appear.js"></script>
+<script src="js/validate.js"></script>
 <script src="js/parallax.min.js"></script>
 <script src="js/script.js"></script>
 <!--Google Map APi Key-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcaOOcFcQ0hoTqANKZYz-0ii-J0aUoHjk"></script>
-<script src="js/map-script.js"></script>
+{{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcaOOcFcQ0hoTqANKZYz-0ii-J0aUoHjk"></script>
+<script src="js/map-script.js"></script> --}}
 <!--End Google Map APi-->
 </body>
 </html>
