@@ -22,7 +22,7 @@ Route::view('/services', 'website.services');
 Route::view('/testimonials', 'website.testimonials');
 Route::view('/awards', 'website.awards'); 
 Route::view('/gallery', 'website.gallery');
-Route::view('/clients', 'website.clients');
+// Route::view('/clients', 'website.clients');
 Route::view('/franchise', 'website.franchise');
 Route::post('/contact-us', function(Request $request) {
     dd($request);

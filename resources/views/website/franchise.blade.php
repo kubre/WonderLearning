@@ -1,4 +1,4 @@
-<x-website-layout title="Programs">
+<x-website-layout title="Franchise">
     <!--Page Title-->
     <section class="page-title" style="background-image:url(images/background/1.jpg);">
         <div class="auto-container">
@@ -21,29 +21,28 @@
                 <!-- Program Block -->
                 <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v1.svg" alt=""></figure>
-                        </div>
                         <div class="lower-content">
-                            <h4>Playgroup</h4>
-                            <div class="text">
-                                Wonder Learning  is focused on providing a fun, nurturing and curiosity-driven environment where children develop a love for learning and a grateful perspective on their lives.
-                            </div>
+                            <h4>Why Wonder Joy Preschool</h4>
+                            <ul class="list-style-two">
+                                <li>India’s emerging pre- School chain.</li>
+                                <li>Managed by highly qualified & most experienced management team in the preschool industry.</li>
+                                <li>Reasonable Franchise fee & royalty - No hidden costs and No false promises.</li>
+                                <li>Assistance in developing infrastructure and designing interiors.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
+                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v2.svg" alt=""></figure>
-                        </div>
                         <div class="lower-content">
-                            <h4>Nursery</h4>
-                            <div class="text">
-                                Our goal is to nurture curiosity, strengthen resilience, and cultivate appreciation for the world around us so that young minds can flourish.
-                            </div>
+                            <h4>Pre-Requisites</h4>
+                            <ul class="list-style-two">
+                                <li>Minimum 2500+ Sq ft. carpet area on ground floor. Preferably independent house with separate boundary wall along with outdoor play area.</li>
+                                <li>An initial investment of 12-15 lakh (as per city and location).</li>
+                                <li>Passion to deliver quality education</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -51,30 +50,40 @@
 
             <div class="row">
                 <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
+                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v3.svg" alt=""></figure>
-                        </div>
                         <div class="lower-content">
-                            <h4>Lower Kindergarten</h4>
-                            <div class="text">
-                                We envision developing a future generation of leaders who value global well-being and approach their life challenges with integrity, resiliency and compassion.
-                            </div>
+                            <h4>Our Supoort</h4>
+                            <ul class="list-style-two">
+                                <li>Detailed operating manuals for franchisees.</li>
+                                <li>Franchisee training at nearest location without any cost.</li>
+                                <li>Field assistance for franchisee.</li>
+                                <li>Expert guidance from Head Office to franchisee in opening the franchise.</li>
+                                <li>Providing all Curriculum/Training manuals.</li>
+                                <li>Recruitment and interview support, regular trainings.</li>
+                                <li>Letters, Mailers and CDs for day-to-day working assistance.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
                 <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
+                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp">
                     <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v3.svg" alt=""></figure>
-                        </div>
                         <div class="lower-content">
-                            <h4>Upper Kindergarten</h4>
-                            <div class="text">
-                                We envision developing a future generation of leaders who value global well-being and approach their life challenges with integrity, resiliency and compassion.
-                            </div>
+                            <h4>How to join us</h4>
+                            <ul class="list-style-two">
+                                <li>Kindly Whatsapp/Email/Courier us the location Pictures of the proposed location in the city/town- Need plan/layout of the proposed building with approximate dimensions of the rooms.</li>
+                                <li>If the location is approved, we shall confirm to you on the phone/email.</li>
+                                <li>You can Make the advance /Booking amount payment through RTGS or Draft in Favour of “Wonder Learning India Pvt. Ltd.”.</li>
+                                <li>Our designing team will start working on your art work designs and will start helping you set-up the branch for you.</li>
+                                <li>We shall inform you once all your franchise material is ready to dispatch before the final payment.</li>
+                                <li>We shall give you training at your location on mutually agreed dates.</li>
+                                <li>We shall prepare a marketing plan for your launch in consultation with you.</li>
+                                <li>Once the branch is launched, you shall continue to receive regular guidance on running the school as per the Wonder Learning curriculum and standards.</li>
+                                <li>Other Wonder Learning’s branches & the Head Office is just one phone call/email away for any help you need. We are here to help you become a successful entrepreneur !!</li>
+                                <li>To discuss the matter personally, Contact our Franchise Consultant at <a href="/contact-us">here</a>.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

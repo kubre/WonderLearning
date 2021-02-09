@@ -1,4 +1,4 @@
-<x-website-layout title="Programs">
+<x-website-layout title="Awards">
     <!--Page Title-->
     <section class="page-title" style="background-image:url(images/background/1.jpg);">
         <div class="auto-container">
@@ -7,84 +7,32 @@
                     <li><a href="/">Home</a></li>
                     <li>Awards</li>
                 </ul>
-                <h1>Awards</h1>
+                <h1>“Best emerging Preschool Consultants in India 2019” 
+                    <br> at India Education Awards 2019 by Blindwink</h1>
             </div>
         </div>
     </section>
     <!--End Page Title-->
 
-    <!-- Program Section -->
-    <section class="program-section pt-4">
+    <section class="gallery-section style-two">   
         <div class="auto-container">
-
             <div class="row">
-                <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v1.svg" alt=""></figure>
-                        </div>
-                        <div class="lower-content">
-                            <h4>Playgroup</h4>
-                            <div class="text">
-                                Wonder Learning  is focused on providing a fun, nurturing and curiosity-driven environment where children develop a love for learning and a grateful perspective on their lives.
-                            </div>
-                        </div>
+                <!-- Gallery Item -->
+                <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn">
+                    <div class="image-box">
+                        <figure class="image"><img src="images/website/award.jpeg" alt=""></figure>
+                        <div class="overlay-box"><a href="images/website/award.jpeg" class="lightbox-image" data-fancybox='gallery'><span class="icon flaticon-add"></span></a></div>
                     </div>
                 </div>
 
-                <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="400ms">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v2.svg" alt=""></figure>
-                        </div>
-                        <div class="lower-content">
-                            <h4>Nursery</h4>
-                            <div class="text">
-                                Our goal is to nurture curiosity, strengthen resilience, and cultivate appreciation for the world around us so that young minds can flourish.
-                            </div>
-                        </div>
+                <!-- Gallery Item -->
+                <div class="gallery-item col-lg-4 col-md-6 col-sm-12 wow fadeIn" data-wow-delay="400ms">
+                    <div class="image-box">
+                        <figure class="image"><img src="images/website/g2.png" alt=""></figure>
+                        <div class="overlay-box"><a href="images/website/g2.png" class="lightbox-image" data-fancybox='gallery'><span class="icon flaticon-add"></span></a></div>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v3.svg" alt=""></figure>
-                        </div>
-                        <div class="lower-content">
-                            <h4>Lower Kindergarten</h4>
-                            <div class="text">
-                                We envision developing a future generation of leaders who value global well-being and approach their life challenges with integrity, resiliency and compassion.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Program Block -->
-                <div class="program-block col-lg-6 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="800ms">
-                    <div class="inner-box">
-                        <div class="image-box">
-                            <figure class="image"><img style="width: 100%; height: 100%;" src="images/website/v3.svg" alt=""></figure>
-                        </div>
-                        <div class="lower-content">
-                            <h4>Upper Kindergarten</h4>
-                            <div class="text">
-                                We envision developing a future generation of leaders who value global well-being and approach their life challenges with integrity, resiliency and compassion.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- <div class="btn-box">
-                <a href="programs.html" class="theme-btn btn-style-one">View All Programs</a>
-            </div> --}}
         </div>
     </section>
-    <!--End Program Section -->
-
 </x-website-layout>

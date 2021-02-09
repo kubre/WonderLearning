@@ -90,7 +90,7 @@
                                 <li class="{{ Request::is('testimonials') ? 'current' : '' }}"><a href='{{ url('testimonials') }}'>Testimonials</a></li>
                                 <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
                                 <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
-                                <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li>
+                                {{-- <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li> --}}
                                 <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li>
                                 <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us </a></li>
                             </ul>
@@ -105,7 +105,7 @@
             <div class="auto-container">
                 <div class="nav-outer clearfix">
                     {{-- <ul class="info-box clearfix">
-                        <li><a href="tel:6668880000">666 888 0000 <span class="fa fa-phone-square"></span></a></li>    <li><a href="mailto:info@bebio.com"><span class="fa fa-envelope"></span>info@bebio.com</a></li>
+                        <li><a href="tel:7264809024">726 480 9024 <span class="fa fa-phone-square"></span></a></li>   <li><a href="mailto:help@wonderlearning.in"><span class="fa fa-envelope"></span>help@wonderlearning.in</a></li>
                     </ul> --}}
 
                     <div class="responsive-logo"><a href="index.html"><img style="max-height: 50px;" src="images/logo.png" alt="" title="Bebio - Kinder Garten HTML Template"></a></div>
@@ -133,7 +133,7 @@
                                 <li class="{{ Request::is('testimonials') ? 'current' : '' }}"><a href='{{ url('testimonials') }}'>Testimonials</a></li>
                                 <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
                                 <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
-                                <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li>
+                                {{-- <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li> --}}
                                 <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li>
                                 <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us</a></li>
                             </ul>
@@ -194,7 +194,7 @@
                                 <li class="{{ Request::is('testimonials') ? 'current' : '' }}"><a href='{{ url('testimonials') }}'>Testimonials</a></li>
                                 <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
                                 <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
-                                <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li>
+                                {{-- <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li> --}}
                                 <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li>
                                 <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us </a></li>
                             </ul>

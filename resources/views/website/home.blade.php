@@ -6,11 +6,11 @@
             <div class="rev_slider fullwidthabanner" id="rev_slider_one" data-version="5.4.1">
                 <ul>
                     <!-- Slide 1 -->
-                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1681" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/sl1.jpg">
+                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1681" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/b11.jpg">
 
-                        <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/sl1.jpg">
+                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/b11.jpg">
                         
-                        <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
+                        {{-- <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
                         data-paddingbottom="[0,0,0,0]"
                         data-paddingleft="[0,0,0,0]"
                         data-paddingright="[0,0,0,0]"
@@ -142,15 +142,15 @@
                         data-textalign="['top','top','top','top']"
                         data-frames='[{"delay":1500,"speed":1500,"frame":"0","from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
                             <h2>India Education Awards 2019 by Blindwink</h2>
-                        </div>
+                        </div> --}}
                     </li>
 
                     <!-- Slide 2 -->
-                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/sl3.jpg">
+                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/b12.jpg">
 
-                        <img alt="" class="rev-slidebg" data-bgfit="cover" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/sl3.jpg">
+                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/b12.jpg">
                         
-                        <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
+                        {{-- <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
                         data-paddingbottom="[0,0,0,0]"
                         data-paddingleft="[0,0,0,0]"
                         data-paddingright="[0,0,0,0]"
@@ -301,7 +301,166 @@
                         data-textalign="['top','top','top','top']"
                         data-frames='[{"delay":2000,"speed":1500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
                             <div class="link-box"><a href="about.html" class="theme-btn btn-style-one">Learn More</a></div>
+                        </div> --}}
+                    </li>
+
+                    <!-- Slide 3 -->
+                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/b13.jpg">
+
+                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/b13.jpg">
+                        
+                        {{-- <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-whitespace="nowrap"
+                        data-width="none"
+                        data-hoffset="['-80','15','15','15']"
+                        data-voffset="['30','0','0','0']"
+                        data-x="['left','left','left','left']"
+                        data-y="['top','top','top','top']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <span class="icon icon-sun-2"></span>
                         </div>
+
+
+                        <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-3" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-whitespace="nowrap"
+                        data-width="none"
+                        data-hoffset="['-255','15','15','15']"
+                        data-voffset="['175','0','0','0']"
+                        data-x="['left','left','left','left']"
+                        data-y="['top','top','top','top']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <span class="icon icon-star"></span>
+                        </div>
+
+                        <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-3" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-whitespace="nowrap"
+                        data-width="none"
+                        data-hoffset="['440','15','15','15']"
+                        data-voffset="['105','0','0','0']"
+                        data-x="['left','left','left','left']"
+                        data-y="['top','top','top','top']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <span class="icon icon-star-4"></span>
+                        </div>
+
+                        <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-whitespace="nowrap"
+                        data-width="none"
+                        data-hoffset="['150','15','15','15']"
+                        data-voffset="['40','0','0','0']"
+                        data-x="['right','right','right','right']"
+                        data-y="['top','top','top','top']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <span class="icon icon-idea"></span>
+                        </div>
+
+                        <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-5" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-whitespace="nowrap"
+                        data-width="none"
+                        data-hoffset="['-360','15','15','15']"
+                        data-voffset="['150','0','0','0']"
+                        data-x="['left','left','left','left']"
+                        data-y="['bottom','bottom','bottom','bottom']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <span class="icon icon-pencil"></span>
+                        </div>
+
+                        <div class="tp-caption" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-width="['650','650','670','400']"
+                        data-whitespace="normal"
+                        data-hoffset="['15','15','15','15']"
+                        data-voffset="['-185','-180','-140','-210']"
+                        data-x="['left','left','left','left']"
+                        data-y="['middle','middle','middle','middle']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":1000,"speed":1500,"frame":"0","from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <div class="title"></div>
+                        </div>
+
+                        <div class="tp-caption" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-width="['650','730','650','400']"
+                        data-whitespace="normal"
+                        data-hoffset="['15','15','15','15']"
+                        data-voffset="['-25','-25','-25','-25']"
+                        data-x="['left','left','left','left']"
+                        data-y="['middle','middle','middle','middle']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":1500,"speed":1500,"frame":"0","from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <h2></h2>
+                        </div>
+                        
+                        <div class="tp-caption tp-resizeme" 
+                        data-paddingbottom="[0,0,0,0]"
+                        data-paddingleft="[0,0,0,0]"
+                        data-paddingright="[0,0,0,0]"
+                        data-paddingtop="[0,0,0,0]"
+                        data-responsive_offset="on"
+                        data-type="text"
+                        data-height="none"
+                        data-whitespace="normal"
+                        data-width="['650','650','650','400']"
+                        data-hoffset="['15','15','15','15']"
+                        data-voffset="['190','190','130','190']"
+                        data-x="['left','left','left','left']"
+                        data-y="['middle','middle','middle','middle']"
+                        data-textalign="['top','top','top','top']"
+                        data-frames='[{"delay":2000,"speed":1500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"Power4.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
+                            <div class="link-box"><a href="about.html" class="theme-btn btn-style-one">Learn More</a></div>
+                        </div> --}}
                     </li>
                 </ul>
             </div>
