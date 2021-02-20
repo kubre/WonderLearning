@@ -25,7 +25,42 @@
     .header-style-two .top-right .link-box::before {
         content: '';
     }
+
+    @media only screen and (min-width: 768px) {
+        .header-style-two .header-lower .main-menu .navigation > li:hover::before,
+        .header-style-two .header-lower .main-menu .navigation > li.current::before {
+            background-repeat: no-repeat;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li:hover,
+        .header-style-two .header-lower .main-menu .navigation > li.current {
+            background-color: #f5c747;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li,
+        .header-style-two .header-lower .main-menu .navigation > li > a {
+            margin: 0 !important; 
+            padding: 0 !important;
+            height: 140px;
+            width: 100%;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li > a {
+            padding: 0px 12px !important;
+            line-height: 140px;
+        }
+        .header-style-two .header-lower .nav-outer {
+            width: 80% !important;
+            float: right;
+        }
+        .header-style-two .header-lower .main-menu,
+        .header-style-two .header-lower .navbar-collapse,
+        .header-style-two .header-lower .main-menu .navigation {
+            width: 100% !important;
+            display: flex;
+            justify-content: stretch;
+        }
+    }
 </style>
+
+{{ $head ?? '' }}
 </head>
 
 <body>
@@ -91,7 +126,7 @@
                                 <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
                                 <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
                                 {{-- <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li> --}}
-                                <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li>
+                                {{-- <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li> --}}
                                 <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us </a></li>
                             </ul>
                         </div>
@@ -108,7 +143,7 @@
                         <li><a href="tel:7264809024">726 480 9024 <span class="fa fa-phone-square"></span></a></li>   <li><a href="mailto:help@wonderlearning.in"><span class="fa fa-envelope"></span>help@wonderlearning.in</a></li>
                     </ul> --}}
 
-                    <div class="responsive-logo"><a href="index.html"><img style="max-height: 50px;" src="images/logo.png" alt="" title="Bebio - Kinder Garten HTML Template"></a></div>
+                    <div class="responsive-logo"><a href="index.html"><img style="max-height: 50px;" src="images/logo.png" alt="" title="Wonder Learning India Pvt. Ltd."></a></div>
 
                     <!-- Main Menu -->
                     <nav class="main-menu navbar-expand-md navbar-light">
@@ -134,7 +169,7 @@
                                 <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
                                 <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
                                 {{-- <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li> --}}
-                                <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li>
+                                {{-- <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li> --}}
                                 <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us</a></li>
                             </ul>
                         </div>
@@ -174,7 +209,7 @@
             <div class="auto-container clearfix">
                 <!--Logo-->
                 <div class="logo pull-left">
-                    <a href="index.html" title=""><img src="images/logo.png" style="max-height: 50px;" alt="" title=""></a>
+                    <a href="/" title=""><img src="images/logo.png" style="max-height: 50px;" alt="" title=""></a>
                 </div>
                 <!--Right Col-->
                 <div class="pull-right">

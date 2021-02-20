@@ -1,5 +1,13 @@
 <x-website-layout title='Home' index="true">
 
+    <x-slot name="head">
+        <style>
+            .about-section-three {
+                background: url(../images/icons/pattern.png), #5798fe;
+            }
+        </style>
+    </x-slot>
+
     <!--Main Slider-->
     <section class="main-slider style-two">
         <div class="rev_slider_wrapper fullwidthbanner-container"  id="rev_slider_one_wrapper" data-source="gallery">
@@ -519,7 +527,7 @@
     <!-- About Us Section -->
     <section class="about-section-three">
         <div class="auto-container">
-            <div class="sec-title text-center">
+            <div class="sec-title light text-center">
                 <span class="title">Information</span>
                 <h2>About Us</h2>
             </div>
@@ -579,7 +587,7 @@
                 </div> --}}
                 {{-- col-lg-4 col-md-12 col-sm-12 --}}
                 <div class="text-column">
-                    <div class="text px-4 px-md-0">
+                    <div class="text px-4 px-md-0 text-white">
                         We are an ISO 9001:2015 certified  preschool consultant company from Maharashtra state of India. We have stepped up in the market with the philosophy “Empowering the Child Education” to encourage & support pre-schools to have a better learning environment for a child.  With the vision of  bringing a revolution in the early childhood education space, extensive research was done over 2-3 years in studying the best practices and consulting with the best experts in early education; we have designed & developed <strong>“Student Academic Kit”</strong> which provides an age appropriate, child centred curriculum along with other resourceful contents which are useful to students & school management throughout the academic year. In a way we are providing ‘One stop solution’ to the schools for their pre-primary section. We are committed to early development of a child and introducing him/her to a balanced learning through a child centric learning environment with a play way method. 
                     </div>
                 </div>
