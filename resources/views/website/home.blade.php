@@ -14,9 +14,9 @@
             <div class="rev_slider fullwidthabanner" id="rev_slider_one" data-version="5.4.1">
                 <ul>
                     <!-- Slide 1 -->
-                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1681" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/b11.jpg">
+                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1681" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/sl2.jpg">
 
-                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/b11.jpg">
+                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/sl2.jpg">
                         
                         {{-- <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
                         data-paddingbottom="[0,0,0,0]"
@@ -154,9 +154,9 @@
                     </li>
 
                     <!-- Slide 2 -->
-                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/b12.jpg">
+                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/sl2.jpg">
 
-                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/b12.jpg">
+                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/sl2.jpg">
                         
                         {{-- <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
                         data-paddingbottom="[0,0,0,0]"
@@ -313,9 +313,9 @@
                     </li>
 
                     <!-- Slide 3 -->
-                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/b13.jpg">
+                    <li data-transition="parallaxvertical" data-description="Slide Description" data-easein="default" data-easeout="default" data-fsmasterspeed="1500" data-fsslotamount="7" data-fstransition="fade" data-hideafterloop="0" data-hideslideonmobile="off" data-index="rs-1682" data-masterspeed="default" data-param1="" data-param10="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-rotate="0" data-saveperformance="off" data-slotamount="default" data-thumb="images/website/sl2.jpg">
 
-                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/b13.jpg">
+                        <img alt="" class="rev-slidebg" data-bgfit="contain" data-bgparallax="10" data-bgposition="center center" data-bgrepeat="no-repeat" data-no-retina="" src="images/website/sl2.jpg">
                         
                         {{-- <div class="tp-caption tp-resizeme big-ipad-hidden tp-shape tp-shapewrapper rs-parallaxlevel-4" 
                         data-paddingbottom="[0,0,0,0]"
@@ -514,8 +514,8 @@
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="image-box">
-                            <figure class="image wow fadeInLeft"><img style="width: 370px; height: 485px;" src="images/website/wl1.jpg" alt=""></figure>
-                            <figure class="image2 wow fadeInRight"><img src="images/website/award.jpg" alt=""></figure>
+                            <figure class="image wow fadeInLeft"><img style="width: 370px; height: 485px;" src="images/website/w2.jpg" alt=""></figure>
+                            <figure class="image2 wow fadeInRight"><img style="width: 370px; height: 385px;" src="images/website/w1.jpg" alt=""></figure>
                         </div>
                     </div>
                 </div>

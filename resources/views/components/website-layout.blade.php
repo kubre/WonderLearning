@@ -30,10 +30,16 @@
         .header-style-two .header-lower .main-menu .navigation > li:hover::before,
         .header-style-two .header-lower .main-menu .navigation > li.current::before {
             background-repeat: no-repeat;
+            bottom: 25px;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li::before,
+        .header-style-two .header-lower .main-menu .navigation > li::before {
+            background-repeat: no-repeat;
+            bottom: 25px;
         }
         .header-style-two .header-lower .main-menu .navigation > li:hover,
         .header-style-two .header-lower .main-menu .navigation > li.current {
-            background-color: #f5c747;
+            background-color: rgba(144, 204, 223, 0.514);
         }
         .header-style-two .header-lower .main-menu .navigation > li,
         .header-style-two .header-lower .main-menu .navigation > li > a {
@@ -43,8 +49,14 @@
             width: 100%;
         }
         .header-style-two .header-lower .main-menu .navigation > li > a {
-            padding: 0px 12px !important;
-            line-height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-content: center;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li > a > img {
+            height: 70px;
+            margin-bottom: 10px;
         }
         .header-style-two .header-lower .nav-outer {
             width: 80% !important;
@@ -114,20 +126,41 @@
                         <div class="collapse navbar-collapse clearfix" id="navbarSupportedContent">
                             <ul class="navigation clearfix">
                                 <li class="{{ (Request::is('/') ? 'current' : '') }}">
-                                    <a href="{{url('/')}}">Home</a>
+                                    <a href="{{url('/')}}">
+                                        <img src="images/home.svg" alt="Home Icon">
+                                        <span>Home</span>
+                                    </a>
                                     <ul>
                                         <li><a href="/#about-section">About Us</a></li>
                                         <li><a href="#vision-and-mission">Vision & Mission</a></li>
                                     </ul>
                                 </li>
-                                <li class="{{ (Request::is('programs') ? 'current' : '') }}"><a href="{{ url('/programs')}}">Programs</a></li>
-                                <li class="{{ Request::is('services') ? 'current' : '' }}"><a href="services">Services</a>
-                                <li class="{{ Request::is('testimonials') ? 'current' : '' }}"><a href='{{ url('testimonials') }}'>Testimonials</a></li>
-                                <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>Awards </a></li>
-                                <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>Gallery</a></li>
+                                <li class="{{ (Request::is('programs') ? 'current' : '') }}"><a href="{{ url('/programs')}}">
+                                    <img src="images/program.svg" alt="Program Icon">
+                                    <span>Programs</span>
+                                </a></li>
+                                <li class="{{ Request::is('services') ? 'current' : '' }}"><a href="services">
+                                    <img src="images/services.svg" alt="Services Icon">
+                                    <span>Services</span>
+                                </a>
+                                <li class="{{ Request::is('testimonials') ? 'current' : '' }}"><a href='{{ url('testimonials') }}'>
+                                    <img src="images/testimonials.svg" alt="Testimonials">
+                                    <span>Testimonials</span>
+                                </a></li>
+                                <li class="{{ Request::is('awards') ? 'current' : '' }}"><a href='{{ url('awards') }}'>
+                                    <img src="images/awards.svg" alt="Award">
+                                    <span>Awards</span>
+                                </a></li>
+                                <li class="{{ Request::is('gallery') ? 'current' : '' }}"><a href='{{ url('gallery') }}'>
+                                    <img src="images/gallery.svg" alt="Gallery">
+                                    <span>Gallery</span>
+                                </a></li>
                                 {{-- <li class="{{ Request::is('clients') ? 'current' : '' }}"><a href='{{ url('clients') }}'>Clients</a></li> --}}
                                 {{-- <li class="{{ Request::is('franchise') ? 'current' : '' }}"><a href='{{ url('franchise') }}'>Franchise</a></li> --}}
-                                <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>Contact us </a></li>
+                                <li class="{{ Request::is('contact-us') ? 'current' : '' }}"><a href='{{ url('contact-us') }}'>
+                                    <img src="images/contact.svg" alt="Contact Us">
+                                    <span>Contact Us</span>
+                                </a></li>
                             </ul>
                         </div>
                     </nav>
