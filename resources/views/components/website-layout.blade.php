@@ -30,12 +30,20 @@
         .header-style-two .header-lower .main-menu .navigation > li:hover::before,
         .header-style-two .header-lower .main-menu .navigation > li.current::before {
             background-repeat: no-repeat;
-            bottom: 25px;
+            bottom: 10px;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li span{
+            transform: scale(0);
+            transition-duration: .4s;
+        }
+        .header-style-two .header-lower .main-menu .navigation > li:hover span,
+        .header-style-two .header-lower .main-menu .navigation > li.current span{
+            transform: scale(1);
         }
         .header-style-two .header-lower .main-menu .navigation > li::before,
         .header-style-two .header-lower .main-menu .navigation > li::before {
             background-repeat: no-repeat;
-            bottom: 25px;
+            bottom: 10px;
         }
         .header-style-two .header-lower .main-menu .navigation > li:hover,
         .header-style-two .header-lower .main-menu .navigation > li.current {
@@ -45,7 +53,7 @@
         .header-style-two .header-lower .main-menu .navigation > li > a {
             margin: 0 !important; 
             padding: 0 !important;
-            height: 140px;
+            height: 100px;
             width: 100%;
         }
         .header-style-two .header-lower .main-menu .navigation > li > a {
@@ -55,12 +63,17 @@
             align-content: center;
         }
         .header-style-two .header-lower .main-menu .navigation > li > a > img {
-            height: 70px;
-            margin-bottom: 10px;
+            height: 60px;
         }
         .header-style-two .header-lower .nav-outer {
             width: 80% !important;
             float: right;
+        }
+        .header-style-two .header-lower .logo-outer {
+            padding: 15px 0;
+        }
+        .header-style-two .header-lower .logo-outer img {
+            height: 70px;
         }
         .header-style-two .header-lower .main-menu,
         .header-style-two .header-lower .navbar-collapse,
@@ -84,7 +97,7 @@
     <header class="main-header {{ isset($index) ? 'header-style-two' : '' }}">
         <!-- Header Top -->
         @if(isset($index))
-        <div class="header-top">
+        <div class="header-top d-none">
             <div class="auto-container">
                 <div class="clearfix">
                     <div class="top-left">
@@ -111,7 +124,7 @@
             <div class="auto-container clearfix">
                 <!--Info-->
                 <div class="logo-outer">
-                    <div class="logo"><a href="/"><img style="max-height: 50px;" src="images/logo.png" alt="" title=""></a></div>
+                    <div class="logo"><a href="/"><img src="images/logo.png" alt="" title=""></a></div>
                 </div>
                 <!--Nav Box-->
                 <div class="nav-outer clearfix">

@@ -514,8 +514,8 @@
                 <div class="image-column col-lg-6 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="image-box">
-                            <figure class="image wow fadeInLeft"><img style="width: 370px; height: 485px;" src="images/website/w2.jpg" alt=""></figure>
-                            <figure class="image2 wow fadeInRight"><img style="width: 370px; height: 385px;" src="images/website/w1.jpg" alt=""></figure>
+                            <figure class="image wow fadeInLeft"><img style="width: 370px; height: 485px;" src="images/website/w1.jpg" alt=""></figure>
+                            <figure class="image2 wow fadeInRight"><img style="width: 370px; height: 385px;" src="images/website/w2.jpg" alt=""></figure>
                         </div>
                     </div>
                 </div>
