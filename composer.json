@@ -1,9 +1,9 @@
 {
-    "name": "laravel/laravel",
+    "name": "Schools System",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Schools System",
     "keywords": [
-        "framework",
+        "Schools/Branches CMS",
         "laravel"
     ],
     "license": "MIT",
