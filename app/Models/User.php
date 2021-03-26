@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Orchid\Platform\Models\User as Authenticatable;
 
+/** @property School $school */
 class User extends Authenticatable
 {
     /**
@@ -63,4 +64,17 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function school()
+    {
+        return $this->hasOne(School::class, 'owner_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->inRole('admin');
+    }
 }

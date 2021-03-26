@@ -4,7 +4,6 @@ namespace App\Orchid\Screens\School;
 
 use App\Models\School;
 use App\Orchid\Layouts\School\SchoolListLayout;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 

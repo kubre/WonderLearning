@@ -33,6 +33,9 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Schools')
                 ->icon('building')
                 ->route('admin.school.list'),
+            ItemMenu::label('Enquiry')
+                ->icon('info')
+                ->route('school.enquiry.list'),
         ];
     }
 

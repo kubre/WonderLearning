@@ -2,11 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Models\Enquiry;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
+use App\Orchid\Screens\Student\EnquiryEditScreen;
+use App\Orchid\Screens\Student\EnquiryListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -113,3 +116,8 @@ Route::screen('school/{school?}', SchoolEditScreen::class)
     ->name('admin.school.edit');
 Route::screen('schools', SchoolListScreen::class)
     ->name('admin.school.list');
+
+Route::screen('enquiry/{enquiry?}', EnquiryEditScreen::class)
+    ->name('school.enquiry.edit');
+Route::screen('enquiries', EnquiryListScreen::class)
+    ->name('school.enquiry.list');

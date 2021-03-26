@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\School;
 
+use App\Models\Enquiry;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class SchoolEditScreen extends Screen
 {
@@ -125,12 +127,13 @@ class SchoolEditScreen extends Screen
             'school.contact' => 'required',
             'school.email' => 'required|email',
             'school.address' => 'required',
-            'school.logo' => 'required'
+            'school.logo' => 'required',
+            'school.owner_id' => ['required',],
         ])['school'];
         $form['login_url'] = Str::slug($form['name']);
         
         $school->fill($form)->save();
-        Alert::success('Added school data successfully!');
+        Alert::success(($this->exists ? 'Updated' : 'Added').' details successfully!');
         return redirect()->route('admin.school.list');
     }
 
@@ -140,11 +143,11 @@ class SchoolEditScreen extends Screen
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function remove(School $post)
+    public function remove(School $school)
     {
-        $post->delete();
+        $school->delete();
 
-        Alert::info('You have successfully deleted the post.');
+        Alert::info('You have successfully deleted the school.');
 
         return redirect()->route('admin.school.list');
     }
