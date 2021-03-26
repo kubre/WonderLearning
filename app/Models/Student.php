@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Screen\AsSource;
 
 /** @property School $school */
 /** @property Enquiry $enquiry */
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, AsSource;
 
     /** @var array */
     protected $fillable = [

@@ -33,9 +33,28 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Schools')
                 ->icon('building')
                 ->route('admin.school.list'),
+            
+            ItemMenu::label('Admissions')
+                ->slug('admissions')
+                ->icon('graduation')
+                ->badge(fn() => '▶', Color::DEFAULT())
+                ->withChildren()
+                ->hideEmpty(),
             ItemMenu::label('Enquiry')
+                ->place('admissions')
                 ->icon('info')
                 ->route('school.enquiry.list'),
+
+            ItemMenu::label('Accounts')
+                ->icon('rupee')
+                ->slug('accounts')
+                ->badge(fn() => '▶', Color::DEFAULT())
+                ->withChildren()
+                ->hideEmpty(),
+            ItemMenu::label('Fee Rate Card')
+                ->place('accounts')
+                ->icon('note')
+                ->route('account.fees.edit'),
         ];
     }
 

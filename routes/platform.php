@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Enquiry;
+use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -121,3 +122,6 @@ Route::screen('enquiry/{enquiry?}', EnquiryEditScreen::class)
     ->name('school.enquiry.edit');
 Route::screen('enquiries', EnquiryListScreen::class)
     ->name('school.enquiry.list');
+
+Route::screen('fees/{fees?}', FeesEditScreen::class)
+    ->name('account.fees.edit');
