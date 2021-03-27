@@ -328,10 +328,11 @@
                                         <ul class="contact-info">    
                                             <li><a href="tel:7264809024"><span class="fa fa-phone-square"></span>726 480 9024</a></li>
                                             <li><a href="mailto:support@wonderlearning.in"><span class="fa fa-envelope"></span>support@wonderlearning.in</a></li>
-                                            <li><span class="fa fa-map"></span> 
-                                                A-13/ 303 Mangal Bhairav Apt.,<br>
-                                                Nanded City, Sinhgad Road,<br>
-                                                Pune, Maharashtra – 411 041
+                                            <li><span class="fa fa-map"></span>
+                                                5/12, Prabhashali Apartment,<br>
+                                                Off Karve Road, Nal Stop,<br>
+                                                Hotel Sweekar lane, Erandwane,<br>
+                                                Pune(411004)
                                             </li>
                                         </ul>
                                     </div>
