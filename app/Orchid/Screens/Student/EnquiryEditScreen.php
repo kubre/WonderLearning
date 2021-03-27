@@ -96,6 +96,17 @@ class EnquiryEditScreen extends Screen
                     Input::make('name')
                         ->title('Name')
                         ->required(),
+                    Select::make('program')
+                    ->options([
+                        'Playgroup' => 'Playgroup',
+                        'Nursery' => 'Nursery',
+                        'Junior KG' => 'Junior KG',
+                        'Senior KG' => 'Senior KG',
+                    ])
+                    ->required()
+                    ->title('Program'),
+                ]),
+                Group::make([
                     Select::make('gender')
                         ->options([
                             'Male' => 'Male',
@@ -148,6 +159,7 @@ class EnquiryEditScreen extends Screen
             'name' => 'required',
             'gender' => 'required|in:Male,Female,Transgender,Other',
             'dob_at' => 'required|date',
+            'program' => 'required',
             'enquirer_name' => 'required',
             'enquirer_email' => 'required|email',
             'enquirer_contact' => 'required|digits:10',

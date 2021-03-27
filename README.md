@@ -45,8 +45,8 @@ student_id
 academic_year
 admission_at
 program -> Playgroup, Nursery, Junior KG, Senior KG
-fees_id
 fees_installments -> 1..12
+discount
 batch
-transport_required
+is_transportation_required
 ```

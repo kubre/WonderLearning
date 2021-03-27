@@ -44,6 +44,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->place('admissions')
                 ->icon('info')
                 ->route('school.enquiry.list'),
+            ItemMenu::label('Admission')
+                ->place('admissions')
+                ->icon('user')
+                ->route('school.admission.list'),
 
             ItemMenu::label('Accounts')
                 ->icon('rupee')

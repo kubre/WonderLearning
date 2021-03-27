@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Screens\School;
 
-use App\Models\Enquiry;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,7 +14,6 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class SchoolEditScreen extends Screen
 {

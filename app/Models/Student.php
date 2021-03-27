@@ -17,7 +17,10 @@ class Student extends Model
         'name', 'photo', 'dob_at', 'gender', 'father_name', 'father_contact', 'father_occupation', 'father_email', 'father_organization_name', 'mother_name', 'mother_contact', 'mother_occupation', 'mother_email', 'mother_organization_name', 'previous_school', 'siblings', 'address', 'city', 'state', 'postal_code', 'nationality', 'school_id', ];
     
     /** @var array */
-    protected $dates = ['dob_at', ];
+    protected $casts = [
+        'siblings' => 'array',
+        'dob_at' => 'date'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

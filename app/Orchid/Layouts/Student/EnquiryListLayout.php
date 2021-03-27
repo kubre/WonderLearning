@@ -6,6 +6,7 @@ use App\Models\Enquiry;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -57,6 +58,15 @@ class EnquiryListLayout extends Table
                                 ->parameters([
                                     'id' => $enquiry->id,
                                 ]),
+                            // Link::make(__('Convert to Admission'))
+                            //     ->route('school.admission.edit', $enquiry->id)
+                            //     ->icon('share-alt'),
+                            ModalToggle::make(__('Convert to Admission'))
+                                ->icon('share-alt')
+                                ->modal('chooseEnquirerType')
+                                ->modalTitle('Admission Process #1')
+                                ->method('proceedToAdmission')
+                                ->asyncParameters($enquiry->id),
                         ]);
                 }),
         ];

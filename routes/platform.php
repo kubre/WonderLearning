@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Models\Enquiry;
 use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\School\AdmissionEditScreen;
+use App\Orchid\Screens\School\AdmissionListScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
 use App\Orchid\Screens\Student\EnquiryEditScreen;
@@ -125,3 +126,8 @@ Route::screen('enquiries', EnquiryListScreen::class)
 
 Route::screen('fees/{fees?}', FeesEditScreen::class)
     ->name('account.fees.edit');
+
+Route::screen('admission/{admission?}', AdmissionEditScreen::class)
+    ->name('school.admission.edit');
+Route::screen('admissions', AdmissionListScreen::class)
+    ->name('school.admission.list');

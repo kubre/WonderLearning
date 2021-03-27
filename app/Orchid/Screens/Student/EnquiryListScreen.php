@@ -4,9 +4,13 @@ namespace App\Orchid\Screens\Student;
 
 use App\Models\Enquiry;
 use App\Orchid\Layouts\Student\EnquiryListLayout;
+use GuzzleHttp\Psr7\Request;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
+use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
 class EnquiryListScreen extends Screen
@@ -60,6 +64,18 @@ class EnquiryListScreen extends Screen
     public function layout(): array
     {
         return [
+            Layout::modal('chooseEnquirerType', [
+                Layout::rows([
+                    Select::make('enquirer')
+                        ->options([
+                            'other' => 'Other',
+                            'father' => 'Father',
+                            'mother' => 'Mother',
+                        ])->title('Map the enquirer details to'),
+                ]),
+            ])
+            ->applyButton('Next')
+            ->closeButton('Cancel'),
             EnquiryListLayout::class
         ];
     }
@@ -70,12 +86,18 @@ class EnquiryListScreen extends Screen
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function remove(Enquiry $enquiry)
+    public function remove(Enquiry $enquiry): \Illuminate\Http\RedirectResponse
     {
         $enquiry->delete();
 
         Toast::info('You have successfully deleted the enquiry.');
 
         return redirect()->route('school.enquiry.list');
+    }
+
+    public function proceedToAdmission($enquirerId)
+    {
+        return redirect()->route('school.admission.edit',
+            ['enquirerId' => $enquirerId, 'enquirer' => request('enquirer')]);
     }
 }
