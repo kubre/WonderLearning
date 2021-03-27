@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class AdmissionRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        /** @todo Make sure to properly authorize people */
+        return auth()->check();
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            "photo" => "required",
+            "admission_at" => "required",
+            "created_at" => "required",
+            "name" => "required",
+            "gender" => "required",
+            "dob_at" => "required|before:today",
+            "nationality" => "required",
+            "program" => "required",
+            "father_name" => "required_without:mother_name",
+            "father_email" => "required_without:mother_email",
+            "father_contact" => "required_without:mother_contact",
+            "father_occupation" => "nullable",
+            "father_organization" => "nullable",
+            "mother_name" => "required_without:father_name",
+            "mother_email" => "required_without:father_email",
+            "mother_contact" => "required_without:father_contact",
+            "mother_occupation" => "nullable",
+            "mother_organization" => "nullable",
+            "address" => "required|max:191",
+            "city" => "required",
+            "state" => "required",
+            "pincode" => "nullable|digits:6",
+            "fees_installments" => "required|numeric|min:1|max:12",
+            "discount" => "required|numeric",
+            "batch" => "required|in:Morning,Afternoon",
+            "is_transportation_required" => "boolean",
+            "siblings" => "nullable",
+        ];
+    }
+}
