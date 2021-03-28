@@ -50,8 +50,8 @@ class Fees extends Model
         return $this->belongsTo(School::class);
     }
 
-    public static function getFeesCard(Carbon $date = null): ?Fees
+    public static function getFeesCard(array $academic_year): ?Fees
     {
-        return self::whereBetween('created_at', self::getAcademicYear($date))->first();
+        return self::whereBetween('created_at', $academic_year)->first();
     }
 }

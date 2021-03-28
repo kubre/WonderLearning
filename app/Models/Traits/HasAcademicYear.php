@@ -3,8 +3,6 @@
 namespace App\Models\Traits;
 
 use Carbon\Carbon;
-use DateTime;
-
 /**
  * 
  */
@@ -16,25 +14,13 @@ trait HasAcademicYear
      * @param Carbon $date
      * @return array
      */
-    public static function getAcademicYear(Carbon $date = null): array
+    public function getAcademicYear(Carbon $date = null): array
     {
-        if (is_null($date)) $date = Carbon::today();
-        
-        $last_year = clone $date;
-        $last_year->setDay(1)->setMonth(6);
-        $current_year = clone $date;
-        $current_year->addYear()->setDay(31)->setMonth(5);
-
-        if ($date->isBetween($last_year, $current_year)) {
-            return [$last_year, $current_year];
-        }
-
-        return [$last_year->subYear(), $current_year->subYear()];
+        return get_academic_year($date);
     }
 
-    public static function getAcademicYearFormatted(Carbon $date = null): string
+    public function getAcademicYearFormatted(?array $academic_year = null): string
     {
-        list($last_year, $current_year) = self::getAcademicYear($date);
-        return "{$last_year->format('M y')} - {$current_year->format('M y')}";
+        return get_academic_year_formatted($academic_year);
     }
 }

@@ -30,7 +30,7 @@ class AdmissionListScreen extends Screen
     public function query(): array
     {
         return [
-            'admissions' => Admission::with(['student'])->paginate(), 
+            'admissions' => Admission::whereBetween('created_at', working_year())->with(['student'])->paginate(), 
         ];
     }
 

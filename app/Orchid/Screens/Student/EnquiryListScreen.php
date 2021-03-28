@@ -37,7 +37,7 @@ class EnquiryListScreen extends Screen
     public function query(): array
     {
         return [
-            'enquiries' => Enquiry::paginate(),
+            'enquiries' => Enquiry::whereBetween('created_at', working_year())->paginate(),
         ];
     }
 

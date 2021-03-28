@@ -30,21 +30,11 @@ class FeesEditScreen extends Screen
      */
     public $description = 'Edit Current Year\'s Fees Rate Card';
 
-    /** @var array */
     const FEES_FORMAT = ['Fees' => 'fees', 'Amount' => 'amount'];
 
-    /** @var null|Fees */
-    protected $fees;
+    protected Fees $fees;
 
-    /** @var Carbon */
-    protected $working_date;
-
-    public function __construct()
-    {
-        /** @todo Set to user chosen academic year */
-        $this->working_date = Carbon::today();
-        $this->fees = Fees::getFeesCard($this->working_date) ?? new Fees();
-    }
+    protected array $working_year;
 
     /**
      * Query data.
@@ -53,8 +43,11 @@ class FeesEditScreen extends Screen
      */
     public function query(): array
     {
-        $this->name .= Fees::getAcademicYearFormatted($this->working_date);
-        return optional($this->fees)->toArray() ?? [];
+        $this->working_year = working_year();
+        $this->fees = Fees::getFeesCard($this->working_year) ?? new Fees();
+
+        $this->name .= get_academic_year_formatted($this->working_year);
+        return $this->fees->toArray();
     }
 
     /**
@@ -78,7 +71,7 @@ class FeesEditScreen extends Screen
      * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
-    {
+    { 
         return [
             Layout::rows([
                 Group::make([
@@ -128,9 +121,9 @@ class FeesEditScreen extends Screen
 
         $this->fees->fill(array_merge(
             $totals->all(), $request->all(), 
-            ['title' => Fees::getAcademicYearFormatted($this->working_date),
+            ['title' => get_academic_year_formatted($this->working_year),
             'school_id' => auth()->user()->school->id,
-            'created_at' => $this->working_date,],)
+            'created_at' => $this->working_year[0],],)
         )->save();
         
         Toast::info('Updated Fees Rate Card!');

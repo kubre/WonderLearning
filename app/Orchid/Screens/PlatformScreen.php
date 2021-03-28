@@ -4,9 +4,15 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use Carbon\Carbon;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Session;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class PlatformScreen extends Screen
 {
@@ -42,6 +48,11 @@ class PlatformScreen extends Screen
     public function commandBar(): array
     {
         return [
+            ModalToggle::make('Change Academic Year ('. get_academic_year_formatted(working_year()) .')')
+                ->modalTitle('Change Academic Year')
+                ->icon('calendar')
+                ->modal('changeWorkingYear')
+                ->method('updateWorkingYear'),
             // Link::make('Website')
             //     ->href('http://orchid.software')
             //     ->icon('globe-alt'),
@@ -63,8 +74,29 @@ class PlatformScreen extends Screen
      */
     public function layout(): array
     {
+        $valid_years = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
+            $d = Carbon::createFromDate($y, 6, 1);
+            return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
+        });
+
         return [
+            Layout::modal('changeWorkingYear', [
+                Layout::rows([
+                    Select::make('workingYear')
+                        ->options($valid_years)
+                        ->title('Select the Academic Year'),
+                ]),
+            ])
+            ->applyButton('Next')
+            ->closeButton('Cancel')
             // Layout::view('platform::partials.welcome'),
         ];
+    }
+
+    public function updateWorkingYear()
+    {
+        $d = Carbon::parse(request('workingYear'));
+        working_year($d);
+        Toast::success("Changed academic year to {$d->format('M Y')} successfully!");
     }
 }

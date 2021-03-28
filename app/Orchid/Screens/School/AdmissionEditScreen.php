@@ -30,9 +30,6 @@ class AdmissionEditScreen extends Screen
      */
     public $name = 'Convert to Admission';
 
-    /** @var bool */
-    public $exists = false;
-
     /**
      * Display header description.
      *
@@ -40,15 +37,40 @@ class AdmissionEditScreen extends Screen
      */
     public $description = 'Fill the following form to convert/edit to an Admission.';
 
+    public bool $exists = false;
+
+    protected string $current_year;
+
+    protected string $current_year_start;
+
+    protected string $next_year;
+
+    protected string $next_year_start;
+
+    protected array $working_year;
+
     /**
      * Query data.
      *
      * @return array
      */
     public function query(Admission $admission): array
-    {       
+    {     
         $this->exists = $admission->exists;
+        /** @todo Make sure to implement changeable year solution here */
+        $this->working_year = working_year();
+        $this->current_year_start = (string) $this->working_year[0];
+        $this->current_year = get_academic_year_formatted($this->working_year);
         
+        if (today()->isBetween(...$this->working_year)) {
+            $academic_year = get_academic_year(today()->addYear());
+            $this->next_year_start = (string) $academic_year[0];
+            $this->next_year = get_academic_year_formatted($academic_year);
+        } else {
+            $this->next_year = $this->current_year;
+            $this->next_year_start = $this->current_year_start;
+        }
+
         $data = [];
         $enquirer = null;
         
@@ -61,7 +83,7 @@ class AdmissionEditScreen extends Screen
             $enquiry[$enquirer.'_name'] = $enquiry['enquirer_name'];
             $enquiry[$enquirer.'_contact'] = $enquiry['enquirer_contact'];
             $enquiry[$enquirer.'_email'] = $enquiry['enquirer_email'];
-            $enquiry['admission_at'] = Carbon::today()->format('d-m-Y');
+            $enquiry['admission_at'] = today()->format('Y-m-d');
             $data = $enquiry;
         } else {
             $this->name = 'Update Admission Details';
@@ -106,14 +128,6 @@ class AdmissionEditScreen extends Screen
      */
     public function layout(): array
     {
-
-        /** @todo Make sure to implement changeable year solution here */
-        $current_year = Admission::getAcademicYearFormatted();
-        $current_year_start = (Admission::getAcademicYear()[0])->toDateString();
-
-        $next_year = Admission::getAcademicYearFormatted(Carbon::today()->addYear());
-        $next_year_start = (Admission::getAcademicYear(Carbon::today()->addYear())[0])->toDateString();
-
         return [
             Layout::rows([
                 Group::make([
@@ -123,15 +137,14 @@ class AdmissionEditScreen extends Screen
                         ->targetRelativeUrl()
                         ->height(450)
                         ->width(350),
-                    /** @todo Make sure to implement changeable year solution here */
-                    Select::make('admission_at')
+                    Select::make('created_at')
                         ->title('Admission Academic Year')
                         ->options([
-                            $current_year_start => $current_year,
-                            $next_year_start => $next_year, 
+                            $this->current_year_start => $this->current_year,
+                            $this->next_year_start => $this->next_year, 
                         ]),
-                    DateTimer::make('created_at')
-                        ->format('d-m-Y')
+                    DateTimer::make('admission_at')
+                        ->format('Y-m-d')
                         ->enableTime(false)
                         ->title('Admission Date')
                 ]),
@@ -147,7 +160,7 @@ class AdmissionEditScreen extends Screen
                         ])
                         ->title('Gender'),
                     DateTimer::make('dob_at')
-                        ->format('d-m-Y')
+                        ->format('Y-m-d')
                         ->noCalendar()
                         ->enableTime(false)
                         ->title('Date of Birth')
