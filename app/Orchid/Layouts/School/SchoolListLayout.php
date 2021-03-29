@@ -36,7 +36,7 @@ class SchoolListLayout extends Table
             TD::make('login_url', 'Login Url')
                 ->render(fn (School $s) => 
                     Link::make($s->login_url)->icon('globe')
-                    ->target('_blank')->href(env('APP_URL').'/login/'.$s->login_url.'/'.$s->id)),
+                    ->target('_blank')->href(env('APP_URL').'/login/'.$s->login_url)),
             TD::make('actions', 'Actions')
                 ->render(fn (School $s) =>
                     Link::make('Edit')->icon('note')->route('admin.school.edit', $s))
