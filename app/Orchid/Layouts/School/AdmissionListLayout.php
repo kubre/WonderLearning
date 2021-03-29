@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\School;
 
 use App\Models\Admission;
+use App\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -19,6 +20,8 @@ class AdmissionListLayout extends Table
      */
     protected $target = 'admissions';
 
+    protected User $user;
+
     /**
      * Get the table cells to be displayed.
      *
@@ -26,6 +29,7 @@ class AdmissionListLayout extends Table
      */
     protected function columns(): array
     {
+        $this->user = auth()->user();
         return [
             TD::make('admission_at', 'Admission Date')->sort()->filter(TD::FILTER_DATE),
             TD::make('student_id', 'Name')->filter(TD::FILTER_TEXT)->render(fn (Admission $a) => $a->student->name),
@@ -39,6 +43,7 @@ class AdmissionListLayout extends Table
             TD::make('fees_installments', 'Fees Installments')->filter(TD::FILTER_NUMERIC),
             TD::make('batch', 'Batch')->filter(TD::FILTER_TEXT),
             TD::make('actions', 'Actions')
+                ->canSee($this->user->hasAccess('admission.edit'))
                 ->render(fn (Admission $s) =>
                     Link::make('Edit')->icon('note')->route('school.admission.edit', $s))
         ];

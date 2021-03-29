@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\School;
 use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -131,3 +132,4 @@ Route::screen('admission/{admission?}', AdmissionEditScreen::class)
     ->name('school.admission.edit');
 Route::screen('admissions', AdmissionListScreen::class)
     ->name('school.admission.list');
+

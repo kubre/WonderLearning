@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Student;
 
 use App\Models\Enquiry;
+use App\Models\User;
 use App\Orchid\Layouts\Student\EnquiryListLayout;
 use GuzzleHttp\Psr7\Request;
 use Orchid\Screen\Actions\Link;
@@ -29,6 +30,10 @@ class EnquiryListScreen extends Screen
      */
     public $description = 'Add, Edit, Delete, Convert to Admission the enquiries and more.';
 
+    public $permission = 'enquiry.table';
+
+    protected User $user;
+
     /**
      * Query data.
      *
@@ -36,6 +41,7 @@ class EnquiryListScreen extends Screen
      */
     public function query(): array
     {
+        $this->user = auth()->user();
         return [
             'enquiries' => Enquiry::whereBetween('created_at', working_year())->paginate(),
         ];
@@ -52,6 +58,7 @@ class EnquiryListScreen extends Screen
             Link::make('New Enquiry')
                 ->type(Color::PRIMARY())
                 ->route('school.enquiry.edit')
+                ->canSee($this->user->hasAccess('enquiry.create'))
                 ->icon('pencil'),
         ];
     }

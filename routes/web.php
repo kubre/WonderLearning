@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\School;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +31,31 @@ Route::post('/contact-us', function(Request $request) {
     dd($request);
 });
 Route::view('/contact-us', 'website.contact');
+
+Route::get('/login/{school:login_url}/', function (School $school) {
+    session(['school' => $school->toArray()]);
+    return view('platform::auth.login');
+});
+
+Route::get('/logout/{school:login_url}', function(School $school) {
+    Auth::guard()->logout();
+
+    request()->session()->invalidate();
+
+    request()->session()->regenerateToken();
+
+    return request()->wantsJson()
+        ? new JsonResponse([], 204)
+        : redirect('/login/' . $school->login_url);
+})->missing(function() {
+        Auth::guard()->logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+
+        return request()->wantsJson()
+            ? new JsonResponse([], 204)
+        : redirect('/admin/');
+    })
+    ->name('auth.signout');

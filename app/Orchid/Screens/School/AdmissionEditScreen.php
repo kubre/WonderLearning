@@ -6,6 +6,7 @@ use App\Http\Requests\AdmissionRequest;
 use App\Models\Admission;
 use App\Models\Enquiry;
 use App\Models\Student;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Orchid\Support\Facades\Toast;
@@ -37,6 +38,8 @@ class AdmissionEditScreen extends Screen
      */
     public $description = 'Fill the following form to convert/edit to an Admission.';
 
+    public $permission = 'admission.edit';
+
     public bool $exists = false;
 
     protected string $current_year;
@@ -55,9 +58,8 @@ class AdmissionEditScreen extends Screen
      * @return array
      */
     public function query(Admission $admission): array
-    {     
+    {
         $this->exists = $admission->exists;
-        /** @todo Make sure to implement changeable year solution here */
         $this->working_year = working_year();
         $this->current_year_start = (string) $this->working_year[0];
         $this->current_year = get_academic_year_formatted($this->working_year);

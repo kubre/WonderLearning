@@ -23,6 +23,9 @@ class SchoolListScreen extends Screen
      */
     public $description = 'Manage School Data';
 
+    /** @var string|array */
+    public $permission = 'admin.school';
+
     /**
      * Query data.
      *

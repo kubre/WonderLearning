@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Student;
 
 use App\Models\Enquiry;
+use App\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -22,6 +23,8 @@ class EnquiryListLayout extends Table
      */
     protected $target = 'enquiries';
 
+    protected User $user;
+
     /**
      * Get the table cells to be displayed.
      *
@@ -29,6 +32,7 @@ class EnquiryListLayout extends Table
      */
     protected function columns(): array
     {
+        $this->user = auth()->user();
         return [
             // TD::make('id'),
             TD::make('created_at', 'Enquiry Date')
@@ -43,26 +47,29 @@ class EnquiryListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
+                ->canSee($this->user->hasAccess('enquiry.edit') ||
+                    $this->user->hasAccess('enquiry.delete') ||
+                    $this->user->hasAccess('admission.create'))
                 ->render(function (Enquiry $enquiry) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
                                 ->route('school.enquiry.edit', $enquiry->id)
+                                ->canSee($this->user->hasAccess('enquiry.edit'))
                                 ->icon('note'),
 
                             Button::make(__('Delete'))
                                 ->icon('trash')
+                                ->canSee($this->user->hasAccess('enquiry.delete'))
                                 ->method('remove')
                                 ->confirm("Once deleted this can not be restored are you sure?")
                                 ->parameters([
                                     'id' => $enquiry->id,
                                 ]),
-                            // Link::make(__('Convert to Admission'))
-                            //     ->route('school.admission.edit', $enquiry->id)
-                            //     ->icon('share-alt'),
                             ModalToggle::make(__('Convert to Admission'))
                                 ->icon('share-alt')
+                                ->canSee($this->user->hasAccess('admission.create'))
                                 ->modal('chooseEnquirerType')
                                 ->modalTitle('Admission Process #1')
                                 ->method('proceedToAdmission')

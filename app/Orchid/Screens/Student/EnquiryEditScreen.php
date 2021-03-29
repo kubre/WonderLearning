@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Student;
 
 use App\Models\Enquiry;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
@@ -35,8 +36,9 @@ class EnquiryEditScreen extends Screen
     /** @var bool */
     public $exists;
 
-    /** @var int */
-    public $school_id;
+    public User $user;
+
+    public $permission = 'enquiry.edit';
 
     /**
      * Query data.
@@ -45,7 +47,7 @@ class EnquiryEditScreen extends Screen
      */
     public function query(Enquiry $enquiry): array
     {
-        $this->school_id = auth()->user()->school->id;
+        $this->user = auth()->user();
         $this->exists = $enquiry->exists;
         if($this->exists) $this->name = 'Update Enquiry';
         return $enquiry->toArray();
@@ -61,6 +63,7 @@ class EnquiryEditScreen extends Screen
         return [
             Link::make('Back')
                 ->icon('arrow-left')
+                ->canSee($this->user->hasAccess('enquiry.table'))
                 ->route('school.enquiry.list'),
 
             Button::make('Save School')
@@ -78,7 +81,7 @@ class EnquiryEditScreen extends Screen
                 ->icon('trash')
                 ->type(Color::DANGER())
                 ->method('remove')
-                ->canSee($this->exists),
+                ->canSee($this->user->hasAccess('enquiry.delete') && $this->exists),
         ];
     }
 
@@ -166,7 +169,7 @@ class EnquiryEditScreen extends Screen
             'reference' => 'required',
             'follow_up_at' => 'required|date',
         ]);
-        $form['school_id'] = $this->school_id;
+        $form['school_id'] = $this->user->school->id;
         
         $enquiry->fill($form)->save();
         Toast::info(($this->exists ? 'Updated' : 'Added').' details successfully!');

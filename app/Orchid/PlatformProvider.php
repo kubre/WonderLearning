@@ -2,6 +2,8 @@
 
 namespace App\Orchid;
 
+use App\Models\User;
+use Hamcrest\Arrays\IsArray;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
@@ -25,6 +27,8 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function registerMainMenu(): array
     {
+        /** @var User */
+        $user = auth()->user();
         return [
             ItemMenu::label('Dashboard')
                 ->icon('speedometer')
@@ -32,6 +36,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Menu'),
             ItemMenu::label('Schools')
                 ->icon('building')
+                ->canSee($user->hasAccess('admin.school'))
                 ->route('admin.school.list'),
             
             ItemMenu::label('Admissions')
@@ -39,14 +44,17 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('graduation')
                 ->badge(fn() => '▶', Color::DEFAULT())
                 ->withChildren()
+                ->canSee($user->hasAccess('admission.table') || $user->hasAccess('enquiry.table'))
                 ->hideEmpty(),
             ItemMenu::label('Enquiry')
                 ->place('admissions')
                 ->icon('info')
+                ->canSee($user->hasAccess('enquiry.table'))
                 ->route('school.enquiry.list'),
             ItemMenu::label('Admission')
                 ->place('admissions')
                 ->icon('user')
+                ->canSee($user->hasAccess('admission.table'))
                 ->route('school.admission.list'),
 
             ItemMenu::label('Accounts')
@@ -54,11 +62,16 @@ class PlatformProvider extends OrchidServiceProvider
                 ->slug('accounts')
                 ->badge(fn() => '▶', Color::DEFAULT())
                 ->withChildren()
+                ->canSee($user->hasAccess('fees.edit'))
                 ->hideEmpty(),
             ItemMenu::label('Fee Rate Card')
                 ->place('accounts')
                 ->icon('note')
+                ->canSee($user->hasAccess('fees.edit'))
                 ->route('account.fees.edit'),
+            ItemMenu::label('Sign Out')
+                ->icon('logout')
+                ->route('auth.signout', [ optional(session('school'))['login_url'] ?? 'admin' ] ),
         ];
     }
 

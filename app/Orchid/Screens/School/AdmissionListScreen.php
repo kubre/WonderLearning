@@ -22,6 +22,8 @@ class AdmissionListScreen extends Screen
      */
     public $description = 'Manage current year\'s admissions.';
 
+    public $permission = 'admission.table';
+
     /**
      * Query data.
      *
