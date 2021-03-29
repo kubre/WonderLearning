@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Scopes\AcademicYearScope;
+use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Orchid\Filters\Filterable;
@@ -16,14 +17,29 @@ use Orchid\Screen\AsSource;
 /** @property Carbon $follow_up_at */
 class Enquiry extends Model
 {
-    use HasFactory, AsSource, Filterable;
+    use AsSource, Filterable;
 
     /** @var array */
     protected $fillable = [
-        'name', 'gender', 'dob_at', 'program', 'enquirer_name', 'enquirer_email', 'enquirer_contact', 'locality', 'reference', 'follow_up_at', 'student_id', 'school_id', ];
+        'name', 'gender', 'dob_at', 'program', 'enquirer_name', 'enquirer_email', 'enquirer_contact', 'locality', 'reference', 'follow_up_at', 'student_id', 'school_id',
+    ];
 
     /** @var array */
-    protected $dates = ['dob_at', 'follow_up_at', ];
+    protected $dates = ['dob_at', 'follow_up_at',];
+
+    /** @var array */
+    protected $allowedFilters = [
+        'created_at',
+        'name',
+        'follow_up_at',
+    ];
+
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new AcademicYearScope);
+        static::addGlobalScope(new SchoolScope);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

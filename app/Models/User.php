@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\SchoolScope;
 use Orchid\Platform\Models\User as Authenticatable;
 
 /** @property School $school */
@@ -17,6 +18,7 @@ class User extends Authenticatable
         'email',
         'password',
         'permissions',
+        'school_id',
     ];
 
     /**
@@ -50,6 +52,7 @@ class User extends Authenticatable
         'name',
         'email',
         'permissions',
+        'school_id',
     ];
 
     /**
@@ -70,11 +73,6 @@ class User extends Authenticatable
      */
     public function school()
     {
-        return $this->hasOne(School::class, 'owner_id');
-    }
-
-    public function isAdmin()
-    {
-        return $this->inRole('admin');
+        return $this->belongsTo(School::class);
     }
 }

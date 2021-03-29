@@ -6,6 +6,7 @@ use App\Models\School;
 use App\Orchid\Layouts\School\SchoolListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 
 class SchoolListScreen extends Screen
 {
@@ -46,9 +47,10 @@ class SchoolListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('Create School')
+            Link::make('Add School')
                 ->route('admin.school.edit')
-                ->icon('pencil'),
+                ->type(Color::PRIMARY())
+                ->icon('plus'),
         ];
     }
 

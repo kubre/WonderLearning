@@ -8,7 +8,8 @@ use App\Orchid\Layouts\User\UserEditLayout;
 use App\Orchid\Layouts\User\UserFiltersLayout;
 use App\Orchid\Layouts\User\UserListLayout;
 use Illuminate\Http\Request;
-use Orchid\Platform\Models\User;
+// use Orchid\Platform\Models\User;
+use App\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -100,7 +101,7 @@ class UserListScreen extends Screen
     public function saveUser(User $user, Request $request)
     {
         $request->validate([
-            'user.email' => 'required|unique:users,email,'.$user->id,
+            'user.email' => 'required|unique:users,email,' . $user->id,
         ]);
 
         $user->fill($request->input('user'))

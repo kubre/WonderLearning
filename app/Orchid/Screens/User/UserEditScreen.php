@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Orchid\Access\UserSwitch;
-use Orchid\Platform\Models\User;
+// use Orchid\Platform\Models\User;
+use App\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -57,7 +58,7 @@ class UserEditScreen extends Screen
     {
         $this->user = $user;
 
-        if (! $user->exists) {
+        if (!$user->exists) {
             $this->name = 'Create User';
         }
 
@@ -177,6 +178,13 @@ class UserEditScreen extends Screen
             unset($userData['password']);
         } else {
             $userData['password'] = Hash::make($userData['password']);
+        }
+
+        /** @var User $authUser */
+        $authUser = auth()->user();
+
+        if (!$authUser->hasAccess('admin.school')) {
+            $userData['school_id'] = $authUser->school_id;
         }
 
         $user

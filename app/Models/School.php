@@ -3,28 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Attachment\Attachable;
 use Orchid\Screen\AsSource;
 
 /** @property Collection $students */
 /** @property Collection $enquiries */
 class School extends Model
 {
-    use AsSource, Attachable;
+    use AsSource;
 
     /** @var array */
     protected $fillable = [
-        'name', 'logo', 'contact', 'email', 'address', 'login_url', 'owner_id', 
+        'name', 'logo', 'contact', 'email', 'address', 'login_url', 'owner_id',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function owner()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'owner_id', 'id', 'users');
+        return $this->hasMany(User::class);
     }
 
     /**

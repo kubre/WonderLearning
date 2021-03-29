@@ -30,16 +30,16 @@ class SchoolListLayout extends Table
         return [
             TD::make('logo', 'School Logo')
                 ->render(fn (School $s) =>
-                    "<img src='{$s->logo}' height='80'>"),
+                "<img src='{$s->logo}' height='50'>"),
             TD::make('name', 'School Name')->sort(),
             TD::make('email', 'Email'),
             TD::make('login_url', 'Login Url')
-                ->render(fn (School $s) => 
-                    Link::make($s->login_url)->icon('globe')
-                    ->target('_blank')->href(env('APP_URL').'/login/'.$s->login_url)),
+                ->render(fn (School $s) =>
+                Link::make($s->login_url)->icon('globe')
+                    ->target('_blank')->href(env('APP_URL') . '/login/' . $s->login_url)),
             TD::make('actions', 'Actions')
                 ->render(fn (School $s) =>
-                    Link::make('Edit')->icon('note')->route('admin.school.edit', $s))
+                Link::make('Edit')->icon('note')->route('admin.school.edit', $s))
         ];
     }
 }

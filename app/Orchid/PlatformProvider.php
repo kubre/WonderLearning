@@ -38,13 +38,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('building')
                 ->canSee($user->hasAccess('admin.school'))
                 ->route('admin.school.list'),
-            
+
             ItemMenu::label('Admissions')
                 ->slug('admissions')
                 ->icon('graduation')
-                ->badge(fn() => '▶', Color::DEFAULT())
+                ->badge(fn () => '▶', Color::DEFAULT())
                 ->withChildren()
-                ->canSee($user->hasAccess('admission.table') || $user->hasAccess('enquiry.table'))
                 ->hideEmpty(),
             ItemMenu::label('Enquiry')
                 ->place('admissions')
@@ -60,9 +59,8 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Accounts')
                 ->icon('rupee')
                 ->slug('accounts')
-                ->badge(fn() => '▶', Color::DEFAULT())
+                ->badge(fn () => '▶', Color::DEFAULT())
                 ->withChildren()
-                ->canSee($user->hasAccess('fees.edit'))
                 ->hideEmpty(),
             ItemMenu::label('Fee Rate Card')
                 ->place('accounts')
@@ -71,7 +69,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('account.fees.edit'),
             ItemMenu::label('Sign Out')
                 ->icon('logout')
-                ->route('auth.signout', [ optional(session('school'))['login_url'] ?? 'admin' ] ),
+                ->route('auth.signout', [optional(session('school'))['login_url'] ?? 'admin']),
         ];
     }
 

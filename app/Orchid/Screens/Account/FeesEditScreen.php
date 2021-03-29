@@ -32,10 +32,6 @@ class FeesEditScreen extends Screen
 
     const FEES_FORMAT = ['Fees' => 'fees', 'Amount' => 'amount'];
 
-    protected Fees $fees;
-
-    protected array $working_year;
-
     /**
      * Query data.
      *
@@ -43,11 +39,8 @@ class FeesEditScreen extends Screen
      */
     public function query(): array
     {
-        $this->working_year = working_year();
-        $this->fees = Fees::getFeesCard($this->working_year) ?? new Fees();
-
-        $this->name .= get_academic_year_formatted($this->working_year);
-        return $this->fees->toArray();
+        $this->name .= get_academic_year_formatted(working_year());
+        return optional(Fees::first())->toArray() ?? [];
     }
 
     /**
@@ -71,42 +64,42 @@ class FeesEditScreen extends Screen
      * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
-    { 
+    {
         return [
             Layout::rows([
                 Group::make([
-                Matrix::make('playgroup')
-                    ->title('Playgroup Fees')
-                    ->columns(self::FEES_FORMAT)
-                    ->fields([
-                        'amount' => Input::make()->type('number'),
-                    ]),
-                Matrix::make('nursery')
-                    ->title('Nursery Fees')
-                    ->columns(self::FEES_FORMAT)
-                    ->fields([
-                        'amount' => Input::make()->type('number'),
-                    ]),
+                    Matrix::make('playgroup')
+                        ->title('Playgroup Fees')
+                        ->columns(self::FEES_FORMAT)
+                        ->fields([
+                            'amount' => Input::make()->type('number'),
+                        ]),
+                    Matrix::make('nursery')
+                        ->title('Nursery Fees')
+                        ->columns(self::FEES_FORMAT)
+                        ->fields([
+                            'amount' => Input::make()->type('number'),
+                        ]),
                 ]),
                 Group::make([
-                Matrix::make('junior_kg')
-                    ->title('Junior KG Fees')
-                    ->columns(self::FEES_FORMAT)
-                    ->fields([
-                        'amount' => Input::make()->type('number'),
-                    ]),
-                Matrix::make('senior_kg')
-                    ->title('Senior KG Fees')
-                    ->columns(self::FEES_FORMAT)
-                    ->fields([
-                        'amount' => Input::make()->type('number'),
-                    ]),
+                    Matrix::make('junior_kg')
+                        ->title('Junior KG Fees')
+                        ->columns(self::FEES_FORMAT)
+                        ->fields([
+                            'amount' => Input::make()->type('number'),
+                        ]),
+                    Matrix::make('senior_kg')
+                        ->title('Senior KG Fees')
+                        ->columns(self::FEES_FORMAT)
+                        ->fields([
+                            'amount' => Input::make()->type('number'),
+                        ]),
                 ]),
             ]),
         ];
     }
 
-    public function save(Fees $f, Request $request)
+    public function save(Request $request)
     {
         $request->validate([
             'playgroup' => 'required',
@@ -115,17 +108,25 @@ class FeesEditScreen extends Screen
             'senior_kg' => 'required',
         ]);
 
-        $many_fees = collect($request->except('_token'));
-        $totals = $many_fees->mapWithKeys(fn($fees, $group) => 
-            [$group.'_total' => collect($fees)->sum('amount')]);
+        $fees = Fees::first() ?? new Fees;
+        $working_year = working_year();
 
-        $this->fees->fill(array_merge(
-            $totals->all(), $request->all(), 
-            ['title' => get_academic_year_formatted($this->working_year),
-            'school_id' => auth()->user()->school->id,
-            'created_at' => $this->working_year[0],],)
+        $many_fees = collect($request->except('_token'));
+        $totals = $many_fees->mapWithKeys(fn ($fees, $group) =>
+        [$group . '_total' => collect($fees)->sum('amount')]);
+
+        $fees->fill(
+            array_merge(
+                $totals->all(),
+                $request->all(),
+                [
+                    'title' => get_academic_year_formatted($working_year),
+                    'school_id' => auth()->user()->school_id,
+                    'created_at' => $working_year[0],
+                ],
+            )
         )->save();
-        
+
         Toast::info('Updated Fees Rate Card!');
     }
 }

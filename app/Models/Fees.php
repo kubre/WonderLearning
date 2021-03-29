@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\AcademicYearScope;
+use App\Models\Scopes\SchoolScope;
 use App\Models\Traits\HasAcademicYear;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +15,7 @@ use Orchid\Screen\AsSource;
 /** @property Carbon $updated_at */
 class Fees extends Model
 {
-    use HasFactory, AsSource, HasAcademicYear;
+    use AsSource;
 
     /** @var array */
     protected $fillable = [
@@ -42,16 +44,17 @@ class Fees extends Model
         'senior_kg_total' => 'integer',
     ];
 
+    protected static function booted()
+    {
+        static::addGlobalScope(new AcademicYearScope);
+        static::addGlobalScope(new SchoolScope);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function school()
     {
         return $this->belongsTo(School::class);
-    }
-
-    public static function getFeesCard(array $academic_year): ?Fees
-    {
-        return self::whereBetween('created_at', $academic_year)->first();
     }
 }

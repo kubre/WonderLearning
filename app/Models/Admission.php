@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Traits\HasAcademicYear;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Scopes\AcademicYearScope;
+use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 /** @property School $school */
@@ -14,7 +15,7 @@ use Orchid\Screen\AsSource;
 /** @property Carbon $admission_at */
 class Admission extends Model
 {
-    use HasFactory, AsSource, HasAcademicYear;
+    use AsSource, Filterable;
 
     /** @var array */
     protected $fillable = [
@@ -36,6 +37,20 @@ class Admission extends Model
         'discount' => 'integer',
         'admission_at' => 'date:Y-m-d',
     ];
+
+    protected $allowedFilters = [
+        'admission_at',
+        'name',
+        'program',
+        'fees_installments',
+        'batch',
+    ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new AcademicYearScope);
+        static::addGlobalScope(new SchoolScope);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -42,8 +42,9 @@ class EnquiryListScreen extends Screen
     public function query(): array
     {
         $this->user = auth()->user();
+        $this->user->hasAccess('admin.school');
         return [
-            'enquiries' => Enquiry::whereBetween('created_at', working_year())->paginate(),
+            'enquiries' => Enquiry::filters()->paginate(),
         ];
     }
 
@@ -55,11 +56,11 @@ class EnquiryListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('New Enquiry')
+            Link::make('Add Enquiry')
                 ->type(Color::PRIMARY())
                 ->route('school.enquiry.edit')
                 ->canSee($this->user->hasAccess('enquiry.create'))
-                ->icon('pencil'),
+                ->icon('plus'),
         ];
     }
 
@@ -81,8 +82,8 @@ class EnquiryListScreen extends Screen
                         ])->title('Map the enquirer details to'),
                 ]),
             ])
-            ->applyButton('Next')
-            ->closeButton('Cancel'),
+                ->applyButton('Next')
+                ->closeButton('Cancel'),
             EnquiryListLayout::class
         ];
     }
@@ -104,7 +105,9 @@ class EnquiryListScreen extends Screen
 
     public function proceedToAdmission($enquirerId)
     {
-        return redirect()->route('school.admission.edit',
-            ['enquirerId' => $enquirerId, 'enquirer' => request('enquirer')]);
+        return redirect()->route(
+            'school.admission.edit',
+            ['enquirerId' => $enquirerId, 'enquirer' => request('enquirer')]
+        );
     }
 }

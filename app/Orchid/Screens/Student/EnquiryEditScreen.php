@@ -49,7 +49,7 @@ class EnquiryEditScreen extends Screen
     {
         $this->user = auth()->user();
         $this->exists = $enquiry->exists;
-        if($this->exists) $this->name = 'Update Enquiry';
+        if ($this->exists) $this->name = 'Update Enquiry';
         return $enquiry->toArray();
     }
 
@@ -99,14 +99,14 @@ class EnquiryEditScreen extends Screen
                         ->title('Name')
                         ->required(),
                     Select::make('program')
-                    ->options([
-                        'Playgroup' => 'Playgroup',
-                        'Nursery' => 'Nursery',
-                        'Junior KG' => 'Junior KG',
-                        'Senior KG' => 'Senior KG',
-                    ])
-                    ->required()
-                    ->title('Program'),
+                        ->options([
+                            'Playgroup' => 'Playgroup',
+                            'Nursery' => 'Nursery',
+                            'Junior KG' => 'Junior KG',
+                            'Senior KG' => 'Senior KG',
+                        ])
+                        ->required()
+                        ->title('Program'),
                 ]),
                 Group::make([
                     Select::make('gender')
@@ -149,7 +149,7 @@ class EnquiryEditScreen extends Screen
         ];
     }
 
-     /**
+    /**
      * @param Enquiry $enquiry
      * @param Request $request
      *
@@ -169,10 +169,11 @@ class EnquiryEditScreen extends Screen
             'reference' => 'required',
             'follow_up_at' => 'required|date',
         ]);
-        $form['school_id'] = $this->user->school->id;
-        
+
+        $form['school_id'] = auth()->user()->school_id;
+
         $enquiry->fill($form)->save();
-        Toast::info(($this->exists ? 'Updated' : 'Added').' details successfully!');
+        Toast::info('Added details successfully!');
         return redirect()->route('school.enquiry.list');
     }
 

@@ -1,4 +1,4 @@
-.cropper-preview {
+.cropper-preview, .picture-preview {
     max-height: 100px;
     max-width: 100px;
     object-fit: contain;

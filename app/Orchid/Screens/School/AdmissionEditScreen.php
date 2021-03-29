@@ -63,7 +63,7 @@ class AdmissionEditScreen extends Screen
         $this->working_year = working_year();
         $this->current_year_start = (string) $this->working_year[0];
         $this->current_year = get_academic_year_formatted($this->working_year);
-        
+
         if (today()->isBetween(...$this->working_year)) {
             $academic_year = get_academic_year(today()->addYear());
             $this->next_year_start = (string) $academic_year[0];
@@ -75,16 +75,16 @@ class AdmissionEditScreen extends Screen
 
         $data = [];
         $enquirer = null;
-        
+
         if (!is_null(request('enquirerId'))) {
             $enquiry = Enquiry::findOrFail(request('enquirerId'))->toArray();
             $enquirer = request('enquirer');
         }
 
         if (!$this->exists) {
-            $enquiry[$enquirer.'_name'] = $enquiry['enquirer_name'];
-            $enquiry[$enquirer.'_contact'] = $enquiry['enquirer_contact'];
-            $enquiry[$enquirer.'_email'] = $enquiry['enquirer_email'];
+            $enquiry[$enquirer . '_name'] = $enquiry['enquirer_name'];
+            $enquiry[$enquirer . '_contact'] = $enquiry['enquirer_contact'];
+            $enquiry[$enquirer . '_email'] = $enquiry['enquirer_email'];
             $enquiry['admission_at'] = today()->format('Y-m-d');
             $data = $enquiry;
         } else {
@@ -143,7 +143,7 @@ class AdmissionEditScreen extends Screen
                         ->title('Admission Academic Year')
                         ->options([
                             $this->current_year_start => $this->current_year,
-                            $this->next_year_start => $this->next_year, 
+                            $this->next_year_start => $this->next_year,
                         ]),
                     DateTimer::make('admission_at')
                         ->format('Y-m-d')
@@ -210,20 +210,20 @@ class AdmissionEditScreen extends Screen
                     Input::make('mother_organization')
                         ->title('Organization'),
                 ])->title('Mother\'s Details'),
-            ]), 
+            ]),
             Layout::rows([
                 Group::make([
-                Input::make('address')
-                    ->title('Address'),
-                Input::make('city')
-                    ->title('City'),
+                    Input::make('address')
+                        ->title('Address'),
+                    Input::make('city')
+                        ->title('City'),
                 ]),
                 Group::make([
-                Input::make('state')
-                    ->title('State'),
-                Input::make('pincode')
-                    ->mask('999999')
-                    ->title('Pin Code'),
+                    Input::make('state')
+                        ->title('State'),
+                    Input::make('pincode')
+                        ->mask('999999')
+                        ->title('Pin Code'),
                 ]),
             ])->title('Address Details'),
             Layout::rows([
@@ -259,14 +259,14 @@ class AdmissionEditScreen extends Screen
     }
 
     public function createOrUpdate(Admission $admission, AdmissionRequest $request)
-    {     
+    {
         $student = new Student;
         if ($this->exists) {
             $student = $admission->student;
         }
 
         $form = $request->all();
-        $form['school_id'] = auth()->user()->school->id;
+        $form['school_id'] = auth()->user()->school_id;
 
         $student->fill($form)->save();
 
