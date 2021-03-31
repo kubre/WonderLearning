@@ -11,7 +11,7 @@ use Orchid\Screen\AsSource;
 /** @property Enquiry $enquiry */
 class Student extends Model
 {
-    use AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     /** @var array */
     protected $fillable = [

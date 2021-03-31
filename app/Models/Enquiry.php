@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Orchid\Filters\Filterable;
@@ -17,7 +18,7 @@ use Orchid\Screen\AsSource;
 /** @property Carbon $follow_up_at */
 class Enquiry extends Model
 {
-    use AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     /** @var array */
     protected $fillable = [

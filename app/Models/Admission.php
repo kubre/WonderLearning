@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
+use Illuminate\Support\Str;
 
 /** @property School $school */
 /** @property Student $student */
@@ -15,7 +17,7 @@ use Orchid\Screen\AsSource;
 /** @property Carbon $admission_at */
 class Admission extends Model
 {
-    use AsSource, Filterable;
+    use AsSource, Filterable, HasFactory;
 
     /** @var array */
     protected $fillable = [
@@ -50,6 +52,11 @@ class Admission extends Model
     {
         static::addGlobalScope(new AcademicYearScope);
         static::addGlobalScope(new SchoolScope);
+    }
+
+    public function getFeesTotalColumnAttribute()
+    {
+        return Str::of($this->program)->lower()->snake() . '_total';
     }
 
     /**

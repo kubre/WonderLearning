@@ -21,10 +21,6 @@ class CreateSchoolsTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('login_url');
-            $table->foreignId('owner_id')
-                ->nullable()
-                ->constrained('users')
-                ->onDelete('set NULL');
             $table->timestamps();
         });
     }

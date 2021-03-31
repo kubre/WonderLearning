@@ -3,6 +3,7 @@
 ## Entities
 
 ### Students Table
+
 ```
 name
 dob_at
@@ -26,6 +27,7 @@ nationality
 ```
 
 ### Enquiry Table
+
 ```
 name
 gender
@@ -40,6 +42,7 @@ student_id
 ```
 
 ### Admission Table
+
 ```
 student_id
 academic_year
@@ -49,4 +52,18 @@ fees_installments -> 1..12
 discount
 batch
 is_transportation_required
+```
+
+### Fees
+
+```
+title
+playgroup
+playgroup_total
+nursery
+nursery_total
+junior_kg
+junior_kg_total
+senior_kg
+senior_kg_total
 ```

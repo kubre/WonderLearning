@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Scopes\SchoolScope;
 use Orchid\Platform\Models\User as Authenticatable;
 
 /** @property School $school */

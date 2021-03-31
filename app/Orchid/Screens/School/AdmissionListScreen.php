@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\School;
 
 use App\Models\Admission;
+use App\Models\Fees;
 use App\Orchid\Layouts\School\AdmissionListLayout;
 use Orchid\Screen\Screen;
 
@@ -33,6 +34,7 @@ class AdmissionListScreen extends Screen
     {
         return [
             'admissions' => Admission::filters()->with(['student'])->paginate(),
+            'fees' => Fees::first(),
         ];
     }
 

@@ -15,7 +15,7 @@ use Orchid\Screen\AsSource;
 /** @property Carbon $updated_at */
 class Fees extends Model
 {
-    use AsSource;
+    use AsSource, HasFactory;
 
     /** @var array */
     protected $fillable = [

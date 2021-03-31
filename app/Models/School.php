@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 
@@ -10,11 +11,11 @@ use Orchid\Screen\AsSource;
 /** @property Collection $enquiries */
 class School extends Model
 {
-    use AsSource;
+    use AsSource, HasFactory;
 
     /** @var array */
     protected $fillable = [
-        'name', 'logo', 'contact', 'email', 'address', 'login_url', 'owner_id',
+        'name', 'logo', 'contact', 'email', 'address', 'login_url',
     ];
 
     /**

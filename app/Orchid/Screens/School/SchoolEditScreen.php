@@ -40,6 +40,8 @@ class SchoolEditScreen extends Screen
      */
     public $exists = false;
 
+    public $permission = 'admin.school';
+
     /**
      * Query data.
      *
@@ -119,11 +121,6 @@ class SchoolEditScreen extends Screen
                     ->rows(2)
                     ->tabindex(5)
                     ->required(),
-                Relation::make('school.owner_id')
-                    ->title('Owner')
-                    ->tabindex(6)
-                    ->fromModel(User::class, 'name')
-                    ->required(),
             ]),
         ];
     }
@@ -142,12 +139,11 @@ class SchoolEditScreen extends Screen
             'school.email' => 'required|email',
             'school.address' => 'required',
             'school.logo' => 'required',
-            'school.owner_id' => ['required',],
         ])['school'];
         $form['login_url'] = Str::slug($form['name']);
 
         $school->fill($form)->save();
-        Toast::success(($this->exists ? 'Updated' : 'Added') . ' details successfully!');
+        Toast::success('Added details successfully!');
         return redirect()->route('admin.school.list');
     }
 

@@ -3,7 +3,6 @@
 namespace App\Orchid\Layouts\School;
 
 use App\Models\School;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
