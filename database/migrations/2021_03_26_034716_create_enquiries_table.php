@@ -27,12 +27,13 @@ class CreateEnquiriesTable extends Migration
             $table->foreignId('student_id')
                 ->nullable()
                 ->default(null)
-                ->constrained()
-                ->onDelete('SET NULL');
+                ->onDelete('cascade')
+                ->constrained();
             $table->foreignId('school_id')
                 ->nullable()
-                ->constrained()
-                ->onDelete('SET NULL');
+                ->default(null)
+                ->onDelete('cascade')
+                ->constrained();
             $table->timestamps();
         });
     }

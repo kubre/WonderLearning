@@ -17,6 +17,7 @@ class AddSchoolIdToUsers extends Migration
             $table->foreignId('school_id')
                 ->nullable()
                 ->default(null)
+                ->onDelete('cascade')
                 ->constrained();
         });
     }

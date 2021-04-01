@@ -38,8 +38,9 @@ class CreateStudentsTable extends Migration
             $table->string('nationality')->default(null)->nullable();
             $table->foreignId('school_id')
                 ->nullable()
-                ->constrained()
-                ->onDelete('SET NULL');
+                ->default(null)
+                ->onDelete('cascade')
+                ->constrained();
             $table->timestamps();
         });
     }

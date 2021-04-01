@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Screen\AsSource;
 
 /** @property Collection $students */
@@ -40,5 +42,15 @@ class School extends Model
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function receipts(): HasMany
+    {
+        return $this->hasMany(Receipt::class);
+    }
+
+    public function fees(): HasOne
+    {
+        return $this->hasOne(Fees::class);
     }
 }

@@ -26,8 +26,9 @@ class CreateFeesTable extends Migration
             $table->unsignedInteger('senior_kg_total');
             $table->foreignId('school_id')
                 ->nullable()
-                ->constrained()
-                ->onDelete('SET NULL');
+                ->default(null)
+                ->onDelete('cascade')
+                ->constrained();
             $table->timestamps();
         });
     }

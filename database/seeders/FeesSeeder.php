@@ -14,6 +14,6 @@ class FeesSeeder extends Seeder
      */
     public function run()
     {
-        Fees::factory()->count(100)->make();
+        Fees::factory()->count(100)->create();
     }
 }

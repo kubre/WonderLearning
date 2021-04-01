@@ -67,3 +67,17 @@ junior_kg_total
 senior_kg
 senior_kg_total
 ```
+
+### Receipt
+
+```
+invoice_no
+amount
+type
+bank_name
+bank_branch
+transaction_no
+paid_at
+student_id
+school_id
+```

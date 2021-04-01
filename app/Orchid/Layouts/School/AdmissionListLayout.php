@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\School;
 use App\Models\Admission;
 use App\Models\Fees;
 use App\Models\User;
+use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -48,8 +49,19 @@ class AdmissionListLayout extends Table
             TD::make('batch', 'Batch')->filter(TD::FILTER_TEXT),
             TD::make('actions', 'Actions')
                 ->canSee($this->user->hasAccess('admission.edit'))
-                ->render(fn (Admission $s) =>
-                Link::make('Edit')->icon('note')->route('school.admission.edit', $s))
+                ->render(
+                    fn (Admission $a) =>
+                    DropDown::make()
+                        ->icon('options-vertical')
+                        ->list([
+                            Link::make('Edit')
+                                ->icon('note')
+                                ->route('school.admission.edit', $a),
+                            Link::make('Receipt')
+                                ->icon('money')
+                                ->route('school.receipt.list', ['admission_id' => $a->id]),
+                        ]),
+                )
         ];
     }
 }

@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
@@ -66,13 +65,13 @@ class EnquiryEditScreen extends Screen
                 ->canSee($this->user->hasAccess('enquiry.table'))
                 ->route('school.enquiry.list'),
 
-            Button::make('Save School')
+            Button::make('Save Enquiry')
                 ->icon('save')
                 ->method('createOrUpdate')
                 ->type(Color::PRIMARY())
                 ->canSee(!$this->exists),
 
-            Button::make('Update')
+            Button::make('Update Enquiry')
                 ->icon('note')
                 ->method('createOrUpdate')
                 ->canSee($this->exists),

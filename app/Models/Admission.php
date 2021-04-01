@@ -6,6 +6,7 @@ use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Illuminate\Support\Str;
@@ -54,10 +55,31 @@ class Admission extends Model
         static::addGlobalScope(new SchoolScope);
     }
 
-    public function getFeesTotalColumnAttribute()
+    public function getFeesTotalColumnAttribute(): string
     {
         return Str::of($this->program)->lower()->snake() . '_total';
     }
+
+    public function getInvoiceNoAttribute(): string
+    {
+        return 'A' . Str::of($this->program)->limit(1, '')->upper()
+            . '/' . Str::of($this->school_id)->limit(4, '')->padLeft(4, '0')
+            . '/' . Str::of($this->student_id)->limit(4, '')->padLeft(4, '0');
+    }
+
+
+    public function getTotalFeesAttribute()
+    {
+        return $this->school->fees->{$this->fees_total_column} - $this->discount;
+    }
+
+
+    public function getPaidFeesAttribute()
+    {
+        // TODO: Make sure to only add the fees
+        return $this->receipts()->sum('amount');
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -73,5 +95,10 @@ class Admission extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+
+    public function receipts(): HasMany
+    {
+        return $this->hasMany(Receipt::class);
     }
 }

@@ -31,6 +31,7 @@ class PermissionServiceProvider extends ServiceProvider
             'admission' => $crud,
             'enquiry' => $crud,
             'fees' => ['edit'],
+            'receipt' => $crud,
         ];
 
         foreach ($permissions as $name => $permission) {
@@ -38,10 +39,10 @@ class PermissionServiceProvider extends ServiceProvider
         }
 
         $admin = ItemPermission::group('admin')
-                ->addPermission('admin.school', 'Manage School')
-                ->addPermission('admin.user', 'Manage Users')
-                ->addPermission('admin.role', 'Manage Roles');
-        
+            ->addPermission('admin.school', 'Manage School')
+            ->addPermission('admin.user', 'Manage Users')
+            ->addPermission('admin.role', 'Manage Roles');
+
         $dashboard->registerPermissions($admin);
     }
 
@@ -49,7 +50,7 @@ class PermissionServiceProvider extends ServiceProvider
     {
         $p = ItemPermission::group($name);
         foreach ($permissions as $permission) {
-            $p->addPermission($name.'.'.$permission, ucwords($permission.' '.$name));
+            $p->addPermission($name . '.' . $permission, ucwords($permission . ' ' . $name));
         }
         return $p;
     }

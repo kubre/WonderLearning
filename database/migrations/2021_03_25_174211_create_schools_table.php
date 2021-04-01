@@ -21,6 +21,9 @@ class CreateSchoolsTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('login_url');
+            $table->timestamp('suspended_at')
+                ->default(null)
+                ->nullable();
             $table->timestamps();
         });
     }

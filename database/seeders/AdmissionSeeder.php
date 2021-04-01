@@ -14,6 +14,6 @@ class AdmissionSeeder extends Seeder
      */
     public function run()
     {
-        Admission::factory()->count(500)->make();
+        Admission::factory()->count(500)->create();
     }
 }

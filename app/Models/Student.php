@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -38,5 +39,10 @@ class Student extends Model
     public function enquiry()
     {
         return $this->hasOne(Enquiry::class);
+    }
+
+    public function receipts(): HasMany
+    {
+        return $this->hasMany(Receipt::class);
     }
 }

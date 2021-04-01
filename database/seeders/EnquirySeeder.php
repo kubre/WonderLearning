@@ -16,6 +16,6 @@ class EnquirySeeder extends Seeder
     {
         Enquiry::factory()
             ->count(500)
-            ->make();
+            ->create();
     }
 }

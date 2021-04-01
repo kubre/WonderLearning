@@ -21,7 +21,6 @@ class FeesFactory extends Factory
      */
     public function definition()
     {
-        $school = 0;
         return [
             'title' => 'Jun 20 - May 21',
             'playgroup' => '{"1":{"fees":"Tution","amount":"10000"},"2":{"fees":"Kit","amount":"1000"}}',
@@ -33,7 +32,7 @@ class FeesFactory extends Factory
             'senior_kg' => '{"1":{"fees":"Tution","amount":"10000"},"2":{"fees":"Transportation","amount":"2000"}}',
             'senior_kg_total' => 12000,
             'created_at' => now()->format('Y-m-d'),
-            'school_id' => $school++,
+            'school_id' => rand(1, 100),
         ];
     }
 }
