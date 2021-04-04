@@ -55,7 +55,7 @@ class Receipt extends Model
 
     public function admission(): BelongsTo
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Admission::class);
     }
 
 

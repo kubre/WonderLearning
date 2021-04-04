@@ -28,7 +28,7 @@ class UserEditScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Edit User';
+    public $name = 'Create User';
 
     /**
      * Display header description.
@@ -56,11 +56,11 @@ class UserEditScreen extends Screen
      */
     public function query(User $user): array
     {
-        $this->user = $user;
-
-        if (!$user->exists) {
-            $this->name = 'Create User';
+        if ($user->exists) {
+            $this->name = 'Edit User';
         }
+
+        $this->user = $user;
 
         $user->load(['roles']);
 
@@ -195,6 +195,10 @@ class UserEditScreen extends Screen
             ->save();
 
         $user->replaceRoles($request->input('user.roles'));
+
+        if ($request->input('user.is_center_head')) {
+            $user->school->fill(['center_head_id' => $user->id])->save();
+        }
 
         Toast::info(__('User was saved.'));
 

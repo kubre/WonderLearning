@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-use App\Models\School;
 use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\PlatformScreen;
-use App\Orchid\Screens\ReceiptEditScreen;
-use App\Orchid\Screens\ReceiptListScreen;
+use App\Orchid\Screens\School\ReceiptEditScreen;
+use App\Orchid\Screens\School\ReceiptListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
+use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
 use App\Orchid\Screens\Student\EnquiryEditScreen;
@@ -137,5 +137,9 @@ Route::screen('admissions', AdmissionListScreen::class)
 
 Route::screen('receipt/{receipt?}', ReceiptEditScreen::class)
     ->name('school.receipt.edit');
+
 Route::screen('receipts', ReceiptListScreen::class)
     ->name('school.receipt.list');
+
+Route::screen('receipts/{receipt}/{parent}', ReceiptPrintScreen::class)
+    ->name('school.receipt.print');

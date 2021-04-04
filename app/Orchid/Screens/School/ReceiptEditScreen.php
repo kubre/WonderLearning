@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\School;
 
 use App\Models\Receipt;
 use App\Models\Scopes\AcademicYearScope;
-use App\Models\Scopes\AdmissionYearScope;
 use App\Models\User;
 use App\Orchid\Layouts\ReceiptModeListener;
 use Illuminate\Http\Request;

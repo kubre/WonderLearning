@@ -3,6 +3,9 @@
 namespace App\Orchid\Layouts;
 
 use App\Models\Receipt;
+use App\Orchid\Screens\School\ReceiptListScreen;
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -38,6 +41,35 @@ class ReceiptListLayout extends Table
             TD::make('student_id', 'Student Name')
                 ->canSee($is_multi_layout)
                 ->render(fn (Receipt $r) => $r->admission()->student()->name),
+            TD::make('action', 'Action')
+                ->render(
+                    fn (Receipt $r) =>
+                    DropDown::make()
+                        ->icon('options-vertical')
+                        ->list([
+                            ModalToggle::make('Print')
+                                ->icon('printer')
+                                // ->canSee($this->user->hasAccess('admission.create'))
+                                ->modal('chooseReceiptReceiversName')
+                                ->modalTitle('Print Receipt')
+                                ->method('issueReceipt')
+                                ->asyncParameters([
+                                    'receipt' => $r->id,
+                                    'object' => ReceiptListScreen::OPTION_PRINT
+                                ]),
+
+                            ModalToggle::make('Email')
+                                ->icon('share')
+                                // ->canSee($this->user->hasAccess('admission.create'))
+                                ->modal('chooseReceiptReceiversName')
+                                ->modalTitle('Email Receipt')
+                                ->method('issueReceipt')
+                                ->asyncParameters([
+                                    'receipt' => $r->id,
+                                    'object' => ReceiptListScreen::OPTION_EMAIL
+                                ]),
+                        ])
+                ),
         ];
     }
 }

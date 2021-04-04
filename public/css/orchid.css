@@ -3,3 +3,26 @@
     max-width: 100px;
     object-fit: contain;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print-report, #print-report * {
+    visibility: visible;
+  }
+  #print-report {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    box-shadow: none;
+    border: 1 solid black;
+    font-size: 1.3em;
+  }
+}
+
+.b-b {
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+}

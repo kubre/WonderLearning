@@ -3,16 +3,13 @@
 namespace App\Orchid\Screens\School;
 
 use App\Models\School;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
-use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Support\Str;
 use Orchid\Screen\Fields\Group;
@@ -99,6 +96,7 @@ class SchoolEditScreen extends Screen
                         ->title('Logo')
                         ->tabindex(1)
                         ->maxFileSize(1),
+
                     Input::make('school.name')
                         ->title('School Name')
                         ->tabindex(2)
