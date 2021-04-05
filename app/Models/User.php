@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function getIsCenterHeadAttribute()
     {
-        return $this->id == $this->school->center_head_id;
+        return $this->id === optional($this->school)->center_head_id;
     }
 
 
