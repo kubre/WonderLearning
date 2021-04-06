@@ -1,83 +1,122 @@
-# Schools/Branch CMS - Main Server Website
+# Tasks (06-04-2021, Due date (10-04-2021)
 
-## Entities
+-   **Add working year**: Changes in all the files following academic year scope and in helper
 
-### Students Table
+    -   Admission
+    -   Enquiry
+    -   Fees
+    -   Receipt
+    -   Receipt Edit Screen
 
-```
-name
-dob_at
-father_name
-father_contact
-father_occupation
-father_email
-father_organization_name
-mother_name
-mother_contact
-mother_occupation
-mother_email
-mother_organization_name
-previous_school
-siblings
-address
-city
-state
-postal_code
-nationality
-```
+-   **School code**: Max 3 char school code for use in Student PRN number Invoicing and receipt searching
 
-### Enquiry Table
+    -   add in the school migration code (review the migrations)
+    -   School Edit and List Layout Screen
+    -   Unique validation
 
-```
-name
-gender
-dob_at
-enquirer_name
-enquirer_email
-enquirer_contact
-locality
-reference
-follow_up_at
-student_id
-```
+-   **Student PRN number** unique per student only for that school (format SCHOOL CODE\STUDENT CODE\ACADEMIC YEAR, ex. WLS/0001/2021 Add this in Admission Form
 
-### Admission Table
+    -   Student migration - code column
+    -   Edit and List Layout and validation
 
-```
-student_id
-academic_year
-admission_at
-program -> Playgroup, Nursery, Junior KG, Senior KG
-fees_installments -> 1..12
-discount
-batch
-is_transportation_required
-```
+-   **Fees Rate Card**: validation no need for all the fees to be added all time make sure in DB fields are nullable
 
-### Fees
+-   **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make On Behalf on section readonly in student receipts, Also add it to the menu
 
-```
-title
-playgroup
-playgroup_total
-nursery
-nursery_total
-junior_kg
-junior_kg_total
-senior_kg
-senior_kg_total
-```
+-   **Receipt Print layout** also add image for login background
 
-### Receipt
+    -   add (sum of (in digits) &lt;amount&gt; on account of &lt;for&gt; in words &lt;amount&gt; only)
+    -   Add student PRN between receipt and date
+    -   Make school details on top left more obvious
+    -   Add bank name after cheque number
+    -   Invoice No will contain the school code
 
-```
-invoice_no
-amount
-type
-bank_name
-bank_branch
-transaction_no
-paid_at
-student_id
-school_id
-```
+-   **Invoice Print**
+
+    -   Check the invoice format for epms for invoice print
+
+-   **User Management for Schools**
+-   **Make layout more colorful**
+
+-   ?(Need thinking and work) **Inventory & Stocks**: Add ability to manage inventory and stocks
+    -   Item Name
+    -   Price
+    -   Available Units
+
+## Reports -
+
+Have ability to export these reports as excel or pdf
+
+### Reports in account section
+
+-   **Pay Due Report**: (Dropdown filter programme or all)
+    -   PRN
+    -   Student Name
+    -   Father Name
+    -   Program Name
+    -   Discount Applicable
+    -   Invoice Number
+    -   Admission Date
+    -   Invoice Amount
+    -   Amount Received
+    -   Due Amount
+-   **Canceled Logs**: Add ability to cancel receipts and reports. (Excel, PDF)
+    -   Student PRN
+    -   Student Name
+    -   Receipt Number
+    -   Amount in Rs
+    -   Cancellation Date
+-   **Online Collection reports**: Report containing all the online payments done (Date Range Filter) (Excel, PDF)
+    -   Student PRN
+    -   Student Name
+    -   Receipt Number
+    -   Transaction ID
+    -   Payment Date
+    -   Amount
+-   **Daily Collection reports**: (Date Range and Programme Filter) (Excel, PDF)
+
+    -   Receipt No
+    -   Cash
+    -   Cheque
+    -   Online
+
+    In this report make sure to add amount only in column in which payment was done at the end add a total column for individual (Total for all?)
+
+### Reports in Reports section
+
+-   **Admission Report** (Program and Batch Filter) (Excel, PDF)
+    -   State
+    -   City
+    -   Program
+    -   Invoice Number
+    -   Student name
+    -   Admission Status - (New or Graduate)
+    -   Father name
+    -   Fathers Occupation
+    -   Father contact no
+    -   Father Email ID
+    -   Mother name
+    -   Mothers Occupation
+    -   Mother contact no
+    -   Mother Email ID
+    -   Date of Birth
+    -   Gender
+    -   Admission date: Created At
+    -   Address
+    -   Batch
+    -   Transport
+    -   Date of conversion: Admission Date
+    -   Previous Schooling
+-   **Enquiry Report** (Excel, PDF)
+    -   Program Name
+    -   Converted
+    -   Not Converted
+    -   Total
+-   ?(Need more thinking) **Inventory & Stocks Report**
+
+## Small Changes
+
+-   Slider Images
+-   Copyright Wonder Learning India Pvt. Ltd.
+-   Remove dummy client logos
+-   Remove call today from bottom of home page
