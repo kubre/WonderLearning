@@ -30,6 +30,7 @@ class EnquiryListScreen extends Screen
      */
     public $description = 'Add, Edit, Delete, Convert to Admission the enquiries and more.';
 
+    /** @var array|string */
     public $permission = 'enquiry.table';
 
     protected User $user;

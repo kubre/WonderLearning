@@ -23,6 +23,7 @@ class AdmissionListScreen extends Screen
      */
     public $description = 'Manage current year\'s admissions.';
 
+    /** @var array|string */
     public $permission = 'admission.table';
 
     /**

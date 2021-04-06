@@ -38,6 +38,7 @@ class AdmissionEditScreen extends Screen
      */
     public $description = 'Fill the following form to convert/edit to an Admission.';
 
+    /** @var array|string */
     public $permission = 'admission.edit';
 
     public bool $exists = false;
@@ -107,7 +108,7 @@ class AdmissionEditScreen extends Screen
                 ->icon('save')
                 ->type(Color::PRIMARY())
                 ->method('createOrUpdate')
-                ->canSee(!$this->exists),
+                ->canSee(!$this->exists && auth()->user()->hasAccess('admission.create')),
 
             Button::make('Update')
                 ->icon('note')

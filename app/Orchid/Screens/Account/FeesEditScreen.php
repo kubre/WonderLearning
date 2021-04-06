@@ -30,6 +30,10 @@ class FeesEditScreen extends Screen
      */
     public $description = 'Edit Current Year\'s Fees Rate Card';
 
+
+    /** @var array|string */
+    public $permission = 'fees.edit';
+
     const FEES_FORMAT = ['Fees' => 'fees', 'Amount' => 'amount'];
 
     /**

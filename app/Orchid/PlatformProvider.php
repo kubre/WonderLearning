@@ -36,7 +36,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->title('Menu'),
             ItemMenu::label('Schools')
                 ->icon('building')
-                ->canSee($user->hasAccess('admin.school'))
+                ->permission('admin.school')
                 ->route('admin.school.list'),
 
             ItemMenu::label('Admissions')
@@ -48,12 +48,12 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Enquiry')
                 ->place('admissions')
                 ->icon('info')
-                ->canSee($user->hasAccess('enquiry.table'))
+                ->permission('enquiry.table')
                 ->route('school.enquiry.list'),
             ItemMenu::label('Admission')
                 ->place('admissions')
                 ->icon('user')
-                ->canSee($user->hasAccess('admission.table'))
+                ->permission('admission.table')
                 ->route('school.admission.list'),
 
             ItemMenu::label('Accounts')
@@ -65,8 +65,9 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Fee Rate Card')
                 ->place('accounts')
                 ->icon('note')
-                ->canSee($user->hasAccess('fees.edit'))
+                ->permission('fees.edit')
                 ->route('account.fees.edit'),
+
             ItemMenu::label('Sign Out')
                 ->icon('logout')
                 ->route('auth.signout', [optional(session('school'))['login_url'] ?? 'admin']),
@@ -135,7 +136,7 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             // ...Models
-            // \App\Models\User::class
+            // \App\Models\User::class,
         ];
     }
 }

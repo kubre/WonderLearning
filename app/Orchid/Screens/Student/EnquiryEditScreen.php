@@ -37,6 +37,7 @@ class EnquiryEditScreen extends Screen
 
     public User $user;
 
+    /** @var array|string */
     public $permission = 'enquiry.edit';
 
     /**

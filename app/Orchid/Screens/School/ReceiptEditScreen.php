@@ -33,6 +33,8 @@ class ReceiptEditScreen extends Screen
      */
     public $description = 'Add Receipt into the records.';
 
+    /** @var array|string */
+    public $permission = 'receipt.edit';
 
     public bool $exists = false;
 
@@ -80,7 +82,7 @@ class ReceiptEditScreen extends Screen
                 ->icon('save')
                 ->method('createOrUpdate')
                 ->type(Color::PRIMARY())
-                ->canSee(!$this->exists),
+                ->canSee(!$this->exists && $this->user->hasAccess('receipt.create')),
 
             Button::make('Update Receipt')
                 ->icon('note')

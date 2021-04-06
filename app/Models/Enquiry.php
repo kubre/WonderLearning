@@ -22,7 +22,7 @@ class Enquiry extends Model
 
     /** @var array */
     protected $fillable = [
-        'name', 'gender', 'dob_at', 'program', 'enquirer_name', 'enquirer_email', 'enquirer_contact', 'locality', 'reference', 'follow_up_at', 'student_id', 'school_id',
+        'name', 'gender', 'dob_at', 'program', 'enquirer_name', 'enquirer_email', 'enquirer_contact', 'locality', 'reference', 'follow_up_at', 'student_id', 'school_id', 'created_at',
     ];
 
     /** @var array */
