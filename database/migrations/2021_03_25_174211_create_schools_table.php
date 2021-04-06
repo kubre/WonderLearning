@@ -21,9 +21,16 @@ class CreateSchoolsTable extends Migration
             $table->string('email');
             $table->string('address');
             $table->string('login_url');
+            $table->char('code', 3)->unique();
+            $table->char('academic_year', 11);
             $table->timestamp('suspended_at')
+                ->nullable()
+                ->default(null);
+            $table->foreignId('center_head_id')
+                ->nullable()
                 ->default(null)
-                ->nullable();
+                ->constrained('users')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,15 +16,16 @@ class CreateFeesTable extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->json('playgroup');
-            $table->unsignedInteger('playgroup_total');
-            $table->json('nursery');
-            $table->unsignedInteger('nursery_total');
-            $table->json('junior_kg');
-            $table->unsignedInteger('junior_kg_total');
-            $table->json('senior_kg');
-            $table->unsignedInteger('senior_kg_total');
+            $table->json('playgroup')->default(null)->nullable();
+            $table->unsignedInteger('playgroup_total')->default(null)->nullable();
+            $table->json('nursery')->default(null)->nullable();
+            $table->unsignedInteger('nursery_total')->default(null)->nullable();
+            $table->json('junior_kg')->default(null)->nullable();
+            $table->unsignedInteger('junior_kg_total')->default(null)->nullable();
+            $table->json('senior_kg')->default(null)->nullable();
+            $table->unsignedInteger('senior_kg_total')->default(null)->nullable();
             $table->foreignId('school_id')
+                ->index()
                 ->nullable()
                 ->default(null)
                 ->onDelete('cascade')

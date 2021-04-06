@@ -18,17 +18,20 @@ class CreateAdmissionsTable extends Migration
             $table->date('admission_at');
             $table->char('program', 9);
             $table->unsignedTinyInteger('fees_installments');
-            $table->unsignedInteger('discount')->default(null)->nullable();
+            $table->unsignedInteger('discount')
+                ->default(null)
+                ->nullable();
             $table->char('batch', 9);
             $table->boolean('is_transportation_required');
             $table->foreignId('student_id')
-                ->nullable()
                 ->default(null)
+                ->nullable()
                 ->onDelete('cascade')
                 ->constrained();
             $table->foreignId('school_id')
-                ->nullable()
+                ->index()
                 ->default(null)
+                ->nullable()
                 ->onDelete('cascade')
                 ->constrained();
             $table->timestamps();

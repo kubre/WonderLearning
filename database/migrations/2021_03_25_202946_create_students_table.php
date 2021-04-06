@@ -19,6 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('photo')->default(null)->nullable();
             $table->date('dob_at');
             $table->char('gender', 11);
+            $table->unsignedMediumInteger('code');
             $table->string('father_name')->default(null)->nullable();
             $table->char('father_contact', 10)->default(null)->nullable();
             $table->string('father_occupation')->default(null)->nullable();
@@ -37,6 +38,7 @@ class CreateStudentsTable extends Migration
             $table->char('postal_code', 6)->default(null)->nullable();
             $table->string('nationality')->default(null)->nullable();
             $table->foreignId('school_id')
+                ->index()
                 ->nullable()
                 ->default(null)
                 ->onDelete('cascade')

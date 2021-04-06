@@ -18,6 +18,7 @@ class CreateEnquiriesTable extends Migration
             $table->string('name');
             $table->char('gender', 11);
             $table->date('dob_at');
+            $table->char('program', 9);
             $table->string('enquirer_name');
             $table->string('enquirer_email');
             $table->char('enquirer_contact', 10);
@@ -30,6 +31,7 @@ class CreateEnquiriesTable extends Migration
                 ->onDelete('cascade')
                 ->constrained();
             $table->foreignId('school_id')
+                ->index()
                 ->nullable()
                 ->default(null)
                 ->onDelete('cascade')

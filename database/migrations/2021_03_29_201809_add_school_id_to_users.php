@@ -15,6 +15,7 @@ class AddSchoolIdToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('school_id')
+                ->index()
                 ->nullable()
                 ->default(null)
                 ->onDelete('cascade')
