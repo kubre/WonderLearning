@@ -70,7 +70,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')
-                ->route('auth.signout', [optional(session('school'))['login_url'] ?? 'admin']),
+                ->route('auth.signout', [optional(session('school'))->login_url ?? 'admin']),
         ];
     }
 

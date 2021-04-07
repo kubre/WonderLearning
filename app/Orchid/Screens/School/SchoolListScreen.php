@@ -24,8 +24,10 @@ class SchoolListScreen extends Screen
      */
     public $description = 'Manage School Data';
 
+
     /** @var string|array */
     public $permission = 'admin.school';
+
 
     /**
      * Query data.
@@ -35,9 +37,10 @@ class SchoolListScreen extends Screen
     public function query(): array
     {
         return [
-            'schools' => School::paginate()
+            'schools' => School::filters()->paginate(),
         ];
     }
+
 
     /**
      * Button commands.
@@ -53,6 +56,7 @@ class SchoolListScreen extends Screen
                 ->icon('plus'),
         ];
     }
+
 
     /**
      * Views.

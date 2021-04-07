@@ -23,21 +23,21 @@ Route::view('/home', 'website.home');
 Route::view('/programs', 'website.programs');
 Route::view('/services', 'website.services');
 Route::view('/testimonials', 'website.testimonials');
-Route::view('/awards', 'website.awards'); 
+Route::view('/awards', 'website.awards');
 Route::view('/gallery', 'website.gallery');
 // Route::view('/clients', 'website.clients');
 Route::view('/franchise', 'website.franchise');
-Route::post('/contact-us', function(Request $request) {
+Route::post('/contact-us', function (Request $request) {
     dd($request);
 });
 Route::view('/contact-us', 'website.contact');
 
 Route::get('/login/{school:login_url}/', function (School $school) {
-    session(['school' => $school->toArray()]);
+    session(['school' => $school]);
     return view('platform::auth.login');
 });
 
-Route::get('/logout/{school:login_url}', function(School $school) {
+Route::get('/logout/{school:login_url}', function (School $school) {
     Auth::guard()->logout();
 
     request()->session()->invalidate();
@@ -47,15 +47,15 @@ Route::get('/logout/{school:login_url}', function(School $school) {
     return request()->wantsJson()
         ? new JsonResponse([], 204)
         : redirect('/login/' . $school->login_url);
-})->missing(function() {
-        Auth::guard()->logout();
+})->missing(function () {
+    Auth::guard()->logout();
 
-        request()->session()->invalidate();
+    request()->session()->invalidate();
 
-        request()->session()->regenerateToken();
+    request()->session()->regenerateToken();
 
-        return request()->wantsJson()
-            ? new JsonResponse([], 204)
+    return request()->wantsJson()
+        ? new JsonResponse([], 204)
         : redirect('/admin/');
-    })
+})
     ->name('auth.signout');

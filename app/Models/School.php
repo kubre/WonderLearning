@@ -2,25 +2,71 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Orchid\Platform\Models\Role;
+use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
-/** @property Collection $students */
-/** @property Collection $enquiries */
+
 class School extends Model
 {
-    use AsSource, HasFactory;
+    use AsSource, HasFactory, Filterable;
 
     /** @var array */
     protected $fillable = [
-        'name', 'logo', 'contact', 'email', 'address', 'login_url', 'center_head_id',
+        'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'center_head_id',
     ];
+
+
+    public array $allowedFilters = [
+        'name', 'code',
+    ];
+
+
+    public array $allowedSorts = [
+        'name',
+    ];
+
+
+    // Attributes
+    public function getStartMonthAttribute(): int
+    {
+        return (int) substr($this->academic_year, 3, 2);
+    }
+
+
+    public function getAcademicYearAttribute($value): string
+    {
+        if (is_null($value) || strlen($value) != 11) return '01:06|31:05';
+        return $value;
+    }
+
+
+    public function getAcademicYearStartAttribute(): string
+    {
+        return explode('|', $this->academic_year)[0];
+    }
+
+
+    public function getAcademicYearEndAttribute(): string
+    {
+        return explode('|', $this->academic_year)[1];
+    }
+
+
+    public function setAcademicYearStartAttribute(string $value): void
+    {
+        $this->academic_year = substr_replace($this->academic_year, $value, 0, 5);
+    }
+
+
+    public function setAcademicYearEndAttribute(string $value): void
+    {
+        $this->academic_year = substr_replace($this->academic_year, $value, -5);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -1,5 +1,13 @@
 # Tasks (06-04-2021, Due date (10-04-2021)
 
+## Notes
+
+```
+1) Add fields modified in migrations to the Models $fillable
+ - School Done
+
+```
+
 -   **Add working year**: Changes in all the files following academic year scope and in helper
 
     -   Admission

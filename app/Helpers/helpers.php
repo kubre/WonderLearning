@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\School;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('working_date')) {
@@ -25,10 +26,16 @@ if (!function_exists('get_academic_year')) {
     {
         if (is_null($date)) return working_year();
 
+        $academic_year = optional(session('school'))->academic_year
+            ?? (new School)->academic_year;
         $start_at = clone $date;
-        $start_at->setDay(1)->setMonth(6);
+        $start_at
+            ->setMonth((int)substr($academic_year, 3, 2))
+            ->setDay((int)substr($academic_year, 0, 2));
         $end_at = clone $date;
-        $end_at->addYear()->setDay(31)->setMonth(5);
+        $end_at->addYear()
+            ->setMonth((int)substr($academic_year, -2))
+            ->setDay((int)substr($academic_year, -5, 2));
 
         if ($date->isBetween($start_at, $end_at)) {
             return [$start_at, $end_at];

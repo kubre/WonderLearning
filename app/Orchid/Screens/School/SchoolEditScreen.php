@@ -12,6 +12,9 @@ use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Orchid\Screen\Fields\DateRange;
+use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Group;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Toast;
@@ -114,10 +117,24 @@ class SchoolEditScreen extends Screen
                         ->tabindex(4)
                         ->required(),
                 ]),
+                Group::make([
+                    Input::make('school.code')
+                        ->title('School Code')
+                        ->mask('aaa')
+                        ->help('3 Characters unique school to be used in PRN and Receipts')
+                        ->tabindex(5)
+                        ->required(),
+                    Input::make('school.academic_year_start')
+                        ->title('Academic Year start (Ex. 01-06) Zero required')
+                        ->mask('99-99'),
+                    Input::make('school.academic_year_end')
+                        ->mask('99-99')
+                        ->title('Academic Year start (Ex. 31-05) Zero required'),
+                ]),
                 TextArea::make('school.address')
                     ->title('Address')
                     ->rows(2)
-                    ->tabindex(5)
+                    ->tabindex(6)
                     ->required(),
             ]),
         ];
@@ -132,13 +149,23 @@ class SchoolEditScreen extends Screen
     public function createOrUpdate(School $school, Request $request): RedirectResponse
     {
         $form = $request->validate([
-            'school.name' => 'required',
-            'school.contact' => 'required',
-            'school.email' => 'required|email',
-            'school.address' => 'required',
+            'school.name' => 'required|max:191',
+            'school.contact' => 'required|max:191',
+            'school.email' => 'required|email|max:191',
+            'school.address' => 'required|max:191',
             'school.logo' => 'required',
+            'school.academic_year_start' => 'bail|required|regex:/[0-3]{1}[0-9]{1}-[0-1]{1}[1-9]{1}/',
+            'school.academic_year_end' => 'bail|required|regex:/[0-3]{1}[0-9]{1}-[0-1]{1}[1-9]{1}/',
+            'school.code' => [
+                'bail',
+                'required',
+                Rule::unique('schools', 'code')->ignore($school->id),
+            ],
         ])['school'];
-        $form['login_url'] = Str::slug($form['name']);
+
+        $form['login_url'] = Str::of($form['name'])
+            ->slug()
+            ->limit(191);
 
         $school->fill($form)->save();
         Toast::success('Added details successfully!');
@@ -155,7 +182,7 @@ class SchoolEditScreen extends Screen
     {
         $school->delete();
 
-        Toast::info('You have successfully deleted the school.');
+        Toast::info('You have successfully removed the school from records.');
 
         return redirect()->route('admin.school.list');
     }

@@ -30,7 +30,11 @@ class SchoolListLayout extends Table
             TD::make('logo', 'School Logo')
                 ->render(fn (School $s) =>
                 "<img src='{$s->logo}' height='50'>"),
-            TD::make('name', 'School Name')->sort(),
+            TD::make('name', 'School Name')
+                ->sort()
+                ->filter(TD::FILTER_TEXT),
+            TD::make('code', 'School Code')
+                ->filter(TD::FILTER_TEXT),
             TD::make('email', 'Email'),
             TD::make('login_url', 'Login Url')
                 ->render(fn (School $s) =>
