@@ -171,6 +171,7 @@ class EnquiryEditScreen extends Screen
         ]);
 
         $form['school_id'] = auth()->user()->school_id;
+        $form['created_at'] = working_year()[0];
 
         $enquiry->fill($form)->save();
         Toast::info('Added details successfully!');

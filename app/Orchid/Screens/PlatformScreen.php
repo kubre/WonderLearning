@@ -36,6 +36,10 @@ class PlatformScreen extends Screen
      */
     public function query(): array
     {
+        if (!Session::exists('school')) {
+            session(['school' => optional(auth()->user())->school ?? new School]);
+        }
+
         return [];
     }
 
