@@ -8,6 +8,13 @@
 
 ```
 
+## Commits solving issues
+
+```
+(7/apr 12:22pm) Academic Year can now start from any month
+(7/apr 05:00pm) Small changes from (06-04) done
+```
+
 -   **Add working year**: Changes in all the files following academic year scope and in helper
 
     -   Admission
@@ -122,7 +129,7 @@ Have ability to export these reports as excel or pdf
     -   Total
 -   ?(Need more thinking) **Inventory & Stocks Report**
 
-## Small Changes
+## (DONE) Small Changes
 
 -   Slider Images
 -   Copyright Wonder Learning India Pvt. Ltd.
