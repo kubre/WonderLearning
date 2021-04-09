@@ -68,7 +68,7 @@ class ReceiptListScreen extends Screen
             Link::make('Add Receipt')
                 ->icon('plus')
                 ->type(Color::PRIMARY())
-                ->canSee(($this->admission->total_fees - $this->admission->paid_fees) > 0)
+                ->canSee($this->admission->balance_amount > 0)
                 ->route('school.receipt.edit', ['admission_id' => $this->admission->id]),
         ];
     }

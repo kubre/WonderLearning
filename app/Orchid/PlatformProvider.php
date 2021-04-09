@@ -3,7 +3,6 @@
 namespace App\Orchid;
 
 use App\Models\User;
-use Hamcrest\Arrays\IsArray;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;

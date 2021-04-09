@@ -29,7 +29,7 @@ class Student extends Model
     public function getPrnAttribute()
     {
         $date = clone $this->created_at;
-        return $this->school->code . '/' . str_pad($this->code, 4, '0', STR_PAD_LEFT) . '/' . $this->created_at->format('y') . $date->addYear()->format('y');
+        return strtoupper($this->school->code) . '/' . str_pad($this->code, 4, '0', STR_PAD_LEFT) . '/' . $this->created_at->format('y') . $date->addYear()->format('y');
     }
 
     /**

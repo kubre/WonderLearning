@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\School;
 
+use App\Models\Admission;
 use App\Models\Receipt;
 use App\Models\Scopes\AcademicYearScope;
 use App\Models\User;
@@ -51,7 +52,7 @@ class ReceiptEditScreen extends Screen
     {
         $this->exists = $receipt->exists;
         $this->user = auth()->user();
-        $this->for = request('for') ?? 'Fees';
+        $this->for = request('for') ?? 'School Fees';
         $data = [
             'admission_id' => request('admission_id'),
             'for' => $this->for,
@@ -125,7 +126,7 @@ class ReceiptEditScreen extends Screen
                 Input::make('for')
                     ->title('For')
                     ->tabindex(3)
-                    ->hidden($this->for != 'Fees')
+                    ->readonly($this->for == 'School Fees')
                     ->required(),
                 Select::make('payment_mode')
                     ->tabindex(4)
@@ -151,6 +152,13 @@ class ReceiptEditScreen extends Screen
             'paid_at' => 'nullable|date',
             'receipt_at' => 'required|date',
         ]);
+
+        if ($form['amount'] > Admission::findOrFail($form['admission_id'])->balance_amount) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['amount' => 'Amount cannot be greater than student\'s balance amount!']);
+        }
 
         $form['school_id'] = auth()->user()->school_id;
         if (!$receipt->exists) $form['created_at'] = working_year()[0];

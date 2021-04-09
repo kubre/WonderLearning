@@ -87,8 +87,14 @@ class Admission extends Model
 
     public function getPaidFeesAttribute()
     {
-        // TODO: Make sure to only add the fees
-        return $this->receipts()->sum('amount');
+        return $this->receipts()
+            ->where('for', 'School Fees')
+            ->sum('amount');
+    }
+
+    public function getBalanceAmountAttribute()
+    {
+        return $this->total_fees - $this->paid_fees;
     }
 
 

@@ -10,17 +10,17 @@
 
 ## Dashboard
 
-```
-() Fees Rate Card
-```
+-   (9/apr 11:00am) Fees Rate Card
 
-## Commits solving issues
+## Commits history
 
-```
-(7/apr 12:22pm) Academic Year can now start from any month, Also added ability edit school code and validations
-(7/apr 05:00pm) Small changes from (06-04) done
-(7/apr 09:40pm) Fixed enquiry for working year
-```
+-   (7/apr 12:22pm) Academic Year can now start from any month, Also added ability edit school code and validations
+-   (7/apr 05:00pm) Small changes from (06-04) done
+-   (7/apr 09:40pm) Fixed enquiry for working year
+-   (9/apr 11:00am) Added student PRN and Fees Rate Card can be filled partially and dashboard widget for fees rate card
+-   (9/apr 05:15pm) School Fees Receipt changes made, Validation for fees overpay than balance amount, disabled notifications.
+
+## Changes to DONE
 
 -   **Add working year**: Changes in all the files following academic year scope and in helper
 
@@ -43,15 +43,15 @@
 
 -   (9/apr 11:00am) **Fees Rate Card**: validation no need for all the fees to be added all time make sure in DB fields are nullable
 
+-   **Receipt Print layout**
+
+    -   (DONE) add (sum of (in digits) &lt;amount&gt; on account of &lt;for&gt; in words &lt;amount&gt; only)
+    -   (DONE) Add student PRN between receipt and date
+    -   (DONE) Make school details on top left more obvious
+    -   (DONE) Add bank name after cheque number
+    -   (DISCARDED) Invoice No will contain the school code
+
 -   **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make On Behalf on section readonly in student receipts, Also add it to the menu
-
--   **Receipt Print layout** also add image for login background
-
-    -   add (sum of (in digits) &lt;amount&gt; on account of &lt;for&gt; in words &lt;amount&gt; only)
-    -   Add student PRN between receipt and date
-    -   Make school details on top left more obvious
-    -   Add bank name after cheque number
-    -   Invoice No will contain the school code
 
 -   **Invoice Print**
 
@@ -136,9 +136,10 @@ Have ability to export these reports as excel or pdf
     -   Total
 -   ?(Need more thinking) **Inventory & Stocks Report**
 
-## (DONE) Small Changes
+## Small Changes
 
--   Slider Images
--   Copyright Wonder Learning India Pvt. Ltd.
--   Remove dummy client logos
--   Remove call today from bottom of home page
+-   (DONE) Slider Images
+-   (DONE) Copyright Wonder Learning India Pvt. Ltd.
+-   (DONE) Remove dummy client logos
+-   (DONE) Remove call today from bottom of home page
+-   Image for login background
