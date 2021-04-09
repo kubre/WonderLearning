@@ -30,6 +30,7 @@ class AdmissionRequest extends FormRequest
             "created_at" => "required",
             "name" => "required",
             "gender" => "required",
+            "code" => "required|integer",
             "dob_at" => "required|before:today",
             "nationality" => "required",
             "program" => "required",

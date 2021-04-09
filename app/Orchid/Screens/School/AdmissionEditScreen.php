@@ -6,9 +6,6 @@ use App\Http\Requests\AdmissionRequest;
 use App\Models\Admission;
 use App\Models\Enquiry;
 use App\Models\Student;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\CheckBox;
@@ -87,10 +84,12 @@ class AdmissionEditScreen extends Screen
             $enquiry[$enquirer . '_contact'] = $enquiry['enquirer_contact'];
             $enquiry[$enquirer . '_email'] = $enquiry['enquirer_email'];
             $enquiry['admission_at'] = today()->format('Y-m-d');
+            $enquiry['code'] = (Student::max('code') ?? 0) + 1;
             $data = $enquiry;
         } else {
             $this->name = 'Update Admission Details';
             $data = $admission->student->toArray();
+            $data['prn'] = $admission->student->prn;
         }
 
         return array_merge($data, $admission->toArray());
@@ -133,6 +132,12 @@ class AdmissionEditScreen extends Screen
     {
         return [
             Layout::rows([
+                Input::make('prn')
+                    ->title('PRN')
+                    ->canSee($this->exists)
+                    ->readonly(),
+                Input::make('code')
+                    ->hidden(),
                 Group::make([
                     Cropper::make('photo')
                         ->title('Passport Size photo')

@@ -8,11 +8,18 @@
 
 ```
 
+## Dashboard
+
+```
+() Fees Rate Card
+```
+
 ## Commits solving issues
 
 ```
-(7/apr 12:22pm) Academic Year can now start from any month
+(7/apr 12:22pm) Academic Year can now start from any month, Also added ability edit school code and validations
 (7/apr 05:00pm) Small changes from (06-04) done
+(7/apr 09:40pm) Fixed enquiry for working year
 ```
 
 -   **Add working year**: Changes in all the files following academic year scope and in helper
@@ -23,18 +30,18 @@
     -   Receipt
     -   Receipt Edit Screen
 
--   **School code**: Max 3 char school code for use in Student PRN number Invoicing and receipt searching
+-   (7/apr 12:22pm) **School code**: Max 3 char school code for use in Student PRN number Invoicing and receipt searching
 
     -   add in the school migration code (review the migrations)
     -   School Edit and List Layout Screen
     -   Unique validation
 
--   **Student PRN number** unique per student only for that school (format SCHOOL CODE\STUDENT CODE\ACADEMIC YEAR, ex. WLS/0001/2021 Add this in Admission Form
+-   (9/apr 11:00am) **Student PRN number** unique per student only for that school (format SCHOOL CODE\STUDENT CODE\ACADEMIC YEAR, ex. WLS/0001/2021 Add this in Admission Form
 
     -   Student migration - code column
     -   Edit and List Layout and validation
 
--   **Fees Rate Card**: validation no need for all the fees to be added all time make sure in DB fields are nullable
+-   (9/apr 11:00am) **Fees Rate Card**: validation no need for all the fees to be added all time make sure in DB fields are nullable
 
 -   **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make On Behalf on section readonly in student receipts, Also add it to the menu
 

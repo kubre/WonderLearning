@@ -43,7 +43,18 @@ class Admission extends Model
 
     protected $allowedFilters = [
         'admission_at',
-        'name',
+        'parent_name',
+        'parent_contact',
+        'program',
+        'fees_installments',
+        'batch',
+    ];
+
+    protected $allowedSorts = [
+        'admission_at',
+        'student_id',
+        'parent_name',
+        'parent_contact',
         'program',
         'fees_installments',
         'batch',

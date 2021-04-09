@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use App\Models\Fees;
 use App\Models\School;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
@@ -40,7 +42,9 @@ class PlatformScreen extends Screen
             session(['school' => optional(auth()->user())->school ?? new School]);
         }
 
-        return [];
+        return [
+            'fees' => Fees::first()
+        ];
     }
 
     /**
@@ -84,6 +88,7 @@ class PlatformScreen extends Screen
 
 
         return [
+            Layout::view('dashboard.fees'),
             Layout::modal('changeWorkingYear', [
                 Layout::rows([
                     Select::make('workingYear')

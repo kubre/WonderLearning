@@ -106,10 +106,10 @@ class FeesEditScreen extends Screen
     public function save(Request $request)
     {
         $request->validate([
-            'playgroup' => 'required',
-            'nursery' => 'required',
-            'junior_kg' => 'required',
-            'senior_kg' => 'required',
+            'playgroup' => 'required_without_all:nursery,junior_kg,senior_kg',
+            'nursery' => 'required_without_all:playgroup,junior_kg,senior_kg',
+            'junior_kg' => 'required_without_all:nursery,playgroup,senior_kg',
+            'senior_kg' => 'required_without_all:nursery,junior_kg,playgroup',
         ]);
 
         $fees = Fees::first() ?? new Fees;
