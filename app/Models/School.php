@@ -40,7 +40,7 @@ class School extends Model
 
     public function getAcademicYearAttribute($value): string
     {
-        if (is_null($value) || strlen($value) != 11) return '01:06|31:05';
+        if (is_null($value) || strlen($value) != 11) return '01-06|31-05';
         return $value;
     }
 

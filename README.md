@@ -43,7 +43,7 @@
 
 -   (9/apr 11:00am) **Fees Rate Card**: validation no need for all the fees to be added all time make sure in DB fields are nullable
 
--   **Receipt Print layout**
+-   (DONE) **Receipt Print layout**
 
     -   (DONE) add (sum of (in digits) &lt;amount&gt; on account of &lt;for&gt; in words &lt;amount&gt; only)
     -   (DONE) Add student PRN between receipt and date
@@ -51,7 +51,12 @@
     -   (DONE) Add bank name after cheque number
     -   (DISCARDED) Invoice No will contain the school code
 
--   **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make On Behalf on section readonly in student receipts, Also add it to the menu
+-   **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make on Behalf on section readonly in student receipts, Also add it to the menu.
+
+    -   Menu option (Keep get param empty)
+    -   Change the ReceiptEditLayout
+    -   Add New ReceiptScreen with Old ReceiptListLayout displaying all receipts not showing school fees
+    -   Add ability to print those receipts
 
 -   **Invoice Print**
 

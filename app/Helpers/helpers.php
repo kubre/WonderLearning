@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\School;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('working_date')) {
@@ -27,7 +26,7 @@ if (!function_exists('get_academic_year')) {
         if (is_null($date)) return working_year();
 
         $academic_year = optional(session('school'))->academic_year
-            ?? (new School)->academic_year;
+            ?? (new App\Models\School)->academic_year;
         $start_at = clone $date;
         $start_at
             ->setMonth((int)substr($academic_year, 3, 2))
@@ -51,6 +50,24 @@ if (!function_exists('get_academic_year_formatted')) {
         if (is_null($academic_year)) $academic_year = working_year();
         list($last_year, $current_year) = $academic_year;
         return "{$last_year->format('M y')} - {$current_year->format('M y')}";
+    }
+}
+
+if (!function_exists('is_academic_year_in_sync')) {
+    function is_academic_year_in_sync(string $academic_year): string
+    {
+        $working_year = working_year();
+        list($last_year, $current_year) = $working_year;
+        return $academic_year === "{$last_year->format('m-y')}|{$current_year->format('m-y')}";
+    }
+}
+
+
+if (!function_exists('school')) {
+    /** @return App\Models\School */
+    function school(): App\Models\School
+    {
+        return session('school') ?? new App\Models\School;
     }
 }
 

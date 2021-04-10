@@ -8,6 +8,8 @@ use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Support\Color;
+use Orchid\Support\Facades\Toast;
+use Session;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -17,6 +19,11 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
+
+        // This code is to make sure if working year in session ever gets out of sync just sync it back
+        if (!is_academic_year_in_sync(school()->academic_year)) {
+            Session::forget('_working_year');
+        }
 
         // ...
     }
@@ -66,6 +73,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('note')
                 ->permission('fees.edit')
                 ->route('account.fees.edit'),
+            ItemMenu::label('Fees Receipt Generation')
+                ->place('accounts')
+                ->icon('money')
+                ->permission('receipt.create')
+                ->route('school.receipt.list'),
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')
