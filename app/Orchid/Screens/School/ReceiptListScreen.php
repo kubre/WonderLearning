@@ -35,7 +35,7 @@ class ReceiptListScreen extends Screen
 
     public const OPTION_EMAIL = 1;
 
-    public ?Admission $admission;
+    public ?Admission $admission = null;
 
     /**
      * Query data.
@@ -44,11 +44,17 @@ class ReceiptListScreen extends Screen
      */
     public function query(): array
     {
-        $this->admission = Admission::findOrFail(request('admission_id'));
-        if (!is_null($this->admission)) {
-            $receipts = Receipt::where('admission_id', $this->admission->id)->paginate();
+        if (is_null(request('admission_id'))) {
+            $receipts = Receipt::filters()
+                ->where('for', '!=', Receipt::SCHOOL_FEES)
+                ->with('admission.student')
+                ->paginate();
         } else {
-            $receipts = Receipt::paginate();
+            $this->admission = Admission::find(request('admission_id'));
+            $receipts = Receipt::filters()
+                ->where('for', Receipt::SCHOOL_FEES)
+                ->where('admission_id', $this->admission->id)
+                ->paginate();
         }
 
         return [
@@ -68,8 +74,11 @@ class ReceiptListScreen extends Screen
             Link::make('Add Receipt')
                 ->icon('plus')
                 ->type(Color::PRIMARY())
-                ->canSee($this->admission->balance_amount > 0)
-                ->route('school.receipt.edit', ['admission_id' => $this->admission->id]),
+                ->canSee(is_null($this->admission) || $this->admission->balance_amount > 0)
+                ->route('school.receipt.edit', [
+                    'admission_id' => optional($this->admission)->id,
+                    'for' => is_null($this->admission) ? null : Receipt::SCHOOL_FEES,
+                ]),
         ];
     }
 
@@ -80,8 +89,12 @@ class ReceiptListScreen extends Screen
      */
     public function layout(): array
     {
+        $views = [];
+        if (!is_null($this->admission)) {
+            $views[] = Layout::component(AdmissionReceipt::class);
+        }
         return [
-            Layout::component(AdmissionReceipt::class),
+            ...$views,
             ReceiptListLayout::class,
             Layout::modal('chooseReceiptReceiversName', [
                 Layout::rows([
@@ -97,11 +110,12 @@ class ReceiptListScreen extends Screen
         ];
     }
 
-    public function issueReceipt(int $receipt, string $option): RedirectResponse
+    public function issueReceipt(int $receipt, string $option, bool $is_multi_layout): RedirectResponse
     {
         return redirect()->route('school.receipt.print', [
             'receipt' => $receipt,
             'parent' => request('for'),
+            'is_multi_layout' => $is_multi_layout,
         ]);
     }
 }

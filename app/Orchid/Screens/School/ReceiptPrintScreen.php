@@ -27,6 +27,8 @@ class ReceiptPrintScreen extends Screen
 
     public int $admission_id;
 
+    public bool $is_multi_layout = false;
+
     /**
      * Query data.
      *
@@ -35,6 +37,7 @@ class ReceiptPrintScreen extends Screen
     public function query(Receipt $receipt, string $parent): array
     {
         $this->admission_id = $receipt->admission_id;
+        $this->is_multi_layout = request('is_multi_layout', false);
         return compact('receipt', 'parent');
     }
 
@@ -48,6 +51,11 @@ class ReceiptPrintScreen extends Screen
         return [
             Link::make('Back')
                 ->icon('arrow-left')
+                ->canSee($this->is_multi_layout)
+                ->route('school.receipt.list'),
+            Link::make('Back')
+                ->icon('arrow-left')
+                ->canSee(!$this->is_multi_layout)
                 ->route('school.receipt.list', ['admission_id' => $this->admission_id]),
             Link::make('Print')
                 ->icon('printer')

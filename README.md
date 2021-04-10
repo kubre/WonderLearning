@@ -5,6 +5,7 @@
 ```
 1) Add fields modified in migrations to the Models $fillable
  - School Done
+2) Menu nav bug cause of receipt for student and receipt generation having same route name
 
 ```
 
@@ -51,12 +52,12 @@
     -   (DONE) Add bank name after cheque number
     -   (DISCARDED) Invoice No will contain the school code
 
--   **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make on Behalf on section readonly in student receipts, Also add it to the menu.
+-   (DONE) **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make on Behalf on section readonly in student receipts, Also add it to the menu.
 
-    -   Menu option (Keep get param empty)
-    -   Change the ReceiptEditLayout
-    -   Add New ReceiptScreen with Old ReceiptListLayout displaying all receipts not showing school fees
-    -   Add ability to print those receipts
+    -   (DONE) Menu option (Keep get param empty)
+    -   (DONE) Change the ReceiptEditLayout
+    -   (DONE) Add New ReceiptScreen with Old ReceiptListLayout displaying all receipts not showing school fees
+    -   (DONE) Add ability to print those receipts
 
 -   **Invoice Print**
 

@@ -8,11 +8,12 @@ use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 class Receipt extends Model
 {
-    use AsSource;
+    use AsSource, Filterable;
 
     protected $fillable = [
         'receipt_no',
@@ -29,6 +30,11 @@ class Receipt extends Model
         'created_at',
     ];
 
+
+    public $allowedFilters = [
+        'receipt_id',
+    ];
+
     protected $casts = [
         'amount' => 'integer',
         'receipt_at' => 'date:Y-m-d',
@@ -40,6 +46,8 @@ class Receipt extends Model
         'o' => 'Online Payment',
         'b' => 'Cheque',
     ];
+
+    public const SCHOOL_FEES = 'School Fees';
 
     protected static function booted()
     {

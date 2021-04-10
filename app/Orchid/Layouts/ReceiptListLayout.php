@@ -40,7 +40,7 @@ class ReceiptListLayout extends Table
             TD::make('amount', 'Amount'),
             TD::make('student_id', 'Student Name')
                 ->canSee($is_multi_layout)
-                ->render(fn (Receipt $r) => $r->admission()->student()->name),
+                ->render(fn (Receipt $r) => $r->admission->student->name),
             TD::make('action', 'Action')
                 ->render(
                     fn (Receipt $r) =>
@@ -55,18 +55,20 @@ class ReceiptListLayout extends Table
                                 ->method('issueReceipt')
                                 ->asyncParameters([
                                     'receipt' => $r->id,
-                                    'object' => ReceiptListScreen::OPTION_PRINT
+                                    'object' => ReceiptListScreen::OPTION_PRINT,
+                                    'is_multi_layout' => $is_multi_layout,
                                 ]),
 
                             ModalToggle::make('Email')
                                 ->icon('share')
-                                // ->canSee($this->user->hasAccess('admission.create'))
+                                ->canSee(false)
                                 ->modal('chooseReceiptReceiversName')
                                 ->modalTitle('Email Receipt')
                                 ->method('issueReceipt')
                                 ->asyncParameters([
                                     'receipt' => $r->id,
-                                    'object' => ReceiptListScreen::OPTION_EMAIL
+                                    'object' => ReceiptListScreen::OPTION_EMAIL,
+                                    'is_multi_layout' => $is_multi_layout,
                                 ]),
                         ])
                 ),

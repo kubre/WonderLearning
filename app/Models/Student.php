@@ -16,7 +16,7 @@ class Student extends Model
 
     /** @var array */
     protected $fillable = [
-        'name', 'photo', 'dob_at', 'gender', 'code', 'father_name', 'father_contact', 'father_occupation', 'father_email', 'father_organization_name', 'mother_name', 'mother_contact', 'mother_occupation', 'mother_email', 'mother_organization_name', 'previous_school', 'siblings', 'address', 'city', 'state', 'postal_code', 'nationality', 'school_id',
+        'name', 'photo', 'dob_at', 'gender', 'code', 'father_name', 'father_contact', 'father_occupation', 'father_email', 'father_organization_name', 'mother_name', 'mother_contact', 'mother_occupation', 'mother_email', 'mother_organization_name', 'previous_school', 'siblings', 'address', 'city', 'state', 'postal_code', 'nationality', 'school_id', 'created_at'
     ];
 
     /** @var array */
@@ -30,6 +30,12 @@ class Student extends Model
     {
         $date = clone $this->created_at;
         return strtoupper($this->school->code) . '/' . str_pad($this->code, 4, '0', STR_PAD_LEFT) . '/' . $this->created_at->format('y') . $date->addYear()->format('y');
+    }
+
+
+    public function getSearchTitleAttribute(): string
+    {
+        return $this->attributes['name'] . ' (' . $this->prn . ')';
     }
 
     /**
