@@ -26,3 +26,12 @@
   border-bottom: 1px solid black;
   padding-bottom: 5px;
 }
+
+.table-black, .table-black th , .table-black td, .table-black tr {
+  border-color:#333 !important;
+}
+
+.table-black>thead>tr>th {
+  border-color:#333 !important;
+  color: #333;
+}

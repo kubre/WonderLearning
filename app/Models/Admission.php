@@ -66,9 +66,14 @@ class Admission extends Model
         static::addGlobalScope(new SchoolScope);
     }
 
+    public function getFeesColumnAttribute(): string
+    {
+        return Str::of($this->program)->lower()->snake();
+    }
+
     public function getFeesTotalColumnAttribute(): string
     {
-        return Str::of($this->program)->lower()->snake() . '_total';
+        return $this->fees_column . '_total';
     }
 
     public function getInvoiceNoAttribute(): string

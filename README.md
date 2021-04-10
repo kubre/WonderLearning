@@ -20,6 +20,9 @@
 -   (7/apr 09:40pm) Fixed enquiry for working year
 -   (9/apr 11:00am) Added student PRN and Fees Rate Card can be filled partially and dashboard widget for fees rate card
 -   (9/apr 05:15pm) School Fees Receipt changes made, Validation for fees overpay than balance amount, disabled notifications.
+-   (10/apr 09:33pm) Fixed Academic Year sync issues
+-   (10/apr 02:41pm) Fees Receipt Generation
+-   (10/apr 05:13pm) Invoice Prints
 
 ## Changes to DONE
 
@@ -44,7 +47,7 @@
 
 -   (9/apr 11:00am) **Fees Rate Card**: validation no need for all the fees to be added all time make sure in DB fields are nullable
 
--   (DONE) **Receipt Print layout**
+-   (9/Apr 05:15pm) **Receipt Print layout**
 
     -   (DONE) add (sum of (in digits) &lt;amount&gt; on account of &lt;for&gt; in words &lt;amount&gt; only)
     -   (DONE) Add student PRN between receipt and date
@@ -52,16 +55,17 @@
     -   (DONE) Add bank name after cheque number
     -   (DISCARDED) Invoice No will contain the school code
 
--   (DONE) **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make on Behalf on section readonly in student receipts, Also add it to the menu.
+-   (10/apr 02:41pm) **Fees Receipt Generation**: Misc receipts generation for events and stuff like that, Make sure to make on Behalf on section readonly in student receipts, Also add it to the menu.
 
     -   (DONE) Menu option (Keep get param empty)
     -   (DONE) Change the ReceiptEditLayout
     -   (DONE) Add New ReceiptScreen with Old ReceiptListLayout displaying all receipts not showing school fees
     -   (DONE) Add ability to print those receipts
 
--   **Invoice Print**
+-   (10/apr 05:13pm) **Invoice Print**
 
-    -   Check the invoice format for epms for invoice print
+    -   Make InvoicePrintScreen
+    -   Copy and Modify the receipt layout
 
 -   **User Management for Schools**
 -   **Make layout more colorful**

@@ -7,6 +7,7 @@ use App\Models\Fees;
 use App\Models\User;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -69,6 +70,12 @@ class AdmissionListLayout extends Table
                             Link::make('Receipt')
                                 ->icon('money')
                                 ->route('school.receipt.list', ['admission_id' => $a->id]),
+                            ModalToggle::make('Invoice')
+                                ->icon('doc')
+                                ->modal('chooseInvoiceReceiversName')
+                                ->modalTitle('Print Invoice')
+                                ->method('issueInvoice')
+                                ->asyncParameters(['admission_id' => $a->id]),
                         ]),
                 )
         ];
