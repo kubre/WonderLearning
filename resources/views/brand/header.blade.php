@@ -1,9 +1,6 @@
-<p class="h3 n-m font-thin v-center">
+<p class="h3 n-m font-thin v-center text-center">
     @if (null !== session('school'))
-        <img style="max-height: 60px; max-width: 200px;" src="{{ session('school')->logo }}" alt="Logo">
-        <span class="ml-4 d-none d-sm-block">
-            {{ session('school')->name }}
-        </span>
+        <img style="max-height: 80px; max-width: 100%;" src="{{ session('school')->logo }}" alt="Logo">
         @push('head')
             <link href="{{ session('school')->logo }}" id="favicon" rel="icon">
         @endpush
