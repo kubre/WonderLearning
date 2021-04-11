@@ -2,13 +2,15 @@
 
 namespace App\Orchid\Layouts\Account;
 
-use App\Orchid\Filters\ProgramFilter;
+use App\Orchid\Filters\DateRangeFilter;
 use Orchid\Filters\Filter;
 use Orchid\Screen\Layouts\Selection;
 
-class ProgramSelectionLayout extends Selection
+class DateRangeSelectionLayout extends Selection
 {
-
+    /**
+     * @var string
+     */
     public $template = 'layouts.selection';
 
     /**
@@ -17,7 +19,7 @@ class ProgramSelectionLayout extends Selection
     public function filters(): array
     {
         return [
-            ProgramFilter::class,
+            DateRangeFilter::class
         ];
     }
 }

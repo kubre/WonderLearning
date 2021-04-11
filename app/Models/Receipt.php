@@ -32,6 +32,7 @@ class Receipt extends Model
 
     public $allowedFilters = [
         'receipt_id',
+        'paid_at',
     ];
 
     protected $casts = [
@@ -40,11 +41,18 @@ class Receipt extends Model
         'paid_at' => 'date:Y-m-d',
     ];
 
+    public const MODE_ONLINE_PAYMENTS = 'o';
+
+    public const MODE_BANK = 'b';
+
+    public const MODE_CASH = 'c';
+
     public const PAYMENT_MODES = [
-        'c' => 'Cash',
-        'o' => 'Online Payment',
-        'b' => 'Cheque',
+        self::MODE_CASH => 'Cash',
+        self::MODE_ONLINE_PAYMENTS => 'Online Payment',
+        self::MODE_BANK => 'Cheque',
     ];
+
 
     public const SCHOOL_FEES = 'School Fees';
 

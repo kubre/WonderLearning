@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\Account\CanceledLogScreen;
 use App\Orchid\Screens\Account\FeesEditScreen;
+use App\Orchid\Screens\Account\OnlinePaymentsScreen;
 use App\Orchid\Screens\Account\PaymentDueReportScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\School\ReceiptEditScreen;
@@ -150,8 +151,11 @@ Route::screen('receipts/{receipt}/{parent}', ReceiptPrintScreen::class)
 Route::screen('invoice/{admission}/{parent}', InvoicePrintScreen::class)
     ->name('school.invoice.print');
 
-Route::screen('account/payment-due-report', PaymentDueReportScreen::class)
+Route::screen('account/reports/payment-due-report', PaymentDueReportScreen::class)
     ->name('account.payment-due.report');
 
-Route::screen('account/canceled-log', CanceledLogScreen::class)
+Route::screen('account/reports/canceled-log', CanceledLogScreen::class)
     ->name('account.canceled-log.report');
+
+Route::screen('account/reports/online-payments', OnlinePaymentsScreen::class)
+    ->name('account.online-payments.report');

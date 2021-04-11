@@ -86,6 +86,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->place('accounts')
                 ->icon('trash')
                 ->route('account.canceled-log.report'),
+            ItemMenu::label('Online Payments Report')
+                ->place('accounts')
+                ->icon('rupee')
+                ->route('account.online-payments.report'),
+
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')

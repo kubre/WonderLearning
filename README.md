@@ -26,6 +26,7 @@
 -   (11/apr 12:30pm) Payment Due Reports and CSV export library, pdf also
 -   (11/apr 2:14pm) Added cancel for the receipts
 -   (11/apr 2:38pm) Added Cancelled receipts logs reports, changed csv export name scheme
+-   (11/apr 5:05pm) Online Collection reports added, custom filter layout added
 
 ## Changes to DONE
 
@@ -101,7 +102,7 @@ Have ability to export these reports as excel or pdf
     -   Amount Received
     -   Due Amount
 
--   **Canceled Logs**: Add ability to cancel receipts and Reports for canceled one. (Excel, PDF)
+-   (11/apr 2:38pm) **Canceled Logs**: Add ability to cancel receipts and Reports for canceled one. (Excel, PDF)
 
     -   Student PRN
     -   Student Name
@@ -109,7 +110,7 @@ Have ability to export these reports as excel or pdf
     -   Amount in Rs
     -   Cancellation Date
 
--   **Online Collection reports**: Report containing all the online payments done (Date Range Filter) (Excel, PDF)
+-   (11/apr 5:05pm) **Online Collection reports**: Report containing all the online payments done (Date Range Filter) (Excel, PDF)
 
     -   Student PRN
     -   Student Name
