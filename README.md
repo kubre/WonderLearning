@@ -23,6 +23,7 @@
 -   (10/apr 09:33pm) Fixed Academic Year sync issues
 -   (10/apr 02:41pm) Fees Receipt Generation
 -   (10/apr 05:13pm) Invoice Prints
+-   (11/apr 12:30pm) Payment Due Reports and CSV export library, pdf also
 
 ## Changes to DONE
 
@@ -81,7 +82,8 @@ Have ability to export these reports as excel or pdf
 
 ### Reports in account section
 
--   **Pay Due Report**: (Dropdown filter programme or all)
+-   (11/apr 12:30pm)**Pay Due Report**: (Dropdown filter programme or all)
+
     -   PRN
     -   Student Name
     -   Father Name
@@ -92,19 +94,24 @@ Have ability to export these reports as excel or pdf
     -   Invoice Amount
     -   Amount Received
     -   Due Amount
+
 -   **Canceled Logs**: Add ability to cancel receipts and reports. (Excel, PDF)
+
     -   Student PRN
     -   Student Name
     -   Receipt Number
     -   Amount in Rs
     -   Cancellation Date
+
 -   **Online Collection reports**: Report containing all the online payments done (Date Range Filter) (Excel, PDF)
+
     -   Student PRN
     -   Student Name
     -   Receipt Number
     -   Transaction ID
     -   Payment Date
     -   Amount
+
 -   **Daily Collection reports**: (Date Range and Programme Filter) (Excel, PDF)
 
     -   Receipt No

@@ -78,6 +78,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('money')
                 ->permission('receipt.create')
                 ->route('school.receipt.list'),
+            ItemMenu::label('Payment Due Report')
+                ->place('accounts')
+                ->icon('docs')
+                ->route('account.payment-due.report'),
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')

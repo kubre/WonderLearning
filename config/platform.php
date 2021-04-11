@@ -93,8 +93,12 @@ return [
     */
 
     'resource' => [
-        'stylesheets' => ['/css/orchid.css'],
-        'scripts'     => [],
+        'stylesheets' => ['/css/orchid.css',],
+        'scripts'     => [
+            '/js/FileSaver.min.js',
+            '/js/tableexport.min.js',
+            '/js/orchid.js',
+        ],
     ],
 
     /*

@@ -5,12 +5,18 @@
 }
 
 @media print {
+  /* @page {
+    size: landscape;
+  } */
+
   body * {
     visibility: hidden;
   }
+
   #print-report, #print-report * {
     visibility: visible;
   }
+
   #print-report {
     position: fixed;
     left: 0;
@@ -20,6 +26,27 @@
     border: 1 solid black;
     font-size: 1.3em;
   }
+
+  .p-table-black, .p-table-black thead, .p-table-black tbody, .p-table-black tfoot, .p-table-black th, .p-table-black td, .p-table-black tr {
+    border: 1px solid #333 !important;
+    color: #333 !important;
+  }
+
+  table.p-table-black>thead>tr>th {
+    border: 1px solid #333 !important;
+    color: #333;
+    text-align: center !important;
+  }
+
+  table.p-table-black td, table.p-table-black th {
+    padding: 3px !important;
+  }
+
+  table.p-table-black {
+    font-size: 1em;
+    width: 100%;
+    max-width: 2480px;
+  }
 }
 
 .b-b {
@@ -28,10 +55,10 @@
 }
 
 .table-black, .table-black th , .table-black td, .table-black tr {
-  border-color:#333 !important;
+  border: 1px solid #333 !important;
 }
 
 .table-black>thead>tr>th {
-  border-color:#333 !important;
+  border: 1px solid #333 !important;
   color: #333;
 }

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\Account\FeesEditScreen;
+use App\Orchid\Screens\Account\PaymentDueReportScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\School\ReceiptEditScreen;
 use App\Orchid\Screens\School\ReceiptListScreen;
@@ -147,3 +148,6 @@ Route::screen('receipts/{receipt}/{parent}', ReceiptPrintScreen::class)
 
 Route::screen('invoice/{admission}/{parent}', InvoicePrintScreen::class)
     ->name('school.invoice.print');
+
+Route::screen('account/payment-due-report', PaymentDueReportScreen::class)
+    ->name('account.payment-due.report');

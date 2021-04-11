@@ -83,6 +83,10 @@ class Admission extends Model
             . '/' . Str::of($this->student_id)->limit(4, '')->padLeft(4, '0');
     }
 
+    public function getPrnAttribute()
+    {
+        return $this->student->prn;
+    }
 
     public function getTotalFeesAttribute()
     {
@@ -122,5 +126,10 @@ class Admission extends Model
     public function receipts(): HasMany
     {
         return $this->hasMany(Receipt::class);
+    }
+
+    public function school_fees_receipts(): HasMany
+    {
+        return $this->hasMany(Receipt::class)->where('receipts.for', Receipt::SCHOOL_FEES);
     }
 }
