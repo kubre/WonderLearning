@@ -27,6 +27,7 @@
 -   (11/apr 2:14pm) Added cancel for the receipts
 -   (11/apr 2:38pm) Added Cancelled receipts logs reports, changed csv export name scheme
 -   (11/apr 5:05pm) Online Collection reports added, custom filter layout added
+-   (11/apr 5:56pm) Add Daily Collection, Minor tweaks other reports and filters
 
 ## Changes to DONE
 
@@ -119,7 +120,7 @@ Have ability to export these reports as excel or pdf
     -   Payment Date
     -   Amount
 
--   **Daily Collection reports**: (Date Range and Programme Filter) (Excel, PDF)
+-   (11/apr 5:56pm) **Daily Collection reports**: (Date Range and Programme Filter) (Excel, PDF)
 
     -   Receipt No
     -   Cash

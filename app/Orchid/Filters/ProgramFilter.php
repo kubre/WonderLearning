@@ -31,6 +31,7 @@ class ProgramFilter extends Filter
      */
     public function run(Builder $builder): Builder
     {
+        if ($this->request->get('program') === 'All') return $builder;
         return $builder->where('program', $this->request->get('program'));
     }
 
@@ -43,6 +44,7 @@ class ProgramFilter extends Filter
             Select::make('program')
                 ->value($this->request->get('program'))
                 ->options([
+                    'All' => 'All',
                     'Playgroup' => 'Playgroup',
                     'Nursery' => 'Nursery',
                     'Junior KG' => 'Junior KG',

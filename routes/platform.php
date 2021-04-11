@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Orchid\Screens\Account\CanceledLogScreen;
+use App\Orchid\Screens\Account\DailyCollectionReportScreen;
 use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\Account\OnlinePaymentsScreen;
 use App\Orchid\Screens\Account\PaymentDueReportScreen;
@@ -159,3 +160,6 @@ Route::screen('account/reports/canceled-log', CanceledLogScreen::class)
 
 Route::screen('account/reports/online-payments', OnlinePaymentsScreen::class)
     ->name('account.online-payments.report');
+
+Route::screen('account/reports/daily-collection', DailyCollectionReportScreen::class)
+    ->name('account.daily-collection.report');

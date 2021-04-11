@@ -3,28 +3,27 @@
 namespace App\Orchid\Screens\Account;
 
 use App\Models\Receipt;
-use App\Orchid\Layouts\Account\DateRangeSelectionLayout;
-use App\Orchid\Layouts\Account\OnlinePaymentListLayout;
-use Illuminate\Database\Eloquent\Collection;
+use App\Orchid\Layouts\Account\DailyCollectionReportListLayout;
+use App\Orchid\Layouts\Account\ReceiptDateSelectionLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 
-class OnlinePaymentsScreen extends Screen
+class DailyCollectionReportScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Online Payments Report';
+    public $name = 'Daily Collection Report';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Reports for online payments during current academic year.';
+    public $description = 'Daily collection report.';
 
     /**
      * Query data.
@@ -33,22 +32,24 @@ class OnlinePaymentsScreen extends Screen
      */
     public function query(): array
     {
-        $receipts = [];
-        $total_amount = 'Select From and To date to view online payment report.';
         if (request()->has('from_date') && request()->has('to_date')) {
-
             /** @var Collection */
-            $receipts = Receipt::where('payment_mode', Receipt::MODE_ONLINE_PAYMENTS)
-                ->with(['admission.student'])
-                ->filtersApplySelection(DateRangeSelectionLayout::class)
+            $receipts = Receipt::filtersApplySelection(ReceiptDateSelectionLayout::class)
                 ->get();
 
-            $total_amount = $receipts->sum('amount');
-        }
+            $totals = $receipts->groupBy('payment_mode')->map(fn ($c) => $c->sum('amount'));
 
+            return [
+                'receipts' => $receipts,
+                'total_cash' => $totals->get(Receipt::MODE_CASH),
+                'total_bank' => $totals->get(Receipt::MODE_BANK),
+                'total_online_payments' => $totals->get(Receipt::MODE_ONLINE_PAYMENTS),
+                'total_amount' => $totals->sum(),
+            ];
+        }
         return [
-            'receipts' => $receipts,
-            'total_amount' => $total_amount,
+            'receipts' => [],
+            'total_amount' => 'Select From and To Date to view Daily Collections',
         ];
     }
 
@@ -82,8 +83,8 @@ class OnlinePaymentsScreen extends Screen
     public function layout(): array
     {
         return [
-            DateRangeSelectionLayout::class,
-            OnlinePaymentListLayout::class,
+            ReceiptDateSelectionLayout::class,
+            DailyCollectionReportListLayout::class,
         ];
     }
 }

@@ -33,6 +33,7 @@ class Receipt extends Model
     public $allowedFilters = [
         'receipt_id',
         'paid_at',
+        'receipt_at',
     ];
 
     protected $casts = [

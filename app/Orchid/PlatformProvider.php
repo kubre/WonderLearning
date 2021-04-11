@@ -90,7 +90,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->place('accounts')
                 ->icon('rupee')
                 ->route('account.online-payments.report'),
-
+            ItemMenu::label('Daily Collection Report')
+                ->place('accounts')
+                ->icon('calendar')
+                ->route('account.daily-collection.report'),
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')
