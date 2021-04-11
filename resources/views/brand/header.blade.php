@@ -1,5 +1,5 @@
 <p class="h3 n-m font-thin v-center text-center">
-    @if (null !== session('school'))
+    @empty(session('school')->logo)
         <img style="max-height: 80px; max-width: 100%;" src="{{ session('school')->logo }}" alt="Logo">
         @push('head')
             <link href="{{ session('school')->logo }}" id="favicon" rel="icon">
@@ -13,5 +13,5 @@
         @push('head')
             <link href="/images/logo.svg" id="favicon" rel="icon">
         @endpush
-    @endif
-</p>
+        @endif
+    </p>
