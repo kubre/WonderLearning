@@ -95,6 +95,17 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('calendar')
                 ->route('account.daily-collection.report'),
 
+            ItemMenu::label('Reports')
+                ->icon('docs')
+                ->slug('reports')
+                ->badge(fn () => '▶', Color::DEFAULT())
+                ->withChildren()
+                ->hideEmpty(),
+            ItemMenu::label('Admissions Report')
+                ->place('reports')
+                ->icon('user')
+                ->route('reports.admissions.report'),
+
             ItemMenu::label('Sign Out')
                 ->icon('logout')
                 ->route('auth.signout', [optional(session('school'))->login_url ?? 'admin']),

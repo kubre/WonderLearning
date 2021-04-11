@@ -8,6 +8,7 @@ use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\Account\OnlinePaymentsScreen;
 use App\Orchid\Screens\Account\PaymentDueReportScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\School\ReceiptEditScreen;
 use App\Orchid\Screens\School\ReceiptListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -163,3 +164,6 @@ Route::screen('account/reports/online-payments', OnlinePaymentsScreen::class)
 
 Route::screen('account/reports/daily-collection', DailyCollectionReportScreen::class)
     ->name('account.daily-collection.report');
+
+Route::screen('reports/admissions', AdmissionReportScreen::class)
+    ->name('reports.admissions.report');

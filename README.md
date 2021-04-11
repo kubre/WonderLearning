@@ -6,6 +6,7 @@
 1) Add fields modified in migrations to the Models $fillable
  - School Done
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
+3) Implement graduation logic
 
 ```
 
@@ -28,6 +29,7 @@
 -   (11/apr 2:38pm) Added Cancelled receipts logs reports, changed csv export name scheme
 -   (11/apr 5:05pm) Online Collection reports added, custom filter layout added
 -   (11/apr 5:56pm) Add Daily Collection, Minor tweaks other reports and filters
+-   (11/apr 06:42pm) Admission Report and added batch filter in Program Selection
 
 ## Changes to DONE
 
@@ -131,7 +133,7 @@ Have ability to export these reports as excel or pdf
 
 ### Reports in Reports section
 
--   **Admission Report** (Program and Batch Filter) (Excel, PDF)
+-   (11/apr 06:42pm) **Admission Report** (Program and Batch Filter) (Excel)
     -   State
     -   City
     -   Program

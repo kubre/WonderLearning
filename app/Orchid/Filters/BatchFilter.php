@@ -7,13 +7,13 @@ use Orchid\Filters\Filter;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Select;
 
-class ProgramFilter extends Filter
+class BatchFilter extends Filter
 {
     /**
      * @var array
      */
     public $parameters = [
-        'program'
+        'batch',
     ];
 
     /**
@@ -21,7 +21,7 @@ class ProgramFilter extends Filter
      */
     public function name(): string
     {
-        return 'Programme';
+        return 'Batch';
     }
 
     /**
@@ -31,8 +31,8 @@ class ProgramFilter extends Filter
      */
     public function run(Builder $builder): Builder
     {
-        if ($this->request->get('program') === 'All') return $builder;
-        return $builder->where('program', $this->request->get('program'));
+        if ($this->request->get('batch') === 'All') return $builder;
+        return $builder->where('batch', $this->request->get('batch'));
     }
 
     /**
@@ -41,14 +41,12 @@ class ProgramFilter extends Filter
     public function display(): array
     {
         return [
-            Select::make('program')
-                ->value($this->request->get('program'))
+            Select::make('batch')
+                ->value($this->request->get('batch'))
                 ->options([
                     'All' => 'All',
-                    'Playgroup' => 'Playgroup',
-                    'Nursery' => 'Nursery',
-                    'Junior KG' => 'Junior KG',
-                    'Senior KG' => 'Senior KG',
+                    'Morning' => 'Morning',
+                    'Afternoon' => 'Afternoon',
                 ]),
         ];
     }
