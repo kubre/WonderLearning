@@ -25,6 +25,7 @@
 -   (10/apr 05:13pm) Invoice Prints
 -   (11/apr 12:30pm) Payment Due Reports and CSV export library, pdf also
 -   (11/apr 2:14pm) Added cancel for the receipts
+-   (11/apr 2:38pm) Added Cancelled receipts logs reports, changed csv export name scheme
 
 ## Changes to DONE
 

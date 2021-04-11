@@ -7,14 +7,14 @@ if (table) {
     {
         var table = document.querySelector('table.table.table-striped.table-bordered');
         var today = new Date().toISOString().slice(0, 10);
+        var title = document.getElementsByTagName('h1')[0].innerText.replaceAll(' ', '_');
         var xtable = new TableExport(table,
         {
             formats: ["csv"],
-            filename: "payment-due-report_" + today,
+            filename: title + '_' + today,
             exportButtons: false,
         });
         var tableName;
-        console.log(xtable.getExportData());
         for (x in xtable.getExportData()) { tableName = x; }
         var exportData = xtable.getExportData()[tableName]['csv'];
         xtable.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);

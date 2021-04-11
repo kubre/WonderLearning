@@ -82,6 +82,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->place('accounts')
                 ->icon('docs')
                 ->route('account.payment-due.report'),
+            ItemMenu::label('Canceled Receipt Logs')
+                ->place('accounts')
+                ->icon('trash')
+                ->route('account.canceled-log.report'),
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')
