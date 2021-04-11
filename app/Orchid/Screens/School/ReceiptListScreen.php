@@ -13,7 +13,7 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-
+use Orchid\Support\Facades\Toast;
 
 class ReceiptListScreen extends Screen
 {
@@ -108,6 +108,18 @@ class ReceiptListScreen extends Screen
                 ->applyButton('Next')
                 ->closeButton('Cancel'),
         ];
+    }
+
+    public function cancel(Receipt $receipt)
+    {
+        $data = [];
+        if ($receipt->for === Receipt::SCHOOL_FEES) {
+            $data['admission_id'] = $receipt->admission_id;
+        }
+
+        $receipt->delete();
+        Toast::info('You have successfully deleted the enquiry.');
+        return redirect()->route('school.receipt.list', $data);
     }
 
     public function issueReceipt(int $receipt, string $option, bool $is_multi_layout): RedirectResponse

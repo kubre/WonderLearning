@@ -4,6 +4,7 @@ namespace App\Orchid\Layouts;
 
 use App\Models\Receipt;
 use App\Orchid\Screens\School\ReceiptListScreen;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Table;
@@ -47,6 +48,13 @@ class ReceiptListLayout extends Table
                     DropDown::make()
                         ->icon('options-vertical')
                         ->list([
+                            Button::make('Cancel')
+                                ->icon('trash')
+                                ->method('cancel')
+                                ->confirm("Once canceled this can not be restored are you sure?")
+                                ->parameters([
+                                    'id' => $r->id,
+                                ]),
                             ModalToggle::make('Print')
                                 ->icon('printer')
                                 // ->canSee($this->user->hasAccess('admission.create'))

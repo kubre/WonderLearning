@@ -24,6 +24,7 @@
 -   (10/apr 02:41pm) Fees Receipt Generation
 -   (10/apr 05:13pm) Invoice Prints
 -   (11/apr 12:30pm) Payment Due Reports and CSV export library, pdf also
+-   (11/apr 2:14pm) Added cancel for the receipts
 
 ## Changes to DONE
 
@@ -68,6 +69,10 @@
     -   Make InvoicePrintScreen
     -   Copy and Modify the receipt layout
 
+-   (11/apr 2:14pm) **Added cancel for the receipts**
+
+    -   Add Soft Deletes
+
 -   **User Management for Schools**
 -   **Make layout more colorful**
 
@@ -95,7 +100,7 @@ Have ability to export these reports as excel or pdf
     -   Amount Received
     -   Due Amount
 
--   **Canceled Logs**: Add ability to cancel receipts and reports. (Excel, PDF)
+-   **Canceled Logs**: Add ability to cancel receipts and Reports for canceled one. (Excel, PDF)
 
     -   Student PRN
     -   Student Name

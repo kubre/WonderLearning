@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use App\Models\Scopes\AcademicYearScope;
-use App\Models\Scopes\AdmissionYearScope;
 use App\Models\Scopes\SchoolScope;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 class Receipt extends Model
 {
-    use AsSource, Filterable;
+    use AsSource, Filterable, SoftDeletes;
 
     protected $fillable = [
         'receipt_no',
