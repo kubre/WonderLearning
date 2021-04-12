@@ -37,7 +37,7 @@ class AdmissionListScreen extends Screen
     public function query(): array
     {
         return [
-            'admissions' => Admission::filters()->with(['student'])->paginate(),
+            'admissions' => Admission::filters()->with(['student.school'])->simplePaginate(50),
             'fees' => Fees::first(),
         ];
     }

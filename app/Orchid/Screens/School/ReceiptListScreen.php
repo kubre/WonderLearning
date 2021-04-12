@@ -48,13 +48,13 @@ class ReceiptListScreen extends Screen
             $receipts = Receipt::filters()
                 ->where('for', '!=', Receipt::SCHOOL_FEES)
                 ->with('admission.student')
-                ->paginate();
+                ->simplePaginate(100);
         } else {
             $this->admission = Admission::find(request('admission_id'));
             $receipts = Receipt::filters()
                 ->where('for', Receipt::SCHOOL_FEES)
                 ->where('admission_id', $this->admission->id)
-                ->paginate();
+                ->simplePaginate(100);
         }
 
         return [
@@ -79,6 +79,18 @@ class ReceiptListScreen extends Screen
                     'admission_id' => optional($this->admission)->id,
                     'for' => is_null($this->admission) ? null : Receipt::SCHOOL_FEES,
                 ]),
+
+            Link::make('Export to Excel')
+                ->icon('table')
+                ->class('btn export-csv ml-5')
+                ->type(Color::SUCCESS())
+                ->href('javascript:exportCsv()')
+                ->rawClick(true),
+
+            Link::make('Print/Export PDF')
+                ->icon('printer')
+                ->type(Color::WARNING())
+                ->href('javascript:printTable()'),
         ];
     }
 

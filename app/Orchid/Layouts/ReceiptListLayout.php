@@ -38,7 +38,8 @@ class ReceiptListLayout extends Table
             TD::make('bank_branch', 'Bank Branch'),
             TD::make('transaction_no', 'Cheque/Transaction No'),
             TD::make('paid_at', 'Cheque/Transaction Date'),
-            TD::make('amount', 'Amount'),
+            TD::make('amount', 'Amount')
+                ->align(TD::ALIGN_RIGHT),
             TD::make('student_id', 'Student Name')
                 ->canSee($is_multi_layout)
                 ->render(fn (Receipt $r) => $r->admission->student->name),
@@ -81,5 +82,38 @@ class ReceiptListLayout extends Table
                         ])
                 ),
         ];
+    }
+
+    public function total(): array
+    {
+        return [
+            TD::make('total')
+                ->colspan(6)
+                ->render(fn () => 'Total:'),
+
+            TD::make('total_fees')
+                ->render(fn () => $this->query->get('receipts')->sum('amount'))
+                ->align(TD::ALIGN_RIGHT),
+        ];
+    }
+
+    /**
+     * Usage for zebra-striping to any table row.
+     *
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Usage for borders on all sides of the table and cells.
+     *
+     * @return bool
+     */
+    protected function bordered(): bool
+    {
+        return true;
     }
 }

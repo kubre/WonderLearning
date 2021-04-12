@@ -32,6 +32,7 @@
 -   (11/apr 5:56pm) Add Daily Collection, Minor tweaks other reports and filters
 -   (11/apr 06:42pm) Admission Report and added batch filter in Program Selection
 -   (12/apr 11:52am) Enquiry Report (Excel, PDF) now admission create will also save student_id in enquiry
+-   (12/apr 4:27pm) Individual Student Receipt Report Export, some query optimizations
 
 ## Changes to DONE
 
@@ -90,6 +91,7 @@
     -   Price
     -   Available Units
 
+-   (12/apr 4:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
 -   **(Feature) Multiple Center Head**
 -   **Installments reminder option per month basis**
 -   **Add new fields for admission and enquiry from rudresh sir**
@@ -136,8 +138,6 @@ Have ability to export these reports as excel or pdf
     -   Cash
     -   Cheque
     -   Online
-
--   **Individual Student Receipt Report Export** (Excel, PDF)
 
 ### Reports in Reports section
 
