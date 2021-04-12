@@ -83,6 +83,7 @@ class AdmissionEditScreen extends Screen
             $enquiry[$enquirer . '_name'] = $enquiry['enquirer_name'];
             $enquiry[$enquirer . '_contact'] = $enquiry['enquirer_contact'];
             $enquiry[$enquirer . '_email'] = $enquiry['enquirer_email'];
+            $enquiry['enquirer_id'] = $enquiry['id'];
             $enquiry['admission_at'] = today()->format('Y-m-d');
             $enquiry['code'] = (Student::max('code') ?? 0) + 1;
             $data = $enquiry;
@@ -109,7 +110,7 @@ class AdmissionEditScreen extends Screen
                 ->method('createOrUpdate')
                 ->canSee(!$this->exists && auth()->user()->hasAccess('admission.create')),
 
-            Button::make('Update')
+            Button::make('Update Details')
                 ->icon('note')
                 ->method('createOrUpdate')
                 ->type(Color::PRIMARY())
@@ -132,6 +133,8 @@ class AdmissionEditScreen extends Screen
     {
         return [
             Layout::rows([
+                Input::make('enquirer_id')
+                    ->hidden(),
                 Input::make('prn')
                     ->title('PRN')
                     ->canSee($this->exists)
@@ -267,7 +270,7 @@ class AdmissionEditScreen extends Screen
     public function createOrUpdate(Admission $admission, AdmissionRequest $request)
     {
         $student = new Student;
-        if ($this->exists) {
+        if ($admission->exists) {
             $student = $admission->student;
         }
 
@@ -278,6 +281,13 @@ class AdmissionEditScreen extends Screen
 
         $form['student_id'] = $student->id;
         $admission->fill($form)->save();
+
+        if (!is_null($request->input('enquirer_id'))) {
+            Enquiry::find($request->input('enquirer_id'))
+                ->fill([
+                    'student_id' => $student->id,
+                ])->save();
+        }
 
         Toast::info('Admission of student was done successfully!');
         return redirect()->route('school.admission.list');

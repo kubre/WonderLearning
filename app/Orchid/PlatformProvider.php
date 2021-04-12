@@ -105,6 +105,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->place('reports')
                 ->icon('user')
                 ->route('reports.admissions.report'),
+            ItemMenu::label('Enquiry Report')
+                ->place('reports')
+                ->icon('info')
+                ->route('reports.enquiries.report'),
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')

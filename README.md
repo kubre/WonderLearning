@@ -7,6 +7,7 @@
  - School Done
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) Implement graduation logic
+3) Fees receipt generation failing
 
 ```
 
@@ -30,6 +31,7 @@
 -   (11/apr 5:05pm) Online Collection reports added, custom filter layout added
 -   (11/apr 5:56pm) Add Daily Collection, Minor tweaks other reports and filters
 -   (11/apr 06:42pm) Admission Report and added batch filter in Program Selection
+-   (12/apr 11:52am) Enquiry Report (Excel, PDF) now admission create will also save student_id in enquiry
 
 ## Changes to DONE
 
@@ -79,12 +81,18 @@
     -   Add Soft Deletes
 
 -   **User Management for Schools**
--   **Make layout more colorful**
+
+-   **(Task) Make layout more colorful**
 
 -   ?(Need thinking and work) **Inventory & Stocks**: Add ability to manage inventory and stocks
+
     -   Item Name
     -   Price
     -   Available Units
+
+-   **(Feature) Multiple Center Head**
+-   **Installments reminder option per month basis**
+-   **Add new fields for admission and enquiry from rudresh sir**
 
 ## Reports -
 
@@ -129,11 +137,12 @@ Have ability to export these reports as excel or pdf
     -   Cheque
     -   Online
 
-    In this report make sure to add amount only in column in which payment was done at the end add a total column for individual (Total for all?)
+-   **Individual Student Receipt Report Export** (Excel, PDF)
 
 ### Reports in Reports section
 
 -   (11/apr 06:42pm) **Admission Report** (Program and Batch Filter) (Excel)
+
     -   State
     -   City
     -   Program
@@ -156,11 +165,14 @@ Have ability to export these reports as excel or pdf
     -   Transport
     -   Date of conversion: Admission Date
     -   Previous Schooling
--   **Enquiry Report** (Excel, PDF)
+
+-   (12/apr 11:52am) **Enquiry Report** (Excel, PDF)
+
     -   Program Name
     -   Converted
     -   Not Converted
     -   Total
+
 -   ?(Need more thinking) **Inventory & Stocks Report**
 
 ## Small Changes
@@ -170,3 +182,5 @@ Have ability to export these reports as excel or pdf
 -   (DONE) Remove dummy client logos
 -   (DONE) Remove call today from bottom of home page
 -   Image for login background
+-   Change Cancel option in receipt from cancel to Delete
+-   Daily Collection Change column title Bank - Cheque
