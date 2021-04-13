@@ -106,6 +106,11 @@ class Admission extends Model
         return $this->total_fees - $this->paid_fees;
     }
 
+    public function getSearchTitleAttribute()
+    {
+        return $this->student->search_title;
+    }
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,12 +15,12 @@ class Student extends Model
 {
     use AsSource, Filterable, HasFactory;
 
-    /** @var array */
+
     protected $fillable = [
         'name', 'photo', 'dob_at', 'gender', 'code', 'father_name', 'father_contact', 'father_occupation', 'father_email', 'father_organization_name', 'mother_name', 'mother_contact', 'mother_occupation', 'mother_email', 'mother_organization_name', 'previous_school', 'siblings', 'address', 'city', 'state', 'postal_code', 'nationality', 'school_id', 'created_at'
     ];
 
-    /** @var array */
+
     protected $casts = [
         'siblings' => 'array',
         'dob_at' => 'date'
@@ -44,6 +45,14 @@ class Student extends Model
     public function school()
     {
         return $this->belongsTo(School::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function admission()
+    {
+        return $this->hasOne(Admission::class);
     }
 
     /**

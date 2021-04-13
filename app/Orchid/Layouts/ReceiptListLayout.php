@@ -49,10 +49,10 @@ class ReceiptListLayout extends Table
                     DropDown::make()
                         ->icon('options-vertical')
                         ->list([
-                            Button::make('Cancel')
+                            Button::make('Delete')
                                 ->icon('trash')
                                 ->method('cancel')
-                                ->confirm("Once canceled this can not be restored are you sure?")
+                                ->confirm("Once deleted this can not be restored are you sure?")
                                 ->parameters([
                                     'id' => $r->id,
                                 ]),

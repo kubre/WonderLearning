@@ -31,7 +31,7 @@ class DailyCollectionReportListLayout extends Table
             TD::make('cash', 'Cash')
                 ->align(TD::ALIGN_RIGHT)
                 ->render(fn (Receipt $r) => $r->payment_mode == Receipt::MODE_CASH ? $r->amount : ''),
-            TD::make('bank', 'Bank')
+            TD::make('bank', 'Cheque')
                 ->align(TD::ALIGN_RIGHT)
                 ->render(fn (Receipt $r) => $r->payment_mode == Receipt::MODE_BANK ? $r->amount : ''),
             TD::make('online', 'Online Payment')

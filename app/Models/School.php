@@ -17,7 +17,7 @@ class School extends Model
 
     /** @var array */
     protected $fillable = [
-        'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'center_head_id',
+        'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'suspended_at', 'center_head_id',
     ];
 
 

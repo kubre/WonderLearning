@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\User;
 use App\Orchid\Layouts\ReceiptModeListener;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\DateTimer;
@@ -57,7 +58,7 @@ class ReceiptEditScreen extends Screen
         $this->exists = $receipt->exists;
         $this->user = auth()->user();
         $this->for = request('for');
-        $this->is_school_fees_receipt = $this->for == Receipt::SCHOOL_FEES;
+        $this->is_school_fees_receipt = $this->for === Receipt::SCHOOL_FEES;
         $data = [
             'admission_id' => request('admission_id'),
             'for' => $this->for,
@@ -96,11 +97,11 @@ class ReceiptEditScreen extends Screen
                 ->method('createOrUpdate')
                 ->canSee($this->user->hasAccess('receipt.edit') && $this->exists),
 
-            Button::make('Remove')
-                ->icon('trash')
-                ->type(Color::DANGER())
-                ->method('remove')
-                ->canSee($this->user->hasAccess('receipt.delete') && $this->exists),
+            // Button::make('Remove')
+            //     ->icon('trash')
+            //     ->type(Color::DANGER())
+            //     ->method('remove')
+            //     ->canSee($this->user->hasAccess('receipt.delete') && $this->exists),
         ];
     }
 
@@ -117,14 +118,13 @@ class ReceiptEditScreen extends Screen
                     ->title('Receipt No')
                     ->readonly()
                     ->required(),
-                Relation::make('student_id')
+                Select::make('admission_id')
                     ->title('Student')
-                    ->fromModel(Student::class, 'name')
-                    ->displayAppend('search_title')
-                    ->searchColumns('name', 'father_contact', 'mother_contact')
+                    ->fromQuery(Admission::with('student.school'), 'search_title')
                     ->canSee(!$this->is_school_fees_receipt),
                 Input::make('admission_id')
-                    ->hidden(),
+                    ->type('hidden')
+                    ->canSee($this->is_school_fees_receipt),
                 Input::make('amount')
                     ->title('Amount')
                     ->autofocus()
@@ -154,8 +154,7 @@ class ReceiptEditScreen extends Screen
     public function createOrUpdate(Receipt $receipt, Request $request)
     {
         $form = $request->validate([
-            'admission_id' => 'required_without:student_id',
-            'student_id' => 'required_without:admission_id',
+            'admission_id' => 'required',
             'receipt_no' => 'required|integer',
             'amount' => 'required|integer|min:0',
             'for' => 'required',
@@ -167,15 +166,11 @@ class ReceiptEditScreen extends Screen
             'receipt_at' => 'required|date',
         ]);
 
-        if (is_null($form['admission_id'])) {
-            $form['admission_id'] = Admission::firstWhere('student_id', $form['student_id'])->id;
-        } else {
-            if ($form['amount'] > Admission::findOrFail($form['admission_id'])->balance_amount) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['amount' => 'Amount cannot be greater than student\'s balance amount!']);
-            }
+        if ($form['amount'] > Admission::findOrFail($form['admission_id'])->balance_amount) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors(['amount' => 'Amount cannot be greater than student\'s balance amount!']);
         }
 
         $form['school_id'] = auth()->user()->school_id;
@@ -184,7 +179,7 @@ class ReceiptEditScreen extends Screen
         $receipt->fill($form)->save();
 
         $data = [];
-        if (!$request->has('student_id')) {
+        if ($request->input('for') === Receipt::SCHOOL_FEES) {
             $data['admission_id'] = $form['admission_id'];
         }
 

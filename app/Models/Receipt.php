@@ -29,7 +29,6 @@ class Receipt extends Model
         'created_at',
     ];
 
-
     public $allowedFilters = [
         'receipt_id',
         'paid_at',
@@ -54,7 +53,6 @@ class Receipt extends Model
         self::MODE_BANK => 'Cheque',
     ];
 
-
     public const SCHOOL_FEES = 'School Fees';
 
     protected static function booted()
@@ -64,7 +62,7 @@ class Receipt extends Model
     }
 
 
-    public function getModeAttribute()
+    public function getModeAttribute(): string
     {
         return static::PAYMENT_MODES[$this->payment_mode];
     }

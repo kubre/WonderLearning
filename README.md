@@ -7,7 +7,7 @@
  - School Done
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) Implement graduation logic
-3) Fees receipt generation failing
+3) (Fixed) Fees receipt generation failing
 
 ```
 
@@ -33,6 +33,7 @@
 -   (11/apr 06:42pm) Admission Report and added batch filter in Program Selection
 -   (12/apr 11:52am) Enquiry Report (Excel, PDF) now admission create will also save student_id in enquiry
 -   (12/apr 4:27pm) Individual Student Receipt Report Export, some query optimizations
+-   (13/apr 9:07am) Fixed Fees Receipt generation error on create as some students didn't had admission that year solved by using Admission instead of student Payment Due error on no data fixed, changed text cancel to delete for receipt action
 
 ## Changes to DONE
 
@@ -182,5 +183,5 @@ Have ability to export these reports as excel or pdf
 -   (DONE) Remove dummy client logos
 -   (DONE) Remove call today from bottom of home page
 -   Image for login background
--   Change Cancel option in receipt from cancel to Delete
--   Daily Collection Change column title Bank - Cheque
+-   (13/apr 9:07am) Change Cancel option in receipt from cancel to Delete
+-   (13/apr 9:07am) Daily Collection Change column title Bank - Cheque

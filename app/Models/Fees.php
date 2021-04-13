@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
-use App\Models\Traits\HasAcademicYear;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

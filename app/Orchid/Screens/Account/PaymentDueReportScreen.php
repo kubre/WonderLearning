@@ -38,20 +38,32 @@ class PaymentDueReportScreen extends Screen
             ->withSum('school_fees_receipts', 'amount')
             ->filtersApplySelection(ProgramSelectionLayout::class)
             ->get();
-        $fees = $admissions->first()->student->school->fees;
 
-        $total_invoice_amount = $admissions->sum(fn ($a) => $fees->{$a->fees_total_column});
-        $total_school_fees_receipts_sum = $admissions->sum('school_fees_receipts_sum_amount');
-        $total_balance_amount = $admissions->sum(fn ($a) =>
-        $fees->{$a->fees_total_column} - $a->discount - $a->school_fees_receipts_sum_amount);
+        if ($admissions->isNotEmpty()) {
+            $fees = $admissions->first()->student->school->fees;
+
+            $total_invoice_amount = $admissions->sum(fn ($a) => $fees->{$a->fees_total_column});
+            $total_school_fees_receipts_sum = $admissions->sum('school_fees_receipts_sum_amount');
+            $total_balance_amount = $admissions->sum(fn ($a) =>
+            $fees->{$a->fees_total_column} - $a->discount - $a->school_fees_receipts_sum_amount);
+
+            return [
+                'admissions' => $admissions,
+                'fees' => $fees,
+                'total_discount' => $admissions->sum('discount'),
+                'total_invoice_amount' => $total_invoice_amount,
+                'total_school_fees_receipts_sum' => $total_school_fees_receipts_sum,
+                'total_balance_amount' => $total_balance_amount,
+            ];
+        }
 
         return [
-            'admissions' => $admissions,
-            'fees' => $fees,
-            'total_discount' => $admissions->sum('discount'),
-            'total_invoice_amount' => $total_invoice_amount,
-            'total_school_fees_receipts_sum' => $total_school_fees_receipts_sum,
-            'total_balance_amount' => $total_balance_amount,
+            'admissions' => [],
+            'fees' => null,
+            'total_discount' => null,
+            'total_invoice_amount' => null,
+            'total_school_fees_receipts_sum' => null,
+            'total_balance_amount' => null,
         ];
     }
 
