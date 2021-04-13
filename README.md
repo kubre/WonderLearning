@@ -94,8 +94,21 @@
     -   Available Units
 
 -   (12/apr 4:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
--   **(Feature) Multiple Center Head**
+-   (13/apr 11:17am) **(Feature) Multiple Center Head**
+
 -   **Installments reminder option per month basis**
+
+    -   Installment Model
+        -   month
+        -   amount
+        -   due_amount
+        -   admission_id
+        -   school_id
+    -   Installment option in the admission form
+    -   School Fees payment option
+        -   User would have to select installment but amount paid will not be restricted to the installments amount.
+    -   Widget on dashboard for current months pending due.
+
 -   **Add new fields for admission and enquiry from rudresh sir**
 
 ## Reports -

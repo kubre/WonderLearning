@@ -47,7 +47,7 @@ class InvoicePrintScreen extends Screen
                 ->route('school.admission.list'),
             Link::make('Print')
                 ->icon('printer')
-                ->type(Color::PRIMARY())
+                ->type(Color::WARNING())
                 ->href('javascript:(function(){window.print();})()'),
         ];
     }

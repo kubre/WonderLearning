@@ -60,7 +60,7 @@ class ReceiptPrintScreen extends Screen
                 ->route('school.receipt.list', ['admission_id' => $this->admission_id]),
             Link::make('Print')
                 ->icon('printer')
-                ->type(Color::PRIMARY())
+                ->type(Color::WARNING())
                 ->href('javascript:(function(){window.print();})()'),
         ];
     }

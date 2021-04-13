@@ -1,7 +1,7 @@
 <div id="print-report" class="bg-white px-4 py-4">
     <div class="row">
         <div class="col-md-3">
-            <img style="max-height: 150px; width: auto;" src="{{ $admission->school->logo }}" alt="Logo">
+            <img style="max-height: 150px; width: auto;" src="{{ $admission->student->school->logo }}" alt="Logo">
         </div>
         <div class="col-md-3 text-center pl-5 mt-3">
             <h2>
@@ -16,11 +16,11 @@
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>{{ $admission->school->address }}</td>
+                    <td>{{ $admission->student->school->address }}</td>
                 </tr>
                 <tr>
                     <th>Contact</th>
-                    <td>{{ $admission->school->contact }}</td>
+                    <td>{{ $admission->student->school->contact }}</td>
                 </tr>
             </table>
         </div>
@@ -85,7 +85,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($admission->school->fees->{$admission->fees_column} as $fees)
+                @foreach ($admission->student->school->fees->{$admission->fees_column} as $fees)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <th>{{ $fees['fees'] }}</th>
@@ -95,7 +95,7 @@
             </tbody>
             <tfoot>
                 <th colspan="2">Total</th>
-                <th class="text-right">{{ $admission->school->fees->{$admission->fees_total_column} }}</th>
+                <th class="text-right">{{ $admission->student->school->fees->{$admission->fees_total_column} }}</th>
             </tfoot>
         </table>
     </div>
@@ -104,14 +104,15 @@
         <span class='col'>
             <span>Amount Chargable (in words): </span>
             <strong class="b-b">
-                {{ strtoupper(inr_format($admission->school->fees->{$admission->fees_total_column})) }} RUPEES ONLY
+                {{ strtoupper(inr_format($admission->student->school->fees->{$admission->fees_total_column})) }}
+                RUPEES ONLY
                 /-
             </strong>
         </span>
     </div>
 
     <div class="row mt-3">
-        <strong class="col">For {{ auth()->user()()->name }}</strong>
+        <strong class="col">For {{ auth()->user()->name }}</strong>
     </div>
     <div class="row mt-5">
         <strong class="col">Authorised Signatory</strong>
