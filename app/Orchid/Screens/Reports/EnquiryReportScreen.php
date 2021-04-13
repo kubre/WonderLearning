@@ -66,7 +66,7 @@ class EnquiryReportScreen extends Screen
 
             Link::make('Print/Export PDF')
                 ->icon('printer')
-                ->type(Color::PRIMARY())
+                ->type(Color::WARNING())
                 ->href('javascript:window.print()'),
         ];
     }

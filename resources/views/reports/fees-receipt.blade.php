@@ -1,7 +1,8 @@
 <div id="print-report" class="bg-white px-4 py-4">
     <div class="row">
         <div class="col-md-4">
-            <img style="max-height: 150px; width: auto;" src="{{ $receipt->school->logo }}" alt="Logo">
+            <img style="max-height: 150px; width: auto;" src="{{ $receipt->admission->student->school->logo }}"
+                alt="Logo">
         </div>
         <div class="col-md-3 text-center mt-3">
             <h2 class="text-bold">Receipt</h2>
@@ -10,15 +11,15 @@
             <table class="w-100">
                 <tr>
                     <th>Center Head</th>
-                    <td>{{ $receipt->school->center_head->name }}</td>
+                    <td>{{ auth()->user()->name }}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
-                    <td>{{ $receipt->school->address }}</td>
+                    <td>{{ $receipt->admission->student->school->address }}</td>
                 </tr>
                 <tr>
                     <th>Contact</th>
-                    <td>{{ $receipt->school->contact }}</td>
+                    <td>{{ $receipt->admission->student->school->contact }}</td>
                 </tr>
             </table>
         </div>

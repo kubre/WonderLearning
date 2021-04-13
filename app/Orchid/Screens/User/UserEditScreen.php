@@ -196,10 +196,6 @@ class UserEditScreen extends Screen
 
         $user->replaceRoles($request->input('user.roles'));
 
-        if ($request->input('user.is_center_head')) {
-            $user->school->fill(['center_head_id' => $user->id])->save();
-        }
-
         Toast::info(__('User was saved.'));
 
         return redirect()->route('platform.systems.users');

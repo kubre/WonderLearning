@@ -26,11 +26,6 @@ class CreateSchoolsTable extends Migration
             $table->timestamp('suspended_at')
                 ->nullable()
                 ->default(null);
-            $table->foreignId('center_head_id')
-                ->nullable()
-                ->default(null)
-                ->constrained('users')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }

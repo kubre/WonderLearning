@@ -12,7 +12,7 @@
             <table class="w-100 table table-bordered table-black">
                 <tr>
                     <th>Center Head</th>
-                    <td>{{ $admission->school->center_head->name }}</td>
+                    <td>{{ auth()->user()->name }}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
@@ -111,7 +111,7 @@
     </div>
 
     <div class="row mt-3">
-        <strong class="col">For {{ $admission->school->center_head->name }}</strong>
+        <strong class="col">For {{ auth()->user()()->name }}</strong>
     </div>
     <div class="row mt-5">
         <strong class="col">Authorised Signatory</strong>

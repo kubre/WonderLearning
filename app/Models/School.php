@@ -17,7 +17,7 @@ class School extends Model
 
     /** @var array */
     protected $fillable = [
-        'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'suspended_at', 'center_head_id',
+        'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'suspended_at',
     ];
 
 
@@ -74,12 +74,6 @@ class School extends Model
     public function users()
     {
         return $this->hasMany(User::class);
-    }
-
-
-    public function center_head(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'center_head_id', 'id', 'users');
     }
 
 

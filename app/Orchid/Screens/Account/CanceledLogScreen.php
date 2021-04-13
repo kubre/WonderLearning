@@ -33,7 +33,7 @@ class CanceledLogScreen extends Screen
     {
         return [
             'receipts' => Receipt::onlyTrashed()
-                ->with(['admission.student'])
+                ->with(['admission.student.school'])
                 ->get(),
         ];
     }
@@ -55,7 +55,7 @@ class CanceledLogScreen extends Screen
 
             Link::make('Print/Export PDF')
                 ->icon('printer')
-                ->type(Color::PRIMARY())
+                ->type(Color::WARNING())
                 ->href('javascript:printTable()'),
 
         ];

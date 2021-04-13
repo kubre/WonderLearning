@@ -35,6 +35,7 @@ class DailyCollectionReportScreen extends Screen
         if (request()->has('from_date') && request()->has('to_date')) {
             /** @var Collection */
             $receipts = Receipt::filtersApplySelection(ReceiptDateSelectionLayout::class)
+                ->with('admission.student.school')
                 ->get();
 
             $totals = $receipts->groupBy('payment_mode')->map(fn ($c) => $c->sum('amount'));
@@ -70,7 +71,7 @@ class DailyCollectionReportScreen extends Screen
 
             Link::make('Print/Export PDF')
                 ->icon('printer')
-                ->type(Color::PRIMARY())
+                ->type(Color::WARNING())
                 ->href('javascript:printTable()'),
         ];
     }

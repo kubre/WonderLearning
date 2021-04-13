@@ -68,20 +68,12 @@ class User extends Authenticatable
         'created_at',
     ];
 
-    public bool $is_center_head = false;
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function school()
     {
         return $this->belongsTo(School::class);
-    }
-
-
-    public function getIsCenterHeadAttribute()
-    {
-        return $this->id === optional($this->school)->center_head_id;
     }
 
 

@@ -39,7 +39,7 @@ class OnlinePaymentsScreen extends Screen
 
             /** @var Collection */
             $receipts = Receipt::where('payment_mode', Receipt::MODE_ONLINE_PAYMENTS)
-                ->with(['admission.student'])
+                ->with(['admission.student.school'])
                 ->filtersApplySelection(DateRangeSelectionLayout::class)
                 ->get();
 
@@ -69,7 +69,7 @@ class OnlinePaymentsScreen extends Screen
 
             Link::make('Print/Export PDF')
                 ->icon('printer')
-                ->type(Color::PRIMARY())
+                ->type(Color::WARNING())
                 ->href('javascript:printTable()'),
         ];
     }

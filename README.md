@@ -34,6 +34,7 @@
 -   (12/apr 11:52am) Enquiry Report (Excel, PDF) now admission create will also save student_id in enquiry
 -   (12/apr 4:27pm) Individual Student Receipt Report Export, some query optimizations
 -   (13/apr 9:07am) Fixed Fees Receipt generation error on create as some students didn't had admission that year solved by using Admission instead of student Payment Due error on no data fixed, changed text cancel to delete for receipt action
+-   (13/apr 11:17am) Print button is in warning style everywhere and fixed every model loading same data with multiple queries
 
 ## Changes to DONE
 

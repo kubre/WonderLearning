@@ -34,8 +34,9 @@ class ReceiptPrintScreen extends Screen
      *
      * @return array
      */
-    public function query(Receipt $receipt, string $parent): array
+    public function query(int $receipt_id, string $parent): array
     {
+        $receipt = Receipt::with('admission.student.school')->findOrFail($receipt_id);
         $this->admission_id = $receipt->admission_id;
         $this->is_multi_layout = request('is_multi_layout', false);
         return compact('receipt', 'parent');

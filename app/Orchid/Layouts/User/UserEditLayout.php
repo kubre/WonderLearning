@@ -39,10 +39,6 @@ class UserEditLayout extends Rows
                 ->canSee(
                     auth()->user()->hasAccess('admin.school')
                 ),
-            CheckBox::make('user.is_center_head')
-                ->title('Center Head')
-                ->placeholder('Only one person can be Center Head.')
-                ->sendTrueOrFalse(),
         ];
     }
 }
