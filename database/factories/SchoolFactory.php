@@ -25,10 +25,12 @@ class SchoolFactory extends Factory
         $name = $this->faker->company;
         return [
             'name' => $name,
+            'code' => $this->faker->unique()->numberBetween(100, 999),
             'logo' => '/storage/2021/03/30/9c0b1fd43226f2879828684a463b9fd7cbc8e9b6.png',
             'contact' => $this->faker->e164PhoneNumber,
             'email' => $this->faker->unique()->email,
             'address' => $this->faker->address,
+            'academic_year' => '01-08:31:07',
             'login_url' => Str::slug($name),
         ];
     }

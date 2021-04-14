@@ -24,7 +24,6 @@ class Admission extends Model
     protected $fillable = [
         'admission_at',
         'program',
-        'fees_installments',
         'discount',
         'batch',
         'is_transportation_required',
@@ -36,7 +35,6 @@ class Admission extends Model
     /** @var array */
     protected $casts = [
         'is_transportation_required' => 'boolean',
-        'fees_installments' => 'integer',
         'discount' => 'integer',
         'admission_at' => 'date:Y-m-d',
     ];

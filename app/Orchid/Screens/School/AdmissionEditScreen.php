@@ -237,13 +237,8 @@ class AdmissionEditScreen extends Screen
             ])->title('Address Details'),
             Layout::rows([
                 Group::make([
-                    Select::make('fees_installments')
-                        ->options(array_combine(range(1, 12), range(1, 12)))
-                        ->title('No of Fees Installments'),
                     Input::make('discount')
-                        ->title('Discount')
-                ]),
-                Group::make([
+                        ->title('Discount'),
                     Select::make('batch')
                         ->options([
                             'Morning' => 'Morning',
@@ -270,6 +265,8 @@ class AdmissionEditScreen extends Screen
     public function createOrUpdate(Admission $admission, AdmissionRequest $request)
     {
         $student = new Student;
+        $new_admission = !$admission->exists;
+
         if ($admission->exists) {
             $student = $admission->student;
         }
@@ -290,6 +287,13 @@ class AdmissionEditScreen extends Screen
         }
 
         Toast::info('Admission of student was done successfully!');
+
+        if ($new_admission) {
+            return redirect()->route('school.installment.edit', [
+                'admission' => $admission,
+                'fees_installments' => $form['fees_installments'] ?? 1,
+            ]);
+        }
         return redirect()->route('school.admission.list');
     }
 }

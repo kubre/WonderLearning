@@ -34,7 +34,8 @@
 -   (12/apr 11:52am) Enquiry Report (Excel, PDF) now admission create will also save student_id in enquiry
 -   (12/apr 4:27pm) Individual Student Receipt Report Export, some query optimizations
 -   (13/apr 9:07am) Fixed Fees Receipt generation error on create as some students didn't had admission that year solved by using Admission instead of student Payment Due error on no data fixed, changed text cancel to delete for receipt action
--   (13/apr 11:17am) Print button is in warning style everywhere and fixed every model loading same data with multiple queries
+-   (13/apr 11:17am) Print button is in warning style everywhere and fixed every model loading same data with multiple queries, Multiple Center Head
+-   (14/apr 8:40am) Removed fees installments from admission moved to separate model, screen to add installment added
 
 ## Changes to DONE
 
@@ -98,13 +99,14 @@
 
 -   **Installments reminder option per month basis**
 
-    -   Installment Model
+    -   (14/apr 8:40am) Installment Model
         -   month
         -   amount
         -   due_amount
         -   admission_id
         -   school_id
-    -   Installment option in the admission form
+    -   (14/apr 8:40am) Installment option after the admission form
+    -   See installments in student Receipts (Shool Fees)
     -   School Fees payment option
         -   User would have to select installment but amount paid will not be restricted to the installments amount.
     -   Widget on dashboard for current months pending due.
@@ -199,3 +201,8 @@ Have ability to export these reports as excel or pdf
 -   Image for login background
 -   (13/apr 9:07am) Change Cancel option in receipt from cancel to Delete
 -   (13/apr 9:07am) Daily Collection Change column title Bank - Cheque
+-   Designed by instead of made by
+-   Admission cum/Declaration form with Photo
+-   Receipt canceled must be approved by owner (On Dashboard)
+-   'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
+-   'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.

@@ -21,6 +21,7 @@ use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
 use App\Orchid\Screens\Student\EnquiryEditScreen;
 use App\Orchid\Screens\Student\EnquiryListScreen;
+use App\Orchid\Screens\Student\InstallmentEditScreen;
 use App\Orchid\Screens\Student\InvoicePrintScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
@@ -150,6 +151,9 @@ Route::screen('receipts', ReceiptListScreen::class)
 
 Route::screen('receipts/{receipt}/{parent}', ReceiptPrintScreen::class)
     ->name('school.receipt.print');
+
+Route::screen('installment/{admission}', InstallmentEditScreen::class)
+    ->name('school.installment.edit');
 
 Route::screen('invoice/{admission}/{parent}', InvoicePrintScreen::class)
     ->name('school.invoice.print');

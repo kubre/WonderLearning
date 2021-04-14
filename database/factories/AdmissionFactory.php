@@ -24,7 +24,6 @@ class AdmissionFactory extends Factory
         return [
             'admission_at' => now()->format('Y-m-d'),
             'program' => $this->faker->randomElement(['Nursery', 'Playgroup', 'Junior KG', 'Senior KG']),
-            'fees_installments' => rand(1, 12),
             'discount' => rand(0, 1000),
             'batch' => $this->faker->randomElement(['Morning', 'Afternoon']),
             'is_transportation_required' => $this->faker->boolean,

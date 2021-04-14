@@ -26,6 +26,7 @@ class StudentFactory extends Factory
             'photo' => '/storage/2021/03/30/9c0b1fd43226f2879828684a463b9fd7cbc8e9b6.png',
             'dob_at' => $this->faker->dateTimeThisDecade,
             'gender' => $this->faker->randomElement(['Male', 'Female', 'Transgender', 'Other']),
+            'code' => $this->faker->unique()->numberBetween(0, 9999),
             'father_name' => $this->faker->name,
             'father_contact' => '1489090909',
             'father_occupation' => $this->faker->jobTitle,

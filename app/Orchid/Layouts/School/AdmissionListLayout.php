@@ -55,7 +55,6 @@ class AdmissionListLayout extends Table
                 ->filter(TD::FILTER_TEXT),
             TD::make('total_fees', 'Total Fees')
                 ->render(fn (Admission $a) => $f->{$a->fees_total_column} - $a->discount),
-            TD::make('fees_installments', 'Fees Installments')->filter(TD::FILTER_NUMERIC),
             TD::make('batch', 'Batch')->filter(TD::FILTER_TEXT),
             TD::make('actions', 'Actions')
                 ->canSee($this->user->hasAccess('admission.edit'))
