@@ -19,6 +19,7 @@ class CreateInstallmentsTable extends Migration
             $table->unsignedMediumInteger('amount');
             $table->unsignedMediumInteger('due_amount');
             $table->foreignId('admission_id')
+                ->index()
                 ->nullable()
                 ->default(null)
                 ->onDelete('cascade')

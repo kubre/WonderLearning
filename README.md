@@ -8,7 +8,7 @@
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) Implement graduation logic
 3) (Fixed) Fees receipt generation failing
-
+4) Canceling receipt restore installment amount.
 ```
 
 ## Dashboard
@@ -36,6 +36,7 @@
 -   (13/apr 9:07am) Fixed Fees Receipt generation error on create as some students didn't had admission that year solved by using Admission instead of student Payment Due error on no data fixed, changed text cancel to delete for receipt action
 -   (13/apr 11:17am) Print button is in warning style everywhere and fixed every model loading same data with multiple queries, Multiple Center Head
 -   (14/apr 8:40am) Removed fees installments from admission moved to separate model, screen to add installment added
+-   (14/apr 8:40am) Installment deduction while paying receipt, Installment tab in receipts
 
 ## Changes to DONE
 
@@ -106,9 +107,8 @@
         -   admission_id
         -   school_id
     -   (14/apr 8:40am) Installment option after the admission form
-    -   See installments in student Receipts (Shool Fees)
-    -   School Fees payment option
-        -   User would have to select installment but amount paid will not be restricted to the installments amount.
+    -   (14/apr 12:48pm) See installments in student Receipts (Shool Fees)
+    -   (14/apr 12:48pm) School Fees auto deduction in installment
     -   Widget on dashboard for current months pending due.
 
 -   **Add new fields for admission and enquiry from rudresh sir**

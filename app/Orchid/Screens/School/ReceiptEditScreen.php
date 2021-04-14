@@ -156,7 +156,7 @@ class ReceiptEditScreen extends Screen
         $form = $request->validate([
             'admission_id' => 'required',
             'receipt_no' => 'required|integer',
-            'amount' => 'required|integer|min:0',
+            'amount' => 'required|integer|min:1',
             'for' => 'required',
             'payment_mode' => 'required|in:c,o,b',
             'bank_name' => 'nullable',
@@ -166,7 +166,9 @@ class ReceiptEditScreen extends Screen
             'receipt_at' => 'required|date',
         ]);
 
-        if ($form['amount'] > Admission::findOrFail($form['admission_id'])->balance_amount) {
+        $admission = Admission::findOrFail($form['admission_id']);
+
+        if ($form['amount'] > $admission->balance_amount) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -181,10 +183,34 @@ class ReceiptEditScreen extends Screen
         $data = [];
         if ($request->input('for') === Receipt::SCHOOL_FEES) {
             $data['admission_id'] = $form['admission_id'];
+
+            $this->deductFromInstallments($form['amount'], $admission->unpaid_installments);
         }
 
         Toast::success('Issued the Receipt');
         return redirect()->route('school.receipt.list', $data);
+    }
+
+
+    /**
+     * @param integer $amount
+     * @param \Illuminate\Database\Eloquent\Collection $installments
+     * @return void
+     */
+    public function deductFromInstallments(int $amount, $installments)
+    {
+        foreach ($installments as $installment) {
+            if ($installment->due_amount >= $amount) {
+                $installment->due_amount -= $amount;
+                $amount = 0;
+            } else {
+                $amount -= $installment->due_amount;
+                $installment->due_amount = 0;
+            }
+
+            $installment->save();
+            if (0 === $amount) break;
+        }
     }
 
     /**

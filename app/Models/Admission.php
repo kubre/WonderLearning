@@ -131,6 +131,16 @@ class Admission extends Model
         return $this->hasMany(Receipt::class);
     }
 
+    public function installments(): HasMany
+    {
+        return $this->hasMany(Installment::class);
+    }
+
+    public function unpaid_installments(): HasMany
+    {
+        return $this->hasMany(Installment::class)->where('due_amount', '>', 0);
+    }
+
     public function school_fees_receipts(): HasMany
     {
         return $this->hasMany(Receipt::class)->where('receipts.for', Receipt::SCHOOL_FEES);

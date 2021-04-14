@@ -60,6 +60,7 @@ class ReceiptListScreen extends Screen
         return [
             'receipts' => $receipts,
             'admission' => $this->admission,
+            'installments' => $this->admission->installments,
         ];
     }
 
@@ -103,10 +104,11 @@ class ReceiptListScreen extends Screen
     {
         $views = [];
         if (!is_null($this->admission)) {
-            $views[] = Layout::component(AdmissionReceipt::class);
+            $views['School Fees Details'] = Layout::component(AdmissionReceipt::class);
+            $views['Installments'] = Layout::view('components.installments');
         }
         return [
-            ...$views,
+            Layout::tabs($views),
             ReceiptListLayout::class,
             Layout::modal('chooseReceiptReceiversName', [
                 Layout::rows([
