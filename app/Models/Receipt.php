@@ -61,6 +61,10 @@ class Receipt extends Model
         static::addGlobalScope(new SchoolScope);
     }
 
+    public function getReceiptNoAttribute($value)
+    {
+        return str_pad($value, 6, '0', STR_PAD_LEFT);
+    }
 
     public function getModeAttribute(): string
     {
@@ -72,9 +76,18 @@ class Receipt extends Model
         return $this->belongsTo(Admission::class);
     }
 
-
     public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
+    }
+
+    public function approval()
+    {
+        return $this->morphOne(Approval::class, 'approval');
+    }
+
+    public function runWhenApproved()
+    {
+        $this->delete();
     }
 }

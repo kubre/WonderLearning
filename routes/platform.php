@@ -125,6 +125,7 @@ Route::screen('roles', RoleListScreen::class)
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
+
 Route::screen('school/{school?}', SchoolEditScreen::class)
     ->name('admin.school.edit');
 Route::screen('schools', SchoolListScreen::class)

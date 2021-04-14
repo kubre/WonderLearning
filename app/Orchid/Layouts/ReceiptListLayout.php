@@ -53,6 +53,15 @@ class ReceiptListLayout extends Table
                                 ->icon('trash')
                                 ->method('cancel')
                                 ->confirm("Once deleted this can not be restored are you sure?")
+                                ->canSee(auth()->user()->hasAccess('receipt.delete'))
+                                ->parameters([
+                                    'id' => $r->id,
+                                ]),
+                            Button::make('Request Delete')
+                                ->icon('trash')
+                                ->method('requestDelete')
+                                ->canSee(!auth()->user()->hasAccess('receipt.delete'))
+                                ->confirm("Once deleted this can not be restored are you sure?")
                                 ->parameters([
                                     'id' => $r->id,
                                 ]),

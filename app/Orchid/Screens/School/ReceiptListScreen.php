@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\School;
 
 use App\Models\Admission;
+use App\Models\Approval;
 use App\Models\Receipt;
 use App\Orchid\Layouts\ReceiptListLayout;
 use App\View\Components\AdmissionReceipt;
@@ -132,7 +133,25 @@ class ReceiptListScreen extends Screen
         }
 
         $receipt->delete();
-        Toast::info('You have successfully deleted the enquiry.');
+        Toast::info('You have successfully deleted the receipt.');
+        return redirect()->route('school.receipt.list', $data);
+    }
+
+    public function requestDelete(Receipt $receipt)
+    {
+        $approval = new Approval([
+            'school_id' => $receipt->school_id,
+            'created_at' => working_year()[0],
+        ]);
+
+        $data = [];
+        if ($receipt->for === Receipt::SCHOOL_FEES) {
+            $data['admission_id'] = $receipt->admission_id;
+        }
+
+        $receipt->approval()->save($approval);
+
+        Toast::info('Requested school owner for deletion of receipt!');
         return redirect()->route('school.receipt.list', $data);
     }
 

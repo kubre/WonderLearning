@@ -37,6 +37,7 @@
 -   (13/apr 11:17am) Print button is in warning style everywhere and fixed every model loading same data with multiple queries, Multiple Center Head
 -   (14/apr 8:40am) Removed fees installments from admission moved to separate model, screen to add installment added
 -   (14/apr 8:40am) Installment deduction while paying receipt, Installment tab in receipts
+-   (14/apr 7:25pm) Added receipt deletion approval, if user doesn't have receipt.delete permission then it will show request deletion button now.
 
 ## Changes to DONE
 
@@ -110,6 +111,16 @@
     -   (14/apr 12:48pm) See installments in student Receipts (Shool Fees)
     -   (14/apr 12:48pm) School Fees auto deduction in installment
     -   Widget on dashboard for current months pending due.
+
+-   (14/apr 7:25pm) **Receipt canceled must be approved by owner (On Dashboard)**
+
+    -   Approval Model
+        -   model_id
+        -   model_class
+        -   approved_at
+        -   school_id
+
+-   **Deleted receipts should revert changes in installments**
 
 -   **Add new fields for admission and enquiry from rudresh sir**
 
@@ -201,8 +212,7 @@ Have ability to export these reports as excel or pdf
 -   Image for login background
 -   (13/apr 9:07am) Change Cancel option in receipt from cancel to Delete
 -   (13/apr 9:07am) Daily Collection Change column title Bank - Cheque
--   Designed by instead of made by
+-   (14/apr 7:25pm) Designed by instead of made by
 -   Admission cum/Declaration form with Photo
--   Receipt canceled must be approved by owner (On Dashboard)
 -   'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
 -   'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.
