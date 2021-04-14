@@ -8,7 +8,7 @@
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) Implement graduation logic
 3) (Fixed) Fees receipt generation failing
-4) Canceling receipt restore installment amount.
+4) (Fixed) Generic Receipt were not able to generate once school fees was nil
 ```
 
 ## Dashboard
@@ -96,12 +96,12 @@
     -   Price
     -   Available Units
 
--   (12/apr 4:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
+-   (12/apr 04:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
 -   (13/apr 11:17am) **(Feature) Multiple Center Head**
 
 -   **Installments reminder option per month basis**
 
-    -   (14/apr 8:40am) Installment Model
+    -   (14/apr 08:40am) Installment Model
         -   month
         -   amount
         -   due_amount
@@ -112,7 +112,7 @@
     -   (14/apr 12:48pm) School Fees auto deduction in installment
     -   Widget on dashboard for current months pending due.
 
--   (14/apr 7:25pm) **Receipt canceled must be approved by owner (On Dashboard)**
+-   (14/apr 07:25pm) **Receipt canceled must be approved by owner (On Dashboard)**
 
     -   Approval Model
         -   model_id
@@ -120,7 +120,7 @@
         -   approved_at
         -   school_id
 
--   **Deleted receipts should revert changes in installments**
+-   (14/apr 09:05pm) **Deleted receipts should revert changes in installments**
 
 -   **Add new fields for admission and enquiry from rudresh sir**
 
@@ -130,7 +130,7 @@ Have ability to export these reports as excel or pdf
 
 ### Reports in account section
 
--   (11/apr 12:30pm)**Pay Due Report**: (Dropdown filter programme or all)
+-   (11/apr 12:30pm) **Pay Due Report**: (Dropdown filter programme or all)
 
     -   PRN
     -   Student Name

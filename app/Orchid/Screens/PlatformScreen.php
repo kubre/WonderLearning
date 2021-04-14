@@ -6,8 +6,11 @@ namespace App\Orchid\Screens;
 
 use App\Models\Approval;
 use App\Models\Fees;
+use App\Models\Receipt;
 use App\Models\School;
+use App\Models\User;
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
+use App\Services\InstallmentService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Orchid\Screen\Actions\ModalToggle;
@@ -35,6 +38,8 @@ class PlatformScreen extends Screen
 
     public bool $hasApprovals = false;
 
+    public ?User $user = null;
+
     /**
      * Query data.
      *
@@ -42,8 +47,9 @@ class PlatformScreen extends Screen
      */
     public function query(): array
     {
+        $this->user = auth()->user();
         if (!Session::exists('school')) {
-            session(['school' => optional(auth()->user())->school ?? new School]);
+            session(['school' => optional($this->user)->school ?? new School]);
         }
 
         $approvals = Approval::with('approval.admission.student')->get();
@@ -95,7 +101,10 @@ class PlatformScreen extends Screen
         });
 
         $views = [];
-        if ($this->hasApprovals) $views[] = ApprovalListLayout::class;
+
+        if ($this->user->hasAccess('receipt.delete') && $this->hasApprovals) {
+            $views[] = ApprovalListLayout::class;
+        }
 
         return [
             ...$views,
@@ -123,10 +132,17 @@ class PlatformScreen extends Screen
 
     public function approveDeleteReceipt(Approval $approval)
     {
+        if ($approval->approval->for === Receipt::SCHOOL_FEES) {
+            (new InstallmentService)->restore(
+                $approval->approval->amount,
+                $approval->approval->admission_id
+            );
+        }
+
         $approval->approval->delete();
         $approval->delete();
 
-        Toast::info('Deleted Receipt successfully!');
+        Toast::info('Deleted receipt successfully!');
         return redirect()->route('platform.main');
     }
 

@@ -8,6 +8,7 @@ use App\Models\Scopes\AcademicYearScope;
 use App\Models\Student;
 use App\Models\User;
 use App\Orchid\Layouts\ReceiptModeListener;
+use App\Services\InstallmentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Actions\Button;
@@ -68,6 +69,7 @@ class ReceiptEditScreen extends Screen
             $this->name = 'Edit Receipt';
         } else {
             $data['receipt_no'] = (Receipt::withoutGlobalScope(AcademicYearScope::class)
+                ->withTrashed()
                 ->max('receipt_no') ?? 0) + 1;
         }
 
@@ -168,7 +170,10 @@ class ReceiptEditScreen extends Screen
 
         $admission = Admission::findOrFail($form['admission_id']);
 
-        if ($form['amount'] > $admission->balance_amount) {
+        if (
+            $form['amount'] > $admission->balance_amount
+            && $request->input('for') === Receipt::SCHOOL_FEES
+        ) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -183,34 +188,11 @@ class ReceiptEditScreen extends Screen
         $data = [];
         if ($request->input('for') === Receipt::SCHOOL_FEES) {
             $data['admission_id'] = $form['admission_id'];
-
-            $this->deductFromInstallments($form['amount'], $admission->unpaid_installments);
+            (new InstallmentService)->deduct($form['amount'], $admission->id);
         }
 
         Toast::success('Issued the Receipt');
         return redirect()->route('school.receipt.list', $data);
-    }
-
-
-    /**
-     * @param integer $amount
-     * @param \Illuminate\Database\Eloquent\Collection $installments
-     * @return void
-     */
-    public function deductFromInstallments(int $amount, $installments)
-    {
-        foreach ($installments as $installment) {
-            if ($installment->due_amount >= $amount) {
-                $installment->due_amount -= $amount;
-                $amount = 0;
-            } else {
-                $amount -= $installment->due_amount;
-                $installment->due_amount = 0;
-            }
-
-            $installment->save();
-            if (0 === $amount) break;
-        }
     }
 
     /**

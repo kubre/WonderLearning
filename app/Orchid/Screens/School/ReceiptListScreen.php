@@ -6,6 +6,7 @@ use App\Models\Admission;
 use App\Models\Approval;
 use App\Models\Receipt;
 use App\Orchid\Layouts\ReceiptListLayout;
+use App\Services\InstallmentService;
 use App\View\Components\AdmissionReceipt;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class ReceiptListScreen extends Screen
         return [
             'receipts' => $receipts,
             'admission' => $this->admission,
-            'installments' => $this->admission->installments,
+            'installments' => optional($this->admission)->installments,
         ];
     }
 
@@ -130,6 +131,11 @@ class ReceiptListScreen extends Screen
         $data = [];
         if ($receipt->for === Receipt::SCHOOL_FEES) {
             $data['admission_id'] = $receipt->admission_id;
+
+            (new InstallmentService)->restore(
+                $receipt->amount,
+                $receipt->admission_id
+            );
         }
 
         $receipt->delete();
