@@ -37,11 +37,11 @@
         <div class="col-md-6">
             <table class="w-100 table table-bordered">
                 <tr>
-                    <th>Name</th>
+                    <th>Student Name</th>
                     <td>{{ $admission->student->name }}</td>
                 </tr>
                 <tr>
-                    <th>S/O</th>
+                    <th>Parent Name</th>
                     <td>{{ $admission->student->{$parent . '_name'} }}</td>
                 </tr>
                 <tr>
@@ -49,7 +49,7 @@
                     <td>{{ $admission->student->address }}</td>
                 </tr>
                 <tr>
-                    <th>Programme</th>
+                    <th>Admitted to</th>
                     <td>{{ $admission->program }}</td>
                 </tr>
             </table>

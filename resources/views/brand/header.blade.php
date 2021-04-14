@@ -1,3 +1,22 @@
+@guest
+    @push('head')
+        <style>
+            body {
+                background-image: url('/images/login-bg.jpg');
+                background-size: cover;
+            }
+
+            .footer {
+                color: white;
+            }
+
+            .footer a {
+                color: #11aaff;
+            }
+
+        </style>
+    @endpush
+@endguest
 <p class="h3 n-m font-thin v-center text-center">
     @empty(session('school')->logo)
         <x-orchid-icon path="book-open" />

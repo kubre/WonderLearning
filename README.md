@@ -209,10 +209,11 @@ Have ability to export these reports as excel or pdf
 -   (DONE) Copyright Wonder Learning India Pvt. Ltd.
 -   (DONE) Remove dummy client logos
 -   (DONE) Remove call today from bottom of home page
--   Image for login background
+-   (14/apr 10:03pm) Image for login background
 -   (13/apr 9:07am) Change Cancel option in receipt from cancel to Delete
 -   (13/apr 9:07am) Daily Collection Change column title Bank - Cheque
 -   (14/apr 7:25pm) Designed by instead of made by
 -   Admission cum/Declaration form with Photo
--   'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
--   'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.
+-   (14/apr 10:18pm) 'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
+-   (14/apr 10:18pm) 'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.
+-   (14/apr 10:18pm) Nav Bg changed

@@ -66,3 +66,25 @@
   border: 1px solid #333 !important;
   color: #333;
 }
+
+.row > .aside {
+  background: #111428;
+  background: -webkit-linear-gradient(to bottom, #004e92, #004e92, #1c2453) !important;
+  background: linear-gradient(to bottom, #004e92,#004e92, #1c2453) !important; 
+}
+
+.row .aside nav a {
+  color: white;
+}
+
+.row .aside nav .dropdown-menu a {
+  color: #111;
+}
+
+.row .aside nav .active a, .row .aside nav a.active, .row .aside nav li a:hover, .row .aside nav .sub-menu a:hover {
+  background-color: #111428 !important;
+}
+
+.row .aside nav .text-muted {
+  color: #dfdfdf !important;
+}
