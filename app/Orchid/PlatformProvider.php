@@ -81,18 +81,22 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Payment Due Report')
                 ->place('accounts')
                 ->icon('docs')
+                ->permission('receipt.table')
                 ->route('account.payment-due.report'),
             ItemMenu::label('Canceled Receipt Logs')
                 ->place('accounts')
                 ->icon('trash')
+                ->permission('receipt.table')
                 ->route('account.canceled-log.report'),
             ItemMenu::label('Online Payments Report')
                 ->place('accounts')
                 ->icon('rupee')
+                ->permission('receipt.table')
                 ->route('account.online-payments.report'),
             ItemMenu::label('Daily Collection Report')
                 ->place('accounts')
                 ->icon('calendar')
+                ->permission('receipt.table')
                 ->route('account.daily-collection.report'),
 
             ItemMenu::label('Reports')
@@ -104,10 +108,12 @@ class PlatformProvider extends OrchidServiceProvider
             ItemMenu::label('Admissions Report')
                 ->place('reports')
                 ->icon('user')
+                ->permission('admission.table')
                 ->route('reports.admissions.report'),
             ItemMenu::label('Enquiry Report')
                 ->place('reports')
                 ->icon('info')
+                ->permission('admission.table')
                 ->route('reports.enquiries.report'),
 
             ItemMenu::label('Sign Out')
