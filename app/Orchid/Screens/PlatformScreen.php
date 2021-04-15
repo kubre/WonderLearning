@@ -4,20 +4,29 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens;
 
+use App\CacheKey;
+use App\Models\Admission;
 use App\Models\Approval;
+use App\Models\Enquiry;
 use App\Models\Fees;
+use App\Models\Installment;
 use App\Models\Receipt;
 use App\Models\School;
 use App\Models\User;
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
+use App\Orchid\Layouts\Examples\MetricsExample;
+use App\Orchid\Layouts\School\FeesRateMetric;
+use App\Orchid\Layouts\School\SchoolMetrics;
 use App\Services\InstallmentService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use ReflectionClass;
 use Session;
 
 class PlatformScreen extends Screen
@@ -40,6 +49,11 @@ class PlatformScreen extends Screen
 
     public ?User $user = null;
 
+    public int $day = 86400;
+
+    public bool $is_admin = false;
+
+
     /**
      * Query data.
      *
@@ -48,17 +62,30 @@ class PlatformScreen extends Screen
     public function query(): array
     {
         $this->user = auth()->user();
+        $this->is_admin = $this->user->hasAccess('admin.user');
         if (!Session::exists('school')) {
             session(['school' => optional($this->user)->school ?? new School]);
         }
 
-        $approvals = Approval::with('approval.admission.student')->get();
-        $this->hasApprovals = $approvals->isNotEmpty();
+        $data = [];
 
-        return [
-            'fees' => Fees::first(),
-            'approvals' => $approvals,
-        ];
+        if (!$this->is_admin) {
+            $approvals = Cache::remember(
+                CacheKey::for(CacheKey::APPROVALS),
+                $this->day,
+                fn () => Approval::with('approval.admission.student')->get()
+            );
+
+            $this->hasApprovals = $approvals->isNotEmpty();
+
+            $data = [
+                'approvals' => $approvals,
+                'fees_metric' => $this->feesMetrics(),
+                'school_metrics' => $this->schoolMetrics(),
+            ];
+        }
+
+        return $data;
     }
 
     /**
@@ -69,6 +96,10 @@ class PlatformScreen extends Screen
     public function commandBar(): array
     {
         return [
+            Button::make('Refresh Statistics')
+                ->icon('refresh')
+                ->canSee(!$this->is_admin)
+                ->method('refreshStats'),
             ModalToggle::make('Change Academic Year (' . get_academic_year_formatted(working_year()) . ')')
                 ->modalTitle('Change Academic Year')
                 ->icon('calendar')
@@ -102,6 +133,13 @@ class PlatformScreen extends Screen
 
         $views = [];
 
+        if (!$this->is_admin) {
+            $views = [
+                SchoolMetrics::class,
+                FeesRateMetric::class,
+            ];
+        }
+
         if ($this->user->hasAccess('receipt.delete') && $this->hasApprovals) {
             $views[] = ApprovalListLayout::class;
         }
@@ -109,7 +147,7 @@ class PlatformScreen extends Screen
         return [
             ...$views,
             // Layout::view('dashboard.approval'),
-            Layout::view('dashboard.fees'),
+            // Layout::view('dashboard.fees'),
             Layout::modal('changeWorkingYear', [
                 Layout::rows([
                     Select::make('workingYear')
@@ -118,7 +156,7 @@ class PlatformScreen extends Screen
                 ]),
             ])
                 ->applyButton('Next')
-                ->closeButton('Cancel')
+                ->closeButton('Cancel'),
             // Layout::view('platform::partials.welcome'),
         ];
     }
@@ -127,7 +165,83 @@ class PlatformScreen extends Screen
     {
         $d = Carbon::parse(request('workingYear'));
         working_year($d);
+        $this->refreshStats();
         Toast::success("Changed academic year to {$d->format('M Y')} successfully!");
+    }
+
+    public function feesMetrics()
+    {
+        $fees = Cache::remember(
+            CacheKey::for(CacheKey::FEES),
+            $this->day,
+            fn () => Fees::first([
+                'playgroup_total', 'nursery_total',
+                'junior_kg_total', 'senior_kg_total',
+            ])
+        );
+
+        return [
+            ['keyValue' => '₹ ' . optional($fees)->playgroup_total,],
+            ['keyValue' => '₹ ' . optional($fees)->nursery_total,],
+            ['keyValue' => '₹ ' . optional($fees)->junior_kg_total,],
+            ['keyValue' => '₹ ' . optional($fees)->senior_kg_total,],
+        ];
+    }
+
+    public function schoolMetrics()
+    {
+        $payment_due = Cache::remember(
+            CacheKey::for(CacheKey::PAYMENT_DUE),
+            $this->day,
+            fn () => Installment::where('month', today()->month)->sum('due_amount')
+        );
+
+        $receivable = Cache::remember(
+            CacheKey::for(CacheKey::RECEIVABLE),
+            $this->day,
+            fn () => Installment::sum('due_amount')
+        );
+
+        $deposited = Cache::remember(
+            CacheKey::for(CacheKey::DEPOSITED),
+            $this->day,
+            fn () => Receipt::sum('amount')
+        );
+
+        $admission_count  = Cache::remember(
+            CacheKey::for(CacheKey::ADMISSION),
+            $this->day,
+            fn () => Admission::count('id')
+        );
+
+        $enquiry_count  = Cache::remember(
+            CacheKey::for(CacheKey::ENQUIRY),
+            $this->day,
+            fn () => Enquiry::count('id')
+        );
+
+        $conversion_count  = Cache::remember(
+            CacheKey::for(CacheKey::CONVERSION),
+            $this->day,
+            fn () => Enquiry::count('student_id')
+        );
+
+        return [
+            ['keyValue' => '₹ ' . number_format($payment_due, 0)],
+            ['keyValue' => '₹ ' . number_format($receivable, 0)],
+            ['keyValue' => '₹ ' . number_format($deposited, 0)],
+            ['keyValue' => number_format($enquiry_count, 0)],
+            ['keyValue' => number_format($conversion_count, 0)],
+            ['keyValue' => number_format($admission_count, 0)],
+        ];
+    }
+
+    public function refreshStats()
+    {
+        Cache::deleteMultiple(array_map(
+            fn ($x) => school()->code . '_' . $x,
+            array_values((new ReflectionClass(CacheKey::class))->getConstants())
+        ));
     }
 
     public function approveDeleteReceipt(Approval $approval)

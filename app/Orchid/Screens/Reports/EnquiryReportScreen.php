@@ -32,7 +32,7 @@ class EnquiryReportScreen extends Screen
      */
     public function query(): array
     {
-        $enquiries_db = DB::select('select program, count(*) as total, count(*) - count(student_id) as not_converted, count(student_id) as converted from enquiries group by program;');
+        $enquiries_db = Enquiry::selectRaw('program, count(*) as total, count(*) - count(student_id) as not_converted, count(student_id) as converted')->groupBy('program')->get();
 
         $enquiries = [
             'Playgroup' => [],

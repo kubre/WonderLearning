@@ -7,6 +7,7 @@ use App\Orchid\Screens\Account\DailyCollectionReportScreen;
 use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\Account\OnlinePaymentsScreen;
 use App\Orchid\Screens\Account\PaymentDueReportScreen;
+use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\Reports\EnquiryReportScreen;
@@ -108,13 +109,13 @@ Route::screen('roles', RoleListScreen::class)
     });
 
 // Example...
-// Route::screen('example', ExampleScreen::class)
-//     ->name('platform.example')
-//     ->breadcrumbs(function (Trail $trail) {
-//         return $trail
-//             ->parent('platform.index')
-//             ->push(__('Example screen'));
-//     });
+Route::screen('example', ExampleScreen::class)
+    ->name('platform.example')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Example screen'));
+    });
 
 // Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
 // Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');

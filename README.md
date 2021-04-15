@@ -14,6 +14,7 @@
 ## Dashboard
 
 -   (9/apr 11:00am) Fees Rate Card
+-   (15/apr 5:08pm) Removed Fees Rate Card, Added FeesMetrics, SchoolMetrics
 
 ## Commits history
 
@@ -38,6 +39,7 @@
 -   (14/apr 8:40am) Removed fees installments from admission moved to separate model, screen to add installment added
 -   (14/apr 8:40am) Installment deduction while paying receipt, Installment tab in receipts
 -   (14/apr 7:25pm) Added receipt deletion approval, if user doesn't have receipt.delete permission then it will show request deletion button now.
+-   (15/apr 5:08pm) Added School And Fees Metrics, implemented caching, fixed enquiry report not having scopes, Admin and School Dashboard separation
 
 ## Changes to DONE
 
@@ -110,7 +112,7 @@
     -   (14/apr 8:40am) Installment option after the admission form
     -   (14/apr 12:48pm) See installments in student Receipts (Shool Fees)
     -   (14/apr 12:48pm) School Fees auto deduction in installment
-    -   Widget on dashboard for current months pending due.
+    -   (15/apr 5:08pm) Widget on dashboard for current months pending due.
 
 -   (14/apr 07:25pm) **Receipt canceled must be approved by owner (On Dashboard)**
 
@@ -121,7 +123,7 @@
         -   school_id
 
 -   (14/apr 09:05pm) **Deleted receipts should revert changes in installments**
-
+-   (15/apr 5:08pm) **Admin and School Dashboard separation**
 -   **Add new fields for admission and enquiry from rudresh sir**
 
 ## Reports -
