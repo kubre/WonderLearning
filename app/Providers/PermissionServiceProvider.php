@@ -41,6 +41,7 @@ class PermissionServiceProvider extends ServiceProvider
         $admin = ItemPermission::group('admin')
             ->addPermission('admin.school', 'Manage School')
             ->addPermission('admin.user', 'Manage Users')
+            ->addPermission('admin.export', 'Export Data')
             ->addPermission('admin.role', 'Manage Roles');
 
         $dashboard->registerPermissions($admin);

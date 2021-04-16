@@ -7,6 +7,7 @@ use App\Orchid\Screens\Account\DailyCollectionReportScreen;
 use App\Orchid\Screens\Account\FeesEditScreen;
 use App\Orchid\Screens\Account\OnlinePaymentsScreen;
 use App\Orchid\Screens\Account\PaymentDueReportScreen;
+use App\Orchid\Screens\Admin\ExportScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
@@ -110,13 +111,22 @@ Route::screen('roles', RoleListScreen::class)
     });
 
 // Example...
-Route::screen('example', ExampleScreen::class)
-    ->name('platform.example')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
+// Route::screen('example', ExampleScreen::class)
+//     ->name('platform.example')
+//     ->breadcrumbs(function (Trail $trail) {
+//         return $trail
+//             ->parent('platform.index')
+//             ->push(__('Example screen'));
+//     });
+
+// Admin 
+Route::screen('exports', ExportScreen::class)
+    ->name('admin.export')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
             ->parent('platform.index')
-            ->push(__('Example screen'));
-    });
+            ->push(__('Export Screen'), route('admin.export'))
+    );
 
 // Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
 // Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');

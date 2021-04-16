@@ -41,6 +41,12 @@
 -   (14/apr 7:25pm) Added receipt deletion approval, if user doesn't have receipt.delete permission then it will show request deletion button now.
 -   (15/apr 5:08pm) Added School And Fees Metrics, implemented caching, fixed enquiry report not having scopes, Admin and School Dashboard separation
 -   (16/apr 06:20pm) Added Graduation Screen and Logic, Installment and Admission bugs fixed, now admission cannot be added without adding fees first. Minor fixes in Dashboard.
+-   (17/apr 12:10am) Properly set up the Laravel Excel Package on local, Also exported users table as expected
+
+# Admin Dashboard
+
+-   **Exports**
+    -   (17/apr 12:10am) **User Exports**
 
 ## Changes to DONE
 
