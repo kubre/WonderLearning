@@ -17,6 +17,7 @@ use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
+use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
@@ -142,8 +143,12 @@ Route::screen('fees/{fees?}', FeesEditScreen::class)
 
 Route::screen('admission/{admission?}', AdmissionEditScreen::class)
     ->name('school.admission.edit');
+
 Route::screen('admissions', AdmissionListScreen::class)
     ->name('school.admission.list');
+
+Route::screen('graduation/{admission?}', GraduationScreen::class)
+    ->name('school.graduation.edit');
 
 Route::screen('receipt/{receipt?}', ReceiptEditScreen::class)
     ->name('school.receipt.edit');

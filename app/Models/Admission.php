@@ -7,6 +7,7 @@ use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Illuminate\Support\Str;
@@ -18,7 +19,12 @@ use Illuminate\Support\Str;
 /** @property Carbon $admission_at */
 class Admission extends Model
 {
-    use AsSource, Filterable, HasFactory;
+    use AsSource;
+    use Filterable;
+    use HasFactory;
+
+
+    protected ?int $c_invoice_fees = null;
 
     /** @var array */
     protected $fillable = [
@@ -88,7 +94,7 @@ class Admission extends Model
 
     public function getTotalFeesAttribute()
     {
-        return $this->school->fees->{$this->fees_total_column} - $this->discount;
+        return $this->invoice_fees - $this->discount;
     }
 
 
@@ -139,6 +145,18 @@ class Admission extends Model
     public function unpaid_installments(): HasMany
     {
         return $this->hasMany(Installment::class)->where('due_amount', '>', 0);
+    }
+
+    public function getInvoiceFeesAttribute()
+    {
+        if (is_null($this->c_invoice_fees)) {
+            $this->c_invoice_fees = optional($this->hasOne(Fees::class, 'school_id', 'school_id')
+                ->withoutGlobalScopes()
+                ->whereBetween('created_at', get_academic_year($this->created_at))
+                ->first())
+                ->{$this->fees_total_column};
+        }
+        return $this->c_invoice_fees;
     }
 
     public function school_fees_receipts(): HasMany

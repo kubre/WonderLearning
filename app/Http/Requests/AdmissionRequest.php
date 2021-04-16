@@ -52,6 +52,7 @@ class AdmissionRequest extends FormRequest
             "batch" => "required|in:Morning,Afternoon",
             "is_transportation_required" => "boolean",
             "siblings" => "nullable",
+            'is_graduation' => 'nullable',
         ];
     }
 }

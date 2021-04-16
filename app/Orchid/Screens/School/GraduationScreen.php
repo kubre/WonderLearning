@@ -4,11 +4,9 @@ namespace App\Orchid\Screens\School;
 
 use App\Http\Requests\AdmissionRequest;
 use App\Models\Admission;
-use App\Models\Enquiry;
 use App\Models\Fees;
-use App\Models\Student;
+use App\Models\Scopes\AcademicYearScope;
 use Illuminate\Support\Str;
-use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Cropper;
@@ -20,39 +18,56 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
-class AdmissionEditScreen extends Screen
+class GraduationScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Convert to Admission';
+    public $name = 'Graduate Student';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Fill the following form to convert/edit to an Admission.';
+    public $description = 'Graduate student to next programme or retain them to the same.';
 
-    /** @var array|string */
-    public $permission = 'admission.edit';
 
-    public bool $exists = false;
+    protected const GRADUATIONS_MAP = [
+        'Playgroup' => 'Nursery',
+        'Nursery' => 'Junior KG',
+        'Junior KG' => 'Senior KG',
+    ];
 
-    protected string $current_year;
+    protected const GRADUATIONS = [
+        'Playgroup' => [
+            'Nursery' => 'Nursery',
+            'Playgroup' => 'Playgroup',
+        ],
+        'Nursery' => [
+            'Junior KG' => 'Junior KG',
+            'Nursery' => 'Nursery',
+        ],
+        'Junior KG' => [
+            'Senior KG' => 'Senior KG',
+            'Junior KG' => 'Junior KG',
+        ],
+    ];
 
-    protected string $current_year_start;
+    protected const PROGRAMMES = [
+        'Playgroup' => 'Playgroup',
+        'Nursery' => 'Nursery',
+        'Junior KG' => 'Junior KG',
+        'Senior KG' => 'Senior KG',
+    ];
 
-    protected string $next_year;
+    public string $program;
 
-    protected string $next_year_start;
-
-    protected array $working_year;
-
-    protected bool $disable_save = false;
+    public bool $disable_graduate = false;
 
     /**
      * Query data.
@@ -61,49 +76,39 @@ class AdmissionEditScreen extends Screen
      */
     public function query(Admission $admission): array
     {
-        $this->exists = $admission->exists;
-        $data = [];
-        $enquirer = null;
+        $student = $admission->student->toArray();
+        $student['prn'] = $admission->student->prn;
 
-        if (!is_null(request('enquirerId'))) {
-            $enquiry = Enquiry::findOrFail(request('enquirerId'));
-            $enquirer = request('enquirer');
+        $academic_year = get_academic_year(today()->addYear());
+
+        $fees = Fees::withoutGlobalScope(AcademicYearScope::class)
+            ->whereBetween('created_at', $academic_year)
+            ->first();
+        $program_fees = optional($fees)->{$admission->fees_total_column};
+        $graduate_fees = optional($fees)->{Str::of(static::GRADUATIONS_MAP[$admission->program])
+            ->lower()->snake() . '_total'};
+
+        if (
+            is_null($program_fees)
+            || is_null($graduate_fees)
+            || $program_fees < 1
+            || $graduate_fees < 1
+        ) {
+            $this->disable_graduate = true;
+            Toast::error("Please add fees rate card for next year first!");
         }
 
-        if (!$this->exists) {
-            $fees = Fees::first();
-            $program_fees = optional($fees)->{Str::of($enquiry->program)->lower()->snake() . '_total'};
+        $admission = $admission->toArray();
 
-            if (is_null($program_fees) || $program_fees < 1) {
-                $this->disable_save = true;
-                Toast::error("Please add fees rate card for next year first!");
-            }
-            $data = $enquiry->toArray();
-            $data[$enquirer . '_name'] = $enquiry->enquirer_name;
-            $data[$enquirer . '_contact'] = $enquiry->enquirer_contact;
-            $data[$enquirer . '_email'] = $enquiry->enquirer_email;
-            $data['enquirer_id'] = $enquiry->id;
-            $data['admission_at'] = today()->format('Y-m-d');
-            $data['code'] = (Student::max('code') ?? 0) + 1;
-        } else {
-            $this->name = 'Update Admission Details';
-            $data = $admission->student->toArray();
-            $data['prn'] = $admission->student->prn;
-        }
+        $admission['discount'] = null;
+        $admission['is_transportation_required'] = null;
+        $this->program = $admission['program'];
+        $admission['program'] = static::GRADUATIONS_MAP[$this->program];
 
-        $this->working_year = working_year();
-        $this->current_year_start = (string) $this->working_year[0];
-        $this->current_year = get_academic_year_formatted($this->working_year);
-        if (today()->isBetween(...$this->working_year)) {
-            $academic_year = get_academic_year(today()->addYear());
-            $this->next_year_start = (string) $academic_year[0];
-            $this->next_year = get_academic_year_formatted($academic_year);
-        } else {
-            $this->next_year = $this->current_year;
-            $this->next_year_start = $this->current_year_start;
-        }
+        $admission['created_at'] = $academic_year[0];
+        $admission['created_at_dummy'] = get_academic_year_formatted($academic_year);
 
-        return array_merge($data, $admission->toArray());
+        return array_merge($student, $admission);
     }
 
     /**
@@ -114,25 +119,12 @@ class AdmissionEditScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make('Save Details')
-                ->icon('save')
-                ->disabled($this->disable_save)
-                ->type(Color::PRIMARY())
-                ->method('createOrUpdate')
-                ->canSee(!$this->exists && auth()->user()->hasAccess('admission.create')),
-
-            Button::make('Update Details')
+            Button::make('Graduate')
                 ->icon('note')
-                ->method('createOrUpdate')
-                ->type(Color::PRIMARY())
-                ->canSee($this->exists),
-
-            // Button::make('Remove')
-            //     ->icon('trash')
-            //     ->method('remove')
-            //     ->type(Color::DANGER())
-            //     ->canSee($this->exists),
-        ];
+                ->method('graduate')
+                ->disabled($this->disable_graduate)
+                ->type(Color::PRIMARY()),
+        ];;
     }
 
     /**
@@ -144,12 +136,11 @@ class AdmissionEditScreen extends Screen
     {
         return [
             Layout::rows([
-                Input::make('enquirer_id')
-                    ->hidden(),
                 Input::make('prn')
                     ->title('PRN')
-                    ->canSee($this->exists)
                     ->readonly(),
+                Input::make('created_at')
+                    ->hidden(),
                 Input::make('code')
                     ->hidden(),
                 Group::make([
@@ -159,19 +150,17 @@ class AdmissionEditScreen extends Screen
                         ->targetRelativeUrl()
                         ->height(450)
                         ->width(350),
-                    Select::make('created_at')
-                        ->title('Admission Academic Year')
-                        ->options([
-                            $this->current_year_start => $this->current_year,
-                            $this->next_year_start => $this->next_year,
-                        ]),
+                    Input::make('created_at_dummy')
+                        ->readonly()
+                        ->title('Admission Academic Year'),
                     DateTimer::make('admission_at')
                         ->format('Y-m-d')
                         ->enableTime(false)
-                        ->title('Admission Date')
+                        ->title('Admission Date'),
                 ]),
                 Group::make([
                     Input::make('name')
+                        ->readonly()
                         ->title('Name'),
                     Select::make('gender')
                         ->options([
@@ -182,25 +171,24 @@ class AdmissionEditScreen extends Screen
                         ])
                         ->title('Gender'),
                     DateTimer::make('dob_at')
+                        ->readonly()
                         ->format('Y-m-d')
                         ->noCalendar()
                         ->enableTime(false)
                         ->title('Date of Birth')
                 ]),
+
                 Group::make([
                     Input::make('nationality')
                         ->title('Nationality'),
+
                     Select::make('program')
-                        ->options([
-                            'Playgroup' => 'Playgroup',
-                            'Nursery' => 'Nursery',
-                            'Junior KG' => 'Junior KG',
-                            'Senior KG' => 'Senior KG',
-                        ])
-                        ->required()
+                        ->options(static::GRADUATIONS[$this->program])
                         ->title('Program'),
                 ]),
+
             ])->title('Basic Details'),
+
             Layout::columns([
                 Layout::rows([
                     Input::make('father_name')
@@ -270,40 +258,24 @@ class AdmissionEditScreen extends Screen
                     ->fields(['sibling_dob' => DateTimer::make('')->format('d-m-Y')])
                     ->maxRows(5)
             ])->title('Other Details'),
-        ];
+        ];;
     }
 
-    public function createOrUpdate(Admission $admission, AdmissionRequest $request)
+
+    public function graduate(Admission $admission, AdmissionRequest $request)
     {
-        $student = new Student;
-        $new_admission = !$admission->exists;
+        $student = $admission->student;
 
-        if ($admission->exists) {
-            $student = $admission->student;
-        }
+        $student->fill($request->except('created_at'))->save();
 
-        $form = $request->all();
-        $form['school_id'] = auth()->user()->school_id;
+        $admission_attr = $request->all();
+        $admission_attr['school_id'] = $student->school_id;
+        $admission = $student->admission()->create($admission_attr);
 
-        $student->fill($form)->save();
+        Toast::info('Student graduated to next programme successfully!');
 
-        $form['student_id'] = $student->id;
-        $admission->fill($form)->save();
-
-        if (!is_null($request->input('enquirer_id'))) {
-            Enquiry::find($request->input('enquirer_id'))
-                ->fill([
-                    'student_id' => $student->id,
-                ])->save();
-        }
-
-        Toast::info('Admission of student was done successfully!');
-
-        if ($new_admission) {
-            return redirect()->route('school.installment.edit', [
-                'admission' => $admission->id,
-            ]);
-        }
-        return redirect()->route('school.admission.list');
+        return redirect()->route('school.installment.edit', [
+            'admission' => $admission->id,
+        ]);
     }
 }

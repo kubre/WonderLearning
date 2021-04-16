@@ -96,7 +96,7 @@ class PlatformScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Button::make('Refresh Statistics')
+            Button::make('Refresh Overview')
                 ->icon('refresh')
                 ->canSee(!$this->is_admin)
                 ->method('refreshStats'),
@@ -205,7 +205,7 @@ class PlatformScreen extends Screen
         $deposited = Cache::remember(
             CacheKey::for(CacheKey::DEPOSITED),
             $this->day,
-            fn () => Receipt::sum('amount')
+            fn () => Receipt::where('for', Receipt::SCHOOL_FEES)->sum('amount')
         );
 
         $admission_count  = Cache::remember(
@@ -226,13 +226,14 @@ class PlatformScreen extends Screen
             fn () => Enquiry::count('student_id')
         );
 
+
         return [
-            ['keyValue' => '₹ ' . number_format($payment_due, 0)],
-            ['keyValue' => '₹ ' . number_format($receivable, 0)],
-            ['keyValue' => '₹ ' . number_format($deposited, 0)],
-            ['keyValue' => number_format($enquiry_count, 0)],
-            ['keyValue' => number_format($conversion_count, 0)],
-            ['keyValue' => number_format($admission_count, 0)],
+            ['keyValue' => '₹ ' . number_format((float) $payment_due, 0)],
+            ['keyValue' => '₹ ' . number_format((float) $receivable, 0)],
+            ['keyValue' => '₹ ' . number_format((float) $deposited, 0)],
+            ['keyValue' => number_format((float) $enquiry_count, 0)],
+            ['keyValue' => number_format((float) $conversion_count, 0)],
+            ['keyValue' => number_format((float) $admission_count, 0)],
         ];
     }
 

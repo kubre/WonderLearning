@@ -3,7 +3,6 @@
 namespace App\Orchid\Screens\Student;
 
 use App\Models\Admission;
-use App\Models\Fees;
 use App\Models\Installment;
 use App\Orchid\Layouts\InstallmentListener;
 use Illuminate\Http\Request;
@@ -37,11 +36,10 @@ class InstallmentEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Admission $admission): array
+    public function query(int $admission): array
     {
-        return [
-            'admission' => $admission,
-        ];
+        $admission = Admission::withoutGlobalScopes()->findOrFail($admission);
+        return compact('admission');
     }
 
     /**
@@ -83,12 +81,15 @@ class InstallmentEditScreen extends Screen
         ];
     }
 
-    public function createOrUpdate(Admission $admission, Request $request)
+    public function createOrUpdate(int $admission, Request $request)
     {
         $months = $request->input('month');
         $amounts = $request->input('amount');
         $total_amount = array_sum($amounts);
+
+        $admission = Admission::withoutGlobalScopes()->findOrFail($admission);
         $expected_fees = $admission->total_fees;
+
 
         if ($total_amount !== $expected_fees) {
             return back()->withErrors([
@@ -96,20 +97,20 @@ class InstallmentEditScreen extends Screen
             ]);
         }
 
-        $created_at = working_year()[0];
-
+        $now = now()->toDateTimeString();
         $data = array_map(fn ($month, $amount) => [
             'month' => $month,
             'amount' => $amount,
             'due_amount' => $amount,
             'admission_id' => $admission->id,
             'school_id' => $admission->school_id,
-            'created_at' => $created_at,
+            'created_at' => $admission->created_at,
+            'updated_at' => $now,
         ], $months, $amounts);
 
         Installment::insert($data);
 
-        Toast::info('Installments assigned to the student!');
+        Toast::info('Installments has been assigned to the student!');
         return redirect()->route('school.admission.list');
     }
 

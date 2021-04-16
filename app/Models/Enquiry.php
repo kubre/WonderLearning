@@ -7,6 +7,7 @@ use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -40,6 +41,16 @@ class Enquiry extends Model
     {
         static::addGlobalScope(new AcademicYearScope);
         static::addGlobalScope(new SchoolScope);
+    }
+
+    public function getFeesColumnAttribute(): string
+    {
+        return Str::of($this->program)->lower()->snake();
+    }
+
+    public function getFeesTotalColumnAttribute(): string
+    {
+        return $this->fees_column . '_total';
     }
 
     /**

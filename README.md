@@ -1,4 +1,4 @@
-# Tasks (06-04-2021, Due date (10-04-2021)
+# Development Log Kept from 06-04-2021
 
 ## Notes
 
@@ -6,7 +6,7 @@
 1) Add fields modified in migrations to the Models $fillable
  - School Done
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
-3) Implement graduation logic
+3) (DONE) Implement graduation logic
 3) (Fixed) Fees receipt generation failing
 4) (Fixed) Generic Receipt were not able to generate once school fees was nil
 ```
@@ -40,6 +40,7 @@
 -   (14/apr 8:40am) Installment deduction while paying receipt, Installment tab in receipts
 -   (14/apr 7:25pm) Added receipt deletion approval, if user doesn't have receipt.delete permission then it will show request deletion button now.
 -   (15/apr 5:08pm) Added School And Fees Metrics, implemented caching, fixed enquiry report not having scopes, Admin and School Dashboard separation
+-   (16/apr 06:20pm) Added Graduation Screen and Logic, Installment and Admission bugs fixed, now admission cannot be added without adding fees first. Minor fixes in Dashboard.
 
 ## Changes to DONE
 
@@ -123,7 +124,18 @@
         -   school_id
 
 -   (14/apr 09:05pm) **Deleted receipts should revert changes in installments**
+
 -   (15/apr 5:08pm) **Admin and School Dashboard separation**
+
+-   (16/apr 06:20pm) **Graduation logic**
+
+    -   Button for graduate in admission actions
+    -   Readonly: Name, DOB, Academic Year, Program
+    -   If retained keep the programme same
+    -   If not retained then set programme to next
+    -   Make sure to create new admission with old student attached
+    -   Make sure to redirect to installments
+
 -   **Add new fields for admission and enquiry from rudresh sir**
 
 ## Reports -

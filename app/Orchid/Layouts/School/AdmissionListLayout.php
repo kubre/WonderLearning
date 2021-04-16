@@ -65,10 +65,16 @@ class AdmissionListLayout extends Table
                         ->list([
                             Link::make('Edit')
                                 ->icon('note')
-                                ->route('school.admission.edit', $a),
+                                ->route('school.admission.edit', $a->id),
                             Link::make('Receipt')
                                 ->icon('money')
                                 ->route('school.receipt.list', ['admission_id' => $a->id]),
+                            Link::make('Graduate To')
+                                ->icon('action-redo')
+                                ->canSee($a->program !== 'Senior KG')
+                                ->route('school.graduation.edit', [
+                                    'admission' => $a->id,
+                                ]),
                             ModalToggle::make('Invoice')
                                 ->icon('doc')
                                 ->modal('chooseInvoiceReceiversName')
