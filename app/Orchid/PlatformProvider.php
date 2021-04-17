@@ -120,6 +120,12 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('admission.table')
                 ->route('reports.enquiries.report'),
 
+            ItemMenu::label('Users')
+                ->icon('people')
+                ->permission('school.users')
+                ->route('school.users'),
+
+
             ItemMenu::label('Sign Out')
                 ->icon('logout')
                 ->route('auth.signout', [optional(session('school'))->login_url ?? 'admin']),

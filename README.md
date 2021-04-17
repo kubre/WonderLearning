@@ -43,6 +43,7 @@
 -   (16/apr 06:20pm) Added Graduation Screen and Logic, Installment and Admission bugs fixed, now admission cannot be added without adding fees first. Minor fixes in Dashboard.
 -   (17/apr 12:10am) Properly set up the Laravel Excel Package on local, Also exported users table as expected
 -   (17/apr 12:50pm) Demoed excel exports on server and added remaining xlsx exports for admin specified in Exports task
+-   (17/apr 4:30pm) Added User Management for Schools
 
 # Admin Dashboard
 
@@ -101,7 +102,7 @@
 
     -   Add Soft Deletes
 
--   **User Management for Schools**
+-   (17/apr 4:30pm) **User Management for Schools**
 
 -   **(Task) Make layout more colorful**
 

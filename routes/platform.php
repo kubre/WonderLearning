@@ -22,6 +22,8 @@ use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
+use App\Orchid\Screens\School\UserEditScreen as SchoolUserEditScreen;
+use App\Orchid\Screens\School\UserListScreen as SchoolUserListScreen;
 use App\Orchid\Screens\Student\EnquiryEditScreen;
 use App\Orchid\Screens\Student\EnquiryListScreen;
 use App\Orchid\Screens\Student\InstallmentEditScreen;
@@ -57,7 +59,7 @@ Route::screen('profile', UserProfileScreen::class)
     });
 
 // Platform > System > Users
-Route::screen('users/{users}/edit', UserEditScreen::class)
+Route::screen('/users/{users}/edit', UserEditScreen::class)
     ->name('platform.systems.users.edit')
     ->breadcrumbs(function (Trail $trail, $user) {
         return $trail
@@ -66,7 +68,7 @@ Route::screen('users/{users}/edit', UserEditScreen::class)
     });
 
 // Platform > System > Users > Create
-Route::screen('users/create', UserEditScreen::class)
+Route::screen('/users/create', UserEditScreen::class)
     ->name('platform.systems.users.create')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
@@ -75,7 +77,7 @@ Route::screen('users/create', UserEditScreen::class)
     });
 
 // Platform > System > Users > User
-Route::screen('users', UserListScreen::class)
+Route::screen('/users', UserListScreen::class)
     ->name('platform.systems.users')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
@@ -137,6 +139,33 @@ Route::screen('exports', ExportScreen::class)
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
+
+// School > Users
+Route::screen('school/users/{users}/edit', SchoolUserEditScreen::class)
+    ->name('school.users.edit')
+    ->breadcrumbs(function (Trail $trail, $user) {
+        return $trail
+            ->parent('school.users')
+            ->push(__('Edit'), route('school.users.edit', $user));
+    });
+
+// School > Users > Create
+Route::screen('school/users/create', SchoolUserEditScreen::class)
+    ->name('school.users.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('school.users')
+            ->push(__('Create'), route('school.users.create'));
+    });
+
+// School > Users
+Route::screen('school/users', SchoolUserListScreen::class)
+    ->name('school.users')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Users'), route('school.users'));
+    });
 
 Route::screen('school/{school?}', SchoolEditScreen::class)
     ->name('admin.school.edit');
