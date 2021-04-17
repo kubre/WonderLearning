@@ -7,16 +7,11 @@ use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Illuminate\Support\Str;
 
-/** @property School $school */
-/** @property Student $student */
-/** @property Carbon $created_at */
-/** @property Carbon $updated_at */
-/** @property Carbon $admission_at */
+
 class Admission extends Model
 {
     use AsSource;
@@ -42,7 +37,7 @@ class Admission extends Model
     protected $casts = [
         'is_transportation_required' => 'boolean',
         'discount' => 'integer',
-        'admission_at' => 'date:Y-m-d',
+        'admission_at' => 'datetime',
     ];
 
     protected $allowedFilters = [

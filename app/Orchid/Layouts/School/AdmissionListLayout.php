@@ -38,6 +38,7 @@ class AdmissionListLayout extends Table
             TD::make('prn', 'PRN')
                 ->render(fn (Admission $a) => $a->student->prn),
             TD::make('admission_at', 'Admission Date')
+                ->render(fn (Admission $a) => $a->admission_at->format('d-M-Y'))
                 ->sort()
                 ->filter(TD::FILTER_DATE),
             TD::make('student_name', 'Name')

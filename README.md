@@ -42,11 +42,17 @@
 -   (15/apr 5:08pm) Added School And Fees Metrics, implemented caching, fixed enquiry report not having scopes, Admin and School Dashboard separation
 -   (16/apr 06:20pm) Added Graduation Screen and Logic, Installment and Admission bugs fixed, now admission cannot be added without adding fees first. Minor fixes in Dashboard.
 -   (17/apr 12:10am) Properly set up the Laravel Excel Package on local, Also exported users table as expected
+-   (17/apr 12:50pm) Demoed excel exports on server and added remaining xlsx exports for admin specified in Exports task
 
 # Admin Dashboard
 
--   **Exports**
-    -   (17/apr 12:10am) **User Exports**
+-   (17/apr 12:50pm) **Exports**
+    -   (17/apr 12:10am) **User**
+    -   (17/apr 12:50pm) **School**
+    -   (17/apr 12:50pm) **Enquiry**
+    -   (17/apr 12:50pm) **Admission Export**
+    -   (17/apr 12:50pm) **Fees**
+    -   (17/apr 12:50pm) **Receipts**
 
 ## Changes to DONE
 

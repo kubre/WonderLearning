@@ -2,6 +2,10 @@
 
 namespace App\Orchid\Screens\Admin;
 
+use App\Exports\AdmissionExport;
+use App\Exports\EnquiryExport;
+use App\Exports\FeesExport;
+use App\Exports\ReceiptExport;
 use App\Exports\SchoolExport;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -11,6 +15,7 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
+use Orchid\Screen\Fields\Label;
 use Orchid\Support\Color;
 
 class ExportScreen extends Screen
@@ -32,6 +37,10 @@ class ExportScreen extends Screen
     public const EXPORT_INDEX = [
         'users' => UsersExport::class,
         'schools' => SchoolExport::class,
+        'enquiries' => EnquiryExport::class,
+        'admissions' => AdmissionExport::class,
+        'fees' => FeesExport::class,
+        'receipts' => ReceiptExport::class,
     ];
 
     /**
@@ -54,7 +63,7 @@ class ExportScreen extends Screen
         return [
             Button::make('Download')
                 ->method('exportXlsx')
-                ->icon('arrow-down')
+                ->icon('cloud-download')
                 ->type(Color::SUCCESS())
                 ->rawClick(),
         ];
@@ -74,13 +83,19 @@ class ExportScreen extends Screen
                     ->options([
                         'users' => 'Users',
                         'schools' => 'Schools',
+                        'enquiries' => 'Enquiries',
+                        'admissions' => 'Admissions',
+                        'fees' => 'School Fees',
+                        'receipts' => 'Receipts',
                     ]),
                 DateTimer::make('from_date')
                     ->format('Y-m-d')
+                    ->help('Optional: If not provided Data from Beginning will be downloaded')
                     ->title('From Date'),
                 DateTimer::make('to_date')
                     ->format('Y-m-d')
-                    ->title('To Date'),
+                    ->help('Optional: If not provided Data till today will be downloaded')
+                    ->title('Up To Date'),
             ])
         ];
     }

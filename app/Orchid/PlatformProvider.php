@@ -40,15 +40,14 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('speedometer')
                 ->url('/admin')
                 ->title('Menu'),
+            ItemMenu::label('Schools')
+                ->icon('building')
+                ->permission('admin.school')
+                ->route('admin.school.list'),
             ItemMenu::label('Export Data')
                 ->icon('table')
                 ->permission('admin.export')
                 ->route('admin.export'),
-
-            ItemMenu::label('Export')
-                ->icon('building')
-                ->permission('admin.school')
-                ->route('admin.school.list'),
 
             ItemMenu::label('Admissions')
                 ->slug('admissions')

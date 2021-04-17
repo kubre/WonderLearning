@@ -3,11 +3,12 @@
 namespace App\Exports;
 
 
-class FromToExportable
+abstract class FromToExportable
 {
     public ?string $from_date;
     public ?string $to_date;
     public string $table;
+    public string $column = 'created_at';
 
     public function __construct(string $table, ?string $from_date, ?string $to_date)
     {
@@ -19,11 +20,11 @@ class FromToExportable
     public function applyFromToOn($model)
     {
         if (!is_null($this->from_date)) {
-            $model->where($this->table . '.created_at', '>=', $this->from_date);
+            $model->where($this->table . '.' . $this->column, '>=', $this->from_date);
         }
 
         if (!is_null($this->to_date)) {
-            $model->where($this->table . '.created_at', '<=', $this->to_date);
+            $model->where($this->table . '.' . $this->column, '<=', $this->to_date);
         }
 
         return $model;

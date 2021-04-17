@@ -73,7 +73,8 @@ class Receipt extends Model
 
     public function admission(): BelongsTo
     {
-        return $this->belongsTo(Admission::class);
+        return $this->belongsTo(Admission::class)
+            ->withoutGlobalScopes();
     }
 
     public function school(): BelongsTo

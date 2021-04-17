@@ -4,11 +4,24 @@ namespace App\Exports;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\{
+    FromQuery,
+    ShouldAutoSize,
+    WithColumnFormatting,
+    WithHeadings,
+    WithMapping,
+};
+use PhpOffice\PhpSpreadsheet\{
+    Shared\Date,
+    Style\NumberFormat,
+};
 
-class UsersExport extends FromToExportable implements FromQuery, WithHeadings, ShouldAutoSize
+class UsersExport extends FromToExportable implements
+    FromQuery,
+    WithHeadings,
+    ShouldAutoSize,
+    WithMapping,
+    WithColumnFormatting
 {
 
     public function __construct(?string $from_date, ?string $to_date)
@@ -20,23 +33,44 @@ class UsersExport extends FromToExportable implements FromQuery, WithHeadings, S
     {
         return $this->applyFromToOn(
             User::query()
-                ->leftJoin('schools', 'schools.id', '=', 'users.school_id')
-                ->select([
-                    'users.id', 'users.name', 'users.email',
-                    'schools.name as school_name', 'users.created_at', 'users.updated_at',
-                ])
+                ->with('roles', 'school')
         );
+    }
+
+    /** @param User $user */
+    public function map($user): array
+    {
+        return [
+            $user->id,
+            optional($user->school)->name,
+            optional($user->school)->code,
+            $user->name,
+            $user->email,
+            $user->roles->pluck('name')->join(', '),
+            Date::dateTimeToExcel($user->created_at),
+            Date::dateTimeToExcel($user->updated_at),
+        ];
     }
 
     public function headings(): array
     {
         return [
             'Unique ID',
+            'School Name',
+            'School Code',
             'Name',
             'Email',
-            'School',
-            'Created',
+            'Roles',
+            'Creation Date',
             'Last Updated',
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'F' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+            'G' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 }

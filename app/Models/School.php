@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Filters\Filterable;
@@ -18,6 +17,10 @@ class School extends Model
     /** @var array */
     protected $fillable = [
         'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'suspended_at',
+    ];
+
+    protected $casts = [
+        'suspended_at' => 'datetime',
     ];
 
 
