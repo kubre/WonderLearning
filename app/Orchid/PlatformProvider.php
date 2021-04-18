@@ -125,6 +125,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('school.users')
                 ->route('school.users'),
 
+            ItemMenu::label('Kit Stock')
+                ->icon('module')
+                ->permission('school.users')
+                ->route('school.kit.stock'),
+
 
             ItemMenu::label('Sign Out')
                 ->icon('logout')

@@ -105,4 +105,9 @@ class School extends Model
     {
         return $this->hasOne(Fees::class);
     }
+
+    public function kitStock(): HasOne
+    {
+        return $this->hasOne(KitStock::class);
+    }
 }

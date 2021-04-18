@@ -106,11 +106,18 @@
 
 -   **(Task) Make layout more colorful**
 
--   ?(Need thinking and work) **Inventory & Stocks**: Add ability to manage inventory and stocks
+-   **Kit Stock Management**
 
-    -   Item Name
-    -   Price
-    -   Available Units
+    -   (18/apr 3:43pm) Model
+        -   playgroup_total
+        -   playgroup_current
+        -   nursery_total
+        -   nursery_current
+        -   junior_kg_total
+        -   junior_kg_current
+        -   senior_kg_total
+        -   senior_kg_current
+    -   (18/apr 3:43pm) Ability to assign kit to the student
 
 -   (12/apr 04:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
 -   (13/apr 11:17am) **(Feature) Multiple Center Head**
@@ -227,8 +234,6 @@ Have ability to export these reports as excel or pdf
     -   Converted
     -   Not Converted
     -   Total
-
--   ?(Need more thinking) **Inventory & Stocks Report**
 
 ## Small Changes
 

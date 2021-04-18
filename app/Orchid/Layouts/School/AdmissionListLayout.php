@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\School;
 use App\Models\Admission;
 use App\Models\Fees;
 use App\Models\User;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
@@ -76,6 +77,11 @@ class AdmissionListLayout extends Table
                                 ->route('school.graduation.edit', [
                                     'admission' => $a->id,
                                 ]),
+                            Button::make('Assign Kit')
+                                ->icon('book-open')
+                                ->method('assignKit')
+                                ->parameters(['admission' => $a->id])
+                                ->canSee(!$a->assigned_kit),
                             ModalToggle::make('Invoice')
                                 ->icon('doc')
                                 ->modal('chooseInvoiceReceiversName')

@@ -19,6 +19,7 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
 use App\Orchid\Screens\School\GraduationScreen;
+use App\Orchid\Screens\School\KitStockScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
@@ -165,6 +166,14 @@ Route::screen('school/users', SchoolUserListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Users'), route('school.users'));
+    });
+
+Route::screen('kit', KitStockScreen::class)
+    ->name('school.kit.stock')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Kit Stock'), route('school.kit.stock'));
     });
 
 Route::screen('school/{school?}', SchoolEditScreen::class)
