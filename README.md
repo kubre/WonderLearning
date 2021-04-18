@@ -47,6 +47,7 @@
 
 -   (18/apr 3:43pm) Kit Stock Management, Ability to assign kit to the student
 -   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
+-   (18/apr 8:22pm) Added Kit Stock Reports for admin
 
 # Admin Dashboard
 
@@ -122,7 +123,7 @@
         -   senior_kg_current
     -   (18/apr 3:43pm) Ability to assign kit to the student
     -   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
-    -   Kit Stock report for Admin
+    -   (18/apr 8:22pm) Kit Stock report for Admin
 
 -   (12/apr 04:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
 -   (13/apr 11:17am) **(Feature) Multiple Center Head**

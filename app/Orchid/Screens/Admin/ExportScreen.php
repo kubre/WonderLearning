@@ -2,12 +2,15 @@
 
 namespace App\Orchid\Screens\Admin;
 
-use App\Exports\AdmissionExport;
-use App\Exports\EnquiryExport;
-use App\Exports\FeesExport;
-use App\Exports\ReceiptExport;
-use App\Exports\SchoolExport;
-use App\Exports\UsersExport;
+use App\Exports\{
+    AdmissionExport,
+    EnquiryExport,
+    FeesExport,
+    ReceiptExport,
+    SchoolExport,
+    UsersExport,
+    KitStockExport,
+};
 use Maatwebsite\Excel\Facades\Excel;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\DateTimer;
@@ -15,7 +18,6 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
-use Orchid\Screen\Fields\Label;
 use Orchid\Support\Color;
 
 class ExportScreen extends Screen
@@ -41,6 +43,7 @@ class ExportScreen extends Screen
         'admissions' => AdmissionExport::class,
         'fees' => FeesExport::class,
         'receipts' => ReceiptExport::class,
+        'kits' => KitStockExport::class,
     ];
 
     /**
@@ -87,6 +90,7 @@ class ExportScreen extends Screen
                         'admissions' => 'Admissions',
                         'fees' => 'School Fees',
                         'receipts' => 'Receipts',
+                        'kits' => 'Kit Stocks',
                     ]),
                 DateTimer::make('from_date')
                     ->format('Y-m-d')
