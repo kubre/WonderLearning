@@ -70,11 +70,12 @@ class AdmissionExport extends FromToExportable implements
             $admission->discount,
             $admission->batch,
             $admission->is_transportation_required ? "Yes" : "No",
+            $admission->assigned_kit ? "Yes" : "No",
             $admission->student->siblings,
             $admission->student->school->name,
             $admission->student->school->code,
-            /* AC */ Date::dateTimeToExcel($admission->created_at),
-            /* AD */ Date::dateTimeToExcel($admission->updated_at),
+            /* AD */ Date::dateTimeToExcel($admission->created_at),
+            /* AE */ Date::dateTimeToExcel($admission->updated_at),
         ];
     }
 
@@ -106,6 +107,7 @@ class AdmissionExport extends FromToExportable implements
             'Discount',
             'Batch',
             'Transportation Required',
+            'Has kit been assigned',
             'Siblings',
             'School Name',
             'School Code',
@@ -119,8 +121,8 @@ class AdmissionExport extends FromToExportable implements
         return [
             'C' => NumberFormat::FORMAT_DATE_DDMMYYYY,
             'F' => NumberFormat::FORMAT_DATE_DDMMYYYY,
-            'AC' => NumberFormat::FORMAT_DATE_DDMMYYYY,
             'AD' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+            'AE' => NumberFormat::FORMAT_DATE_DDMMYYYY,
         ];
     }
 }

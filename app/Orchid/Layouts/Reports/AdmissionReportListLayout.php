@@ -47,6 +47,8 @@ class AdmissionReportListLayout extends Table
             TD::make('student.dob_at', 'Date Of Birth')
                 ->render(fn (Admission $a) => $a->student->dob_at->format('d-M-y')),
             TD::make('student.gender', 'Gender'),
+            TD::make('assigned_kit', 'Has kit been assigned')
+                ->render(fn (Admission $a) => $a->assigned_kit ? "Yes" : "No"),
             TD::make('created_at', 'Admission Date')
                 ->render(fn (Admission $a) => $a->created_at->format('d-M-y')),
             TD::make('student.address', 'Address'),

@@ -88,10 +88,20 @@ class AdmissionListScreen extends Screen
 
     public function assignKit(Admission $admission)
     {
-        KitStock::withoutGlobalScope(AcademicYearScope::class)
+        $kitStock = KitStock::withoutGlobalScope(AcademicYearScope::class)
             ->whereDate('created_at', $admission->created_at)
-            ->increment($admission->fees_column . '_assigned');
+            ->firstOrFail();
 
+        if (
+            $kitStock->{$admission->fees_column . '_total'}
+            - $kitStock->{$admission->fees_column . '_assigned'} < 1
+        ) {
+            Toast::warning('Not enough kits available for this program please update the total count.');
+            return redirect()->route('school.admission.list');
+        }
+
+        $kitStock->{$admission->fees_column . '_assigned'} += 1;
+        $kitStock->save();
         tap(
             $admission,
             fn ($a) => $a->assigned_kit = true

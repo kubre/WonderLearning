@@ -45,6 +45,9 @@
 -   (17/apr 12:50pm) Demoed excel exports on server and added remaining xlsx exports for admin specified in Exports task
 -   (17/apr 4:30pm) Added User Management for Schools
 
+-   (18/apr 3:43pm) Kit Stock Management, Ability to assign kit to the student
+-   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
+
 # Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -118,6 +121,8 @@
         -   senior_kg_total
         -   senior_kg_current
     -   (18/apr 3:43pm) Ability to assign kit to the student
+    -   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
+    -   Kit Stock report for Admin
 
 -   (12/apr 04:27pm) **Individual Student Receipt Report Export** (Excel, PDF)
 -   (13/apr 11:17am) **(Feature) Multiple Center Head**
