@@ -3,8 +3,7 @@
 ## Notes
 
 ```
-1) Add fields modified in migrations to the Models $fillable
- - School Done
+1) (DONE) Add fields modified in migrations to the Models $fillable
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) (DONE) Implement graduation logic
 3) (Fixed) Fees receipt generation failing
@@ -49,7 +48,7 @@
 -   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
 -   (18/apr 8:22pm) Added Kit Stock Reports for admin
 
-# Admin Dashboard
+## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
     -   (17/apr 12:10am) **User**
@@ -255,3 +254,36 @@ Have ability to export these reports as excel or pdf
 -   (14/apr 10:18pm) 'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
 -   (14/apr 10:18pm) 'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.
 -   (14/apr 10:18pm) Nav Bg changed
+
+<hr>
+
+## Teacher Module
+
+### Questions I have
+
+-   Can there be multiple teachers for same subject
+-   Will batches change every year
+
+### Notes for me
+
+-   Thought on divisions implementation
+    -   Store division name directly on admission table and in
+    -   batches table only store school id
+
+### Admin Features
+
+-   Admin should have an ability to manage following hierarchy
+    Subject > Book > Chapters > Topics
+-
+
+### Center Head Features
+
+-   Subjects are assigned to teachers
+-   divisions facility (Center head should be able to create Division of student which then can be assigned to the student)
+
+### Teacher Features
+
+-   Teacher would mark topics covered on that day, everyday so then it can be seen by parents
+-   Once a week teacher would fill out performance report for every child for chapters from 1 to 10. This needs to be approved by center head.
+-   The above report then can be seen by parent in the app
+-   Student Attendance for everyday.
