@@ -7,8 +7,8 @@ use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
+use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Color;
-use Orchid\Support\Facades\Toast;
 use Session;
 
 class PlatformProvider extends OrchidServiceProvider
@@ -36,102 +36,112 @@ class PlatformProvider extends OrchidServiceProvider
         /** @var User */
         $user = auth()->user();
         return [
-            ItemMenu::label('Dashboard')
+            Menu::make('Dashboard')
                 ->icon('speedometer')
                 ->url('/admin')
                 ->title('Menu'),
-            ItemMenu::label('Schools')
+            // Menu::make(__('Users'))
+            //     ->icon('user')
+            //     ->route('platform.systems.users')
+            //     ->permission('platform.systems.users')
+            //     ->title(__('Access rights')),
+
+            // Menu::make(__('Roles'))
+            //     ->icon('lock')
+            //     ->route('platform.systems.roles')
+            //     ->permission('platform.systems.roles'),
+            Menu::make('Schools')
                 ->icon('building')
                 ->permission('admin.school')
                 ->route('admin.school.list'),
-            ItemMenu::label('Export Data')
+            Menu::make('Export Data')
                 ->icon('table')
                 ->permission('admin.export')
                 ->route('admin.export'),
 
-            ItemMenu::label('Admissions')
+            Menu::make('Admissions')
                 ->slug('admissions')
                 ->icon('graduation')
                 ->badge(fn () => '▶', Color::DEFAULT())
-                ->withChildren()
-                ->hideEmpty(),
-            ItemMenu::label('Enquiry')
-                ->place('admissions')
-                ->icon('info')
-                ->permission('enquiry.table')
-                ->route('school.enquiry.list'),
-            ItemMenu::label('Admission')
-                ->place('admissions')
-                ->icon('user')
-                ->permission('admission.table')
-                ->route('school.admission.list'),
+                ->list([
+                    Menu::make('Enquiry')
+                        ->place('admissions')
+                        ->icon('info')
+                        ->permission('enquiry.table')
+                        ->route('school.enquiry.list'),
+                    Menu::make('Admission')
+                        ->place('admissions')
+                        ->icon('user')
+                        ->permission('admission.table')
+                        ->route('school.admission.list'),
+                ]),
 
-            ItemMenu::label('Accounts')
+            Menu::make('Accounts')
                 ->icon('rupee')
                 ->slug('accounts')
                 ->badge(fn () => '▶', Color::DEFAULT())
-                ->withChildren()
-                ->hideEmpty(),
-            ItemMenu::label('Fee Rate Card')
-                ->place('accounts')
-                ->icon('note')
-                ->permission('fees.edit')
-                ->route('account.fees.edit'),
-            ItemMenu::label('Fees Receipt Generation')
-                ->place('accounts')
-                ->icon('money')
-                ->permission('receipt.create')
-                ->route('school.receipt.list'),
-            ItemMenu::label('Payment Due Report')
-                ->place('accounts')
-                ->icon('docs')
-                ->permission('receipt.table')
-                ->route('account.payment-due.report'),
-            ItemMenu::label('Canceled Receipt Logs')
-                ->place('accounts')
-                ->icon('trash')
-                ->permission('receipt.table')
-                ->route('account.canceled-log.report'),
-            ItemMenu::label('Online Payments Report')
-                ->place('accounts')
-                ->icon('rupee')
-                ->permission('receipt.table')
-                ->route('account.online-payments.report'),
-            ItemMenu::label('Daily Collection Report')
-                ->place('accounts')
-                ->icon('calendar')
-                ->permission('receipt.table')
-                ->route('account.daily-collection.report'),
+                ->list([
+                    Menu::make('Fee Rate Card')
+                        ->place('accounts')
+                        ->icon('note')
+                        ->permission('fees.edit')
+                        ->route('account.fees.edit'),
+                    Menu::make('Fees Receipt Generation')
+                        ->place('accounts')
+                        ->icon('money')
+                        ->permission('receipt.create')
+                        ->route('school.receipt.list'),
+                    Menu::make('Payment Due Report')
+                        ->place('accounts')
+                        ->icon('docs')
+                        ->permission('receipt.table')
+                        ->route('account.payment-due.report'),
+                    Menu::make('Canceled Receipt Logs')
+                        ->place('accounts')
+                        ->icon('trash')
+                        ->permission('receipt.table')
+                        ->route('account.canceled-log.report'),
+                    Menu::make('Online Payments Report')
+                        ->place('accounts')
+                        ->icon('rupee')
+                        ->permission('receipt.table')
+                        ->route('account.online-payments.report'),
+                    Menu::make('Daily Collection Report')
+                        ->place('accounts')
+                        ->icon('calendar')
+                        ->permission('receipt.table')
+                        ->route('account.daily-collection.report'),
+                ]),
 
-            ItemMenu::label('Reports')
+            Menu::make('Reports')
                 ->icon('docs')
                 ->slug('reports')
                 ->badge(fn () => '▶', Color::DEFAULT())
-                ->withChildren()
-                ->hideEmpty(),
-            ItemMenu::label('Admissions Report')
-                ->place('reports')
-                ->icon('user')
-                ->permission('admission.table')
-                ->route('reports.admissions.report'),
-            ItemMenu::label('Enquiry Report')
-                ->place('reports')
-                ->icon('info')
-                ->permission('admission.table')
-                ->route('reports.enquiries.report'),
+                ->list([
+                    Menu::make('Admissions Report')
+                        ->place('reports')
+                        ->icon('user')
+                        ->permission('admission.table')
+                        ->route('reports.admissions.report'),
+                    Menu::make('Enquiry Report')
+                        ->place('reports')
+                        ->icon('info')
+                        ->permission('admission.table')
+                        ->route('reports.enquiries.report'),
+                ]),
 
-            ItemMenu::label('Users')
+            Menu::make('Users')
                 ->icon('people')
                 ->permission('school.users')
                 ->route('school.users'),
 
-            ItemMenu::label('Kit Stock')
+            Menu::make('Kit Stock')
                 ->icon('module')
                 ->permission('school.users')
                 ->route('school.kit.stock'),
 
 
-            ItemMenu::label('Sign Out')
+            Menu::make('Sign Out')
                 ->icon('logout')
                 ->route('auth.signout', [optional(session('school'))->login_url ?? 'admin']),
         ];
@@ -143,7 +153,7 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerProfileMenu(): array
     {
         return [
-            ItemMenu::label('Profile')
+            Menu::make('Profile')
                 ->route('platform.profile')
                 ->icon('user'),
         ];
