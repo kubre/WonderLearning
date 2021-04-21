@@ -4,6 +4,20 @@
     object-fit: contain;
 }
 
+/* Fixes for Orchid 10 */
+.table-striped>tbody>tr>td {
+  color: black;
+}
+
+.select2-container--bootstrap .select2-dropdown {
+    border-color: rgba(28,43,54,.1);
+    outline: 0!important;
+    box-shadow: none;
+    z-index: 1200;
+}
+
+/* Fixes end */
+
 @media print {
   /* @page {
     size: landscape;

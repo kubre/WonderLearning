@@ -46,7 +46,6 @@ use Tabuna\Breadcrumbs\Trail;
 |
 */
 
-// Main
 Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 
@@ -60,16 +59,11 @@ Route::screen('profile', UserProfileScreen::class)
     });
 
 // Platform > System > Users
-Route::screen('/users/{users}/edit', UserEditScreen::class)
-    ->name('platform.systems.users.edit')
-    ->breadcrumbs(function (Trail $trail, $user) {
-        return $trail
-            ->parent('platform.systems.users')
-            ->push(__('Edit'), route('platform.systems.users.edit', $user));
-    });
+Route::screen('users/{user}/edit', UserEditScreen::class)
+    ->name('platform.systems.users.edit');
 
 // Platform > System > Users > Create
-Route::screen('/users/create', UserEditScreen::class)
+Route::screen('users/create', UserEditScreen::class)
     ->name('platform.systems.users.create')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
@@ -78,11 +72,11 @@ Route::screen('/users/create', UserEditScreen::class)
     });
 
 // Platform > System > Users > User
-Route::screen('/users', UserListScreen::class)
+Route::screen('users', UserListScreen::class)
     ->name('platform.systems.users')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
-            ->parent('platform.systems.index')
+            ->parent('platform.index')
             ->push(__('Users'), route('platform.systems.users'));
     });
 
@@ -109,10 +103,9 @@ Route::screen('roles', RoleListScreen::class)
     ->name('platform.systems.roles')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
-            ->parent('platform.systems.index')
+            ->parent('platform.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
-
 // Example...
 // Route::screen('example', ExampleScreen::class)
 //     ->name('platform.example')

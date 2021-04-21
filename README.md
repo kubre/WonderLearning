@@ -263,6 +263,7 @@ Have ability to export these reports as excel or pdf
 
 -   Can there be multiple teachers for same subject
 -   Will batches change every year
+-   who would assign divisions to the student (Center Head or Teacher)
 
 ### Notes for me
 
@@ -272,18 +273,24 @@ Have ability to export these reports as excel or pdf
 
 ### Admin Features
 
--   Admin should have an ability to manage following hierarchy
-    Subject > Book > Chapters > Topics
--
+-   Admin should have an ability to (add/edit/delete) following:
+    `Subjects > Books > Chapters > Topics` This also represents how these modules related to each other
+-   Ability to add academic year calendar with assigning of each topic on particular
 
 ### Center Head Features
 
--   Subjects are assigned to teachers
--   divisions facility (Center head should be able to create Division of student which then can be assigned to the student)
+-   Divisions facility (Center head will be able to create Divisions for student Like A, B, etc.)
+-   Center Head will assign a subject and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them).
+-   Approval of weekly student performance reports.
+-   Can see Student attendance and performance report an export excel if needed.
 
 ### Teacher Features
 
--   Teacher would mark topics covered on that day, everyday so then it can be seen by parents
--   Once a week teacher would fill out performance report for every child for chapters from 1 to 10. This needs to be approved by center head.
--   The above report then can be seen by parent in the app
--   Student Attendance for everyday.
+-   Teachers will be able to see the list of all students under their divisions
+-   They can mark attendance for students everyday
+-   They will see entire syllabus for the subject they have been assigned
+-   They can mark a topic as finished which then will be sent parents of students who attended school that day in that division
+-   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark of from 1 to 10. This needs to be approved by center head before this can be seen by parents.
+-   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
+-   Teachers will be able to see old attendance of students in their batch and get excel report if needed
+-   Teachers will be able to see the performance report of their student and export it to excel if needed

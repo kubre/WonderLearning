@@ -36,20 +36,21 @@ class PlatformProvider extends OrchidServiceProvider
         /** @var User */
         $user = auth()->user();
         return [
+
             Menu::make('Dashboard')
                 ->icon('speedometer')
-                ->url('/admin')
-                ->title('Menu'),
-            // Menu::make(__('Users'))
-            //     ->icon('user')
-            //     ->route('platform.systems.users')
-            //     ->permission('platform.systems.users')
-            //     ->title(__('Access rights')),
+                ->title('Menu')
+                ->url('/admin'),
+            Menu::make(__('Users'))
+                ->icon('user')
+                ->route('platform.systems.users')
+                ->permission('platform.systems.users'),
 
-            // Menu::make(__('Roles'))
-            //     ->icon('lock')
-            //     ->route('platform.systems.roles')
-            //     ->permission('platform.systems.roles'),
+            Menu::make(__('Roles'))
+                ->icon('lock')
+                ->route('platform.systems.roles')
+                ->permission('platform.systems.roles'),
+
             Menu::make('Schools')
                 ->icon('building')
                 ->permission('admin.school')
@@ -60,25 +61,23 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('admin.export'),
 
             Menu::make('Admissions')
-                ->slug('admissions')
                 ->icon('graduation')
+                ->permission('admission.table')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Enquiry')
-                        ->place('admissions')
                         ->icon('info')
-                        ->permission('enquiry.table')
+                        ->permission('admission.table')
                         ->route('school.enquiry.list'),
                     Menu::make('Admission')
-                        ->place('admissions')
                         ->icon('user')
-                        ->permission('admission.table')
+                        ->permissions('enquiry.table')
                         ->route('school.admission.list'),
                 ]),
 
             Menu::make('Accounts')
                 ->icon('rupee')
-                ->slug('accounts')
+                ->permission('receipt.table')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Fee Rate Card')
@@ -115,7 +114,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Reports')
                 ->icon('docs')
-                ->slug('reports')
+                ->permission('admission.table')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Admissions Report')

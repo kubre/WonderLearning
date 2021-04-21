@@ -52,6 +52,24 @@ return [
         'private' => ['web', 'platform'],
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Guard
+    |--------------------------------------------------------------------------
+    |
+    | This can be used if you are using a multi-auth setup configured.
+    | Such as using an Admin model for Orchid and User Model for frontend access.
+    | If not using default auth guard remember to add 'auth:guard_name' to the middleware
+    | where guard_name is the custom guard name.
+    |
+    | You can learn more here: https://laravel.com/docs/authentication
+    |
+    */
+
+    'guard' => config('auth.defaults.guard', 'web'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Auth Page
@@ -165,4 +183,8 @@ return [
         'interval' => 60,
     ],
 
+
+    'turbo' => [
+        'cache' => true,
+    ],
 ];
