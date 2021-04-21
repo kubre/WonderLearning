@@ -80,6 +80,7 @@ class AdmissionListLayout extends Table
                             Button::make('Assign Kit')
                                 ->icon('book-open')
                                 ->method('assignKit')
+                                ->confirm('Once assigned a kit cannot be reassigned back and will deduct 1 count from kits available for this programme, Are you sure?')
                                 ->parameters(['admission' => $a->id])
                                 ->canSee(!$a->assigned_kit),
                             ModalToggle::make('Invoice')

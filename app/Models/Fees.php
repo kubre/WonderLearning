@@ -43,6 +43,17 @@ class Fees extends Model
         'senior_kg_total' => 'integer',
     ];
 
+    protected static function boot()
+    {
+        $working_year = working_year();
+        parent::boot();
+        static::creating(function (Fees $fees) use ($working_year) {
+            $fees->title = get_academic_year_formatted($working_year);
+            $fees->created_at = $working_year[0];
+            $fees->school_id = auth()->user()->school_id;
+        });
+    }
+
     protected static function booted()
     {
         static::addGlobalScope(new AcademicYearScope);

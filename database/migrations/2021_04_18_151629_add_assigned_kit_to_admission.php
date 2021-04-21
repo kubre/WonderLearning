@@ -14,7 +14,7 @@ class AddAssignedKitToAdmission extends Migration
     public function up()
     {
         Schema::table('admissions', function (Blueprint $table) {
-            $table->boolean('assigned_kit');
+            $table->boolean('assigned_kit')->nullable();
         });
     }
 

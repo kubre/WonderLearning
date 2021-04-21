@@ -59,6 +59,14 @@ class Admission extends Model
         'batch',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function (Admission $admission) {
+            $admission->school_id = auth()->user()->school_id;
+        });
+    }
+
     protected static function booted()
     {
         static::addGlobalScope(new AcademicYearScope);

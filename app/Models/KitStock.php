@@ -33,6 +33,15 @@ class KitStock extends Model
         'senior_kg_assigned' => 'integer',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (KitStock $kit) {
+            $kit->created_at = working_year()[0];
+            $kit->school_id = school()->id;
+        });
+    }
 
     public static function booted()
     {

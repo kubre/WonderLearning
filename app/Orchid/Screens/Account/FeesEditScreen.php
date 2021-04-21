@@ -3,7 +3,6 @@
 namespace App\Orchid\Screens\Account;
 
 use App\Models\Fees;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Actions\Button;
@@ -112,24 +111,14 @@ class FeesEditScreen extends Screen
             'senior_kg' => 'required_without_all:nursery,junior_kg,playgroup',
         ]);
 
-        $fees = Fees::first() ?? new Fees;
-        $working_year = working_year();
+        $totals = collect($request->except('_token'))
+            ->mapWithKeys(
+                fn ($fees, $group) => [$group . '_total' => collect($fees)->sum('amount')]
+            )->merge($request->input());
 
-        $many_fees = collect($request->except('_token'));
-        $totals = $many_fees->mapWithKeys(fn ($fees, $group) =>
-        [$group . '_total' => collect($fees)->sum('amount')]);
-
-        $fees->fill(
-            array_merge(
-                $totals->all(),
-                $request->all(),
-                [
-                    'title' => get_academic_year_formatted($working_year),
-                    'school_id' => auth()->user()->school_id,
-                    'created_at' => $working_year[0],
-                ],
-            )
-        )->save();
+        Fees::firstOrNew()
+            ->fill($totals->all())
+            ->save();
 
         Toast::info('Updated Fees Rate Card!');
     }

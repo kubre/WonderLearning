@@ -8,7 +8,9 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Label;
+use Orchid\Screen\Layouts\Legend;
 use Orchid\Screen\Screen;
+use Orchid\Screen\Sight;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
@@ -83,7 +85,6 @@ class KitStockScreen extends Screen
                         ->class('text-center font-weight-bold')
                         ->value('Remaining'),
                 ]),
-                Label::make('title')->hr(),
                 Group::make([
                     Label::make('title')
                         ->title('Playgroup'),
@@ -138,14 +139,8 @@ class KitStockScreen extends Screen
         ]);
 
         KitStock::firstOrNew()
-            ->fill([
-                'playgroup_total' => $request->playgroup_total,
-                'nursery_total' => $request->nursery_total,
-                'junior_kg_total' => $request->junior_kg_total,
-                'senior_kg_total' => $request->senior_kg_total,
-                'created_at' => working_year()[0],
-                'school_id' => school()->id,
-            ])->save();
+            ->fill($request->input())
+            ->save();
 
         Toast::info('Updated stock successfully!');
         return redirect()->route('school.kit.stock');

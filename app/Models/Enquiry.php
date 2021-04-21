@@ -36,6 +36,14 @@ class Enquiry extends Model
         'follow_up_at',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function (Enquiry $enquiry) {
+            $enquiry->school_id = auth()->user()->school_id;
+            $enquiry->created_at = working_year()[0];
+        });
+    }
 
     protected static function booted()
     {

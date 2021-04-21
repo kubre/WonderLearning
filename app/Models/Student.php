@@ -26,6 +26,13 @@ class Student extends Model
         'dob_at' => 'date'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function (Student $student) {
+            $student->school_id = school()->id;
+        });
+    }
 
     public function getPrnAttribute()
     {

@@ -282,13 +282,11 @@ class AdmissionEditScreen extends Screen
             $student = $admission->student;
         }
 
-        $form = $request->all();
-        $form['school_id'] = auth()->user()->school_id;
+        $student->fill($request->input())->save();
 
-        $student->fill($form)->save();
-
-        $form['student_id'] = $student->id;
-        $admission->fill($form)->save();
+        $student->admission()->save(
+            $admission->fill($request->input())
+        );
 
         if (!is_null($request->input('enquirer_id'))) {
             Enquiry::find($request->input('enquirer_id'))

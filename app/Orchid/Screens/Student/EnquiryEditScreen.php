@@ -157,7 +157,7 @@ class EnquiryEditScreen extends Screen
      */
     public function createOrUpdate(Enquiry $enquiry, Request $request)
     {
-        $form = $request->validate([
+        $request->validate([
             'name' => 'required',
             'gender' => 'required|in:Male,Female,Transgender,Other',
             'dob_at' => 'required|date',
@@ -170,10 +170,8 @@ class EnquiryEditScreen extends Screen
             'follow_up_at' => 'required|date',
         ]);
 
-        $form['school_id'] = auth()->user()->school_id;
-        $form['created_at'] = working_year()[0];
+        $enquiry->fill($request->input())->save();
 
-        $enquiry->fill($form)->save();
         Toast::info('Added details successfully!');
         return redirect()->route('school.enquiry.list');
     }
@@ -188,7 +186,7 @@ class EnquiryEditScreen extends Screen
     {
         $enquiry->delete();
 
-        Toast::info('You have successfully deleted the enquiry.');
+        Toast::info('You have successfully deleted the enquiry!');
 
         return redirect()->route('school.enquiry.list');
     }
