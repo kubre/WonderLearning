@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SchoolLoginController;
 use App\Models\School;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,34 +29,12 @@ Route::view('/gallery', 'website.gallery');
 // Route::view('/clients', 'website.clients');
 Route::view('/franchise', 'website.franchise');
 Route::post('/contact-us', function (Request $request) {
-    dd($request);
+    return back();
 });
 Route::view('/contact-us', 'website.contact');
 
-Route::get('/login/{school:login_url}/', function (School $school) {
-    session(['school' => $school]);
-    return view('platform::auth.login');
-});
+Route::get('/login/{school:login_url}/', [SchoolLoginController::class, 'showLoginForm']);
 
-Route::get('/logout/{school:login_url}', function (School $school) {
-    Auth::guard()->logout();
-
-    request()->session()->invalidate();
-
-    request()->session()->regenerateToken();
-
-    return request()->wantsJson()
-        ? new JsonResponse([], 204)
-        : redirect('/login/' . $school->login_url);
-})->missing(function () {
-    Auth::guard()->logout();
-
-    request()->session()->invalidate();
-
-    request()->session()->regenerateToken();
-
-    return request()->wantsJson()
-        ? new JsonResponse([], 204)
-        : redirect('/admin/');
-})
+Route::get('/logout/{school:login_url}', [SchoolLoginController::class, 'schoolLogout'])
+    ->missing([SchoolLoginController::class, 'adminLogout'])
     ->name('auth.signout');

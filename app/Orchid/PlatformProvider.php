@@ -29,7 +29,7 @@ class PlatformProvider extends OrchidServiceProvider
     }
 
     /**
-     * @return ItemMenu[]
+     * @return Menu[]
      */
     public function registerMainMenu(): array
     {
@@ -155,37 +155,6 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Profile')
                 ->route('platform.profile')
                 ->icon('user'),
-        ];
-    }
-
-    /**
-     * @return ItemMenu[]
-     */
-    public function registerSystemMenu(): array
-    {
-        return [
-            ItemMenu::label(__('Access rights'))
-                ->icon('lock')
-                ->slug('Auth')
-                ->active('platform.systems.*')
-                ->permission('platform.systems.index')
-                ->sort(1000),
-
-            ItemMenu::label(__('Users'))
-                ->place('Auth')
-                ->icon('user')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users')
-                ->sort(1000)
-                ->title(__('All registered users')),
-
-            ItemMenu::label(__('Roles'))
-                ->place('Auth')
-                ->icon('lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles')
-                ->sort(1000)
-                ->title(__('A Role defines a set of tasks a user assigned the role is allowed to perform.')),
         ];
     }
 

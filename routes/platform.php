@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\Account\CanceledLogScreen;
-use App\Orchid\Screens\Account\DailyCollectionReportScreen;
-use App\Orchid\Screens\Account\FeesEditScreen;
-use App\Orchid\Screens\Account\OnlinePaymentsScreen;
-use App\Orchid\Screens\Account\PaymentDueReportScreen;
+use App\Orchid\Screens\Account\{
+    CanceledLogScreen,
+    DailyCollectionReportScreen,
+    FeesEditScreen,
+    OnlinePaymentsScreen,
+    PaymentDueReportScreen,
+};
 use App\Orchid\Screens\Admin\ExportScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\Reports\EnquiryReportScreen;
