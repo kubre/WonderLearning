@@ -5,16 +5,17 @@ declare(strict_types=1);
 namespace App\Orchid\Screens;
 
 use App\CacheKey;
-use App\Models\Admission;
-use App\Models\Approval;
-use App\Models\Enquiry;
-use App\Models\Fees;
-use App\Models\Installment;
-use App\Models\Receipt;
-use App\Models\School;
-use App\Models\User;
+use App\Models\{
+    Admission,
+    Approval,
+    Enquiry,
+    Fees,
+    Installment,
+    Receipt,
+    School,
+    User
+};
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
-use App\Orchid\Layouts\Examples\MetricsExample;
 use App\Orchid\Layouts\School\FeesRateMetric;
 use App\Orchid\Layouts\School\SchoolMetrics;
 use App\Services\InstallmentService;

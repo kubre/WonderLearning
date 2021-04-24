@@ -5,9 +5,9 @@
 }
 
 /* Fixes for Orchid 10 */
-.table-striped>tbody>tr>td {
+/* .table-striped>tbody>tr>td {
   color: black;
-}
+} */
 
 .select2-container--bootstrap .select2-dropdown {
     border-color: rgba(28,43,54,.1);
