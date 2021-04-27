@@ -63,15 +63,17 @@ class SchoolLoginController extends Controller
 
         return request()->wantsJson()
             ? new JsonResponse([], 204)
-            : $this->missingSchoolResponse($school);
+            : self::missingSchoolResponse($school);
     }
 
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function adminLogout()
+    public static function adminLogout()
     {
-        $this->guard->logout();
+        auth()
+            ->guard(config('platform.guard'))
+            ->logout();
 
         request()->session()->invalidate();
 
@@ -79,10 +81,10 @@ class SchoolLoginController extends Controller
 
         return request()->wantsJson()
             ? new JsonResponse([], 204)
-            : $this->missingSchoolResponse();
+            : self::missingSchoolResponse();
     }
 
-    protected function missingSchoolResponse(School $school = null)
+    protected static function missingSchoolResponse(School $school = null)
     {
         return is_null($school) ?
             redirect('/admin') :
