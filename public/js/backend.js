@@ -14752,6 +14752,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   created: function created() {
+    this.from_date = document.getElementById("from_date").value;
+    this.to_date = document.getElementById("to_date").value;
     this.fetchSyllabus();
   },
   methods: {
@@ -14759,7 +14761,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.disableSave = true;
-      fetch("/api/getSyllabus").then(function (res) {
+      fetch("/api/getSyllabus?from_date=".concat(this.from_date, "&to_date=").concat(this.to_date)).then(function (res) {
         return res.json();
       }).then(function (res) {
         _this.syllabus = res;
@@ -14792,7 +14794,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       disableSave: false,
-      syllabus: []
+      syllabus: [],
+      from_date: null,
+      to_date: null
     };
   },
   components: {

@@ -7,6 +7,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Orchid\Screen\Fields\Input;
 
 class SyllabusScreen extends Screen
 {
@@ -31,7 +32,10 @@ class SyllabusScreen extends Screen
      */
     public function query(): array
     {
-        return [];
+        return [
+            'from_date' => working_year()[0],
+            'to_date' => working_year()[1],
+        ];
     }
 
     /**

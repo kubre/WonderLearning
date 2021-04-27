@@ -22,12 +22,16 @@ import SyllabusItem from "./SyllabusItem.vue";
 
 export default {
   created: function () {
+    this.from_date = document.getElementById("from_date").value;
+    this.to_date = document.getElementById("to_date").value;
     this.fetchSyllabus();
   },
   methods: {
     fetchSyllabus: function () {
       this.disableSave = true;
-      fetch("/api/getSyllabus")
+      fetch(
+        `/api/getSyllabus?from_date=${this.from_date}&to_date=${this.to_date}`
+      )
         .then((res) => res.json())
         .then((res) => {
           this.syllabus = res;
@@ -63,6 +67,8 @@ export default {
     return {
       disableSave: false,
       syllabus: [],
+      from_date: null,
+      to_date: null,
     };
   },
   components: {
