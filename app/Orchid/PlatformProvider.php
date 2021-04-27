@@ -55,6 +55,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('building')
                 ->permission('admin.school')
                 ->route('admin.school.list'),
+            Menu::make(__('Syllabus'))
+                ->icon('notebook')
+                ->permission('admin.school')
+                ->route('admin.syllabus'),
             Menu::make('Export Data')
                 ->icon('table')
                 ->permission('admin.export')

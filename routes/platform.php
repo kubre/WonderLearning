@@ -10,6 +10,7 @@ use App\Orchid\Screens\Account\{
     PaymentDueReportScreen,
 };
 use App\Orchid\Screens\Admin\ExportScreen;
+use App\Orchid\Screens\Admin\SyllabusScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\Reports\EnquiryReportScreen;
@@ -116,7 +117,7 @@ Route::screen('roles', RoleListScreen::class)
 //             ->push(__('Example screen'));
 //     });
 
-// Admin 
+// Admin
 Route::screen('exports', ExportScreen::class)
     ->name('admin.export')
     ->breadcrumbs(
@@ -124,6 +125,15 @@ Route::screen('exports', ExportScreen::class)
             ->parent('platform.index')
             ->push(__('Export Screen'), route('admin.export'))
     );
+
+Route::screen('syllabus', SyllabusScreen::class)
+    ->name('admin.syllabus')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Syllabus Management'), route('admin.syllabus'))
+    );
+
 
 // Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
 // Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');

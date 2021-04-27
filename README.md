@@ -47,7 +47,7 @@
 -   (18/apr 3:43pm) Kit Stock Management, Ability to assign kit to the student
 -   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
 -   (18/apr 8:22pm) Added Kit Stock Reports for admin
-
+-   (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -259,38 +259,40 @@ Have ability to export these reports as excel or pdf
 
 ## Teacher Module
 
-### Questions I have
+### Admin Panel Features
 
--   Can there be multiple teachers for same subject
--   Will batches change every year
--   who would assign divisions to the student (Center Head or Teacher)
+-   Admin should have an ability to (add/edit/delete) following:<br>
+    Subjects > Books > Chapters > Topics > Sub Topics This also represents how these modules related to each other chapters contains topics and books contains chapter so on.
+
+    -   Syllabus: Handled using Nested Set Package
+        - (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
+    
+
+-   Ability to add academic year calendar with assigning of each topic on particular
+
+### Center Head/Owner Panel Features
+
+-   Divisions facility (Center head will be able to create Divisions for student Like A, B, etc.)
+-   Center Head will assign a Program (PG/NUR/LKG/UKG) and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them though subject would only have a single teacher).
+-   Approval to Daily Teaching (Taught) syllabus.
+-   Approval to weekly student performance reports.
+-   Can see Student attendance and performance report an export excel if needed.
+-   They can provide approval to the completed Topic/Sub topic submitted by teachers as finished which then will be sent to parents of students who have attended school on that particular day.
+
+### Teacher Panel Features
+
+-   Dashboard for teacher
+-   Teachers will be able to see the list of all students under their divisions
+-   They can mark attendance for students everyday
+-   They will see entire syllabus for the subject they have been assigned
+-   They can mark a Topic/Sub topic as finished on that particular day which then will be sent to center head for an approval.
+-   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark from 1 to 10. This needs to be approved by center head before this can be seen by parents.
+-   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
+-   Teachers will be able to see old attendance of students in their batch and get excel report if needed
+-   Teachers will be able to see the performance report of their student and export it to excel if needed
 
 ### Notes for me
 
 -   Thought on divisions implementation
     -   Store division name directly on admission table and in
     -   batches table only store school id
-
-### Admin Features
-
--   Admin should have an ability to (add/edit/delete) following:
-    `Subjects > Books > Chapters > Topics` This also represents how these modules related to each other
--   Ability to add academic year calendar with assigning of each topic on particular
-
-### Center Head Features
-
--   Divisions facility (Center head will be able to create Divisions for student Like A, B, etc.)
--   Center Head will assign a subject and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them).
--   Approval of weekly student performance reports.
--   Can see Student attendance and performance report an export excel if needed.
-
-### Teacher Features
-
--   Teachers will be able to see the list of all students under their divisions
--   They can mark attendance for students everyday
--   They will see entire syllabus for the subject they have been assigned
--   They can mark a topic as finished which then will be sent parents of students who attended school that day in that division
--   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark of from 1 to 10. This needs to be approved by center head before this can be seen by parents.
--   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
--   Teachers will be able to see old attendance of students in their batch and get excel report if needed
--   Teachers will be able to see the performance report of their student and export it to excel if needed
