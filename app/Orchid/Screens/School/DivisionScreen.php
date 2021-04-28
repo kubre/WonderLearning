@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\School;
 use App\Models\Division;
 use App\Models\School;
 use App\Models\User;
+use App\Orchid\Layouts\School\DivisionListLayout;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
@@ -39,7 +40,8 @@ class DivisionScreen extends Screen
     public function query(): array
     {
         return [
-            'divisions' => Division::simplePaginate(20),
+            'divisions' => Division::with('teacher')
+                ->simplePaginate(20),
         ];
     }
 
@@ -84,6 +86,7 @@ class DivisionScreen extends Screen
                         ->required(),
                 ]),
             ])->applyButton('Save'),
+            DivisionListLayout::class,
         ];
     }
 
@@ -98,6 +101,15 @@ class DivisionScreen extends Screen
         Division::create($request->input());
 
         Toast::info('Created and Assigned the division to the teacher.');
+
+        return redirect()->route('school.divisions');
+    }
+
+    public function remove(Division $division)
+    {
+        $division->delete();
+
+        Toast::info('Removed division and unassigned the teacher.');
 
         return redirect()->route('school.divisions');
     }

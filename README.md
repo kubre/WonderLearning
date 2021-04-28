@@ -49,6 +49,7 @@
 -   (18/apr 8:22pm) Added Kit Stock Reports for admin
 -   (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
 -   (28/apr 11:24pm) School can add and assign divisions to teachers
+-   (28/apr 11:40pm) Table and Delete added for divisions 
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
