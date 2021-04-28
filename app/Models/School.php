@@ -14,6 +14,15 @@ class School extends Model
 {
     use AsSource, HasFactory, Filterable;
 
+
+    public const PROGRAMMES = [
+        'Playgroup' => 'Playgroup',
+        'Nursery' => 'Nursery',
+        'Junior KG' => 'Junior KG',
+        'Senior KG' => 'Senior KG',
+    ];
+
+
     /** @var array */
     protected $fillable = [
         'name', 'logo', 'contact', 'code', 'academic_year', 'academic_year_start', 'academic_year_end', 'email', 'address', 'login_url', 'suspended_at',

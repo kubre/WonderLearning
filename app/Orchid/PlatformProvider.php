@@ -64,6 +64,23 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('admin.export')
                 ->route('admin.export'),
 
+
+            // School Menu
+            Menu::make('Users')
+                ->icon('people')
+                ->permission('school.users')
+                ->route('school.users'),
+
+            Menu::make('Divisions')
+                ->icon('layers')
+                ->permission('school.users')
+                ->route('school.divisions'),
+
+            Menu::make('Kit Stock')
+                ->icon('module')
+                ->permission('school.users')
+                ->route('school.kit.stock'),
+
             Menu::make('Admissions')
                 ->icon('graduation')
                 ->permission('admission.table')
@@ -132,17 +149,6 @@ class PlatformProvider extends OrchidServiceProvider
                         ->permission('admission.table')
                         ->route('reports.enquiries.report'),
                 ]),
-
-            Menu::make('Users')
-                ->icon('people')
-                ->permission('school.users')
-                ->route('school.users'),
-
-            Menu::make('Kit Stock')
-                ->icon('module')
-                ->permission('school.users')
-                ->route('school.kit.stock'),
-
 
             Menu::make('Sign Out')
                 ->icon('logout')

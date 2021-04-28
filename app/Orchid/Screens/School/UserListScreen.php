@@ -40,7 +40,7 @@ class UserListScreen extends Screen
         return [
             'users' => User::filters()
                 ->filtersApplySelection(UserFiltersLayout::class)
-                ->where('school_id', school()->id)
+                ->ofSchool(school()->id)
                 ->simplePaginate(),
         ];
     }

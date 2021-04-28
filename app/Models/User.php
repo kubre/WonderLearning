@@ -82,7 +82,7 @@ class User extends Authenticatable
      *
      * @return Builder
      */
-    public function scopeSchool(Builder $query, int $school_id): Builder
+    public function scopeOfSchool(Builder $query, int $school_id): Builder
     {
         return $query->where('school_id', $school_id);
     }

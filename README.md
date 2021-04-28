@@ -48,6 +48,7 @@
 -   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
 -   (18/apr 8:22pm) Added Kit Stock Reports for admin
 -   (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
+-   (28/apr 11:24pm) School can add and assign divisions to teachers
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -268,12 +269,16 @@ Have ability to export these reports as excel or pdf
         - (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
     
 
--   Ability to add academic year calendar with assigning of each topic on particular
+-   (DISCARDED) Ability to add academic year calendar with assigning of each topic on particular
 
 ### Center Head/Owner Panel Features
 
--   Divisions facility (Center head will be able to create Divisions for student Like A, B, etc.)
--   Center Head will assign a Program (PG/NUR/LKG/UKG) and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them though subject would only have a single teacher).
+-   (28/apr 11:24pm) Divisions facility (Center head will be able to create Divisions for student Like A, B, etc.)
+    -   title
+    -   program
+    -   teacher_id
+    -   school_id
+-   (28/apr 11:24pm) Center Head will assign a Program (PG/NUR/LKG/UKG) and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them though subject would only have a single teacher).
 -   Approval to Daily Teaching (Taught) syllabus.
 -   Approval to weekly student performance reports.
 -   Can see Student attendance and performance report an export excel if needed.

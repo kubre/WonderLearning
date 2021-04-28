@@ -65,7 +65,7 @@ class PlatformScreen extends Screen
         $this->user = auth()->user();
         $this->is_admin = $this->user->hasAccess('admin.user');
         if (!Session::exists('school')) {
-            session(['school' => optional($this->user)->school ?? new School]);
+            session(['school' => optional($this->user)->school ?? new School()]);
         }
 
         $data = [];

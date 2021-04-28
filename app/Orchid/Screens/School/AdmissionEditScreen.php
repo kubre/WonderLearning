@@ -6,6 +6,7 @@ use App\Http\Requests\AdmissionRequest;
 use App\Models\Admission;
 use App\Models\Enquiry;
 use App\Models\Fees;
+use App\Models\School;
 use App\Models\Student;
 use Illuminate\Support\Str;
 use Orchid\Support\Facades\Toast;
@@ -191,12 +192,7 @@ class AdmissionEditScreen extends Screen
                     Input::make('nationality')
                         ->title('Nationality'),
                     Select::make('program')
-                        ->options([
-                            'Playgroup' => 'Playgroup',
-                            'Nursery' => 'Nursery',
-                            'Junior KG' => 'Junior KG',
-                            'Senior KG' => 'Senior KG',
-                        ])
+                        ->options(School::PROGRAMMES)
                         ->required()
                         ->title('Program'),
                 ]),

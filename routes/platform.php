@@ -20,6 +20,7 @@ use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
+use App\Orchid\Screens\School\DivisionScreen;
 use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\KitStockScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
@@ -234,3 +235,11 @@ Route::screen('reports/admissions', AdmissionReportScreen::class)
 
 Route::screen('reports/enquiries', EnquiryReportScreen::class)
     ->name('reports.enquiries.report');
+
+Route::screen('divisions', DivisionScreen::class)
+    ->name('school.divisions')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Divisions Management'), route('school.divisions'))
+    );
