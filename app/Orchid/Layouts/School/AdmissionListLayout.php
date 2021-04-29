@@ -48,13 +48,16 @@ class AdmissionListLayout extends Table
                 ->filter(TD::FILTER_TEXT),
             TD::make('parent_name', 'Parents')
                 ->filter(TD::FILTER_TEXT)
-                ->render(fn (Admission $a) => join('/', array_filter([$a->student->father_name, $a->student->mother_name]))),
+                ->render(fn (Admission $a) =>
+                join('/', array_filter([$a->student->father_name, $a->student->mother_name]))),
             TD::make('parent_contact', 'Contacts')
                 ->filter(TD::FILTER_TEXT)
-                ->render(fn (Admission $a) => join('/', array_filter([$a->student->father_contact, $a->student->mother_contact]))),
-            TD::make('program', 'Program')
+                ->render(fn (Admission $a) =>
+                join('/', array_filter([$a->student->father_contact, $a->student->mother_contact]))),
+            TD::make('program', 'Programme')
                 ->sort()
                 ->filter(TD::FILTER_TEXT),
+            TD::make('division.title', 'Division'),
             TD::make('total_fees', 'Total Fees')
                 ->render(fn (Admission $a) => $f->{$a->fees_total_column} - $a->discount),
             TD::make('batch', 'Batch')->filter(TD::FILTER_TEXT),
@@ -65,30 +68,37 @@ class AdmissionListLayout extends Table
                     DropDown::make()
                         ->icon('options-vertical')
                         ->list([
-                            Link::make('Edit')
-                                ->icon('note')
-                                ->route('school.admission.edit', $a->id),
                             Link::make('Receipt')
                                 ->icon('money')
                                 ->route('school.receipt.list', ['admission_id' => $a->id]),
-                            Link::make('Graduate To')
-                                ->icon('action-redo')
-                                ->canSee($a->program !== 'Senior KG')
-                                ->route('school.graduation.edit', [
-                                    'admission' => $a->id,
-                                ]),
+                            ModalToggle::make('Assign Division')
+                                ->icon('layers')
+                                ->modal('asyncAssignDivision')
+                                ->modalTitle('Assign division to a student')
+                                ->method('assignDivision')
+                                ->parameters(['admission' => $a->id])
+                                ->asyncParameters(['admission' => $a->id, 'program' => $a->program]),
                             Button::make('Assign Kit')
                                 ->icon('book-open')
                                 ->method('assignKit')
                                 ->confirm('Once assigned a kit cannot be reassigned back and will deduct 1 count from kits available for this programme, Are you sure?')
                                 ->parameters(['admission' => $a->id])
                                 ->canSee(!$a->assigned_kit),
+                            Link::make('Graduate To')
+                                ->icon('action-redo')
+                                ->canSee($a->program !== 'Senior KG')
+                                ->route('school.graduation.edit', [
+                                    'admission' => $a->id,
+                                ]),
                             ModalToggle::make('Invoice')
                                 ->icon('doc')
                                 ->modal('chooseInvoiceReceiversName')
                                 ->modalTitle('Print Invoice')
                                 ->method('issueInvoice')
                                 ->asyncParameters(['admission_id' => $a->id]),
+                            Link::make('Edit')
+                                ->icon('note')
+                                ->route('school.admission.edit', $a->id),
                         ]),
                 )
         ];

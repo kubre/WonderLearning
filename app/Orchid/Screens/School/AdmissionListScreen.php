@@ -3,15 +3,18 @@
 namespace App\Orchid\Screens\School;
 
 use App\Models\Admission;
+use App\Models\Division;
 use App\Models\Fees;
 use App\Models\KitStock;
 use App\Models\Scopes\AcademicYearScope;
 use App\Orchid\Layouts\School\AdmissionListLayout;
+use App\Orchid\Layouts\School\DivisionRow;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Illuminate\Http\Request;
 
 class AdmissionListScreen extends Screen
 {
@@ -40,7 +43,7 @@ class AdmissionListScreen extends Screen
     public function query(): array
     {
         return [
-            'admissions' => Admission::filters()->with(['student.school'])->simplePaginate(50),
+            'admissions' => Admission::filters()->with(['student.school', 'division'])->simplePaginate(50),
             'fees' => Fees::first(),
         ];
     }
@@ -75,7 +78,34 @@ class AdmissionListScreen extends Screen
             ])
                 ->applyButton('Generate')
                 ->closeButton('Cancel'),
+            Layout::modal('asyncAssignDivision', [
+                DivisionRow::class,
+            ])
+                ->applyButton('Assign')
+                ->closeButton('Cancel')
+                ->async('asyncGetDivisions'),
         ];
+    }
+
+    /** Get data for division row for division assignment */
+    public function asyncGetDivisions(int $admission_id, string $program): array
+    {
+        return [
+            'divisions' => Division::select(['id', 'title'])
+                ->whereProgram($program)
+                ->get()
+                ->mapWithKeys(fn ($d) => [$d->id => $d->title])
+                ->toArray(),
+        ];
+    }
+
+    public function assignDivision(
+        Admission $admission,
+        string $program,
+        Request $request
+    ): \Illuminate\Http\RedirectResponse {
+        $admission->fill($request->input())->save();
+        return redirect()->route('school.admission.list');
     }
 
     public function issueInvoice(int $admission_id): RedirectResponse

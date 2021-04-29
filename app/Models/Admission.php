@@ -6,18 +6,17 @@ use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Illuminate\Support\Str;
-
 
 class Admission extends Model
 {
     use AsSource;
     use Filterable;
     use HasFactory;
-
 
     protected ?int $c_invoice_fees = null;
 
@@ -30,6 +29,7 @@ class Admission extends Model
         'is_transportation_required',
         'student_id',
         'school_id',
+        'division_id',
         'created_at',
     ];
 
@@ -69,8 +69,8 @@ class Admission extends Model
 
     protected static function booted()
     {
-        static::addGlobalScope(new AcademicYearScope);
-        static::addGlobalScope(new SchoolScope);
+        static::addGlobalScope(new AcademicYearScope());
+        static::addGlobalScope(new SchoolScope());
     }
 
     public function getFeesColumnAttribute(): string
@@ -118,21 +118,33 @@ class Admission extends Model
         return $this->student->search_title;
     }
 
+    public function getInvoiceFeesAttribute()
+    {
+        if (is_null($this->c_invoice_fees)) {
+            $this->c_invoice_fees = optional($this->hasOne(Fees::class, 'school_id', 'school_id')
+                ->withoutGlobalScopes()
+                ->whereBetween('created_at', get_academic_year($this->created_at))
+                ->first())
+                ->{$this->fees_total_column};
+        }
+        return $this->c_invoice_fees;
+    }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function school()
+    // Relations
+
+    public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
+    }
+
+    public function division(): BelongsTo
+    {
+        return $this->belongsTo(Division::class);
     }
 
     public function receipts(): HasMany
@@ -148,18 +160,6 @@ class Admission extends Model
     public function unpaid_installments(): HasMany
     {
         return $this->hasMany(Installment::class)->where('due_amount', '>', 0);
-    }
-
-    public function getInvoiceFeesAttribute()
-    {
-        if (is_null($this->c_invoice_fees)) {
-            $this->c_invoice_fees = optional($this->hasOne(Fees::class, 'school_id', 'school_id')
-                ->withoutGlobalScopes()
-                ->whereBetween('created_at', get_academic_year($this->created_at))
-                ->first())
-                ->{$this->fees_total_column};
-        }
-        return $this->c_invoice_fees;
     }
 
     public function school_fees_receipts(): HasMany
