@@ -7,6 +7,7 @@ use App\Models\Division;
 use App\Models\Fees;
 use App\Models\KitStock;
 use App\Models\Scopes\AcademicYearScope;
+use App\Orchid\Layouts\Account\ProgramSelectionLayout;
 use App\Orchid\Layouts\School\AdmissionListLayout;
 use App\Orchid\Layouts\School\DivisionRow;
 use Illuminate\Http\RedirectResponse;
@@ -43,7 +44,11 @@ class AdmissionListScreen extends Screen
     public function query(): array
     {
         return [
-            'admissions' => Admission::filters()->with(['student.school', 'division'])->simplePaginate(50),
+            'admissions' => Admission::query()
+                ->filters()
+                ->filtersApplySelection(ProgramSelectionLayout::class)
+                ->with(['student.school', 'division'])
+                ->simplePaginate(50),
             'fees' => Fees::first(),
         ];
     }
@@ -66,6 +71,7 @@ class AdmissionListScreen extends Screen
     public function layout(): array
     {
         return [
+            ProgramSelectionLayout::class,
             AdmissionListLayout::class,
             Layout::modal('chooseInvoiceReceiversName', [
                 Layout::rows([

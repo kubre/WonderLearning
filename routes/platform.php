@@ -32,6 +32,7 @@ use App\Orchid\Screens\Student\EnquiryEditScreen;
 use App\Orchid\Screens\Student\EnquiryListScreen;
 use App\Orchid\Screens\Student\InstallmentEditScreen;
 use App\Orchid\Screens\Student\InvoicePrintScreen;
+use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -242,4 +243,12 @@ Route::screen('divisions', DivisionScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Divisions Management'), route('school.divisions'))
+    );
+
+Route::screen('students', StudentListScreen::class)
+    ->name('teacher.students.list')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Student List'), route('teacher.students.list'))
     );

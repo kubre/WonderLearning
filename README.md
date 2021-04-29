@@ -51,6 +51,7 @@
 -   (28/apr 11:24pm) School can add and assign divisions to teachers
 -   (28/apr 11:40pm) Table and Delete added for divisions
 -   (29/apr 1:25pm) Ability to assign division to the student
+-   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions, fixed filter layouts views
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -290,7 +291,7 @@ Have ability to export these reports as excel or pdf
 ### Teacher Panel Features
 
 -   Dashboard for teacher
--   Teachers will be able to see the list of all students under their divisions
+-   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions
 -   They can mark attendance for students everyday
 -   They will see entire syllabus for the subject they have been assigned
 -   They can mark a Topic/Sub topic as finished on that particular day which then will be sent to center head for an approval.

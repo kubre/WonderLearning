@@ -54,13 +54,11 @@ class AdmissionListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(fn (Admission $a) =>
                 join('/', array_filter([$a->student->father_contact, $a->student->mother_contact]))),
-            TD::make('program', 'Programme')
-                ->sort()
-                ->filter(TD::FILTER_TEXT),
+            TD::make('program', 'Programme'),
             TD::make('division.title', 'Division'),
             TD::make('total_fees', 'Total Fees')
                 ->render(fn (Admission $a) => $f->{$a->fees_total_column} - $a->discount),
-            TD::make('batch', 'Batch')->filter(TD::FILTER_TEXT),
+            TD::make('batch', 'Batch'),
             TD::make('actions', 'Actions')
                 ->canSee($this->user->hasAccess('admission.edit'))
                 ->render(

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Platform\Models\User as Authenticatable;
 
 /** @property School $school */
@@ -85,5 +86,10 @@ class User extends Authenticatable
     public function scopeOfSchool(Builder $query, int $school_id): Builder
     {
         return $query->where('school_id', $school_id);
+    }
+
+    public function divisions(): HasMany
+    {
+        return $this->hasMany(Division::class, 'teacher_id');
     }
 }

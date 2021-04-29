@@ -83,16 +83,16 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Admissions')
                 ->icon('graduation')
-                ->permission('admission.table')
+                ->permission('enquiry.table')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Enquiry')
                         ->icon('info')
-                        ->permission('admission.table')
+                        ->permission('enquiry.table')
                         ->route('school.enquiry.list'),
                     Menu::make('Admission')
                         ->icon('user')
-                        ->permissions('enquiry.table')
+                        ->permissions('admission.table')
                         ->route('school.admission.list'),
                 ]),
 
@@ -139,16 +139,20 @@ class PlatformProvider extends OrchidServiceProvider
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Admissions Report')
-                        ->place('reports')
                         ->icon('user')
                         ->permission('admission.table')
                         ->route('reports.admissions.report'),
                     Menu::make('Enquiry Report')
-                        ->place('reports')
                         ->icon('info')
                         ->permission('admission.table')
                         ->route('reports.enquiries.report'),
                 ]),
+
+            // Options for Teacher
+            Menu::make('Students')
+                ->icon('people')
+                ->permission('teacher.student')
+                ->route('teacher.students.list'),
 
             Menu::make('Sign Out')
                 ->icon('logout')
