@@ -52,6 +52,7 @@
 -   (28/apr 11:40pm) Table and Delete added for divisions
 -   (29/apr 1:25pm) Ability to assign division to the student
 -   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions, fixed filter layouts views
+-   (30/apr 11:30am) Fixed school users management
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**

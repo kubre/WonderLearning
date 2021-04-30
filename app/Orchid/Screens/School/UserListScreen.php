@@ -38,7 +38,8 @@ class UserListScreen extends Screen
     public function query(): array
     {
         return [
-            'users' => User::filters()
+            'users' => User::with('roles')
+                ->filters()
                 ->filtersApplySelection(UserFiltersLayout::class)
                 ->ofSchool(school()->id)
                 ->simplePaginate(),

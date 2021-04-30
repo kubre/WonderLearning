@@ -33,10 +33,7 @@ class UserListLayout extends Table
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (User $user) {
-                    return $user->presenter()->title();
-                }),
+                ->filter(TD::FILTER_TEXT),
 
             TD::make('email', __('Email'))
                 ->sort()
@@ -57,6 +54,9 @@ class UserListLayout extends Table
                 ->render(function (User $user) {
                     return $user->updated_at->toDateTimeString();
                 }),
+
+            TD::make('roles', 'Roles')
+                ->render(fn (User $u) => $u->roles->implode('name', ', ')),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

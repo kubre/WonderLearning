@@ -16,16 +16,20 @@ class UserRoleLayout extends Rows
      */
     protected function fields(): array
     {
+        $options = ['teacher'];
+        if (auth()->user()->inRole('school-owner')) {
+            $options = [
+                'teacher',
+                'center-head',
+                'school-owner',
+            ];
+        }
         return [
             Select::make('user.roles.')
-                ->fromQuery(Role::whereIn(
-                    'slug',
-                    [
-                        'center-head',
-                        'school-owner',
-                        'teacher',
-                    ]
-                ), 'name')
+                ->fromQuery(
+                    Role::whereIn('slug', $options),
+                    'name'
+                )
                 ->multiple()
                 ->title(__('Name role'))
                 ->help('Specify which groups this account should belong to'),
