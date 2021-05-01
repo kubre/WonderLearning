@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\Syllabus;
 use App\Orchid\Screens\Account\{
     CanceledLogScreen,
     DailyCollectionReportScreen,
@@ -33,7 +34,9 @@ use App\Orchid\Screens\Student\EnquiryEditScreen;
 use App\Orchid\Screens\Student\EnquiryListScreen;
 use App\Orchid\Screens\Student\InstallmentEditScreen;
 use App\Orchid\Screens\Student\InvoicePrintScreen;
+use App\Orchid\Screens\Teacher\BookListScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
+use App\Orchid\Screens\Teacher\SubjectListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -144,7 +147,6 @@ Route::screen('program-subjects', ProgramSubjectsScreen::class)
             ->parent('platform.index')
             ->push(__('Add Subject to Programme'), route('admin.program-subjects'))
     );
-
 
 // Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
 // Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
@@ -260,4 +262,20 @@ Route::screen('students', StudentListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Student List'), route('teacher.students.list'))
+    );
+
+Route::screen('subjects', SubjectListScreen::class)
+    ->name('teacher.subjects')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Subjects'), route('teacher.subjects'))
+    );
+
+Route::screen('subject/{syllabus}', BookListScreen::class)
+    ->name('teacher.subjects.book')
+    ->breadcrumbs(
+        fn (Trail $trail, $syllabus) => $trail
+            ->parent('teacher.subjects')
+            ->push(__('Book'), route('teacher.subjects.book', $syllabus))
     );

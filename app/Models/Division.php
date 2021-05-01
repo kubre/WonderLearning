@@ -42,4 +42,9 @@ class Division extends Model
     {
         return $this->belongsTo(School::class);
     }
+
+    public function subjects()
+    {
+        $this->hasManyThrough(Syllabus::class, ProgramSubject::class, 'program', 'syllabus_id', 'program');
+    }
 }

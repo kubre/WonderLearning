@@ -33,7 +33,7 @@ class PermissionServiceProvider extends ServiceProvider
             'fees' => ['edit'],
             'receipt' => $crud,
             'school' => ['users',],
-            'teacher' => ['student',],
+            'teacher' => ['student', 'subjects'],
         ];
 
         foreach ($permissions as $name => $permission) {

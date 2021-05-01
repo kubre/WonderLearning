@@ -55,6 +55,7 @@
 -   (30/apr 11:30am) Fixed school users management
 -   (1/may 1:02pm) Subjects can be assigned under a programme
 -   (1/may 1:25pm) ProgramSubjects Association List and Delete options added
+-   (1/may 11:00pm) Subjects list screen for teacher with all the books as options
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -299,6 +300,9 @@ Have ability to export these reports as excel or pdf
 -   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions
 -   They can mark attendance for students everyday
 -   They will see entire syllabus for the subject they have been assigned
+    - (1/may 11:00pm) Subjects list screen for teacher with all the books as options
+    - Clicking on book reveals syllabus
+    - Mark topic or subtopic as completed 
 -   They can mark a Topic/Sub topic as finished on that particular day which then will be sent to center head for an approval.
 -   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark from 1 to 10. This needs to be approved by center head before this can be seen by parents.
 -   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Kalnoy\Nestedset\NodeTrait;
+use Orchid\Screen\AsSource;
 
 class Syllabus extends Model
 {
     use NodeTrait;
+    use AsSource;
 
     public const TYPES = [
         'subject',
@@ -48,6 +50,18 @@ class Syllabus extends Model
     protected static function booted()
     {
         static::addGlobalScope(new AcademicYearScope());
+    }
+
+    public function scopeSubjectsForTeacher(Builder $builder, int $teacher_id)
+    {
+        $builder->withoutGlobalScopes()
+            ->select('syllabi.*')
+            ->rightJoin('program_subjects', 'syllabi.id', '=', 'program_subjects.syllabus_id')
+            ->rightJoin('divisions', function ($join) {
+                $join->on('program_subjects.program', '=', 'divisions.program');
+            })
+            ->where('divisions.teacher_id', $teacher_id)
+            ->whereBetween('syllabi.created_at', working_year());
     }
 
     public function scopeUnassignedSubjects(Builder $query): Builder

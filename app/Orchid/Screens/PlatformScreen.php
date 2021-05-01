@@ -69,8 +69,14 @@ class PlatformScreen extends Screen
         }
 
         $data = [];
+        // School owner
+        if ($this->user->hasAccess('school.users')) {
+            $data['fees_metric'] = $this->feesMetrics();
+            $data['school_metrics'] = $this->schoolMetrics();
+        }
 
-        if (!$this->is_admin) {
+        // School owner and center head
+        if ($this->user->hasAccess('receipt.delete')) {
             $approvals = Cache::remember(
                 CacheKey::for(CacheKey::APPROVALS),
                 $this->day,
@@ -79,11 +85,7 @@ class PlatformScreen extends Screen
 
             $this->hasApprovals = $approvals->isNotEmpty();
 
-            $data = [
-                'approvals' => $approvals,
-                'fees_metric' => $this->feesMetrics(),
-                'school_metrics' => $this->schoolMetrics(),
-            ];
+            $data['approvals'] = $approvals;
         }
 
         return $data;
@@ -134,7 +136,7 @@ class PlatformScreen extends Screen
 
         $views = [];
 
-        if (!$this->is_admin) {
+        if ($this->user->hasAccess('school.users')) {
             $views = [
                 SchoolMetrics::class,
                 FeesRateMetric::class,
@@ -249,7 +251,7 @@ class PlatformScreen extends Screen
     public function approveDeleteReceipt(Approval $approval)
     {
         if ($approval->approval->for === Receipt::SCHOOL_FEES) {
-            (new InstallmentService)->restore(
+            (new InstallmentService())->restore(
                 $approval->approval->amount,
                 $approval->approval->admission_id
             );

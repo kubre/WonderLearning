@@ -13,6 +13,10 @@ use Session;
 
 class PlatformProvider extends OrchidServiceProvider
 {
+    public User $user;
+
+    public array $subjects = [];
+
     /**
      * @param Dashboard $dashboard
      */
@@ -24,8 +28,6 @@ class PlatformProvider extends OrchidServiceProvider
         if (!is_academic_year_in_sync(school()->academic_year)) {
             Session::forget('_working_year');
         }
-
-        // ...
     }
 
     /**
@@ -33,10 +35,7 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function registerMainMenu(): array
     {
-        /** @var User */
-        $user = auth()->user();
         return [
-
             Menu::make('Dashboard')
                 ->icon('speedometer')
                 ->title('Menu')
@@ -157,6 +156,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('people')
                 ->permission('teacher.student')
                 ->route('teacher.students.list'),
+
+            Menu::make('Subjects')
+                ->icon('notebook')
+                ->permission('teacher.subjects')
+                ->route('teacher.subjects'),
 
             Menu::make('Sign Out')
                 ->icon('logout')
