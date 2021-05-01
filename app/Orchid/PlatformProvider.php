@@ -59,6 +59,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('notebook')
                 ->permission('admin.school')
                 ->route('admin.syllabus'),
+            Menu::make(__('Add Subjects to Programme'))
+                ->icon('share')
+                ->permission('admin.school')
+                ->route('admin.program-subjects'),
             Menu::make('Export Data')
                 ->icon('table')
                 ->permission('admin.export')

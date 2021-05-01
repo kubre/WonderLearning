@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Scopes\AcademicYearScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Kalnoy\Nestedset\NodeTrait;
 
 class Syllabus extends Model
@@ -48,6 +50,15 @@ class Syllabus extends Model
         static::addGlobalScope(new AcademicYearScope());
     }
 
+    public function scopeUnassignedSubjects(Builder $query): Builder
+    {
+        return $query->doesntHave('programme')->where('type', self::SUBJECT);
+    }
+
+    public function programme(): HasOne
+    {
+        return $this->hasOne(ProgramSubject::class, 'syllabus_id');
+    }
 
     // public function children(): HasMany
     // {

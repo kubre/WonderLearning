@@ -10,6 +10,7 @@ use App\Orchid\Screens\Account\{
     PaymentDueReportScreen,
 };
 use App\Orchid\Screens\Admin\ExportScreen;
+use App\Orchid\Screens\Admin\ProgramSubjectsScreen;
 use App\Orchid\Screens\Admin\SyllabusScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
@@ -134,6 +135,14 @@ Route::screen('syllabus', SyllabusScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Syllabus Management'), route('admin.syllabus'))
+    );
+
+Route::screen('program-subjects', ProgramSubjectsScreen::class)
+    ->name('admin.program-subjects')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Syllabus Management'), route('admin.program-subjects'))
     );
 
 

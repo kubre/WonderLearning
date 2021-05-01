@@ -53,6 +53,7 @@
 -   (29/apr 1:25pm) Ability to assign division to the student
 -   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions, fixed filter layouts views
 -   (30/apr 11:30am) Fixed school users management
+-   (1/may 1:02pm) Subjects can be assigned under a programme
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -271,6 +272,7 @@ Have ability to export these reports as excel or pdf
 
     -   Syllabus: Handled using Nested Set Package
         - (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
+    -   (1/may 1:02pm) Subjects can be assigned under a programme
     
 
 -   (DISCARDED) Ability to add academic year calendar with assigning of each topic on particular
