@@ -142,7 +142,7 @@ Route::screen('program-subjects', ProgramSubjectsScreen::class)
     ->breadcrumbs(
         fn (Trail $trail) => $trail
             ->parent('platform.index')
-            ->push(__('Syllabus Management'), route('admin.program-subjects'))
+            ->push(__('Add Subject to Programme'), route('admin.program-subjects'))
     );
 
 

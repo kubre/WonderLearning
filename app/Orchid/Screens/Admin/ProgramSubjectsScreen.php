@@ -5,13 +5,15 @@ namespace App\Orchid\Screens\Admin;
 use App\Models\ProgramSubject;
 use App\Models\School;
 use App\Models\Syllabus;
+use App\Orchid\Layouts\Admin\ProgramSubjectsListLayout;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 use Illuminate\Http\Request;
+use Orchid\Support\Facades\Toast;
 
 class ProgramSubjectsScreen extends Screen
 {
@@ -36,7 +38,9 @@ class ProgramSubjectsScreen extends Screen
      */
     public function query(): array
     {
-        return [];
+        return [
+            'program_subjects' => ProgramSubject::with('subject')->simplePaginate(30),
+        ];
     }
 
     /**
@@ -76,10 +80,11 @@ class ProgramSubjectsScreen extends Screen
                         ->required(),
                 ]),
             ])->applyButton('Save'),
+            ProgramSubjectsListLayout::class,
         ];
     }
 
-    public function associate(Request $request)
+    public function associate(Request $request): RedirectResponse
     {
         $request->validate([
             'program' => ['required', 'in:' . \implode(',', School::PROGRAMMES)],
@@ -89,6 +94,15 @@ class ProgramSubjectsScreen extends Screen
         ProgramSubject::create($request->input());
 
         Toast::info('Added the subject under programme.');
+
+        return redirect()->route('admin.program-subjects');
+    }
+
+    public function remove(ProgramSubject $association): RedirectResponse
+    {
+        $association->delete();
+
+        Toast::info('Removed subject from programme.');
 
         return redirect()->route('admin.program-subjects');
     }
