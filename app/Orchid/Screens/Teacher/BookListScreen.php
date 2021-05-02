@@ -4,6 +4,8 @@ namespace App\Orchid\Screens\Teacher;
 
 use App\Models\Syllabus;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
+use Illuminate\Http\Request;
 
 class BookListScreen extends Screen
 {
@@ -19,7 +21,7 @@ class BookListScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'Content of the selected book';
+    public $description = 'Index Page';
 
     /**
      * Query data.
@@ -29,7 +31,10 @@ class BookListScreen extends Screen
     public function query(Syllabus $book): array
     {
         $this->name = $book->name;
-        return [];
+        return [
+            'items' => $book->descendants()->with('children')->get(),
+            'book_id' => $book->id,
+        ];
     }
 
     /**
@@ -49,6 +54,18 @@ class BookListScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            Layout::view('components.book')
+        ];
+    }
+
+    public function markComplete(Syllabus $book, Request $request)
+    {
+        $request->validate([
+            'syllabus_id' => ['bail', 'required', 'exists:syllabi,id',],
+            'completed_at' => ['required', 'date'],
+        ]);
+
+        return response(['status' => 'ok']);
     }
 }

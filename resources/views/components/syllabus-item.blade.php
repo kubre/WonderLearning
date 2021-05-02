@@ -8,14 +8,6 @@
                     <x-orchid-icon class="me-2" path="plus" />
                     Book
                 </button>
-                <button class="btn btn-sm btn-dark rounded-pill ms-1">
-                    <x-orchid-icon class="me-2" path="eye" />
-                    Show/Hide
-                </button>
-                <button class="btn btn-sm btn-danger ms-auto rounded-pill">
-                    <x-orchid-icon class="me-2" path="trash" />
-                    Delete
-                </button>
             </div>
         </div>
 
