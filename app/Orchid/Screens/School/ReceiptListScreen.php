@@ -132,7 +132,7 @@ class ReceiptListScreen extends Screen
         if ($receipt->for === Receipt::SCHOOL_FEES) {
             $data['admission_id'] = $receipt->admission_id;
 
-            (new InstallmentService)->restore(
+            (new InstallmentService())->restore(
                 $receipt->amount,
                 $receipt->admission_id
             );
@@ -145,28 +145,33 @@ class ReceiptListScreen extends Screen
 
     public function requestDelete(Receipt $receipt)
     {
-        $approval = new Approval([
+        $receipt->approval()->save(new Approval([
             'school_id' => $receipt->school_id,
+            'method' => 'deleteReceipt',
             'created_at' => working_year()[0],
-        ]);
-
-        $data = [];
-        if ($receipt->for === Receipt::SCHOOL_FEES) {
-            $data['admission_id'] = $receipt->admission_id;
-        }
-
-        $receipt->approval()->save($approval);
+        ]));
 
         Toast::info('Requested school owner for deletion of receipt!');
-        return redirect()->route('school.receipt.list', $data);
+
+        if ($receipt->for === Receipt::SCHOOL_FEES) {
+            return redirect()->route(
+                'school.receipt.list',
+                ['admission_id' => $receipt->admission_id]
+            );
+        }
+
+        return redirect()->route('school.receipt.list');
     }
 
-    public function issueReceipt(int $receipt, string $option, bool $is_multi_layout): RedirectResponse
-    {
+    public function issueReceipt(
+        int $receipt,
+        string $option,
+        bool $isMultiLayout
+    ): RedirectResponse {
         return redirect()->route('school.receipt.print', [
             'receipt' => $receipt,
             'parent' => request('for'),
-            'is_multi_layout' => $is_multi_layout,
+            'is_multi_layout' => $isMultiLayout,
         ]);
     }
 }

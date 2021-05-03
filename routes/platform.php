@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Models\Syllabus;
 use App\Orchid\Screens\Account\{
     CanceledLogScreen,
     DailyCollectionReportScreen,

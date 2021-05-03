@@ -42,14 +42,14 @@ class ApprovalListLayout extends Table
                     ->list([
                         Button::make('Approve')
                             ->icon('check')
-                            ->method('approveDeleteReceipt')
+                            ->method('approve')
                             ->confirm('Are you sure?')
                             ->parameters([
                                 'id' => $approval->id,
                             ]),
                         Button::make('Cancel')
                             ->icon('close')
-                            ->method('cancelDeleteReceipt')
+                            ->method('cancel')
                             ->parameters([
                                 'id' => $approval->id,
                             ]),

@@ -15,13 +15,14 @@ class Approval extends Model
         'school_id',
         'approval_type',
         'approval_id',
+        'method',
         'created_at',
     ];
 
     protected static function booted()
     {
-        static::addGlobalScope(new AcademicYearScope);
-        static::addGlobalScope(new SchoolScope);
+        static::addGlobalScope(new AcademicYearScope());
+        static::addGlobalScope(new SchoolScope());
     }
 
     public function approval()

@@ -26,38 +26,38 @@
 -   (10/apr 02:41pm) Fees Receipt Generation
 -   (10/apr 05:13pm) Invoice Prints
 -   (11/apr 12:30pm) Payment Due Reports and CSV export library, pdf also
--   (11/apr 2:14pm) Added cancel for the receipts
--   (11/apr 2:38pm) Added Cancelled receipts logs reports, changed csv export name scheme
--   (11/apr 5:05pm) Online Collection reports added, custom filter layout added
--   (11/apr 5:56pm) Add Daily Collection, Minor tweaks other reports and filters
+-   (11/apr 02:14pm) Added cancel for the receipts
+-   (11/apr 02:38pm) Added Cancelled receipts logs reports, changed csv export name scheme
+-   (11/apr 05:05pm) Online Collection reports added, custom filter layout added
+-   (11/apr 05:56pm) Add Daily Collection, Minor tweaks other reports and filters
 -   (11/apr 06:42pm) Admission Report and added batch filter in Program Selection
 -   (12/apr 11:52am) Enquiry Report (Excel, PDF) now admission create will also save student_id in enquiry
--   (12/apr 4:27pm) Individual Student Receipt Report Export, some query optimizations
--   (13/apr 9:07am) Fixed Fees Receipt generation error on create as some students didn't had admission that year solved by using Admission instead of student Payment Due error on no data fixed, changed text cancel to delete for receipt action
+-   (12/apr 04:27pm) Individual Student Receipt Report Export, some query optimizations
+-   (13/apr 09:07am) Fixed Fees Receipt generation error on create as some students didn't had admission that year solved by using Admission instead of student Payment Due error on no data fixed, changed text cancel to delete for receipt action
 -   (13/apr 11:17am) Print button is in warning style everywhere and fixed every model loading same data with multiple queries, Multiple Center Head
--   (14/apr 8:40am) Removed fees installments from admission moved to separate model, screen to add installment added
--   (14/apr 8:40am) Installment deduction while paying receipt, Installment tab in receipts
--   (14/apr 7:25pm) Added receipt deletion approval, if user doesn't have receipt.delete permission then it will show request deletion button now.
--   (15/apr 5:08pm) Added School And Fees Metrics, implemented caching, fixed enquiry report not having scopes, Admin and School Dashboard separation
+-   (14/apr 08:40am) Removed fees installments from admission moved to separate model, screen to add installment added
+-   (14/apr 08:40am) Installment deduction while paying receipt, Installment tab in receipts
+-   (14/apr 07:25pm) Added receipt deletion approval, if user doesn't have receipt.delete permission then it will show request deletion button now.
+-   (15/apr 05:08pm) Added School And Fees Metrics, implemented caching, fixed enquiry report not having scopes, Admin and School Dashboard separation
 -   (16/apr 06:20pm) Added Graduation Screen and Logic, Installment and Admission bugs fixed, now admission cannot be added without adding fees first. Minor fixes in Dashboard.
 -   (17/apr 12:10am) Properly set up the Laravel Excel Package on local, Also exported users table as expected
 -   (17/apr 12:50pm) Demoed excel exports on server and added remaining xlsx exports for admin specified in Exports task
--   (17/apr 4:30pm) Added User Management for Schools
+-   (17/apr 04:30pm) Added User Management for Schools
 
--   (18/apr 3:43pm) Kit Stock Management, Ability to assign kit to the student
--   (18/apr 7:52pm) Validations before assigning kit and added field in admission reports for both user and admin
--   (18/apr 8:22pm) Added Kit Stock Reports for admin
--   (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
+-   (18/apr 03:43pm) Kit Stock Management, Ability to assign kit to the student
+-   (18/apr 07:52pm) Validations before assigning kit and added field in admission reports for both user and admin
+-   (18/apr 08:22pm) Added Kit Stock Reports for admin
+-   (27/apr 05:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
 -   (28/apr 11:24pm) School can add and assign divisions to teachers
 -   (28/apr 11:40pm) Table and Delete added for divisions
--   (29/apr 1:25pm) Ability to assign division to the student
--   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions, fixed filter layouts views
+-   (29/apr 01:25pm) Ability to assign division to the student
+-   (29/apr 09:35pm) Teachers will be able to see the list of all students under their divisions, fixed filter layouts views
 -   (30/apr 11:30am) Fixed school users management
--   (1/may 1:02pm) Subjects can be assigned under a programme
--   (1/may 1:25pm) ProgramSubjects Association List and Delete options added
--   (1/may 11:00pm) Subjects list screen for teacher with all the books as options
-- (2/may 3:11pm) Clicking on book reveals syllabus and Submit mark request and validate
-
+-   (01/may 01:02pm) Subjects can be assigned under a programme
+-   (01/may 01:25pm) ProgramSubjects Association List and Delete options added
+-   (01/may 11:00pm) Subjects list screen for teacher with all the books as options
+-   (02/may 03:11pm) Clicking on book reveals syllabus and Submit mark request and validate
+-   (03/may 12:10pm) Receipt is compatible with new ApprovalService based API
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -304,8 +304,15 @@ Have ability to export these reports as excel or pdf
 -   They will see entire syllabus for the subject they have been assigned
     - (1/may 11:00pm) Subjects list screen for teacher with all the books as options
     - (2/may 3:11pm) Clicking on book reveals syllabus
-    - (2/may 3:11pm) Submit mark request and validate
 -   They can mark a Topic/Sub topic as finished on that particular day which then will be sent to center head for an approval.
+    - (2/may 3:11pm) Submit mark request and validate
+    - Approval request to school admin (Changes required specified below)
+        - Method to approvals table
+        - Changes in delete of ReceiptListScreen
+        - Approval Service
+        - Changes in PlatformScreen
+        - Presenter for Approval Models
+
 -   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark from 1 to 10. This needs to be approved by center head before this can be seen by parents.
 -   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed

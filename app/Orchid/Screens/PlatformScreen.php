@@ -18,6 +18,7 @@ use App\Models\{
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
 use App\Orchid\Layouts\School\FeesRateMetric;
 use App\Orchid\Layouts\School\SchoolMetrics;
+use App\Services\ApprovalService;
 use App\Services\InstallmentService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -75,16 +76,11 @@ class PlatformScreen extends Screen
             $data['school_metrics'] = $this->schoolMetrics();
         }
 
-        // School owner and center head
+        // School owner
         if ($this->user->hasAccess('receipt.delete')) {
-            $approvals = Cache::remember(
-                CacheKey::for(CacheKey::APPROVALS),
-                $this->day,
-                fn () => Approval::with('approval.admission.student')->get()
-            );
-
+            // FIXME: Loading admission and student will not work for every model
+            $approvals = Approval::with('approval.admission.student')->get();
             $this->hasApprovals = $approvals->isNotEmpty();
-
             $data['approvals'] = $approvals;
         }
 
@@ -129,7 +125,7 @@ class PlatformScreen extends Screen
      */
     public function layout(): array
     {
-        $valid_years = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
+        $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
             $d = Carbon::createFromDate($y, session('school')->start_month, 1);
             return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
         });
@@ -154,7 +150,7 @@ class PlatformScreen extends Screen
             Layout::modal('changeWorkingYear', [
                 Layout::rows([
                     Select::make('workingYear')
-                        ->options($valid_years)
+                        ->options($validYears)
                         ->title('Select the Academic Year'),
                 ]),
             ])
@@ -166,10 +162,10 @@ class PlatformScreen extends Screen
 
     public function updateWorkingYear()
     {
-        $d = Carbon::parse(request('workingYear'));
-        working_year($d);
+        $date = Carbon::parse(request('workingYear'));
+        working_year($date);
         $this->refreshStats();
-        Toast::success("Changed academic year to {$d->format('M Y')} successfully!");
+        Toast::success("Changed academic year to {$date->format('M Y')} successfully!");
     }
 
     public function feesMetrics()
@@ -193,7 +189,7 @@ class PlatformScreen extends Screen
 
     public function schoolMetrics()
     {
-        $payment_due = Cache::remember(
+        $paymentDue = Cache::remember(
             CacheKey::for(CacheKey::PAYMENT_DUE),
             $this->day,
             fn () => Installment::where('month', today()->month)->sum('due_amount')
@@ -211,19 +207,19 @@ class PlatformScreen extends Screen
             fn () => Receipt::where('for', Receipt::SCHOOL_FEES)->sum('amount')
         );
 
-        $admission_count  = Cache::remember(
+        $admissionCount = Cache::remember(
             CacheKey::for(CacheKey::ADMISSION),
             $this->day,
             fn () => Admission::count('id')
         );
 
-        $enquiry_count  = Cache::remember(
+        $enquiryCount  = Cache::remember(
             CacheKey::for(CacheKey::ENQUIRY),
             $this->day,
             fn () => Enquiry::count('id')
         );
 
-        $conversion_count  = Cache::remember(
+        $conversionCount = Cache::remember(
             CacheKey::for(CacheKey::CONVERSION),
             $this->day,
             fn () => Enquiry::count('student_id')
@@ -231,12 +227,12 @@ class PlatformScreen extends Screen
 
 
         return [
-            ['keyValue' => '₹ ' . number_format((float) $payment_due, 0)],
+            ['keyValue' => '₹ ' . number_format((float) $paymentDue, 0)],
             ['keyValue' => '₹ ' . number_format((float) $receivable, 0)],
             ['keyValue' => '₹ ' . number_format((float) $deposited, 0)],
-            ['keyValue' => number_format((float) $enquiry_count, 0)],
-            ['keyValue' => number_format((float) $conversion_count, 0)],
-            ['keyValue' => number_format((float) $admission_count, 0)],
+            ['keyValue' => number_format((float) $enquiryCount, 0)],
+            ['keyValue' => number_format((float) $conversionCount, 0)],
+            ['keyValue' => number_format((float) $admissionCount, 0)],
         ];
     }
 
@@ -248,26 +244,16 @@ class PlatformScreen extends Screen
         ));
     }
 
-    public function approveDeleteReceipt(Approval $approval)
+    public function approve(Approval $approval)
     {
-        if ($approval->approval->for === Receipt::SCHOOL_FEES) {
-            (new InstallmentService())->restore(
-                $approval->approval->amount,
-                $approval->approval->admission_id
-            );
-        }
-
-        $approval->approval->delete();
-        $approval->delete();
-
-        Toast::info('Deleted receipt successfully!');
+        (new ApprovalService())->handle($approval);
+        Toast::info('Approved the action successfully!');
         return redirect()->route('platform.main');
     }
 
-    public function cancelDeleteReceipt(Approval $approval)
+    public function cancel(Approval $approval)
     {
-        $approval->delete();
-
+        (new ApprovalService())->cancel($approval);
         Toast::info('Rejected approval!');
         return redirect()->route('platform.main');
     }

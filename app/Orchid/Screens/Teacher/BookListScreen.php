@@ -55,7 +55,7 @@ class BookListScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::view('components.book')
+            Layout::view('components.book'),
         ];
     }
 
