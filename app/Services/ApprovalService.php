@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Approval;
 use App\Models\Receipt;
 use App\Models\SchoolSyllabus;
+use App\Models\Syllabus;
 
 class ApprovalService
 {
@@ -16,13 +17,7 @@ class ApprovalService
             return false;
         }
 
-        $entity = $approval->approval_type::find($approval->approval_id);
-
-        if (is_null($entity)) {
-            return false;
-        }
-
-        $this->{$approval->method}($entity, $approval->data);
+        $this->{$approval->method}($approval);
 
         $approval->delete();
 
@@ -45,29 +40,31 @@ class ApprovalService
         if ($approval->approval_type === Receipt::class) {
             return "Delete receipt for {$approval->approval->admission->student->name}. Receipt No: {$approval->approval->receipt_no} for amount {$approval->approval->amount}?";
         }
-        if ($approval->approval_type === SchoolSyllabus::class) {
-            return "Approve topic \"{$approval->approval->syllabus->name}\" marked completed by \"{$approval->data['teacher_name']}\" on date \"{$approval->data['completed_at']}\".";
+        if ($approval->approval_type === Syllabus::class) {
+            return "Approve topic \"{$approval->approval->name}\" marked completed by \"{$approval->data['teacher_name']}\" on date \"{$approval->data['completed_at']}\".";
         }
         return 'Nothing...';
     }
 
     /** Approval process for receipt deletion */
-    private function deleteReceipt(Receipt $receipt, $data): void
+    private function deleteReceipt(Approval $approval): void
     {
-        if ($receipt->for === Receipt::SCHOOL_FEES) {
+        if ($approval->approval->for === Receipt::SCHOOL_FEES) {
             (new InstallmentService())->restore(
-                $receipt->amount,
-                $receipt->admission_id
+                $approval->approval->amount,
+                $approval->approval->admission_id
             );
         }
 
-        $receipt->delete();
+        $approval->approval->delete();
     }
 
-    private function markSyllabus(SchoolSyllabus $covered, array $data)
+    private function markSyllabus(Approval $approval): void
     {
-        $covered->fill([
-            'completed_at' => $data['completed_at'],
-        ])->save();
+        SchoolSyllabus::create([
+            'school_id' => $approval->school_id,
+            'syllabus_id' => $approval->approval_id,
+            'completed_at' => $approval->data['completed_at'],
+        ]);
     }
 }

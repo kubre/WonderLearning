@@ -73,22 +73,17 @@ class BookListScreen extends Screen
             'syllabus_id' => ['bail', 'required', 'exists:syllabi,id',],
         ]);
 
-        DB::transaction(function () use ($request) {
-            SchoolSyllabus::create([
-                'school_id' => $request->school_id,
-                'syllabus_id' => $request->syllabus_id,
-            ])->approval()
-                ->save(new Approval([
-                    'school_id' => $request->school_id,
-                    'syllabus_id' => $request->syllabus_id,
-                    'method' => 'markSyllabus',
-                    'data' => [
-                        'completed_at' => $request->completed_at,
-                        'teacher_name' => $request->teacher_name,
-                    ],
-                    'created_at' => working_year()[0],
-                ]));
-        });
+        Approval::create([
+            'school_id' => $request->school_id,
+            'method' => 'markSyllabus',
+            'approval_type' => Syllabus::class,
+            'approval_id' => $request->syllabus_id,
+            'data' => [
+                'completed_at' => $request->completed_at,
+                'teacher_name' => $request->teacher_name,
+            ],
+            'created_at' => working_year()[0],
+        ]);
 
         return response(['status' => 'ok']);
     }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Kalnoy\Nestedset\NodeTrait;
 use Orchid\Screen\AsSource;
 
@@ -79,6 +80,11 @@ class Syllabus extends Model
     {
         return $this->belongsToMany(School::class)
             ->withPivot('id', 'completed_at');
+    }
+
+    public function approval(): MorphMany
+    {
+        return $this->morphMany(Approval::class, 'approval');
     }
 
     // public function children(): HasMany

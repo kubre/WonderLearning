@@ -14,6 +14,7 @@ use App\Models\{
     Receipt,
     School,
     SchoolSyllabus,
+    Syllabus,
     User
 };
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
@@ -85,7 +86,7 @@ class PlatformScreen extends Screen
                 ->with(['approval' => function (MorphTo $morphTo) {
                     $morphTo->morphWith([
                         Receipt::class => ['admission.student'],
-                        SchoolSyllabus::class => ['syllabus'],
+                        // Syllabus::class => ['syllabus'],
                     ]);
                 }])->get();
             $this->hasApprovals = $approvals->isNotEmpty();
