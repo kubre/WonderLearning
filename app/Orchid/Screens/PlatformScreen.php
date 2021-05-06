@@ -13,6 +13,7 @@ use App\Models\{
     Installment,
     Receipt,
     School,
+    SchoolSyllabus,
     User
 };
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
@@ -21,6 +22,7 @@ use App\Orchid\Layouts\School\SchoolMetrics;
 use App\Services\ApprovalService;
 use App\Services\InstallmentService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Cache;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
@@ -53,7 +55,7 @@ class PlatformScreen extends Screen
 
     public int $day = 86400;
 
-    public bool $is_admin = false;
+    public bool $isAdmin = false;
 
 
     /**
@@ -64,7 +66,7 @@ class PlatformScreen extends Screen
     public function query(): array
     {
         $this->user = auth()->user();
-        $this->is_admin = $this->user->hasAccess('admin.user');
+        $this->isAdmin = $this->user->hasAccess('admin.user');
         if (!Session::exists('school')) {
             session(['school' => optional($this->user)->school ?? new School()]);
         }
@@ -77,9 +79,15 @@ class PlatformScreen extends Screen
         }
 
         // School owner
+        // FIXME: permission for approvals
         if ($this->user->hasAccess('receipt.delete')) {
-            // FIXME: Loading admission and student will not work for every model
-            $approvals = Approval::with('approval.admission.student')->get();
+            $approvals = Approval::query()
+                ->with(['approval' => function (MorphTo $morphTo) {
+                    $morphTo->morphWith([
+                        Receipt::class => ['admission.student'],
+                        SchoolSyllabus::class => ['syllabus'],
+                    ]);
+                }])->get();
             $this->hasApprovals = $approvals->isNotEmpty();
             $data['approvals'] = $approvals;
         }
@@ -97,7 +105,7 @@ class PlatformScreen extends Screen
         return [
             Button::make('Refresh Overview')
                 ->icon('refresh')
-                ->canSee(!$this->is_admin)
+                ->canSee(!$this->isAdmin)
                 ->method('refreshStats'),
             ModalToggle::make('Change Academic Year (' . get_academic_year_formatted(working_year()) . ')')
                 ->modalTitle('Change Academic Year')

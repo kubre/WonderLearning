@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Approval;
 use App\Models\Receipt;
+use App\Models\SchoolSyllabus;
 
 class ApprovalService
 {
@@ -21,7 +22,7 @@ class ApprovalService
             return false;
         }
 
-        $this->{$approval->method}($entity);
+        $this->{$approval->method}($entity, $approval->data);
 
         $approval->delete();
 
@@ -39,8 +40,19 @@ class ApprovalService
         return $approval->delete();
     }
 
+    public static function messageFor(Approval $approval): string
+    {
+        if ($approval->approval_type === Receipt::class) {
+            return "Delete receipt for {$approval->approval->admission->student->name}. Receipt No: {$approval->approval->receipt_no} for amount {$approval->approval->amount}?";
+        }
+        if ($approval->approval_type === SchoolSyllabus::class) {
+            return "Approve topic \"{$approval->approval->syllabus->name}\" marked completed by \"{$approval->data['teacher_name']}\" on date \"{$approval->data['completed_at']}\".";
+        }
+        return 'Nothing...';
+    }
+
     /** Approval process for receipt deletion */
-    private function deleteReceipt(Receipt $receipt): void
+    private function deleteReceipt(Receipt $receipt, $data): void
     {
         if ($receipt->for === Receipt::SCHOOL_FEES) {
             (new InstallmentService())->restore(
@@ -50,5 +62,12 @@ class ApprovalService
         }
 
         $receipt->delete();
+    }
+
+    private function markSyllabus(SchoolSyllabus $covered, array $data)
+    {
+        $covered->fill([
+            'completed_at' => $data['completed_at'],
+        ])->save();
     }
 }

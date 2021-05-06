@@ -2,10 +2,15 @@
 
 namespace App\Orchid\Screens\Teacher;
 
+use App\Models\Approval;
+use App\Models\School;
+use App\Models\SchoolSyllabus;
 use App\Models\Syllabus;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Orchid\Support\Facades\Toast;
 
 class BookListScreen extends Screen
 {
@@ -62,9 +67,28 @@ class BookListScreen extends Screen
     public function markComplete(Syllabus $book, Request $request)
     {
         $request->validate([
-            'syllabus_id' => ['bail', 'required', 'exists:syllabi,id',],
+            'teacher_name' => ['required'],
+            'school_id' => ['required'],
             'completed_at' => ['required', 'date'],
+            'syllabus_id' => ['bail', 'required', 'exists:syllabi,id',],
         ]);
+
+        DB::transaction(function () use ($request) {
+            SchoolSyllabus::create([
+                'school_id' => $request->school_id,
+                'syllabus_id' => $request->syllabus_id,
+            ])->approval()
+                ->save(new Approval([
+                    'school_id' => $request->school_id,
+                    'syllabus_id' => $request->syllabus_id,
+                    'method' => 'markSyllabus',
+                    'data' => [
+                        'completed_at' => $request->completed_at,
+                        'teacher_name' => $request->teacher_name,
+                    ],
+                    'created_at' => working_year()[0],
+                ]));
+        });
 
         return response(['status' => 'ok']);
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Scopes\AcademicYearScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Kalnoy\Nestedset\NodeTrait;
 use Orchid\Screen\AsSource;
@@ -52,7 +53,7 @@ class Syllabus extends Model
         static::addGlobalScope(new AcademicYearScope());
     }
 
-    public function scopeSubjectsForTeacher(Builder $builder, int $teacher_id)
+    public function scopeSubjectsForTeacher(Builder $builder, int $teacherId)
     {
         $builder->withoutGlobalScopes()
             ->select('syllabi.*')
@@ -60,7 +61,7 @@ class Syllabus extends Model
             ->rightJoin('divisions', function ($join) {
                 $join->on('program_subjects.program', '=', 'divisions.program');
             })
-            ->where('divisions.teacher_id', $teacher_id)
+            ->where('divisions.teacher_id', $teacherId)
             ->whereBetween('syllabi.created_at', working_year());
     }
 
@@ -72,6 +73,12 @@ class Syllabus extends Model
     public function programme(): HasOne
     {
         return $this->hasOne(ProgramSubject::class, 'syllabus_id');
+    }
+
+    public function schools(): BelongsToMany
+    {
+        return $this->belongsToMany(School::class)
+            ->withPivot('id', 'completed_at');
     }
 
     // public function children(): HasMany

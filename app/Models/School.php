@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Filters\Filterable;
@@ -12,7 +13,9 @@ use Orchid\Screen\AsSource;
 
 class School extends Model
 {
-    use AsSource, HasFactory, Filterable;
+    use AsSource;
+    use HasFactory;
+    use Filterable;
 
 
     public const PROGRAMMES = [
@@ -118,5 +121,11 @@ class School extends Model
     public function kitStock(): HasOne
     {
         return $this->hasOne(KitStock::class);
+    }
+
+    public function syllabi(): BelongsToMany
+    {
+        return $this->belongsToMany(Syllabus::class)
+            ->withPivot('id', 'completed_at');
     }
 }

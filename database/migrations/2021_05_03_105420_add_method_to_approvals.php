@@ -15,6 +15,9 @@ class AddMethodToApprovals extends Migration
     {
         Schema::table('approvals', function (Blueprint $table) {
             $table->string('method');
+            $table->json('data')
+                ->nullable()
+                ->default(null);
         });
     }
 
@@ -26,7 +29,7 @@ class AddMethodToApprovals extends Migration
     public function down()
     {
         Schema::table('approvals', function (Blueprint $table) {
-            $table->dropColumn('method');
+            $table->dropColumn(['method', 'data']);
         });
     }
 }

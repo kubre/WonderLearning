@@ -58,6 +58,7 @@
 -   (01/may 11:00pm) Subjects list screen for teacher with all the books as options
 -   (02/may 03:11pm) Clicking on book reveals syllabus and Submit mark request and validate
 -   (03/may 12:10pm) Receipt is compatible with new ApprovalService based API
+-   (06/may 06:30pm) Approval for syllabus taught added, API for approval is fully flexible now
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -291,10 +292,9 @@ Have ability to export these reports as excel or pdf
     -   school_id
 -   (28/apr 11:24pm) Center Head will assign a Program (PG/NUR/LKG/UKG) and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them though subject would only have a single teacher).
 -   (29/apr 1:25pm) Ability to assign division to the student
--   Approval to Daily Teaching (Taught) syllabus.
+-   (6/may 06:30pm) Approval to Daily Teaching (Taught) syllabus.
 -   Approval to weekly student performance reports.
 -   Can see Student attendance and performance report an export excel if needed.
--   They can provide approval to the completed Topic/Sub topic submitted by teachers as finished which then will be sent to parents of students who have attended school on that particular day.
 
 ### Teacher Panel Features
 
@@ -305,14 +305,13 @@ Have ability to export these reports as excel or pdf
     - (1/may 11:00pm) Subjects list screen for teacher with all the books as options
     - (2/may 3:11pm) Clicking on book reveals syllabus
 -   They can mark a Topic/Sub topic as finished on that particular day which then will be sent to center head for an approval.
-    - (2/may 3:11pm) Submit mark request and validate
-    - Approval request to school admin (Changes required specified below)
+    - (2/may 03:11pm) Submit mark request and validate
+    - (6/may 06:30pm) Approval request to school admin (Changes required specified below)
         - Method to approvals table
         - Changes in delete of ReceiptListScreen
         - Approval Service
         - Changes in PlatformScreen
-        - Presenter for Approval Models
-
+    - Reflection of syllabus taught in book screen
 -   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark from 1 to 10. This needs to be approved by center head before this can be seen by parents.
 -   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed

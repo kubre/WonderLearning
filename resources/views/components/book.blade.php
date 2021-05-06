@@ -27,6 +27,8 @@
                 </div>
 
                 <div class="modal-body px-3 py-2">
+                    <input type="hidden" id="school_id" name="school_id" value="{{ school()->id }}">
+                    <input type="hidden" id="teacher_name" name="teacher_name" value="{{ auth()->user()->name }}">
                     <input type="hidden" id="syllabus_id" name="syllabus_id" value="">
                     <div class="mb-3">
                         <label for="completed_at" class="form-label">Completion Date</label>
@@ -65,7 +67,9 @@
             axios.post(url, {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'syllabus_id': document.getElementById('syllabus_id').value,
-                    'completed_at': document.getElementById('completed_at').value
+                    'completed_at': document.getElementById('completed_at').value,
+                    'school_id': document.getElementById('school_id').value,
+                    'teacher_name': document.getElementById('teacher_name').value,
                 })
                 .then(function(res) {
                     document.getElementById('btnSubmit').removeAttribute('disabled');
