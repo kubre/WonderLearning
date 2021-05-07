@@ -59,6 +59,7 @@
 -   (02/may 03:11pm) Clicking on book reveals syllabus and Submit mark request and validate
 -   (03/may 12:10pm) Receipt is compatible with new ApprovalService based API
 -   (06/may 06:30pm) Approval for syllabus taught added, API for approval is fully flexible now
+-   (07/may 04:32pm) Syllabus Completed can be seen marked inside book screen
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -311,7 +312,7 @@ Have ability to export these reports as excel or pdf
         - Changes in delete of ReceiptListScreen
         - Approval Service
         - Changes in PlatformScreen
-    - Reflection of syllabus taught in book screen
+    - (07/may 04:32pm) Reflection of syllabus taught in book screen
 -   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark from 1 to 10. This needs to be approved by center head before this can be seen by parents.
 -   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed

@@ -37,7 +37,9 @@ class BookListScreen extends Screen
     {
         $this->name = $book->name;
         return [
-            'items' => $book->descendants()->with('children')->get(),
+            'items' => $book->descendants()
+                ->with('children', 'covered')
+                ->get(),
             'book_id' => $book->id,
         ];
     }
@@ -64,7 +66,7 @@ class BookListScreen extends Screen
         ];
     }
 
-    public function markComplete(Syllabus $book, Request $request)
+    public function markComplete(int $bookId, Request $request)
     {
         $request->validate([
             'teacher_name' => ['required'],

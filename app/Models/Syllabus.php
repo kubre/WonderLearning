@@ -82,6 +82,11 @@ class Syllabus extends Model
             ->withPivot('id', 'completed_at');
     }
 
+    public function covered(): HasOne
+    {
+        return $this->hasOne(SchoolSyllabus::class, 'syllabus_id', 'id');
+    }
+
     public function approval(): MorphMany
     {
         return $this->morphMany(Approval::class, 'approval');

@@ -22,6 +22,11 @@ class SchoolSyllabus extends Pivot
         'completed_at',
     ];
 
+    public function getCompletedAtAttribute($value)
+    {
+        return \date('d M y', \strtotime($value));
+    }
+
     public function approval(): MorphOne
     {
         return $this->morphOne(Approval::class, 'approval');

@@ -6,11 +6,16 @@
             </div>
             <div>
                 @if ($item->children->isEmpty() && $item->type !== 'chapter')
-                    <button type="button" data-item="{{ $item->toJson() }}" data-bs-toggle="modal"
-                        data-bs-target="#markModal" class="btn btn-default rounded-pill btn-sm">
-                        <x-orchid-icon class="me-2" path='check'></x-orchid-icon>
-                        Mark finished
-                    </button>
+                    @if ($item->covered)
+                        <span class="badge rounded-pill bg-dark text-light">Completed:
+                            {{ $item->covered->completed_at }}</span>
+                    @else
+                        <button type="button" data-item="{{ $item->toJson() }}" data-bs-toggle="modal"
+                            data-bs-target="#markModal" class="btn btn-default rounded-pill btn-sm">
+                            <x-orchid-icon class="me-2" path='check'></x-orchid-icon>
+                            Mark finished
+                        </button>
+                    @endif
                 @endif
             </div>
         </div>
