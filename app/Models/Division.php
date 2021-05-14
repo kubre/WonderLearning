@@ -38,6 +38,11 @@ class Division extends Model
         return $this->belongsTo(User::class, 'teacher_id', 'id', 'users');
     }
 
+    public function getTitleAndProgramAttribute()
+    {
+        return "{$this->attributes['title']} ({$this->attributes['program']})";
+    }
+
     public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
@@ -46,5 +51,10 @@ class Division extends Model
     public function subjects()
     {
         $this->hasManyThrough(Syllabus::class, ProgramSubject::class, 'program', 'syllabus_id', 'program');
+    }
+
+    public function scopeOfTeacher($query, int $teacherId)
+    {
+        return $query->where('teacher_id', $teacherId);
     }
 }

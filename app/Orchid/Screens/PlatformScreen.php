@@ -13,15 +13,12 @@ use App\Models\{
     Installment,
     Receipt,
     School,
-    SchoolSyllabus,
-    Syllabus,
     User
 };
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
 use App\Orchid\Layouts\School\FeesRateMetric;
 use App\Orchid\Layouts\School\SchoolMetrics;
 use App\Services\ApprovalService;
-use App\Services\InstallmentService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Cache;
@@ -68,8 +65,9 @@ class PlatformScreen extends Screen
     {
         $this->user = auth()->user();
         $this->isAdmin = $this->user->hasAccess('admin.user');
+
         if (!Session::exists('school')) {
-            session(['school' => optional($this->user)->school ?? new School()]);
+            session(['school' => $this->user->school ?? new School()]);
         }
 
         $data = [];

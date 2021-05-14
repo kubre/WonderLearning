@@ -2,7 +2,9 @@
 
 namespace App\Orchid;
 
+use App\Models\School;
 use App\Models\User;
+use Auth;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
@@ -23,6 +25,8 @@ class PlatformProvider extends OrchidServiceProvider
     public function boot(Dashboard $dashboard): void
     {
         parent::boot($dashboard);
+
+        // $this->isAdmin = $this->user->hasAccess('admin.user');
 
         // This code is to make sure if working year in session ever gets out of sync just sync it back
         if (!is_academic_year_in_sync(school()->academic_year)) {
@@ -161,6 +165,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('notebook')
                 ->permission('teacher.subjects')
                 ->route('teacher.subjects'),
+
+            Menu::make('Attendance')
+                ->icon('table')
+                ->permission('teacher.student')
+                ->route('teacher.attendance.list'),
 
             Menu::make('Sign Out')
                 ->icon('logout')

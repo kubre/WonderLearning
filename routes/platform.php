@@ -2,23 +2,21 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\Account\{
-    CanceledLogScreen,
-    DailyCollectionReportScreen,
-    FeesEditScreen,
-    OnlinePaymentsScreen,
-    PaymentDueReportScreen,
-};
+use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Account\CanceledLogScreen;
+use App\Orchid\Screens\Account\DailyCollectionReportScreen;
+use App\Orchid\Screens\Account\FeesEditScreen;
+use App\Orchid\Screens\Account\OnlinePaymentsScreen;
+use App\Orchid\Screens\Account\PaymentDueReportScreen;
 use App\Orchid\Screens\Admin\ExportScreen;
 use App\Orchid\Screens\Admin\ProgramSubjectsScreen;
 use App\Orchid\Screens\Admin\SyllabusScreen;
-use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\Reports\EnquiryReportScreen;
-use App\Orchid\Screens\School\ReceiptEditScreen;
-use App\Orchid\Screens\School\ReceiptListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\School\ReceiptEditScreen;
+use App\Orchid\Screens\School\ReceiptListScreen;
 use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
 use App\Orchid\Screens\School\DivisionScreen;
@@ -33,6 +31,8 @@ use App\Orchid\Screens\Student\EnquiryEditScreen;
 use App\Orchid\Screens\Student\EnquiryListScreen;
 use App\Orchid\Screens\Student\InstallmentEditScreen;
 use App\Orchid\Screens\Student\InvoicePrintScreen;
+use App\Orchid\Screens\Teacher\AttendanceEditScreen;
+use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\Teacher\SubjectListScreen;
@@ -277,4 +277,20 @@ Route::screen('subject/{syllabus}', BookListScreen::class)
         fn (Trail $trail, $syllabus) => $trail
             ->parent('teacher.subjects')
             ->push(__('Book'), route('teacher.subjects.book', $syllabus))
+    );
+
+Route::screen('attendances/create', AttendanceEditScreen::class)
+    ->name('teacher.attendance.create')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('teacher.attendance.list')
+            ->push(__('Record Attendance'), route('teacher.attendance.create'))
+    );
+
+Route::screen('attendances', AttendanceListScreen::class)
+    ->name('teacher.attendance.list')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Attendance'), route('teacher.attendance.list'))
     );

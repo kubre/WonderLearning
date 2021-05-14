@@ -43,7 +43,6 @@
 -   (17/apr 12:10am) Properly set up the Laravel Excel Package on local, Also exported users table as expected
 -   (17/apr 12:50pm) Demoed excel exports on server and added remaining xlsx exports for admin specified in Exports task
 -   (17/apr 04:30pm) Added User Management for Schools
-
 -   (18/apr 03:43pm) Kit Stock Management, Ability to assign kit to the student
 -   (18/apr 07:52pm) Validations before assigning kit and added field in admission reports for both user and admin
 -   (18/apr 08:22pm) Added Kit Stock Reports for admin
@@ -60,6 +59,8 @@
 -   (03/may 12:10pm) Receipt is compatible with new ApprovalService based API
 -   (06/may 06:30pm) Approval for syllabus taught added, API for approval is fully flexible now
 -   (07/may 04:32pm) Syllabus Completed can be seen marked inside book screen
+-   (14/may 02:05pm) Record student attendance and see list of added attendance.
+
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -302,6 +303,15 @@ Have ability to export these reports as excel or pdf
 -   Dashboard for teacher
 -   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions
 -   They can mark attendance for students everyday
+    - (14/may 2:05pm)  Division Attendance
+        - division_id
+        - date_at
+    - (14/may 2:05pm) Absent
+        - student_id
+        - division_attendance_id
+    - Attendance Screen
+        - (14/may 2:05pm) List and Add Attendance
+        - See present student list
 -   They will see entire syllabus for the subject they have been assigned
     - (1/may 11:00pm) Subjects list screen for teacher with all the books as options
     - (2/may 3:11pm) Clicking on book reveals syllabus
@@ -313,8 +323,8 @@ Have ability to export these reports as excel or pdf
         - Approval Service
         - Changes in PlatformScreen
     - (07/may 04:32pm) Reflection of syllabus taught in book screen
--   End of the week teacher would fill out performance report for every child on basis of chapters and will give them a remark from 1 to 10. This needs to be approved by center head before this can be seen by parents.
--   This weekly report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
+-   End of month performance report. This needs to be approved by center head before this can be seen by parents.
+-   This report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed
 -   Teachers will be able to see the performance report of their student and export it to excel if needed
 
