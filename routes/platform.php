@@ -19,6 +19,7 @@ use App\Orchid\Screens\School\ReceiptEditScreen;
 use App\Orchid\Screens\School\ReceiptListScreen;
 use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
+use App\Orchid\Screens\School\AttendanceReportScreen;
 use App\Orchid\Screens\School\DivisionScreen;
 use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\KitStockScreen;
@@ -293,4 +294,12 @@ Route::screen('attendances', AttendanceListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Attendance'), route('teacher.attendance.list'))
+    );
+
+Route::screen('report/attendance', AttendanceReportScreen::class)
+    ->name('reports.attendance.monthly')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Monthly Attendance Report'), route('reports.attendance.monthly'))
     );

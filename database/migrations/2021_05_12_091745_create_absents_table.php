@@ -16,12 +16,12 @@ class CreateAbsentsTable extends Migration
         Schema::create('absents', function (Blueprint $table) {
             $table->foreignId('absent_id')
                 ->constrained('students')
-                ->onDeleteCascade()
-                ->onUpdateCascade();
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreignId('division_attendance_id')
                 ->constrained('division_attendances')
-                ->onDeleteCascade()
-                ->onUpdateCascade();
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

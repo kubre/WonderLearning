@@ -90,7 +90,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Admissions')
                 ->icon('graduation')
-                ->permission('enquiry.table')
+                ->permission('menu.admission')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Enquiry')
@@ -99,13 +99,13 @@ class PlatformProvider extends OrchidServiceProvider
                         ->route('school.enquiry.list'),
                     Menu::make('Admission')
                         ->icon('user')
-                        ->permissions('admission.table')
+                        ->permission('admission.table')
                         ->route('school.admission.list'),
                 ]),
 
             Menu::make('Accounts')
                 ->icon('rupee')
-                ->permission('receipt.table')
+                ->permission('menu.account')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Fee Rate Card')
@@ -142,7 +142,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Reports')
                 ->icon('docs')
-                ->permission('admission.table')
+                ->permission('menu.report')
                 ->badge(fn () => '▶', Color::DEFAULT())
                 ->list([
                     Menu::make('Admissions Report')
@@ -153,6 +153,10 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('info')
                         ->permission('admission.table')
                         ->route('reports.enquiries.report'),
+                    Menu::make('Monthly Attendance')
+                        ->icon('table')
+                        ->permission('menu.report')
+                        ->route('reports.attendance.monthly'),
                 ]),
 
             // Options for Teacher

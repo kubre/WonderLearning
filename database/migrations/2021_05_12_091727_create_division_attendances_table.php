@@ -17,8 +17,8 @@ class CreateDivisionAttendancesTable extends Migration
             $table->id();
             $table->foreignId('division_id')
                 ->constrained()
-                ->onDeleteCascade()
-                ->onUpdateCascade();
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->date('date_at');
         });
     }
@@ -30,6 +30,6 @@ class CreateDivisionAttendancesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('divison_attendances');
+        Schema::dropIfExists('division_attendances');
     }
 }

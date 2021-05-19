@@ -6,11 +6,13 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
 class DivisionAttendance extends Model
 {
     use AsSource;
+    use Filterable;
 
     public $fillable = [
         'division_id',

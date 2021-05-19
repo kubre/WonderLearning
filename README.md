@@ -60,6 +60,7 @@
 -   (06/may 06:30pm) Approval for syllabus taught added, API for approval is fully flexible now
 -   (07/may 04:32pm) Syllabus Completed can be seen marked inside book screen
 -   (14/may 02:05pm) Record student attendance and see list of added attendance.
+-   (19/may 6:37pm) Attendance Report
 
 ## Admin Dashboard
 
@@ -311,7 +312,7 @@ Have ability to export these reports as excel or pdf
         - division_attendance_id
     - Attendance Screen
         - (14/may 2:05pm) List and Add Attendance
-        - See present student list
+        - (19/may 6:37pm) Attendance Report
 -   They will see entire syllabus for the subject they have been assigned
     - (1/may 11:00pm) Subjects list screen for teacher with all the books as options
     - (2/may 3:11pm) Clicking on book reveals syllabus
