@@ -32,7 +32,7 @@ class PermissionServiceProvider extends ServiceProvider
             'enquiry' => $crud,
             'fees' => ['edit'],
             'receipt' => $crud,
-            'school' => ['users'],
+            'school' => ['users', 'approvals'],
             'teacher' => ['student', 'subjects'],
             'menu' => ['admission', 'account', 'report'],
         ];

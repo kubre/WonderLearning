@@ -24,6 +24,8 @@ class StudentListScreen extends Screen
      */
     public $description = 'See all the students assigned under you across all divisions and programmes.';
 
+    public $permission = 'teacher.student';
+
     /**
      * Query data.
      *

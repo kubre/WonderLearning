@@ -33,7 +33,7 @@ class FeesEditScreen extends Screen
     /** @var array|string */
     public $permission = 'fees.edit';
 
-    const FEES_FORMAT = ['Fees' => 'fees', 'Amount' => 'amount'];
+    public const FEES_FORMAT = ['Fees' => 'fees', 'Amount' => 'amount'];
 
     /**
      * Query data.

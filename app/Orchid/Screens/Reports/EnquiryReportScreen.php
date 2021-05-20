@@ -25,6 +25,8 @@ class EnquiryReportScreen extends Screen
      */
     public $description = 'Enquiry Report';
 
+    public $permission = 'enquiry.table';
+
     /**
      * Query data.
      *

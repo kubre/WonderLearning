@@ -25,6 +25,8 @@ class AdmissionReportScreen extends Screen
      */
     public $description = 'Admissions Report';
 
+    public $permission = 'admission.table';
+
     /**
      * Query data.
      *

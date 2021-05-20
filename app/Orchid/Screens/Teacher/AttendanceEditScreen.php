@@ -7,12 +7,10 @@ use App\Models\Division;
 use App\Models\DivisionAttendance;
 use App\Orchid\Layouts\AttendanceListener;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Group;
-use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
@@ -33,6 +31,8 @@ class AttendanceEditScreen extends Screen
      * @var string|null
      */
     public $description = 'Record attendance for specific division and date';
+
+    public $permission = 'teacher.subjects';
 
     /**
      * Query data.

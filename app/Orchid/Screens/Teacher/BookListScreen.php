@@ -28,6 +28,8 @@ class BookListScreen extends Screen
      */
     public $description = 'Index Page';
 
+    public $permission = 'teacher.subjects';
+
     /**
      * Query data.
      *

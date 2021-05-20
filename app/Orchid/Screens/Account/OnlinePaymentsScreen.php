@@ -26,6 +26,8 @@ class OnlinePaymentsScreen extends Screen
      */
     public $description = 'Reports for online payments during current academic year.';
 
+    public $permission = 'menu.account';
+
     /**
      * Query data.
      *

@@ -24,6 +24,8 @@ class AttendanceListScreen extends Screen
      */
     public $description = '';
 
+    public $permission = 'teacher.subjects';
+
     /**
      * Query data.
      *

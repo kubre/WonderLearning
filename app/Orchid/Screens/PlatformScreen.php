@@ -13,6 +13,7 @@ use App\Models\{
     Installment,
     Receipt,
     School,
+    Syllabus,
     User
 };
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
@@ -77,14 +78,20 @@ class PlatformScreen extends Screen
             $data['school_metrics'] = $this->schoolMetrics();
         }
 
-        // School owner
-        // FIXME: permission for approvals
-        if ($this->user->hasAccess('receipt.delete')) {
+        // School owner and Center Head
+        if ($this->user->hasAccess('school.approvals')) {
             $approvals = Approval::query()
+                ->when(
+                    $this->user->hasAccess('receipt.delete'),
+                    fn ($query) => $query->orWhere('approval_type', Receipt::class)
+                )
+                ->when(
+                    $this->user->hasAccess('school.users'),
+                    fn ($query) => $query->orWhere('approval_type', Syllabus::class)
+                )
                 ->with(['approval' => function (MorphTo $morphTo) {
                     $morphTo->morphWith([
                         Receipt::class => ['admission.student'],
-                        // Syllabus::class => ['syllabus'],
                     ]);
                 }])->get();
             $this->hasApprovals = $approvals->isNotEmpty();
@@ -111,17 +118,6 @@ class PlatformScreen extends Screen
                 ->icon('calendar')
                 ->modal('changeWorkingYear')
                 ->method('updateWorkingYear'),
-            // Link::make('Website')
-            //     ->href('http://orchid.software')
-            //     ->icon('globe-alt'),
-
-            // Link::make('Documentation')
-            //     ->href('https://orchid.software/en/docs')
-            //     ->icon('docs'),
-
-            // Link::make('GitHub')
-            //     ->href('https://github.com/orchidsoftware/platform')
-            //     ->icon('social-github'),
         ];
     }
 
@@ -146,7 +142,7 @@ class PlatformScreen extends Screen
             ];
         }
 
-        if ($this->user->hasAccess('receipt.delete') && $this->hasApprovals) {
+        if ($this->user->hasAccess('school.approvals') && $this->hasApprovals) {
             $views[] = ApprovalListLayout::class;
         }
 

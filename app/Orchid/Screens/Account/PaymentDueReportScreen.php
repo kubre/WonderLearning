@@ -26,6 +26,8 @@ class PaymentDueReportScreen extends Screen
      */
     public $description = 'See and export payment due report.';
 
+    public $permission = 'menu.account';
+
     /**
      * Query data.
      *

@@ -46,6 +46,8 @@ class ExportScreen extends Screen
         'kits' => KitStockExport::class,
     ];
 
+    public $permission = 'admin.export';
+
     /**
      * Query data.
      *

@@ -25,6 +25,8 @@ class DailyCollectionReportScreen extends Screen
      */
     public $description = 'Daily collection report.';
 
+    public $permission = 'menu.account';
+
     /**
      * Query data.
      *

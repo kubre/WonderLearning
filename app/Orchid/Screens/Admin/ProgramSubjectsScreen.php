@@ -31,6 +31,8 @@ class ProgramSubjectsScreen extends Screen
      */
     public $description = 'Associate which subjects belong to which program.';
 
+    public $permission = 'admin.user';
+
     /**
      * Query data.
      *

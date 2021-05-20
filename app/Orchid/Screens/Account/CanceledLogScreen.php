@@ -24,6 +24,8 @@ class CanceledLogScreen extends Screen
      */
     public $description = 'All the cancelled receipts for current academic year can be see here.';
 
+    public $permission = 'menu.account';
+
     /**
      * Query data.
      *

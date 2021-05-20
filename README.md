@@ -60,8 +60,8 @@
 -   (06/may 06:30pm) Approval for syllabus taught added, API for approval is fully flexible now
 -   (07/may 04:32pm) Syllabus Completed can be seen marked inside book screen
 -   (14/may 02:05pm) Record student attendance and see list of added attendance.
--   (19/may 6:37pm) Attendance Report
-
+-   (19/may 06:37pm) Attendance Report
+-   (20/may 04:03pm) Fixed permission related issues
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
