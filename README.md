@@ -334,3 +334,114 @@ Have ability to export these reports as excel or pdf
 -   Thought on divisions implementation
     -   Store division name directly on admission table and in
     -   batches table only store school id
+
+
+### Mobile App Features
+
+
+#### App and API
+**On Error API should return error message**
+- Error Response:
+```json
+{
+    "error": "You are already logged in on another device"
+}
+```
+
+- Login:
+    - Login with any parent contact and PRN number	
+    - `/login?contact=<contact>&prn=<prn>`
+    - Success: Student Data, School Data
+    ```json
+    {
+        "student": {
+            "id": 1,
+            "name": "Vaibhav Kubre",
+            "photo": "https://wonderlearning.in/storage/jslALJj9asdH",
+            "dob_at": "03-12-2017",
+            "gender": "Male",
+            "prn": "WLS/0001/20201",
+            "father_name": "Satish Kubre",
+            "father_contact": "9090898956",
+            "father_email": "satish@kubre.in",
+            "mother_name": "Savita Kubre",
+            "mother_contact": "899889899",
+            "mother_email": "savita@kubre.in",
+            "admission_at": "06-05-2020",
+            "program": "Playgroup",
+            "discount": 3000,
+            "batch": "Morning",
+            "is_transportation_required": true,
+            "division_id": 1,
+            "division_title": "Sunflower",
+            "kit_assigned": true
+        },
+        "school": {
+            "name": "Wonder School",
+            "logo": "https://wonderlearning.in/storage/jslAL8sd7",
+            "contact": "8989787867",
+            "email": "wonder@wonder.in",
+            "address": "Pune, \nMaharashtra",
+            "academic_start": "01-06-2020",
+            "academic_end": "31-05-2021",
+            "is_suspended": false
+        }
+    }
+    ```
+- Dashboard:
+    - Student Picture with name and buttons to all the screens ex, attendance, observations, etc
+- Attendance:
+    - Calendar Screen with monthly attendance with dates student is present marked green and red when they were absent if no class took place on that day it wil be white with present/absent percentage
+    - `/attendances/<student-id>/<month:06-2021>`
+    - Success: Student Attendance Data
+    ```json
+    {
+        "month": "06-2021"
+    }
+    ```
+- Observations (Performance Reports):
+    - Monthly observation reports filled by teachers can be seen here
+- Classwork (Syllabus Completion Status):
+    - What topics has been taught to this date with search feature
+
+- Homework:
+    - Check the assigned homework to students divisions	
+- Notice Board:
+    - Teachers/ School sent notices to particular students from a division to be seen here
+    - `/notices/<student-id>/<month:06-2021>`
+    - Success: List of Notices 
+- Fees:
+    - View and download invoices and receipts and check remaining due amount to pay	
+    - `/fees/<student-id>`
+    - Success: Receipt and Invoice Data
+- Profile:
+    - Students data can be viewed here
+    - `/student/<student-id>`
+    - Success: Student Data
+- Activities:
+    - Year wise activities/events school will take can be seen here	
+    - `/activities`
+- Messages:
+    - Chat between division teacher and parents to raise a query or notify
+    - GET `chats/<student-id>`
+    - Success: List of Messages
+    - POST `chats/<student-id>`, BODY Params: `message`
+    - Success: List of Messages
+- Gallery:
+    - Gallery of images (In discussion)	
+    - `/gallery`
+- Holiday List:
+    - View holidays added by school in list format
+    - `/holidays/<school-id>`
+    - Success: List of holidays
+
+## School Panels
+
+- Login Lock Reset: As students account can only be logged in once if needed to login on other device school/teacher can reset lock from previous login so new login can be done	
+- Observation: Ability to add monthly observations reports by teacher and then approved by center-head or owner then can be seen by parents inside the app	
+- Homework: Ability to assign homework to all the students of a division	
+- Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division	
+- Activities: Add/Manage custom activities for center-head/owner, which then can be seen by parents inside the app:  	
+- Messages: Chat for teachers between them and parents	
+- Gallery: Upload and manage gallery for images	
+- Holiday List: Manage/View Holiday List which can be seen by parents	
