@@ -18,7 +18,7 @@
     @endpush
 @endguest
 <p class="h3 n-m font-thin v-center text-center">
-    @empty(session('school')->logo)
+    @empty(school()->logo)
         <x-orchid-icon path="book-open" />
         <span class="ml-4 d-none d-sm-block">
             Wonder
@@ -28,9 +28,9 @@
             <link href="/images/logo.svg" id="favicon" rel="icon">
         @endpush
     @else
-        <img style="max-height: 80px; max-width: 100%;" src="{{ session('school')->logo }}" alt="Logo">
+        <img style="max-height: 80px; max-width: 100%;" src="{{ school()->logo }}" alt="Logo">
         @push('head')
-            <link href="{{ session('school')->logo }}" id="favicon" rel="icon">
+            <link href="{{ school()->logo }}" id="favicon" rel="icon">
         @endpush
     @endempty
 </p>

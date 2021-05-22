@@ -129,7 +129,7 @@ class PlatformScreen extends Screen
 
         if ($this->user->hasAccess('school.year')) {
             $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
-                $d = Carbon::createFromDate($y, session('school')->start_month, 1);
+                $d = Carbon::createFromDate($y, school()->start_month, 1);
                 return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
             });
 
