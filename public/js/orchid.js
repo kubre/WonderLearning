@@ -1,4 +1,14 @@
 
+function copyHelper(result) {
+    var copyhelper = document.createElement("input");
+    copyhelper.className = "copyhelper";
+    document.body.appendChild(copyhelper);
+    copyhelper.value = result;
+    copyhelper.select();
+    document.execCommand("copy");
+    document.body.removeChild(copyhelper);
+}
+
 // Table CSV Exports
 var table = document.querySelector('table.table.table-striped.table-bordered');
 
