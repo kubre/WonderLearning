@@ -112,6 +112,7 @@ class PlatformScreen extends Screen
             ModalToggle::make('Change Academic Year (' . get_academic_year_formatted(working_year()) . ')')
                 ->modalTitle('Change Academic Year')
                 ->icon('calendar')
+                ->canSee($this->user->hasAccess('school.year'))
                 ->modal('changeWorkingYear')
                 ->method('updateWorkingYear'),
         ];
@@ -124,29 +125,15 @@ class PlatformScreen extends Screen
      */
     public function layout(): array
     {
-        $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
-            $d = Carbon::createFromDate($y, session('school')->start_month, 1);
-            return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
-        });
-
         $views = [];
 
-        if ($this->user->hasAccess('school.users')) {
-            $views = [
-                SchoolMetrics::class,
-                FeesRateMetric::class,
-            ];
-        }
+        if ($this->user->hasAccess('school.year')) {
+            $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
+                $d = Carbon::createFromDate($y, session('school')->start_month, 1);
+                return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
+            });
 
-        if ($this->user->hasAccess('school.approvals') && $this->hasApprovals) {
-            $views[] = ApprovalListLayout::class;
-        }
-
-        return [
-            ...$views,
-            // Layout::view('dashboard.approval'),
-            // Layout::view('dashboard.fees'),
-            Layout::modal('changeWorkingYear', [
+            $views[] = Layout::modal('changeWorkingYear', [
                 Layout::rows([
                     Select::make('workingYear')
                         ->options($validYears)
@@ -154,9 +141,19 @@ class PlatformScreen extends Screen
                 ]),
             ])
                 ->applyButton('Next')
-                ->closeButton('Cancel'),
-            // Layout::view('platform::partials.welcome'),
-        ];
+                ->closeButton('Cancel');
+        }
+
+        if ($this->user->hasAccess('school.users')) {
+            $views[] = SchoolMetrics::class;
+            $views[] = FeesRateMetric::class;
+        }
+
+        if ($this->user->hasAccess('school.approvals') && $this->hasApprovals) {
+            $views[] = ApprovalListLayout::class;
+        }
+
+        return $views;
     }
 
     public function updateWorkingYear()
