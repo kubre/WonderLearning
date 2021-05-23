@@ -19,10 +19,6 @@
 /* Fixes end */
 
 @media print {
-  /* @page {
-    size: landscape;
-  } */
-
   body * {
     visibility: hidden;
   }
@@ -38,7 +34,7 @@
     width: 100vw;
     box-shadow: none;
     border: 1 solid black;
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   #print-hide {

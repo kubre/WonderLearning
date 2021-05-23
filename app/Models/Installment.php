@@ -6,7 +6,6 @@ use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Installment extends Model
 {
 
@@ -50,12 +49,12 @@ class Installment extends Model
 
     /**
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param int 
+     * @param int
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeUnpaid($query, $admission_id)
+    public function scopeUnpaid($query, $admissionId)
     {
-        return $query->where('admission_id', $admission_id)
+        return $query->where('admission_id', $admissionId)
             ->where('due_amount', '>', 0);
     }
 
@@ -64,20 +63,20 @@ class Installment extends Model
      * @param int
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePaid($query, $admission_id)
+    public function scopePaid($query, $admissionId)
     {
-        return $query->where('admission_id', $admission_id)
+        return $query->where('admission_id', $admissionId)
             ->whereColumn('due_amount', '!=', 'amount');
     }
 
     /**
      * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param int 
+     * @param int
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeNil($query, $admission_id)
+    public function scopeNil($query, $admissionId)
     {
-        return $query->where('admission_id', $admission_id)
+        return $query->where('admission_id', $admissionId)
             ->where('due_amount', 0);
     }
 }
