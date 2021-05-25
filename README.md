@@ -62,6 +62,8 @@
 -   (14/may 02:05pm) Record student attendance and see list of added attendance.
 -   (19/may 06:37pm) Attendance Report
 -   (20/may 04:03pm) Fixed permission related issues
+-   (25/may 11:25pm) Fixed Attendance and receipt and invoice prints
+
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**

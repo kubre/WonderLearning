@@ -113,47 +113,4 @@
     <div class="row mt-4">
         <strong class="col-12">*This is a computer generated receipt does not require signature.</strong>
     </div>
-    {{-- <div class="row mt-4 px-3">towards the full or part payment of the total fees of the course mentioned below: </div> --}}
-    {{-- <div class="row">
-        <div class="col-2"></div>
-        <table class="table table-bordered col-6">
-            <thead>
-                <tr>
-                    <th colspan="2">Fees for year {{ get_academic_year_formatted(working_year()) }}</th>
-                    <th>Amount (₹)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($receipt->school->fees->{strtolower($receipt->admission->program)} as $fees)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <th>{{ $fees['fees'] }}</th>
-                        <td class='text-right'>{{ $fees['amount'] }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <th colspan="2">Total</th>
-                <th>{{ $receipt->school->fees->{$receipt->admission->fees_total_column} }}</th>
-            </tfoot>
-        </table>
-        <table class="table table-bordered col-4">
-            <tr>
-                <th>Invoice No.: </th>
-                <td>{{ $receipt->admission->invoice_no }}</td>
-            </tr>
-            <tr>
-                <th>Invoice Date.: </th>
-                <td>{{ $receipt->admission->invoice_no }}</td>
-            </tr>
-            <tr>
-                <th>Invoice No.: </th>
-                <td>{{ $receipt->admission->invoice_no }}</td>
-            </tr>
-            <tr>
-                <th>Invoice No.: </th>
-                <td>{{ $receipt->admission->invoice_no }}</td>
-            </tr>
-        </table>
-    </div> --}}
 </div>

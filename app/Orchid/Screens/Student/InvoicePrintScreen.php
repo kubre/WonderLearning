@@ -24,6 +24,9 @@ class InvoicePrintScreen extends Screen
      */
     public $description = 'Print invoice details';
 
+
+    public string $fileName = 'invoice_';
+
     /**
      * Query data.
      *
@@ -31,6 +34,7 @@ class InvoicePrintScreen extends Screen
      */
     public function query(Admission $admission, string $parent): array
     {
+        $this->fileName .= $admission->student->name . '_' . $admission->invoice_no;
         return compact('admission', 'parent');
     }
 
@@ -48,7 +52,7 @@ class InvoicePrintScreen extends Screen
             Link::make('Print')
                 ->icon('printer')
                 ->type(Color::WARNING())
-                ->href('javascript:(function(){window.print();})()'),
+                ->href("javascript:printReport('{$this->fileName}', '" . env('APP_URL') . "')"),
         ];
     }
 

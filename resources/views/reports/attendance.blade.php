@@ -10,14 +10,12 @@
         </thead>
 
         <tbody>
-            @foreach ($attendances as $key => $student)
+            @foreach ($classes as $admission_id => $attendances)
                 <tr>
-                    <th>{{ $student->first()->student_name }}
-                        ({{ $admissions->whereStrict('student_id', $key)->first()->prn }})</th>
+                    <th>{{ $attendances['name'] }}
+                        ({{ $attendances['prn'] }})</th>
                     @for ($day = 1; $day <= $days; $day++)
-                        <td>
-                            {{ $student->get($day)->attendance ?? '' }}
-                        </td>
+                        <td>{{ $attendances[$day] ?? '' }}</td>
                     @endfor
                 </tr>
             @endforeach

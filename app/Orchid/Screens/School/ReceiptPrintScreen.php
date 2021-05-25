@@ -3,6 +3,8 @@
 namespace App\Orchid\Screens\School;
 
 use App\Models\Receipt;
+use Illuminate\Support\Facades\App;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
@@ -24,8 +26,13 @@ class ReceiptPrintScreen extends Screen
      */
     public $description = 'Export the receipt';
 
+    public int $receiptId;
+
+    public string $parent;
 
     public int $admission_id;
+
+    public string $fileName = 'receipt_';
 
     public bool $is_multi_layout = false;
 
@@ -34,10 +41,14 @@ class ReceiptPrintScreen extends Screen
      *
      * @return array
      */
-    public function query(int $receipt_id, string $parent): array
+    public function query(int $receiptId, string $parent): array
     {
-        $receipt = Receipt::with('admission.student.school')->findOrFail($receipt_id);
+        $this->receiptId = $receiptId;
+        $this->parent = $parent;
+
+        $receipt = Receipt::with('admission.student.school')->findOrFail($receiptId);
         $this->admission_id = $receipt->admission_id;
+        $this->fileName .= $receipt->admission->student->name . '_' . $receipt->receipt_no;
         $this->is_multi_layout = request('is_multi_layout', false);
         return compact('receipt', 'parent');
     }
@@ -61,7 +72,7 @@ class ReceiptPrintScreen extends Screen
             Link::make('Print')
                 ->icon('printer')
                 ->type(Color::WARNING())
-                ->href('javascript:(function(){window.print();})()'),
+                ->href("javascript:printReport('{$this->fileName}', '" . env('APP_URL') . "')"),
         ];
     }
 

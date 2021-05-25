@@ -35,8 +35,18 @@ class DivisionAttendance extends Model
         return $this->belongsTo(Division::class);
     }
 
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'division_attendance_id');
+    }
+
     public function absents(): HasMany
     {
-        return $this->hasMany(Absent::class, 'division_attendance_id');
+        return $this->hasMany(Attendance::class, 'division_attendance_id')->whereIsPresent(false);
+    }
+
+    public function presents(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'division_attendance_id')->whereIsPresent(true);
     }
 }

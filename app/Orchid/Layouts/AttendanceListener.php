@@ -60,11 +60,9 @@ class AttendanceListener extends Listener
 
         return $admissions->map(
             fn (Admission $admission) => Group::make([
-                Label::make('name.' . $admission->student_id)
-                    ->value($admission->student->prn),
-                Label::make('name.')
-                    ->value($admission->student->name),
-                Switcher::make('is_present.' . $admission->student_id)
+                Label::make('name.' . $admission->id)
+                    ->value($admission->student->name . ' (' . $admission->student->prn . ')'),
+                Switcher::make('is_present.' . $admission->id)
                     ->sendTrueOrFalse(),
             ]),
         )->toArray();

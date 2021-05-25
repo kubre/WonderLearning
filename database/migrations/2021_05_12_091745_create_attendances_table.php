@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsentsTable extends Migration
+class CreateAttendancesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateAbsentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('absents', function (Blueprint $table) {
-            $table->foreignId('absent_id')
-                ->constrained('students')
+        Schema::create('attendances', function (Blueprint $table) {
+            $table->foreignId('admission_id')
+                ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('division_attendance_id')
                 ->constrained('division_attendances')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->boolean('is_present');
         });
     }
 
@@ -32,6 +33,6 @@ class CreateAbsentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absents');
+        Schema::dropIfExists('attendances');
     }
 }

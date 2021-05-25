@@ -75,7 +75,7 @@
             </table>
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-5 px-3">
         <table class="table table-bordered table-black col">
             <thead>
                 <tr>
