@@ -34,6 +34,7 @@ class Enquiry extends Model
         'created_at',
         'name',
         'follow_up_at',
+        'program',
     ];
 
     protected static function boot()

@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Student;
 use App\Models\Enquiry;
 use App\Models\User;
 use App\Orchid\Layouts\Student\EnquiryListLayout;
+use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
@@ -41,9 +42,16 @@ class EnquiryListScreen extends Screen
     public function query(): array
     {
         $this->user = auth()->user();
-        $this->user->hasAccess('admin.school');
+
         return [
-            'enquiries' => Enquiry::filters()->paginate(),
+            'enquiries' => Enquiry::filters()
+                ->simplePaginate(),
+            'count' => Enquiry::select('program', DB::raw('COUNT(id) as count'))
+                ->groupBy('program')
+                ->get()
+                ->mapWithKeys(fn ($item) => [$item->program => $item->count])
+                ->toArray(),
+            'route' => 'school.enquiry.list',
         ];
     }
 
@@ -83,6 +91,7 @@ class EnquiryListScreen extends Screen
             ])
                 ->applyButton('Next')
                 ->closeButton('Cancel'),
+            Layout::view('layouts.program-filter'),
             EnquiryListLayout::class
         ];
     }

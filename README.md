@@ -14,11 +14,11 @@
 ### Issues from 23-05-2021 meeting
 - (26/may 10:58am) User should see select year screen after login
     - Fixed login background shows even on dashboard
-- (26/may 5:03pm) Dashboard UI instructions
+- (26/may 05:03pm) Dashboard UI instructions
     - First Row:    Enquiry, Gross Admissions
     - Second Row:   Gross Receivable, Collection, Collection Due
     - Birthday Reminder: Name, Program, Division
-- Enquiry, Admission: Stats Cards on top by program and clickable to filter data
+- (26/may 07:55pm) Enquiry, Admission: Stats Cards on top by program and clickable to filter data
 - Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
 - Admission: Optional Photo, Discount empty errors total fees calculation make default zero
 - Installment (Month and Year in select option)
