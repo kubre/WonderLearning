@@ -26,6 +26,7 @@ use App\Orchid\Screens\School\KitStockScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
+use App\Orchid\Screens\School\SelectYearScreen;
 use App\Orchid\Screens\School\UserEditScreen as SchoolUserEditScreen;
 use App\Orchid\Screens\School\UserListScreen as SchoolUserListScreen;
 use App\Orchid\Screens\Student\EnquiryEditScreen;
@@ -55,7 +56,11 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
+    ->name('platform.main')
+    ->middleware('working.year');
+
+Route::screen('/select-year', SelectYearScreen::class)
+    ->name('school.select.year');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
@@ -114,14 +119,6 @@ Route::screen('roles', RoleListScreen::class)
             ->parent('platform.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
-// Example...
-// Route::screen('example', ExampleScreen::class)
-//     ->name('platform.example')
-//     ->breadcrumbs(function (Trail $trail) {
-//         return $trail
-//             ->parent('platform.index')
-//             ->push(__('Example screen'));
-//     });
 
 // Admin
 Route::screen('exports', ExportScreen::class)
@@ -147,16 +144,6 @@ Route::screen('program-subjects', ProgramSubjectsScreen::class)
             ->parent('platform.index')
             ->push(__('Add Subject to Programme'), route('admin.program-subjects'))
     );
-
-// Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-// Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-// Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
-// Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-// Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-// Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-
-//Route::screen('idea', 'Idea::class','platform.screens.idea');
-
 
 // School > Users
 Route::screen('school/users/{users}/edit', SchoolUserEditScreen::class)

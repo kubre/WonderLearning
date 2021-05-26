@@ -125,7 +125,9 @@ class PlatformScreen extends Screen
      */
     public function layout(): array
     {
-        $views = [];
+        $views = [
+            Layout::view('layouts.reset'),
+        ];
 
         if ($this->user->hasAccess('school.year')) {
             $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {

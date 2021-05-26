@@ -1,14 +1,28 @@
 # Development Log Kept from 06-04-2021
 
-## Notes
+## Issues
 
+### Old
 ```
 1) (DONE) Add fields modified in migrations to the Models $fillable
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) (DONE) Implement graduation logic
 3) (Fixed) Fees receipt generation failing
 4) (Fixed) Generic Receipt were not able to generate once school fees was nil
+
 ```
+### Issues from 23-05-2021 meeting
+- (26/may 10:58am) User should see select year screen after login
+    - Fixed login background shows even on dashboard
+- Dashboard UI instructions
+    - First Row:    Enquiry, Gross Admissions
+    - Second Row:   Gross Receivable, Collection, Collection Due
+    - Birthday Reminder: Name, Program, Division
+- Enquiry, Admission: Stats Cards on top by program and clickable to filter data
+- Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
+- Admission: Optional Photo, Discount empty errors total fees calculation make default zero
+- Kit Stock Log
+- Declaration form
 
 ## Dashboard
 
