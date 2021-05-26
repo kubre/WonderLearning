@@ -30,27 +30,24 @@ class InstallmentListener extends Listener
      */
     protected $asyncMethod = 'asyncInstallmentCount';
 
-
-    public const MONTHS = [
-        '1' => 'Jan',
-        '2' => 'Feb',
-        '3' => 'Mar',
-        '4' => 'Apr',
-        '5' => 'May',
-        '6' => 'Jun',
-        '7' => 'Jul',
-        '8' => 'Aug',
-        '9' => 'Sep',
-        '10' => 'Oct',
-        '11' => 'Nov',
-        '12' => 'Dec',
-    ];
+    public array $monthList = [];
 
     /**
      * @return Layout[]
      */
     protected function layouts(): array
     {
+        $monthList = [];
+
+        list($start, $end) = working_year();
+        $startMonth = $start->copy();
+        $endMonth = $end->copy();
+
+        for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
+            $monthList[$i->format('m')] = $i->format('M Y');
+        }
+
+        $this->monthList = $monthList;
         return [
             Layout::rows(
                 $this->makeInstallments($this->query->get('installment_count') ?? 1),
@@ -66,7 +63,7 @@ class InstallmentListener extends Listener
                 Select::make('month.')
                     ->title("$i) Month")
                     ->required()
-                    ->options(static::MONTHS),
+                    ->options($this->monthList),
                 Input::make('amount.')
                     ->type('number')
                     ->required()

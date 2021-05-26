@@ -245,6 +245,7 @@ class AdmissionEditScreen extends Screen
             Layout::rows([
                 Group::make([
                     Input::make('discount')
+                        ->value(0)
                         ->title('Discount'),
                     Select::make('batch')
                         ->options([
@@ -271,8 +272,8 @@ class AdmissionEditScreen extends Screen
 
     public function createOrUpdate(Admission $admission, AdmissionRequest $request)
     {
-        $student = new Student;
-        $new_admission = !$admission->exists;
+        $student = new Student();
+        $newAdmission = !$admission->exists;
 
         if ($admission->exists) {
             $student = $admission->student;
@@ -293,7 +294,7 @@ class AdmissionEditScreen extends Screen
 
         Toast::info('Admission of student was done successfully!');
 
-        if ($new_admission) {
+        if ($newAdmission) {
             return redirect()->route('school.installment.edit', [
                 'admission' => $admission->id,
             ]);

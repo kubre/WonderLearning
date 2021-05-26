@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Support\Facades\Layout;
@@ -170,7 +169,7 @@ class EnquiryEditScreen extends Screen
         $request->validate([
             'name' => 'required',
             'gender' => 'required|in:Male,Female,Transgender,Other',
-            'dob_at' => 'required|date',
+            'dob_at' => 'required|date|before:today',
             'program' => 'required',
             'enquirer_name' => 'required',
             'enquirer_email' => 'required|email',
@@ -178,6 +177,8 @@ class EnquiryEditScreen extends Screen
             'locality' => 'required',
             'reference' => 'required',
             'follow_up_at' => 'required|date',
+        ], [
+            'dob_at.before' => 'Date of Birth should be before today',
         ]);
 
         $enquiry->fill($request->input())->save();
