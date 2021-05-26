@@ -12,13 +12,13 @@ use App\Models\{
     Fees,
     Installment,
     Receipt,
-    School,
+    Student,
     Syllabus,
     User
 };
 use App\Orchid\Layouts\Dashboard\ApprovalListLayout;
+use App\Orchid\Layouts\Dashboard\BirthdayListLayout;
 use App\Orchid\Layouts\School\FeesRateMetric;
-use App\Orchid\Layouts\School\SchoolMetrics;
 use App\Services\ApprovalService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -27,10 +27,10 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
+use Orchid\Screen\Sight;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 use ReflectionClass;
-use Session;
 
 class PlatformScreen extends Screen
 {
@@ -56,6 +56,9 @@ class PlatformScreen extends Screen
 
     public bool $isAdmin = false;
 
+    protected ?array $admissionMetrics = null;
+
+    protected ?array $accountMetrics = null;
 
     /**
      * Query data.
@@ -71,7 +74,8 @@ class PlatformScreen extends Screen
         // School owner
         if ($this->user->hasAccess('school.users')) {
             $data['fees_metric'] = $this->feesMetrics();
-            $data['school_metrics'] = $this->schoolMetrics();
+            $this->admissionMetrics = $this->admissionMetrics();
+            $this->accountMetrics = $this->accountMetrics();
         }
 
         // School owner and Center Head
@@ -92,6 +96,22 @@ class PlatformScreen extends Screen
                 }])->get();
             $this->hasApprovals = $approvals->isNotEmpty();
             $data['approvals'] = $approvals;
+        }
+
+
+        if ($this->user->hasAccess('school.year')) {
+            $data['birthdays'] = Cache::remember(
+                CacheKey::for(CacheKey::BIRTHDAYS),
+                $this->day,
+                fn () => Student::with(['admission.division'])
+                    ->whereSchoolId(school()->id)
+                    ->whereRaw(
+                        "DATE_FORMAT(dob_at, '%m-%d') IN (?, ?)",
+                        [Carbon::today()->format('m-d'), Carbon::tomorrow()->format('m-d')]
+                    )
+                    ->orderByRaw("DATE_FORMAT(dob_at, '%d-%m')")
+                    ->get()
+            );
         }
 
         return $data;
@@ -129,7 +149,21 @@ class PlatformScreen extends Screen
             Layout::view('layouts.reset'),
         ];
 
+        if ($this->user->hasAccess('school.users')) {
+            $views[] = Layout::stats('Admissions Overview', $this->admissionMetrics);
+            $views[] = Layout::stats('Accounts Overview', $this->accountMetrics);
+            $views[] = FeesRateMetric::class;
+        }
+
+        if ($this->user->hasAccess('school.approvals') && $this->hasApprovals) {
+            $views[] = Layout::view('components.title', ['title' => 'Approvals']);
+            $views[] = ApprovalListLayout::class;
+        }
+
         if ($this->user->hasAccess('school.year')) {
+            $views[] = Layout::view('components.title', ['title' => '🎂 Upcoming Birthdays']);
+            $views[] = BirthdayListLayout::class;
+
             $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
                 $d = Carbon::createFromDate($y, school()->start_month, 1);
                 return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
@@ -144,15 +178,6 @@ class PlatformScreen extends Screen
             ])
                 ->applyButton('Next')
                 ->closeButton('Cancel');
-        }
-
-        if ($this->user->hasAccess('school.users')) {
-            $views[] = SchoolMetrics::class;
-            $views[] = FeesRateMetric::class;
-        }
-
-        if ($this->user->hasAccess('school.approvals') && $this->hasApprovals) {
-            $views[] = ApprovalListLayout::class;
         }
 
         return $views;
@@ -185,26 +210,8 @@ class PlatformScreen extends Screen
         ];
     }
 
-    public function schoolMetrics()
+    public function admissionMetrics()
     {
-        $paymentDue = Cache::remember(
-            CacheKey::for(CacheKey::PAYMENT_DUE),
-            $this->day,
-            fn () => Installment::where('month', today()->month)->sum('due_amount')
-        );
-
-        $receivable = Cache::remember(
-            CacheKey::for(CacheKey::RECEIVABLE),
-            $this->day,
-            fn () => Installment::sum('due_amount')
-        );
-
-        $deposited = Cache::remember(
-            CacheKey::for(CacheKey::DEPOSITED),
-            $this->day,
-            fn () => Receipt::where('for', Receipt::SCHOOL_FEES)->sum('amount')
-        );
-
         $admissionCount = Cache::remember(
             CacheKey::for(CacheKey::ADMISSION),
             $this->day,
@@ -217,20 +224,53 @@ class PlatformScreen extends Screen
             fn () => Enquiry::count('id')
         );
 
-        $conversionCount = Cache::remember(
-            CacheKey::for(CacheKey::CONVERSION),
+        return [
+            [
+                'title' => 'Enquiries',
+                'value' => number_format((float) $enquiryCount, 0),
+                'link' => route('school.enquiry.list'),
+            ],
+            [
+                'title' => 'Gross Admissions',
+                'value' => number_format((float) $admissionCount, 0),
+                'link' => route('school.admission.list'),
+            ],
+        ];
+    }
+
+    public function accountMetrics()
+    {
+        $collectionDue = Cache::remember(
+            CacheKey::for(CacheKey::PAYMENT_DUE),
             $this->day,
-            fn () => Enquiry::count('student_id')
+            fn () => Installment::sum('due_amount')
         );
 
+        $receivable = Cache::remember(
+            CacheKey::for(CacheKey::RECEIVABLE),
+            $this->day,
+            fn () => Installment::sum('amount')
+        );
+
+        $collection = Cache::remember(
+            CacheKey::for(CacheKey::DEPOSITED),
+            $this->day,
+            fn () => Receipt::where('for', Receipt::SCHOOL_FEES)->sum('amount')
+        );
 
         return [
-            ['keyValue' => '₹ ' . number_format((float) $paymentDue, 0)],
-            ['keyValue' => '₹ ' . number_format((float) $receivable, 0)],
-            ['keyValue' => '₹ ' . number_format((float) $deposited, 0)],
-            ['keyValue' => number_format((float) $enquiryCount, 0)],
-            ['keyValue' => number_format((float) $conversionCount, 0)],
-            ['keyValue' => number_format((float) $admissionCount, 0)],
+            [
+                'title' => 'Gross Receivable',
+                'value' => '₹ ' . number_format((float) $receivable, 0),
+            ],
+            [
+                'title' => 'Collection',
+                'value' => '₹ ' . number_format((float) $collection, 0),
+            ],
+            [
+                'title' => 'Collection Due',
+                'value' => '₹ ' . number_format((float) $collectionDue, 0)
+            ],
         ];
     }
 
