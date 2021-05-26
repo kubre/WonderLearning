@@ -1,6 +1,6 @@
 <div class="mb-3">
     <div class="row mb-2 g-3 g-mb-4">
-        <div class="col-2 text-end">
+        <div class="col text-end">
             <a href="{{ route($route, ['filter[program]' => 'Playgroup']) }}">
                 <div class="p-4 bg-white rounded shadow-sm h-100">
                     <small class="text-muted d-block mb-1">Playgroup</small>
@@ -10,7 +10,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-2 text-end">
+        <div class="col text-end">
             <a href="{{ route($route, ['filter[program]' => 'Nursery']) }}">
                 <div class="p-4 bg-white rounded shadow-sm h-100">
                     <small class="text-muted d-block mb-1">Nursery</small>
@@ -20,7 +20,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-2 text-end">
+        <div class="col text-end">
             <a href="{{ route($route, ['filter[program]' => 'Junior KG']) }}">
                 <div class="p-4 bg-white rounded shadow-sm h-100">
                     <small class="text-muted d-block mb-1">Junior KG</small>
@@ -30,7 +30,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-2 text-end">
+        <div class="col text-end">
             <a href="{{ route($route, ['filter[program]' => 'Senior KG']) }}">
                 <div class="p-4 bg-white rounded shadow-sm h-100">
                     <small class="text-muted d-block mb-1">Senior KG</small>
@@ -40,7 +40,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-2 text-end">
+        <div class="col text-end">
             <a href="{{ route($route) }}">
                 <div class="p-4 bg-white rounded shadow-sm h-100">
                     <small class="text-muted d-block mb-1">All</small>

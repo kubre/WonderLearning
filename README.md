@@ -19,7 +19,7 @@
     - Second Row:   Gross Receivable, Collection, Collection Due
     - Birthday Reminder: Name, Program, Division
 - (26/may 07:55pm) Enquiry, Admission: Stats Cards on top by program and clickable to filter data
-- Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
+- (26/may 08:10pm) Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
 - Admission: Optional Photo, Discount empty errors total fees calculation make default zero
 - Installment (Month and Year in select option)
 - Delete Installment if admission not added
