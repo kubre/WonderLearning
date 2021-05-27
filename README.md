@@ -23,7 +23,8 @@
 - (26/may 08:45pm) Admission: Optional Photo, Discount empty errors total fees calculation make default zero
 - (26/may 08:45pm) Installment (Month and Year in select option)
 - Delete Installment if admission not added
-- Kit Stock Log
+- (27/may 06:05pm) Kit Stock Log
+- Installment Screen name ('Fees Installments - Anexture A')
 - Declaration form
 
 ## Dashboard

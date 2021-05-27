@@ -6,6 +6,7 @@ use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KitStock extends Model
 {
@@ -45,12 +46,17 @@ class KitStock extends Model
 
     public static function booted()
     {
-        static::addGlobalScope(new AcademicYearScope);
-        static::addGlobalScope(new SchoolScope);
+        static::addGlobalScope(new AcademicYearScope());
+        static::addGlobalScope(new SchoolScope());
     }
 
     public function school(): BelongsTo
     {
         return $this->belongsTo(School::class);
+    }
+
+    public function logs(): HasMany
+    {
+        return $this->hasMany(KitStockLog::class, 'kit_stock_id');
     }
 }
