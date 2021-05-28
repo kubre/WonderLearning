@@ -196,12 +196,8 @@
             </strong>
         </span>
     </div>
-
-    <div class="row mt-3">
-        <strong class="col">For {{ auth()->user()->name }}</strong>
-    </div>
+    <div style="min-height: 50px"></div>
     <div class="row mt-5">
-        <strong class="col">Authorised Signatory</strong>
         <strong class="col text-end text-right">
             Parent Signature<br>({{ now()->format('d-M-Y') }}&nbsp;&nbsp;&nbsp;)
         </strong>
