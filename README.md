@@ -24,8 +24,8 @@
 - (26/may 08:45pm) Installment (Month and Year in select option)
 - Delete Installment if admission not added
 - (27/may 06:05pm) Kit Stock Log
-- Installment Screen name ('Fees Installments - Anexture A')
-- Declaration form
+- (28/may 08:58am) Installment Screen name ('Fees Installments - Annexure A')
+- (28/may 08:58am) Declaration form
 
 ## Dashboard
 
@@ -80,6 +80,7 @@
 -   (19/may 06:37pm) Attendance Report
 -   (20/may 04:03pm) Fixed permission related issues
 -   (25/may 11:25pm) Fixed Attendance and receipt and invoice prints
+-   (28/may 08:58am) Added Fees Declaration Form
 
 ## Admin Dashboard
 

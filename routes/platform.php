@@ -11,6 +11,7 @@ use App\Orchid\Screens\Account\PaymentDueReportScreen;
 use App\Orchid\Screens\Admin\ExportScreen;
 use App\Orchid\Screens\Admin\ProgramSubjectsScreen;
 use App\Orchid\Screens\Admin\SyllabusScreen;
+use App\Orchid\Screens\DeclarationFormScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\Reports\EnquiryReportScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -290,3 +291,8 @@ Route::screen('report/attendance', AttendanceReportScreen::class)
             ->parent('platform.index')
             ->push(__('Monthly Attendance Report'), route('reports.attendance.monthly'))
     );
+
+
+
+Route::screen('declaration/{admission}', DeclarationFormScreen::class)
+    ->name('reports.declaration.form');

@@ -98,3 +98,7 @@
 .row .aside nav .text-muted {
   color: #dfdfdf !important;
 }
+
+.new-report td, .new-report p, .new-report ol li {
+  font-size: 1.2em;
+}
