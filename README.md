@@ -22,10 +22,10 @@
 - (26/may 08:10pm) Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
 - (26/may 08:45pm) Admission: Optional Photo, Discount empty errors total fees calculation make default zero
 - (26/may 08:45pm) Installment (Month and Year in select option)
-- Delete Installment if admission not added
 - (27/may 06:05pm) Kit Stock Log
 - (28/may 08:58am) Installment Screen name ('Fees Installments - Annexure A')
 - (28/may 08:58am) Declaration form
+- Delete Installment if admission not added
 
 ## Dashboard
 
@@ -81,6 +81,7 @@
 -   (20/may 04:03pm) Fixed permission related issues
 -   (25/may 11:25pm) Fixed Attendance and receipt and invoice prints
 -   (28/may 08:58am) Added Fees Declaration Form
+-   (28/may 01:20pm) Contact Form fixed
 
 ## Admin Dashboard
 

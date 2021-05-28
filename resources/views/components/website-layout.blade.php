@@ -97,6 +97,11 @@
                 display: flex;
                 justify-content: stretch;
             }
+
+            .info-box h6 a,
+            .info-box h6 {
+                color: white !important;
+            }
         }
 
     </style>
