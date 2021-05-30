@@ -175,7 +175,7 @@
                 <tr>
                     <th colspan="2">Discount Given (if any)</th>
                     <th style="text-align: right">
-                        {{ $admission->discount === 0 ? 'N/A' : $admission->discount === 0 }}
+                        {{ $admission->discount === 0 ? 'N/A' : $admission->discount }}
                     </th>
                 </tr>
                 <tr>

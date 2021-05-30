@@ -18,9 +18,9 @@
         <div class="map-outer">
             <!--Map Canvas-->
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60550.32825232935!2d73.79339671346725!3d18.465735382906523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2956bc58bc1db%3A0x26e4184900f143a5!2sMangal%20Bhairav!5e0!3m2!1sen!2sin!4v1612415572444!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.4966632704095!2d73.82939731482392!3d18.506444974436345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf16f96e9c65%3A0xfd89193b753d06e7!2sWonder%20Learning%2C%20Pune!5e0!3m2!1sen!2sin!4v1622345058412!5m2!1sen!2sin"
                 style="height: 100%; min-height: 600px;width: 100%;" frameborder="0" style="border:0;"
-                allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                allowfullscreen="" aria-hidden="false" tabindex="0" loading="lazy"></iframe>
         </div>
         <div class="row no-gutters">
             <div class="info-box col-md-4 col-sm-12">
