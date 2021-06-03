@@ -82,6 +82,7 @@
 -   (25/may 11:25pm) Fixed Attendance and receipt and invoice prints
 -   (28/may 08:58am) Added Fees Declaration Form
 -   (28/may 01:20pm) Contact Form fixed
+-   (03/jun 04:15pm) Performance Reports can be added
 
 ## Admin Dashboard
 
@@ -346,6 +347,12 @@ Have ability to export these reports as excel or pdf
         - Changes in PlatformScreen
     - (07/may 04:32pm) Reflection of syllabus taught in book screen
 -   End of month performance report. This needs to be approved by center head before this can be seen by parents.
+    - PerformanceReportListScreen (Month and Division Filter)
+    - (03/jun 04:15pm) PerformanceReportEditScreen
+        - admission_id
+        - division_id
+        - performance
+        - date_at
 -   This report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed
 -   Teachers will be able to see the performance report of their student and export it to excel if needed

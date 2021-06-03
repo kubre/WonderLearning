@@ -6,6 +6,7 @@ use App\Models\Scopes\AcademicYearScope;
 use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Screen\AsSource;
 
 class Division extends Model
@@ -56,5 +57,10 @@ class Division extends Model
     public function scopeOfTeacher($query, int $teacherId)
     {
         return $query->where('teacher_id', $teacherId);
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(PerformanceReport::class);
     }
 }

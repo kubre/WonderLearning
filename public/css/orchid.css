@@ -102,3 +102,8 @@
 .new-report td, .new-report p, .new-report ol li {
   font-size: 1.2em;
 }
+
+textarea.label {
+  resize: none;
+  font-weight: 300 !important;
+}

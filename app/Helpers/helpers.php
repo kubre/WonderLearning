@@ -137,3 +137,23 @@ if (!function_exists('days_in_month')) {
             : (($month - 1) % 7 % 2 ? 30 : 31);
     }
 }
+
+
+if (!function_exists('get_months')) {
+    /*
+    * Get valid month list ex. Jun-2020, Jul-2020 to May-2021
+    */
+    function get_months(array $academicYear): array
+    {
+        $monthList = [];
+        list($start, $end) = $academicYear;
+        $startMonth = $start->copy();
+        $endMonth = $end->copy();
+
+        for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
+            $monthList[$i->format('d-M-Y')] = $i->format('M Y');
+        }
+
+        return $monthList;
+    }
+}

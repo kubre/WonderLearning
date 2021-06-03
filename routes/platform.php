@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\PerformanceReport;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Account\CanceledLogScreen;
 use App\Orchid\Screens\Account\DailyCollectionReportScreen;
@@ -37,6 +38,7 @@ use App\Orchid\Screens\Student\InvoicePrintScreen;
 use App\Orchid\Screens\Teacher\AttendanceEditScreen;
 use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
+use App\Orchid\Screens\Teacher\PerformanceReportEditScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\Teacher\SubjectListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -292,7 +294,16 @@ Route::screen('report/attendance', AttendanceReportScreen::class)
             ->push(__('Monthly Attendance Report'), route('reports.attendance.monthly'))
     );
 
-
-
 Route::screen('declaration/{admission}', DeclarationFormScreen::class)
     ->name('reports.declaration.form');
+
+Route::screen('report/performance/{admissionId}/{month}', PerformanceReportEditScreen::class)
+    ->name('reports.performance.fill')
+    ->breadcrumbs(
+        fn (Trail $trail, int $admissionId, string $month) => $trail
+            ->parent('teacher.students.list')
+            ->push(
+                __('Monthly Performance Report'),
+                route('reports.performance.fill', compact('admissionId', 'month'))
+            )
+    );
