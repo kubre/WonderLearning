@@ -25,6 +25,7 @@ use App\Orchid\Screens\School\AttendanceReportScreen;
 use App\Orchid\Screens\School\DivisionScreen;
 use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\KitStockScreen;
+use App\Orchid\Screens\School\PerformanceReportApprovalScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
@@ -296,6 +297,17 @@ Route::screen('report/attendance', AttendanceReportScreen::class)
 
 Route::screen('declaration/{admission}', DeclarationFormScreen::class)
     ->name('reports.declaration.form');
+
+Route::screen('report/performance/approval', PerformanceReportApprovalScreen::class)
+    ->name('reports.performance.approval')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(
+                __('Monthly Performance Report Approval'),
+                route('reports.performance.approval')
+            )
+    );
 
 Route::screen('report/performance/{admissionId}/{month}', PerformanceReportEditScreen::class)
     ->name('reports.performance.fill')

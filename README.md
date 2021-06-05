@@ -83,6 +83,7 @@
 -   (28/may 08:58am) Added Fees Declaration Form
 -   (28/may 01:20pm) Contact Form fixed
 -   (03/jun 04:15pm) Performance Reports can be added
+-   (05/jun 10:40pm) Approval to monthly student performance reports.
 
 ## Admin Dashboard
 
@@ -286,7 +287,7 @@ Have ability to export these reports as excel or pdf
 -   (13/apr 9:07am) Change Cancel option in receipt from cancel to Delete
 -   (13/apr 9:07am) Daily Collection Change column title Bank - Cheque
 -   (14/apr 7:25pm) Designed by instead of made by
--   Admission cum/Declaration form with Photo
+-   (28/may 08:58am) Admission cum/Declaration form with Photo
 -   (14/apr 10:18pm) 'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
 -   (14/apr 10:18pm) 'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.
 -   (14/apr 10:18pm) Nav Bg changed
@@ -316,9 +317,12 @@ Have ability to export these reports as excel or pdf
     -   teacher_id
     -   school_id
 -   (28/apr 11:24pm) Center Head will assign a Program (PG/NUR/LKG/UKG) and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them though subject would only have a single teacher).
--   (29/apr 1:25pm) Ability to assign division to the student
--   (6/may 06:30pm) Approval to Daily Teaching (Taught) syllabus.
--   Approval to weekly student performance reports.
+-   (29/apr 01:25pm) Ability to assign division to the student
+-   (06/may 06:30pm) Approval to Daily Teaching (Taught) syllabus.
+-   (05/jun 10:40pm) Approval to monthly student performance reports.
+    - PerformanceReportApprovalScreen: under reports
+        - select division and month and show checkboxes
+        - set approved_at to date
 -   Can see Student attendance and performance report an export excel if needed.
 
 ### Teacher Panel Features
