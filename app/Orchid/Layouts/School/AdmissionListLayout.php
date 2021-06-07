@@ -60,7 +60,6 @@ class AdmissionListLayout extends Table
                 ->render(fn (Admission $a) => $f->{$a->fees_total_column} - $a->discount),
             TD::make('batch', 'Batch'),
             TD::make('actions', 'Actions')
-                ->canSee($this->user->hasAccess('admission.edit'))
                 ->render(
                     fn (Admission $a) =>
                     DropDown::make()
@@ -68,6 +67,7 @@ class AdmissionListLayout extends Table
                         ->list([
                             Link::make('Receipt')
                                 ->icon('money')
+                                ->canSee($this->user->hasAccess('school.users'))
                                 ->route('school.receipt.list', ['admission_id' => $a->id]),
                             ModalToggle::make('Assign Division')
                                 ->icon('layers')
@@ -75,16 +75,17 @@ class AdmissionListLayout extends Table
                                 ->modalTitle('Assign division to a student')
                                 ->method('assignDivision')
                                 ->parameters(['admission' => $a->id])
+                                ->canSee($this->user->hasAccess('school.users'))
                                 ->asyncParameters(['admission' => $a->id, 'program' => $a->program]),
                             Button::make('Assign Kit')
                                 ->icon('book-open')
                                 ->method('assignKit')
                                 ->confirm('Once assigned a kit cannot be reassigned back and will deduct 1 count from kits available for this programme, Are you sure?')
                                 ->parameters(['admission' => $a->id])
-                                ->canSee(!$a->assigned_kit),
+                                ->canSee(!$a->assigned_kit && $this->user->hasAccess('school.users')),
                             Link::make('Graduate To')
                                 ->icon('action-redo')
-                                ->canSee($a->program !== 'Senior KG')
+                                ->canSee($a->program !== 'Senior KG' && $this->user->hasAccess('school.users'))
                                 ->route('school.graduation.edit', [
                                     'admission' => $a->id,
                                 ]),
@@ -93,9 +94,18 @@ class AdmissionListLayout extends Table
                                 ->modal('chooseInvoiceReceiversName')
                                 ->modalTitle('Print Invoice')
                                 ->method('issueInvoice')
+                                ->canSee($this->user->hasAccess('school.users'))
+                                ->asyncParameters(['admission_id' => $a->id]),
+                            ModalToggle::make('Performance Report')
+                                ->icon('bar-chart')
+                                ->modal('preparePerformanceReport')
+                                ->modalTitle('Fill details')
+                                ->method('prepareReport')
+                                ->canSee($this->user->hasAccess('teacher.student'))
                                 ->asyncParameters(['admission_id' => $a->id]),
                             Link::make('Edit')
                                 ->icon('note')
+                                ->canSee($this->user->hasAccess('admission.edit'))
                                 ->route('school.admission.edit', $a->id),
                         ]),
                 )

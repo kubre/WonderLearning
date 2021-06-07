@@ -2,16 +2,14 @@
 
 namespace App\Orchid;
 
-use App\Models\School;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Session;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemMenu;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
 use Orchid\Support\Color;
-use Session;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -26,8 +24,6 @@ class PlatformProvider extends OrchidServiceProvider
     {
         parent::boot($dashboard);
 
-        // $this->isAdmin = $this->user->hasAccess('admin.user');
-
         // This code is to make sure if working year in session ever gets out of sync just sync it back
         if (!is_academic_year_in_sync(school()->academic_year)) {
             Session::forget('_working_year');
@@ -39,6 +35,10 @@ class PlatformProvider extends OrchidServiceProvider
      */
     public function registerMainMenu(): array
     {
+        if (!Session::exists('school')) {
+            session(['school' => auth()->user()->school]);
+        }
+
         return [
             Menu::make('Dashboard')
                 ->icon('speedometer')
@@ -157,6 +157,10 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('table')
                         ->permission('menu.report')
                         ->route('reports.attendance.monthly'),
+                    Menu::make('Performance Report Approval')
+                        ->icon('check')
+                        ->permission('school.users')
+                        ->route('reports.performance.approval'),
                 ]),
 
             // Options for Teacher
@@ -177,7 +181,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Sign Out')
                 ->icon('logout')
-                ->route('auth.signout', [optional(session('school'))->login_url ?? 'admin']),
+                ->route('auth.signout', [optional(school())->login_url ?? 'admin']),
         ];
     }
 

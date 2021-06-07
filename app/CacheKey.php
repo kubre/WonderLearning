@@ -14,6 +14,7 @@ class CacheKey
     public const CONVERSION = 'conversion';
     public const RECEIVABLE = 'receivable';
     public const DEPOSITED = 'deposited';
+    public const BIRTHDAYS = 'birthdays';
 
     public static function for(string $key): string
     {

@@ -1,14 +1,31 @@
 # Development Log Kept from 06-04-2021
 
-## Notes
+## Issues
 
+### Old
 ```
 1) (DONE) Add fields modified in migrations to the Models $fillable
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
 3) (DONE) Implement graduation logic
 3) (Fixed) Fees receipt generation failing
 4) (Fixed) Generic Receipt were not able to generate once school fees was nil
+
 ```
+### Issues from 23-05-2021 meeting
+- (26/may 10:58am) User should see select year screen after login
+    - Fixed login background shows even on dashboard
+- (26/may 05:03pm) Dashboard UI instructions
+    - First Row:    Enquiry, Gross Admissions
+    - Second Row:   Gross Receivable, Collection, Collection Due
+    - Birthday Reminder: Name, Program, Division
+- (26/may 07:55pm) Enquiry, Admission: Stats Cards on top by program and clickable to filter data
+- (26/may 08:10pm) Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
+- (26/may 08:45pm) Admission: Optional Photo, Discount empty errors total fees calculation make default zero
+- (26/may 08:45pm) Installment (Month and Year in select option)
+- (27/may 06:05pm) Kit Stock Log
+- (28/may 08:58am) Installment Screen name ('Fees Installments - Annexure A')
+- (28/may 08:58am) Declaration form
+- Delete Installment if admission not added
 
 ## Dashboard
 
@@ -62,6 +79,13 @@
 -   (14/may 02:05pm) Record student attendance and see list of added attendance.
 -   (19/may 06:37pm) Attendance Report
 -   (20/may 04:03pm) Fixed permission related issues
+-   (25/may 11:25pm) Fixed Attendance and receipt and invoice prints
+-   (28/may 08:58am) Added Fees Declaration Form
+-   (28/may 01:20pm) Contact Form fixed
+-   (03/jun 04:15pm) Performance Reports can be added
+-   (05/jun 10:40pm) Approval to monthly student performance reports.
+-   (07/jun 08:20pm) Timezone switched to UTC(look out for bugs), Made admission year readonly, added future year for select year
+
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**
@@ -264,7 +288,7 @@ Have ability to export these reports as excel or pdf
 -   (13/apr 9:07am) Change Cancel option in receipt from cancel to Delete
 -   (13/apr 9:07am) Daily Collection Change column title Bank - Cheque
 -   (14/apr 7:25pm) Designed by instead of made by
--   Admission cum/Declaration form with Photo
+-   (28/may 08:58am) Admission cum/Declaration form with Photo
 -   (14/apr 10:18pm) 'Name' to 'Student Name' and 'S/O' to 'Parent Name' InvoicePrintScreen
 -   (14/apr 10:18pm) 'Admitted to' instead of Programme in InvoicePrintScreen and Admission Cum/Decl.
 -   (14/apr 10:18pm) Nav Bg changed
@@ -294,9 +318,12 @@ Have ability to export these reports as excel or pdf
     -   teacher_id
     -   school_id
 -   (28/apr 11:24pm) Center Head will assign a Program (PG/NUR/LKG/UKG) and division to a teacher (Teacher can have multiple subjects and multiple divisions assigned to them though subject would only have a single teacher).
--   (29/apr 1:25pm) Ability to assign division to the student
--   (6/may 06:30pm) Approval to Daily Teaching (Taught) syllabus.
--   Approval to weekly student performance reports.
+-   (29/apr 01:25pm) Ability to assign division to the student
+-   (06/may 06:30pm) Approval to Daily Teaching (Taught) syllabus.
+-   (05/jun 10:40pm) Approval to monthly student performance reports.
+    - PerformanceReportApprovalScreen: under reports
+        - select division and month and show checkboxes
+        - set approved_at to date
 -   Can see Student attendance and performance report an export excel if needed.
 
 ### Teacher Panel Features
@@ -325,6 +352,12 @@ Have ability to export these reports as excel or pdf
         - Changes in PlatformScreen
     - (07/may 04:32pm) Reflection of syllabus taught in book screen
 -   End of month performance report. This needs to be approved by center head before this can be seen by parents.
+    - PerformanceReportListScreen (Month and Division Filter)
+    - (03/jun 04:15pm) PerformanceReportEditScreen
+        - admission_id
+        - division_id
+        - performance
+        - date_at
 -   This report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed
 -   Teachers will be able to see the performance report of their student and export it to excel if needed

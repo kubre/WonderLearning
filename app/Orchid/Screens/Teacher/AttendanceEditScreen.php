@@ -7,6 +7,7 @@ use App\Models\Division;
 use App\Models\DivisionAttendance;
 use App\Orchid\Layouts\AttendanceListener;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\DateTimer;
@@ -105,15 +106,17 @@ class AttendanceEditScreen extends Screen
             ]
         );
 
-        $absents = collect($request->is_present)
-            ->filter(fn ($value) => $value == 0)
+        $attendances = collect($request->is_present)
             ->map(fn ($item, $key) => [
-                'absent_id' => $key,
+                'admission_id' => $key,
+                'is_present' => $item,
             ]);
 
-        DivisionAttendance::create($request->only('division_id', 'date_at'))
-            ->absents()
-            ->createMany($absents);
+        DB::transaction(function () use ($request, $attendances) {
+            DivisionAttendance::create($request->only('division_id', 'date_at'))
+                ->attendances()
+                ->createMany($attendances);
+        });
 
         return redirect()->route('teacher.attendance.list');
     }

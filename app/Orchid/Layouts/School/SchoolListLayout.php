@@ -36,10 +36,13 @@ class SchoolListLayout extends Table
             TD::make('code', 'School Code')
                 ->filter(TD::FILTER_TEXT),
             TD::make('email', 'Email'),
-            TD::make('login_url', 'Login Url')
-                ->render(fn (School $s) =>
-                Link::make($s->login_url)->icon('globe')
-                    ->target('_blank')->href(env('APP_URL') . '/login/' . $s->login_url)),
+            TD::make('login_url', 'Login Url (Click to Copy)')
+                ->render(
+                    fn (School $s) =>
+                    Link::make($s->login_url)
+                        ->icon('docs')
+                        ->href("javascript:copyHelper('" . env('APP_URL') . '/login/' . $s->login_url . "')")
+                ),
             TD::make('actions', 'Actions')
                 ->render(fn (School $s) =>
                 Link::make('Edit')->icon('note')->route('admin.school.edit', $s))

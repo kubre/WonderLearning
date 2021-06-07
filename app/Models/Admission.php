@@ -97,7 +97,7 @@ class Admission extends Model
 
     public function getTotalFeesAttribute()
     {
-        return $this->invoice_fees - $this->discount;
+        return $this->invoice_fees - ($this->discount ?: 0);
     }
 
 
@@ -165,5 +165,10 @@ class Admission extends Model
     public function school_fees_receipts(): HasMany
     {
         return $this->hasMany(Receipt::class)->where('receipts.for', Receipt::SCHOOL_FEES);
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(PerformanceReport::class);
     }
 }

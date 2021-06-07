@@ -19,10 +19,6 @@
 /* Fixes end */
 
 @media print {
-  /* @page {
-    size: landscape;
-  } */
-
   body * {
     visibility: hidden;
   }
@@ -38,7 +34,7 @@
     width: 100vw;
     box-shadow: none;
     border: 1 solid black;
-    font-size: 1.3em;
+    font-size: 1.1em;
   }
 
   #print-hide {
@@ -101,4 +97,17 @@
 
 .row .aside nav .text-muted {
   color: #dfdfdf !important;
+}
+
+.new-report td, .new-report p, .new-report ol li {
+  font-size: 1.2em;
+}
+
+textarea.label {
+  resize: none;
+  font-weight: 300 !important;
+}
+
+input[readonly] {
+  color: #646464 !important;
 }

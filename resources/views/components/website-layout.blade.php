@@ -97,6 +97,11 @@
                 display: flex;
                 justify-content: stretch;
             }
+
+            .info-box h6 a,
+            .info-box h6 {
+                color: white !important;
+            }
         }
 
     </style>
@@ -357,7 +362,7 @@
                                 <div class="footer-column col-lg-6 col-md-6 col-sm-12">
                                     <div class="footer-widget logo-widget">
                                         <div class="logo">
-                                            <a href="/"><img src="images/logo.png" alt="" /></a>
+                                            <a href="/"><img src="images/logo-border.png" alt="" /></a>
                                         </div>
                                         <div class="text"></div>
 

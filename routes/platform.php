@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Models\PerformanceReport;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Account\CanceledLogScreen;
 use App\Orchid\Screens\Account\DailyCollectionReportScreen;
@@ -11,6 +12,7 @@ use App\Orchid\Screens\Account\PaymentDueReportScreen;
 use App\Orchid\Screens\Admin\ExportScreen;
 use App\Orchid\Screens\Admin\ProgramSubjectsScreen;
 use App\Orchid\Screens\Admin\SyllabusScreen;
+use App\Orchid\Screens\DeclarationFormScreen;
 use App\Orchid\Screens\Reports\AdmissionReportScreen;
 use App\Orchid\Screens\Reports\EnquiryReportScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -23,9 +25,11 @@ use App\Orchid\Screens\School\AttendanceReportScreen;
 use App\Orchid\Screens\School\DivisionScreen;
 use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\KitStockScreen;
+use App\Orchid\Screens\School\PerformanceReportApprovalScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
 use App\Orchid\Screens\School\SchoolEditScreen;
 use App\Orchid\Screens\School\SchoolListScreen;
+use App\Orchid\Screens\School\SelectYearScreen;
 use App\Orchid\Screens\School\UserEditScreen as SchoolUserEditScreen;
 use App\Orchid\Screens\School\UserListScreen as SchoolUserListScreen;
 use App\Orchid\Screens\Student\EnquiryEditScreen;
@@ -35,6 +39,7 @@ use App\Orchid\Screens\Student\InvoicePrintScreen;
 use App\Orchid\Screens\Teacher\AttendanceEditScreen;
 use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
+use App\Orchid\Screens\Teacher\PerformanceReportEditScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\Teacher\SubjectListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -55,7 +60,11 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
+    ->name('platform.main')
+    ->middleware('working.year');
+
+Route::screen('/select-year', SelectYearScreen::class)
+    ->name('school.select.year');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
@@ -114,14 +123,6 @@ Route::screen('roles', RoleListScreen::class)
             ->parent('platform.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
-// Example...
-// Route::screen('example', ExampleScreen::class)
-//     ->name('platform.example')
-//     ->breadcrumbs(function (Trail $trail) {
-//         return $trail
-//             ->parent('platform.index')
-//             ->push(__('Example screen'));
-//     });
 
 // Admin
 Route::screen('exports', ExportScreen::class)
@@ -147,16 +148,6 @@ Route::screen('program-subjects', ProgramSubjectsScreen::class)
             ->parent('platform.index')
             ->push(__('Add Subject to Programme'), route('admin.program-subjects'))
     );
-
-// Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-// Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-// Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
-// Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-// Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-// Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
-
-//Route::screen('idea', 'Idea::class','platform.screens.idea');
-
 
 // School > Users
 Route::screen('school/users/{users}/edit', SchoolUserEditScreen::class)
@@ -302,4 +293,29 @@ Route::screen('report/attendance', AttendanceReportScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Monthly Attendance Report'), route('reports.attendance.monthly'))
+    );
+
+Route::screen('declaration/{admission}', DeclarationFormScreen::class)
+    ->name('reports.declaration.form');
+
+Route::screen('report/performance/approval', PerformanceReportApprovalScreen::class)
+    ->name('reports.performance.approval')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(
+                __('Monthly Performance Report Approval'),
+                route('reports.performance.approval')
+            )
+    );
+
+Route::screen('report/performance/{admissionId}/{month}', PerformanceReportEditScreen::class)
+    ->name('reports.performance.fill')
+    ->breadcrumbs(
+        fn (Trail $trail, int $admissionId, string $month) => $trail
+            ->parent('teacher.students.list')
+            ->push(
+                __('Monthly Performance Report'),
+                route('reports.performance.fill', compact('admissionId', 'month'))
+            )
     );

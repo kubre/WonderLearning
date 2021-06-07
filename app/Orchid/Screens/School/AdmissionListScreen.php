@@ -16,6 +16,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdmissionListScreen extends Screen
 {
@@ -50,6 +51,12 @@ class AdmissionListScreen extends Screen
                 ->with(['student.school', 'division'])
                 ->simplePaginate(50),
             'fees' => Fees::first(),
+            'count' => Admission::select('program', DB::raw('COUNT(id) as count'))
+                ->groupBy('program')
+                ->get()
+                ->mapWithKeys(fn ($item) => [$item->program => $item->count])
+                ->toArray(),
+            'route' => 'school.admission.list',
         ];
     }
 
@@ -71,7 +78,8 @@ class AdmissionListScreen extends Screen
     public function layout(): array
     {
         return [
-            ProgramSelectionLayout::class,
+            // ProgramSelectionLayout::class,
+            Layout::view('layouts.program-filter'),
             AdmissionListLayout::class,
             Layout::modal('chooseInvoiceReceiversName', [
                 Layout::rows([

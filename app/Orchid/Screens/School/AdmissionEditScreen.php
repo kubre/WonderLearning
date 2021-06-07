@@ -8,6 +8,7 @@ use App\Models\Enquiry;
 use App\Models\Fees;
 use App\Models\School;
 use App\Models\Student;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Actions\Button;
@@ -20,6 +21,7 @@ use Orchid\Screen\Fields\Matrix;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
 class AdmissionEditScreen extends Screen
@@ -77,7 +79,7 @@ class AdmissionEditScreen extends Screen
 
             if (is_null($program_fees) || $program_fees < 1) {
                 $this->disable_save = true;
-                Toast::error("Please add fees rate card for next year first!");
+                Alert::error("Please add a Fees Rate Card in Accounts section before starting the admissions!");
             }
             $data = $enquiry->toArray();
             $data[$enquirer . '_name'] = $enquiry->enquirer_name;
@@ -95,14 +97,14 @@ class AdmissionEditScreen extends Screen
         $this->working_year = working_year();
         $this->current_year_start = (string) $this->working_year[0];
         $this->current_year = get_academic_year_formatted($this->working_year);
-        if (today()->isBetween(...$this->working_year)) {
-            $academic_year = get_academic_year(today()->addYear());
-            $this->next_year_start = (string) $academic_year[0];
-            $this->next_year = get_academic_year_formatted($academic_year);
-        } else {
-            $this->next_year = $this->current_year;
-            $this->next_year_start = $this->current_year_start;
-        }
+        // if (today()->isBetween(...$this->working_year)) {
+        //     $academic_year = get_academic_year(today()->addYear());
+        //     $this->next_year_start = (string) $academic_year[0];
+        //     $this->next_year = get_academic_year_formatted($academic_year);
+        // } else {
+        //     $this->next_year = $this->current_year;
+        //     $this->next_year_start = $this->current_year_start;
+        // }
 
         return array_merge($data, $admission->toArray());
     }
@@ -145,14 +147,19 @@ class AdmissionEditScreen extends Screen
     {
         return [
             Layout::rows([
-                Input::make('enquirer_id')
-                    ->hidden(),
-                Input::make('prn')
-                    ->title('PRN')
-                    ->canSee($this->exists)
-                    ->readonly(),
-                Input::make('code')
-                    ->hidden(),
+                Group::make([
+                    Input::make('prn')
+                        ->title('PRN')
+                        ->canSee($this->exists)
+                        ->readonly(),
+                    Input::make('enquirer_id')
+                        ->hidden(),
+                    Input::make('code')
+                        ->hidden(),
+                    Input::make('created_at')
+                        ->hidden()
+                        ->value($this->current_year_start),
+                ]),
                 Group::make([
                     Cropper::make('photo')
                         ->title('Passport Size photo')
@@ -160,12 +167,16 @@ class AdmissionEditScreen extends Screen
                         ->targetRelativeUrl()
                         ->height(450)
                         ->width(350),
-                    Select::make('created_at')
+                    // Select::make('created_at')
+                    //     ->title('Admission Academic Year')
+                    //     ->options([
+                    //         $this->current_year_start => $this->current_year,
+                    //         $this->next_year_start => $this->next_year,
+                    //     ]),
+                    Input::make('created_at_label')
                         ->title('Admission Academic Year')
-                        ->options([
-                            $this->current_year_start => $this->current_year,
-                            $this->next_year_start => $this->next_year,
-                        ]),
+                        ->readonly()
+                        ->value($this->current_year),
                     DateTimer::make('admission_at')
                         ->format('Y-m-d')
                         ->enableTime(false)
@@ -245,6 +256,7 @@ class AdmissionEditScreen extends Screen
             Layout::rows([
                 Group::make([
                     Input::make('discount')
+                        ->value(0)
                         ->title('Discount'),
                     Select::make('batch')
                         ->options([
@@ -271,8 +283,8 @@ class AdmissionEditScreen extends Screen
 
     public function createOrUpdate(Admission $admission, AdmissionRequest $request)
     {
-        $student = new Student;
-        $new_admission = !$admission->exists;
+        $student = new Student();
+        $newAdmission = !$admission->exists;
 
         if ($admission->exists) {
             $student = $admission->student;
@@ -293,7 +305,7 @@ class AdmissionEditScreen extends Screen
 
         Toast::info('Admission of student was done successfully!');
 
-        if ($new_admission) {
+        if ($newAdmission) {
             return redirect()->route('school.installment.edit', [
                 'admission' => $admission->id,
             ]);

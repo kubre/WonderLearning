@@ -25,13 +25,13 @@ class AdmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            "photo" => "required",
+            "photo" => "nullable",
             "admission_at" => "required",
             "created_at" => "required",
             "name" => "required",
             "gender" => "required",
             "code" => "required|integer",
-            "dob_at" => "required|before:today",
+            "dob_at" => "required|date|before:today",
             "nationality" => "required",
             "program" => "required",
             "father_name" => "required_without:mother_name",
@@ -48,11 +48,23 @@ class AdmissionRequest extends FormRequest
             "city" => "required",
             "state" => "required",
             "pincode" => "nullable|digits:6",
-            "discount" => "nullable|numeric",
+            "discount" => "numeric|min:0",
             "batch" => "required|in:Morning,Afternoon",
             "is_transportation_required" => "boolean",
             "siblings" => "nullable",
             'is_graduation' => 'nullable',
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'dob_at.before' => 'Date of Birth should not be today or after',
         ];
     }
 }

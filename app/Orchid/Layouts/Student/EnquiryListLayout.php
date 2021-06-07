@@ -8,10 +8,8 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
-use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
-use Orchid\Support\Color;
 
 class EnquiryListLayout extends Table
 {
@@ -61,7 +59,7 @@ class EnquiryListLayout extends Table
 
                             ModalToggle::make('Convert to Admission')
                                 ->icon('share-alt')
-                                ->canSee($this->user->hasAccess('admission.create'))
+                                ->canSee($this->user->hasAccess('admission.create') && is_null($enquiry->student_id))
                                 ->modal('chooseEnquirerType')
                                 ->modalTitle('Admission Process #1')
                                 ->method('proceedToAdmission')

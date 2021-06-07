@@ -22,7 +22,7 @@ class InstallmentEditScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Installments';
+    public $name = 'Fees Installments (ANNEXURE - A)';
 
     /**
      * Display header description.
@@ -90,7 +90,6 @@ class InstallmentEditScreen extends Screen
         $admission = Admission::withoutGlobalScopes()->findOrFail($admission);
         $expected_fees = $admission->total_fees;
 
-
         if ($total_amount !== $expected_fees) {
             return back()->withErrors([
                 'amount' => "Addition of all the fees should add to the $expected_fees.",
@@ -111,7 +110,7 @@ class InstallmentEditScreen extends Screen
         Installment::insert($data);
 
         Toast::info('Installments has been assigned to the student!');
-        return redirect()->route('school.admission.list');
+        return redirect()->route('reports.declaration.form', compact('admission'));
     }
 
     public function asyncInstallmentCount(int $installment_count)

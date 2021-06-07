@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Support\Facades\Layout;
@@ -66,16 +65,10 @@ class EnquiryEditScreen extends Screen
                 ->canSee($this->user->hasAccess('enquiry.table'))
                 ->route('school.enquiry.list'),
 
-            Button::make('Save Enquiry')
+            Button::make('Save')
                 ->icon('save')
                 ->method('createOrUpdate')
-                ->type(Color::PRIMARY())
-                ->canSee(!$this->exists),
-
-            Button::make('Update Enquiry')
-                ->icon('note')
-                ->method('createOrUpdate')
-                ->canSee($this->exists),
+                ->type(Color::PRIMARY()),
 
             Button::make('Remove')
                 ->icon('trash')
@@ -93,8 +86,8 @@ class EnquiryEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::rows([
-                Group::make([
+            Layout::block([
+                Layout::rows([
                     Input::make('name')
                         ->title('Name')
                         ->required(),
@@ -107,8 +100,6 @@ class EnquiryEditScreen extends Screen
                         ])
                         ->required()
                         ->title('Program'),
-                ]),
-                Group::make([
                     Select::make('gender')
                         ->options([
                             'Male' => 'Male',
@@ -120,9 +111,14 @@ class EnquiryEditScreen extends Screen
                         ->required(),
                     DateTimer::make('dob_at')
                         ->title('Date of Birth')
-                        ->required()
+                        ->format('Y-m-d')
+                        ->required(),
                 ]),
-                Group::make([
+            ])
+                ->title('Basic Details')
+                ->description('Basic details related to the child'),
+            Layout::block([
+                Layout::rows([
                     Input::make('enquirer_name')
                         ->title('Enquirer Name')
                         ->required(),
@@ -134,18 +130,31 @@ class EnquiryEditScreen extends Screen
                         ->title('Enquirer Contact')
                         ->required(),
                 ]),
-                Group::make([
+            ])
+                ->title('Enquirers Details')
+                ->description('Basic details related to the enquirer'),
+            Layout::block([
+                Layout::rows([
                     Input::make('locality')
                         ->title('Locality')
                         ->required(),
                     Input::make('reference')
-                        ->title('Reference')
-                        ->required(),
+                        ->value('No Reference')
+                        ->title('Reference'),
                     DateTimer::make('follow_up_at')
                         ->title('Follow Up Date')
+                        ->format('Y-m-d')
                         ->required(),
                 ]),
-            ]),
+            ])
+                ->title('Other Details')
+                ->description('Other miscellaneous details')
+                ->commands([
+                    Button::make('Save')
+                        ->icon('save')
+                        ->method('createOrUpdate')
+                        ->type(Color::PRIMARY()),
+                ]),
         ];
     }
 
@@ -160,7 +169,7 @@ class EnquiryEditScreen extends Screen
         $request->validate([
             'name' => 'required',
             'gender' => 'required|in:Male,Female,Transgender,Other',
-            'dob_at' => 'required|date',
+            'dob_at' => 'required|date|before:today',
             'program' => 'required',
             'enquirer_name' => 'required',
             'enquirer_email' => 'required|email',
@@ -168,6 +177,8 @@ class EnquiryEditScreen extends Screen
             'locality' => 'required',
             'reference' => 'required',
             'follow_up_at' => 'required|date',
+        ], [
+            'dob_at.before' => 'Date of Birth should be before today',
         ]);
 
         $enquiry->fill($request->input())->save();

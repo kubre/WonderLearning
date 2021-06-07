@@ -1,9 +1,9 @@
 <div id="print-report" class="bg-white px-4 py-4">
     <div class="row">
-        <div class="col-md-3">
-            <img style="max-height: 150px; width: auto;" src="{{ $admission->student->school->logo }}" alt="Logo">
+        <div class="col-3">
+            <img style="max-height: 100px; width: auto;" src="{{ $admission->student->school->logo }}" alt="Logo">
         </div>
-        <div class="col-md-3 text-center pl-5 mt-3">
+        <div class="col-3 text-center pl-5 mt-3">
             <h2>
                 <strong>Invoice</strong>
             </h2>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="row mt-5">
-        <div class="col-md-6">
+        <div class="col-6">
             <table class="w-100 table table-bordered">
                 <tr>
                     <th>Student Name</th>
@@ -54,7 +54,7 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-6">
+        <div class="col-6">
             <table class="w-100 table table-bordered">
                 <tr>
                     <th>Admission Month</th>
@@ -75,8 +75,7 @@
             </table>
         </div>
     </div>
-    {{-- <div class="row mt-4 px-3">towards the full or part payment of the total fees of the course mentioned below: </div> --}}
-    <div class="row mt-5">
+    <div class="row mt-5 px-3">
         <table class="table table-bordered table-black col">
             <thead>
                 <tr>

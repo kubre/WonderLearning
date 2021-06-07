@@ -38,62 +38,52 @@ class AttendanceReportScreen extends Screen
     public function query(Request $request): array
     {
         $days = days_in_month(1, 2000);
+        $classes = collect();
 
         if ($request->has('division') && $request->has('month')) {
-            // TODO: maybe someday
-            $sql = <<<'QUERY'
-            SELECT DAY(date_at) date,
-            students.id student_id, name student_name, code student_code,
-                IF(absent_id = students.id, "A", "P") attendance 
-                FROM division_attendances
-                LEFT JOIN absents ON division_attendance_id = division_attendances.id 
-                JOIN students
-                WHERE division_attendances.division_id = :division_id1 
-                AND date_at BETWEEN :start1 AND :end1
-            EXCEPT
-            SELECT DAY(date_at) date,
-            students.id student_id, name student_name, code student_code,
-                if(absent_id = students.id, "A", "P") attendance 
-                FROM division_attendances
-                LEFT JOIN absents ON division_attendance_id = division_attendances.id 
-                JOIN students ON absent_id IS NOT NULL AND students.id != absent_id
-                WHERE division_attendances.division_id = :division_id2
-                AND date_at BETWEEN :start2 AND :end2
-                GROUP BY student_id, absent_id
-                ORDER BY date, student_code; 
-            QUERY;
+            $period = \explode('|', $request->get('month'));
 
-            $divisionId = $request->get('division');
-            list($start, $end) = \explode('|', $request->get('month'));
-
-            $attendances = DivisionAttendance::fromQuery($sql, [
-                'division_id1' => $divisionId,
-                'division_id2' => $divisionId,
-                'start1' => $start,
-                'start2' => $start,
-                'end1' => $end,
-                'end2' => $end,
-            ])
-                ->mapToGroups(fn ($item) => [
-                    $item->student_id => $item // by student id
-                ])
-                ->map(fn ($item) => $item->mapWithKeys(
-                    fn ($item) => [$item->date => $item] // then by date
-                ));
-
-            $admissions = Admission::whereDivisionId($divisionId)
-                ->with('student.school')
+            $classes = DivisionAttendance::with('attendances.admission.student.school')
+                ->whereBetween('date_at', $period)
+                ->whereDivisionId($request->get('division'))
+                ->orderBy('date_at')
                 ->get();
 
-            $date = Carbon::createFromFormat('y-m-d', $start);
-
+            $date = Carbon::createFromFormat('y-m-d', $period[0]);
             $days = days_in_month($date->month, $date->year);
-        } else {
-            $attendances = collect();
-            $admissions = collect();
+
+            $classes =
+                $classes
+                ->mapWithKeys(
+                    fn ($item) => [
+                        $item->date_at =>
+                        $item->attendances
+                            ->mapWithKeys(fn ($aItem) => [
+                                $aItem->admission_id => [
+                                    'id' => $aItem->admission_id,
+                                    'name' => $aItem->admission->student->name,
+                                    'prn' => $aItem->admission->student->prn,
+                                    'date' => $item->date_at,
+                                    'status' => $aItem->status,
+                                ]
+                            ])
+                    ]
+                )
+                ->collapse()
+                ->groupBy('id')
+                ->mapWithKeys(fn ($item, $key) => [
+                    $key => $item->mapWithKeys(
+                        fn ($aItem) => [
+                            (int)\substr($aItem['date'], 0, 2)  => $aItem['status'],
+                            'name' => $aItem['name'],
+                            'prn' => $aItem['prn'],
+                            'date' => $aItem['date'],
+                        ]
+                    ),
+                ]);
         }
 
-        return compact('attendances', 'days', 'admissions');
+        return compact('classes', 'days');
     }
 
     /**
