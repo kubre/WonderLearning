@@ -34,7 +34,9 @@ class SelectYearScreen extends Screen
      */
     public function query(): array
     {
-        return [];
+        return [
+            'workingYear' => Carbon::createFromDate(date('Y'), school()->start_month, 1)->toDateString(),
+        ];
     }
 
     /**
@@ -54,7 +56,7 @@ class SelectYearScreen extends Screen
      */
     public function layout(): array
     {
-        $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
+        $validYears = collect(range(2020, date('Y') + 1))->mapWithKeys(function ($y) {
             $d = Carbon::createFromDate($y, school()->start_month, 1);
             return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
         });

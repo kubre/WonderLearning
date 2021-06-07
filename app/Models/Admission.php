@@ -97,7 +97,7 @@ class Admission extends Model
 
     public function getTotalFeesAttribute()
     {
-        return $this->invoice_fees - $this->discount;
+        return $this->invoice_fees - ($this->discount ?: 0);
     }
 
 

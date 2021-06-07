@@ -84,6 +84,7 @@
 -   (28/may 01:20pm) Contact Form fixed
 -   (03/jun 04:15pm) Performance Reports can be added
 -   (05/jun 10:40pm) Approval to monthly student performance reports.
+-   (07/jun 08:20pm) Timezone switched to UTC(look out for bugs), Made admission year readonly, added future year for select year
 
 ## Admin Dashboard
 

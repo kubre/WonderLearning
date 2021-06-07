@@ -164,7 +164,7 @@ class PlatformScreen extends Screen
             $views[] = Layout::view('components.title', ['title' => '🎂 Upcoming Birthdays']);
             $views[] = BirthdayListLayout::class;
 
-            $validYears = collect(range(2020, date('Y')))->mapWithKeys(function ($y) {
+            $validYears = collect(range(2020, date('Y') + 1))->mapWithKeys(function ($y) {
                 $d = Carbon::createFromDate($y, school()->start_month, 1);
                 return [$d->toDateString() => get_academic_year_formatted(get_academic_year($d))];
             });

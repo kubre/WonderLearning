@@ -27,7 +27,7 @@ class Enquiry extends Model
     ];
 
     /** @var array */
-    protected $dates = ['dob_at', 'follow_up_at',];
+    protected $dates = ['created_at', 'dob_at', 'follow_up_at',];
 
     /** @var array */
     protected $allowedFilters = [

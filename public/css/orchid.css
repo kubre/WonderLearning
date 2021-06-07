@@ -107,3 +107,7 @@ textarea.label {
   resize: none;
   font-weight: 300 !important;
 }
+
+input[readonly] {
+  color: #646464 !important;
+}
