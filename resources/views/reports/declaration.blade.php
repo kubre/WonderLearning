@@ -43,37 +43,43 @@
         </p>
 
         <p>
-        <ol>
-            <li class='mt-2'>On application, I will pay the registration and assessment fee which covers the cost of
-                processing
-                the admission.</li>
+            <ol>
+                <li class='mt-2'>On application, I will pay the registration and assessment fee which covers the cost of
+                    processing
+                    the admission.</li>
 
-            <li class='mt-2'>I will pay the cost of Student Kit (Consist of text & exercise books, the school planner,
-                magazine
-                and other educational materials) before the commencement of the academic year.</li>
+                <li class='mt-2'>I will pay the cost of Student Kit (Consist of text & exercise books, the school
+                    planner,
+                    magazine
+                    and other educational materials) before the commencement of the academic year.</li>
 
-            <li class='mt-2'>It's been discussed and agreed to that I will pay rest of the fees as per the ANNEXURE - A.
-                If I fail to
-                do so, the school has the right to exclude my child from attending school and I will not have any
-                claim in any form [legal/security] against the school.</li>
+                <li class='mt-2'>It's been discussed and agreed to that I will pay rest of the fees as per the ANNEXURE
+                    - A.
+                    If I fail to
+                    do so, the school has the right to exclude my child from attending school and I will not have any
+                    claim in any form [legal/security] against the school.</li>
 
-            <li class='mt-2'>If any cheque issued by me is dishonored, I undertake to remit the fee in cash within five
-                calendar
-                days of the date of notice, failing which the school has the right to exclude my child from attending
-                school. I will also pay a fine of RS. 250/- for each cheque dishonored apart from the applicable late
-                fee.</li>
+                <li class='mt-2'>If any cheque issued by me is dishonored, I undertake to remit the fee in cash within
+                    five
+                    calendar
+                    days of the date of notice, failing which the school has the right to exclude my child from
+                    attending
+                    school. I will also pay a fine of RS. 250/- for each cheque dishonored apart from the applicable
+                    late
+                    fee.</li>
 
-            <li class='mt-2'>On default of payment of fees / dishonoring of a cheque issued by me, the school can
-                initiate
-                legal proceedings against me to recover the dues with interest, the cost of recovery, and
-                reinstate/recover discounts/concessions granted. All legal charges met by the school will be borne by
-                me.</li>
+                <li class='mt-2'>On default of payment of fees / dishonoring of a cheque issued by me, the school can
+                    initiate
+                    legal proceedings against me to recover the dues with interest, the cost of recovery, and
+                    reinstate/recover discounts/concessions granted. All legal charges met by the school will be borne
+                    by
+                    me.</li>
 
-            <li class='mt-2'>
-                I understand that my child cannot remain on school rolls unless he/she abides by the ethos
-                and prevalent rules of the school.
-            </li>
-        </ol>
+                <li class='mt-2'>
+                    I understand that my child cannot remain on school rolls unless he/she abides by the ethos
+                    and prevalent rules of the school.
+                </li>
+            </ol>
         </p>
     </div>
 
@@ -137,11 +143,11 @@
             </thead>
             <tbody>
                 @foreach ($admission->student->school->fees->{$admission->fees_column} as $fees)
-                    <tr>
-                        <td style="width: 14.5%">{{ $loop->iteration }}</td>
-                        <th>{{ $fees['fees'] }}</th>
-                        <td class='text-right text-end'>{{ $fees['amount'] }}</td>
-                    </tr>
+                <tr>
+                    <td style="width: 14.5%">{{ $loop->iteration }}</td>
+                    <th>{{ $fees['fees'] }}</th>
+                    <td class='text-right text-end'>{{ $fees['amount'] }}</td>
+                </tr>
                 @endforeach
             </tbody>
             <tfoot>
@@ -158,20 +164,22 @@
     <div class="bg-white">
         <h5>Fees Installments (ANNEXURE - A)</h5>
         <table class="table table-bordered table-black">
-            <tr>
-                <th>Sr. No.</th>
-                <th>Due Month</th>
-                <th style="text-align: right">Total Amount (₹)</th>
-            </tr>
-            @foreach ($admission->installments as $installment)
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Due Month</th>
+                    <th style="text-align: right">Total Amount (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($admission->installments as $installment)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $monthList[$installment->month] }}</td>
                     <td style="text-align: right">
                         {{ $installment->amount }}</td>
                 </tr>
-            @endforeach
-            <tfoot>
+                @endforeach
                 <tr>
                     <th colspan="2">Discount Given (if any)</th>
                     <th style="text-align: right">
@@ -182,7 +190,7 @@
                     <th colspan="2">Total</th>
                     <th style="text-align: right">{{ $admission->installments->sum('amount') }}</th>
                 </tr>
-            </tfoot>
+            </tbody>
         </table>
     </div>
 

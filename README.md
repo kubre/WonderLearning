@@ -30,6 +30,13 @@
 -   (28/may 08:58am) Declaration form
 -   Delete Installment if admission not added
 
+### Issues from 14-06-2021 meeting
+
+-   (14/jun 11:59am) Second page of print is not visible Declaration
+-   (14/jun 11:59am) Declaration Button
+-   Timezone issue (Kit Stock Log)
+-   Syllabus Copy Button
+
 ## Dashboard
 
 -   (9/apr 11:00am) Fees Rate Card
