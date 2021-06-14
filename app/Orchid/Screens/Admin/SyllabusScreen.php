@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Admin;
 
+use App\Models\ProgramSubject;
 use App\Models\Syllabus;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -65,13 +66,12 @@ class SyllabusScreen extends Screen
     public function save(Request $request)
     {
         DB::transaction(function () use ($request) {
-            // collect($request->input())
-            //     ->each(
-            //         fn ($subject) => array_key_exists('id', $subject) ?
-            //             Syllabus::rebuildTree([$subject], true) :
-            //             Syllabus::create($subject)
-            //     );
             Syllabus::rebuildTree($request->input(), true);
+            $subjects = Syllabus::whereType('subject')
+                ->select('id as syllabus_id', 'program')
+                ->get()
+                ->toArray();
+            ProgramSubject::upsert($subjects, ['syllabus_id'], ['program']);
         });
     }
 }

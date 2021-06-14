@@ -4,13 +4,22 @@
       <strong class="py-2 pe-2">{{ index + 1 }}</strong>
       <input
         type="text"
-        class="form-control flex-fill my-1 me-2"
+        class="form-control my-1 me-2"
         v-model="item.name"
+        style="max-width: 350px"
         :placeholder="'Enter a ' + item.type + ' title'"
       />
       <div class="d-flex flex-fill align-items-center">
+        <template v-if="item.type == 'subject'">
+          <select name="program" v-model="item.program" class="form-control my-1 me-2" style="max-width: 130px">
+            <option value='Playgroup'>Playgroup</option>
+            <option value='Nursery'>Nursery</option>
+            <option value='Junior KG'>Junior KG</option>
+            <option value='Senior KG'>Senior KG</option>
+          </select>
+        </template>
         <template v-if="item.type != 'subtopic'">
-          <button class="btn btn-sm rounded-pill btn-primary" @click="add()">
+            <button class="btn btn-sm rounded-pill btn-primary" @click="add()">
             + {{ addText }}
           </button>
           <button

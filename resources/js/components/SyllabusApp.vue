@@ -55,6 +55,7 @@ export default {
             name: "",
             type: "subject",
             children: [],
+            program: 'Playgroup',
           })
         )
       );
