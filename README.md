@@ -32,9 +32,10 @@
 
 ### Issues from 14-06-2021 meeting
 
--   (14/jun 11:59am) Second page of print is not visible Declaration
--   (14/jun 11:59am) Declaration Button
--   Timezone issue (Kit Stock Log)
+-   (14/jun 11:59pm) Second page of print is not visible Declaration
+-   (14/jun 11:59pm) Declaration Button
+-   (15/jun 11:35am) Timezone issues
+-   (15/jun 11:35am) Fixed Division Attendance not scoping based on school
 -   Syllabus Copy Button
 
 ## Dashboard
@@ -96,6 +97,8 @@
 -   (05/jun 10:40pm) Approval to monthly student performance reports.
 -   (07/jun 08:20pm) Timezone switched to UTC(look out for bugs), Made admission year readonly, added future year for select year
 -   (14/jun 03:56pm) Added Program directly in syllabus Screen
+-   (14/jun 11:59pm) Second page of print is not visible Declaration, Declaration Button on Admission List Screen
+-   (15/jun 11:35am) Timezone issues fixed, Fixed Division Attendance not scoping based on school
 
 ## Admin Dashboard
 

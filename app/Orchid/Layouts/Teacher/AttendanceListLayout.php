@@ -2,6 +2,9 @@
 
 namespace App\Orchid\Layouts\Teacher;
 
+use App\Models\DivisionAttendance;
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -27,7 +30,7 @@ class AttendanceListLayout extends Table
         return [
             TD::make('division.title_and_program', 'Division'),
             TD::make('date_at', 'Date'),
-            TD::make('absents_count', 'Absent'),
+            TD::make('absents_count', 'Total Absent students'),
         ];
     }
 }

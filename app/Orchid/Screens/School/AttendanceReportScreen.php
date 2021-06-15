@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Screens\School;
 
-use App\Models\Admission;
 use App\Models\DivisionAttendance;
 use App\Orchid\Layouts\School\DivisionSelectionLayout;
 use Carbon\Carbon;

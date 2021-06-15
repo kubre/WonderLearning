@@ -35,7 +35,11 @@ class AttendanceListScreen extends Screen
     {
         return [
             'division_attendances' => DivisionAttendance::with('division')
+                ->whereHas('division', function ($query) {
+                    $query->where('school_id', \school()->id);
+                })
                 ->withCount('absents')
+                ->orderBy('date_at')
                 ->simplePaginate(),
         ];
     }

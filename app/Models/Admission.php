@@ -64,6 +64,7 @@ class Admission extends Model
         parent::boot();
         static::creating(function (Admission $admission) {
             $admission->school_id = auth()->user()->school_id;
+            $admission->created_at = \working_year()[0];
         });
     }
 
