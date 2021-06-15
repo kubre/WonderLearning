@@ -87,7 +87,7 @@ class AdmissionEditScreen extends Screen
             $data[$enquirer . '_email'] = $enquiry->enquirer_email;
             $data['enquirer_id'] = $enquiry->id;
             $data['admission_at'] = today()->format('Y-m-d');
-            $data['code'] = (Student::max('code') ?? 0) + 1;
+            $data['code'] = (Student::whereSchoolId(\school()->id)->max('code') ?? 0) + 1;
         } else {
             $this->name = 'Update Admission Details';
             $data = $admission->student->toArray();

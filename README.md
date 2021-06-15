@@ -99,6 +99,7 @@
 -   (14/jun 03:56pm) Added Program directly in syllabus Screen
 -   (14/jun 11:59pm) Second page of print is not visible Declaration, Declaration Button on Admission List Screen
 -   (15/jun 11:35am) Timezone issues fixed, Fixed Division Attendance not scoping based on school
+-   (15/jun 05:20pm) Added Login and Error API added
 
 ## Admin Dashboard
 
@@ -387,7 +388,7 @@ Have ability to export these reports as excel or pdf
 
 **On Error API should return error message**
 
--   Error Response:
+-   (15/jun 05:20pm) Error Response:
 
 ```json
 {
@@ -395,7 +396,7 @@ Have ability to export these reports as excel or pdf
 }
 ```
 
--   Login:
+-   (15/jun 05:20pm) Login:
     -   Login with any parent contact and PRN number
     -   `/login?contact=<contact>&prn=<prn>`
     -   Success: Student Data, School Data

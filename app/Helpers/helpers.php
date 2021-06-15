@@ -21,26 +21,33 @@ if (!function_exists('working_date')) {
 }
 
 if (!function_exists('get_academic_year')) {
-    function get_academic_year(\Carbon\Carbon $date = null): array
+    function get_academic_year(\Carbon\Carbon $date = null, App\Models\School $school = null): array
     {
-        if (is_null($date)) return working_year();
-
-        $academic_year = optional(session('school'))->academic_year
-            ?? (new App\Models\School)->academic_year;
-        $start_at = clone $date;
-        $start_at
-            ->setMonth((int)substr($academic_year, 3, 2))
-            ->setDay((int)substr($academic_year, 0, 2));
-        $end_at = clone $date;
-        $end_at->addYear()
-            ->setMonth((int)substr($academic_year, -2))
-            ->setDay((int)substr($academic_year, -5, 2));
-
-        if ($date->isBetween($start_at, $end_at)) {
-            return [$start_at, $end_at];
+        if (is_null($date)) {
+            return working_year();
         }
 
-        return [$start_at->subYear(), $end_at->subYear()];
+        if (is_null($school)) {
+            $academicYear = optional(session('school'))->academic_year
+                ?? (new App\Models\School())->academic_year;
+        } else {
+            $academicYear = $school->academic_year;
+        }
+
+        $startAt = clone $date;
+        $startAt
+            ->setMonth((int)substr($academicYear, 3, 2))
+            ->setDay((int)substr($academicYear, 0, 2));
+        $endAt = clone $date;
+        $endAt->addYear()
+            ->setMonth((int)substr($academicYear, -2))
+            ->setDay((int)substr($academicYear, -5, 2));
+
+        if ($date->isBetween($startAt, $endAt)) {
+            return [$startAt, $endAt];
+        }
+
+        return [$startAt->subYear(), $endAt->subYear()];
     }
 }
 
@@ -155,5 +162,14 @@ if (!function_exists('get_months')) {
         }
 
         return $monthList;
+    }
+}
+
+if (!function_exists('api_error')) {
+    function api_error($message)
+    {
+        return [
+            'error' => $message,
+        ];
     }
 }

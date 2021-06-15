@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Orchid\Screen\Layout;
 use Orchid\Screen\LayoutFactory;
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        JsonResource::withoutWrapping();
+
         LayoutFactory::macro('stats', function (string $title, array $metrics) {
             return new class($title, $metrics) extends Layout
             {

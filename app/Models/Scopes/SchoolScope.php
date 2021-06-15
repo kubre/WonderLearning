@@ -10,10 +10,13 @@ class SchoolScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
-        if (!$user->hasAccess('admin.school')) {
-            $builder->where('school_id', $user->school_id);
+        if (\request()->wantsJson()) {
+            $builder->where('school_id', \request()->school_id);
+        } else {
+            $user = auth()->user();
+            if (!$user->hasAccess('admin.school')) {
+                $builder->where('school_id', $user->school_id);
+            }
         }
     }
 }

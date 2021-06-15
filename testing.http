@@ -1,0 +1,14 @@
+### Sample Success Login API
+GET http://localhost:8000/api/login?contact=9999999999&prn=DEM/0003/2122 HTTP/1.1
+Accept: application/json
+###
+
+### Sample Success Login API 2
+GET http://localhost:8000/api/login?contact=8989056890&prn=DEM/0001/2122 HTTP/1.1
+Accept: application/json
+###
+
+### Sample Failed Login API
+GET http://localhost:8000/api/login?contact=8989056890&prn=WLS/0010/2021 HTTP/1.1
+Accept: application/json
+###
