@@ -440,19 +440,30 @@ Have ability to export these reports as excel or pdf
     -   Student Picture with name and buttons to all the screens ex, attendance, observations, etc
 -   Attendance:
     -   Calendar Screen with monthly attendance with dates student is present marked green and red when they were absent if no class took place on that day it wil be white with present/absent percentage
-    -   `/attendances/<student-id>/<month:06-2021>`
+    -   `/attendances/<student-id>`
     -   Success: Student Attendance Data
     ```json
     {
-        "month": "06-2021"
+        "06-2021": {
+            "1": "p",
+            "3": "a"
+        },
+        "07-2021": {
+            "1": "p",
+            "3": "a"
+        },
+        "01-2022": {
+            "1": "p",
+            "3": "a"
+        },
+        "02-2022": {},
+        "05-2022": {}
     }
     ```
 -   Observations (Performance Reports):
     -   Monthly observation reports filled by teachers can be seen here
 -   Classwork (Syllabus Completion Status):
-
     -   What topics has been taught to this date with search feature
-
 -   Homework:
     -   Check the assigned homework to students divisions
 -   Notice Board:

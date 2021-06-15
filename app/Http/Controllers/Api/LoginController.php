@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
@@ -13,6 +12,9 @@ class LoginController extends Controller
 {
     public function __invoke(Request $request)
     {
+        request()->merge([
+            'is_api' => true,
+        ]);
         try {
             $code = \explode('/', $request->prn)[1];
             $student = Student::whereCode($code)

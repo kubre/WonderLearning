@@ -10,7 +10,7 @@ class SchoolScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        if (\request()->wantsJson()) {
+        if (\request()->is_api) {
             $builder->where('school_id', \request()->school_id);
         } else {
             $user = auth()->user();

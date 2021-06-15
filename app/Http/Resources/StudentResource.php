@@ -18,7 +18,7 @@ class StudentResource extends JsonResource
             'student' => [
                 'id' => $this->id,
                 'name' => $this->name,
-                'photo' => \secure_url($this->photo),
+                'photo' => \is_null($this->photo) ? null : \secure_url($this->photo),
                 'dob_at' => $this->dob_at->format('d-M-Y'),
                 'gender' => $this->gender,
                 'prn' => $this->prn,

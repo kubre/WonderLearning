@@ -11,7 +11,7 @@ class AcademicYearScope implements Scope
 {
     public function apply(Builder $builder, Model $model): void
     {
-        if (\request()->wantsJson()) {
+        if (\request()->is_api) {
             $builder->whereBetween(
                 'created_at',
                 \get_academic_year(\today(), School::findOrFail(\request()->school_id))
