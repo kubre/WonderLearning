@@ -65,6 +65,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make(__('Add Subjects to Programme'))
                 ->icon('share')
                 ->permission('admin.school')
+                ->canSee(false)
                 ->route('admin.program-subjects'),
             Menu::make('Export Data')
                 ->icon('table')

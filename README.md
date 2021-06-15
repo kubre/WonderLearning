@@ -3,6 +3,7 @@
 ## Issues
 
 ### Old
+
 ```
 1) (DONE) Add fields modified in migrations to the Models $fillable
 2) Menu nav bug cause of receipt for student and receipt generation having same route name
@@ -11,21 +12,31 @@
 4) (Fixed) Generic Receipt were not able to generate once school fees was nil
 
 ```
+
 ### Issues from 23-05-2021 meeting
-- (26/may 10:58am) User should see select year screen after login
-    - Fixed login background shows even on dashboard
-- (26/may 05:03pm) Dashboard UI instructions
-    - First Row:    Enquiry, Gross Admissions
-    - Second Row:   Gross Receivable, Collection, Collection Due
-    - Birthday Reminder: Name, Program, Division
-- (26/may 07:55pm) Enquiry, Admission: Stats Cards on top by program and clickable to filter data
-- (26/may 08:10pm) Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
-- (26/may 08:45pm) Admission: Optional Photo, Discount empty errors total fees calculation make default zero
-- (26/may 08:45pm) Installment (Month and Year in select option)
-- (27/may 06:05pm) Kit Stock Log
-- (28/may 08:58am) Installment Screen name ('Fees Installments - Annexure A')
-- (28/may 08:58am) Declaration form
-- Delete Installment if admission not added
+
+-   (26/may 10:58am) User should see select year screen after login
+    -   Fixed login background shows even on dashboard
+-   (26/may 05:03pm) Dashboard UI instructions
+    -   First Row: Enquiry, Gross Admissions
+    -   Second Row: Gross Receivable, Collection, Collection Due
+    -   Birthday Reminder: Name, Program, Division
+-   (26/may 07:55pm) Enquiry, Admission: Stats Cards on top by program and clickable to filter data
+-   (26/may 08:10pm) Enquiry: Optional Reference, (Issue) Enquiry UI is very compact
+-   (26/may 08:45pm) Admission: Optional Photo, Discount empty errors total fees calculation make default zero
+-   (26/may 08:45pm) Installment (Month and Year in select option)
+-   (27/may 06:05pm) Kit Stock Log
+-   (28/may 08:58am) Installment Screen name ('Fees Installments - Annexure A')
+-   (28/may 08:58am) Declaration form
+-   Delete Installment if admission not added
+
+### Issues from 14-06-2021 meeting
+
+-   (14/jun 11:59pm) Second page of print is not visible Declaration
+-   (14/jun 11:59pm) Declaration Button
+-   (15/jun 11:35am) Timezone issues
+-   (15/jun 11:35am) Fixed Division Attendance not scoping based on school
+-   Syllabus Copy Button
 
 ## Dashboard
 
@@ -85,6 +96,9 @@
 -   (03/jun 04:15pm) Performance Reports can be added
 -   (05/jun 10:40pm) Approval to monthly student performance reports.
 -   (07/jun 08:20pm) Timezone switched to UTC(look out for bugs), Made admission year readonly, added future year for select year
+-   (14/jun 03:56pm) Added Program directly in syllabus Screen
+-   (14/jun 11:59pm) Second page of print is not visible Declaration, Declaration Button on Admission List Screen
+-   (15/jun 11:35am) Timezone issues fixed, Fixed Division Attendance not scoping based on school
 
 ## Admin Dashboard
 
@@ -303,10 +317,9 @@ Have ability to export these reports as excel or pdf
     Subjects > Books > Chapters > Topics > Sub Topics This also represents how these modules related to each other chapters contains topics and books contains chapter so on.
 
     -   Syllabus: Handled using Nested Set Package
-        - (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
+        -   (27/apr 5:48pm) Admin Screen for syllabus: adding, updating, deleting using vue components
     -   (1/may 1:02pm) Subjects can be assigned under a programme
     -   (1/may 1:25pm) ProgramSubjects Association List and Delete options added
-    
 
 -   (DISCARDED) Ability to add academic year calendar with assigning of each topic on particular
 
@@ -321,9 +334,9 @@ Have ability to export these reports as excel or pdf
 -   (29/apr 01:25pm) Ability to assign division to the student
 -   (06/may 06:30pm) Approval to Daily Teaching (Taught) syllabus.
 -   (05/jun 10:40pm) Approval to monthly student performance reports.
-    - PerformanceReportApprovalScreen: under reports
-        - select division and month and show checkboxes
-        - set approved_at to date
+    -   PerformanceReportApprovalScreen: under reports
+        -   select division and month and show checkboxes
+        -   set approved_at to date
 -   Can see Student attendance and performance report an export excel if needed.
 
 ### Teacher Panel Features
@@ -331,33 +344,33 @@ Have ability to export these reports as excel or pdf
 -   Dashboard for teacher
 -   (29/apr 9:35pm) Teachers will be able to see the list of all students under their divisions
 -   They can mark attendance for students everyday
-    - (14/may 2:05pm)  Division Attendance
-        - division_id
-        - date_at
-    - (14/may 2:05pm) Absent
-        - student_id
-        - division_attendance_id
-    - Attendance Screen
-        - (14/may 2:05pm) List and Add Attendance
-        - (19/may 6:37pm) Attendance Report
+    -   (14/may 2:05pm) Division Attendance
+        -   division_id
+        -   date_at
+    -   (14/may 2:05pm) Absent
+        -   student_id
+        -   division_attendance_id
+    -   Attendance Screen
+        -   (14/may 2:05pm) List and Add Attendance
+        -   (19/may 6:37pm) Attendance Report
 -   They will see entire syllabus for the subject they have been assigned
-    - (1/may 11:00pm) Subjects list screen for teacher with all the books as options
-    - (2/may 3:11pm) Clicking on book reveals syllabus
+    -   (1/may 11:00pm) Subjects list screen for teacher with all the books as options
+    -   (2/may 3:11pm) Clicking on book reveals syllabus
 -   They can mark a Topic/Sub topic as finished on that particular day which then will be sent to center head for an approval.
-    - (2/may 03:11pm) Submit mark request and validate
-    - (6/may 06:30pm) Approval request to school admin (Changes required specified below)
-        - Method to approvals table
-        - Changes in delete of ReceiptListScreen
-        - Approval Service
-        - Changes in PlatformScreen
-    - (07/may 04:32pm) Reflection of syllabus taught in book screen
+    -   (2/may 03:11pm) Submit mark request and validate
+    -   (6/may 06:30pm) Approval request to school admin (Changes required specified below)
+        -   Method to approvals table
+        -   Changes in delete of ReceiptListScreen
+        -   Approval Service
+        -   Changes in PlatformScreen
+    -   (07/may 04:32pm) Reflection of syllabus taught in book screen
 -   End of month performance report. This needs to be approved by center head before this can be seen by parents.
-    - PerformanceReportListScreen (Month and Division Filter)
-    - (03/jun 04:15pm) PerformanceReportEditScreen
-        - admission_id
-        - division_id
-        - performance
-        - date_at
+    -   PerformanceReportListScreen (Month and Division Filter)
+    -   (03/jun 04:15pm) PerformanceReportEditScreen
+        -   admission_id
+        -   division_id
+        -   performance
+        -   date_at
 -   This report then can be converted to final report for entire year forming a report card for that student which then can be seen from parents app.
 -   Teachers will be able to see old attendance of students in their batch and get excel report if needed
 -   Teachers will be able to see the performance report of their student and export it to excel if needed
@@ -368,23 +381,24 @@ Have ability to export these reports as excel or pdf
     -   Store division name directly on admission table and in
     -   batches table only store school id
 
-
 ### Mobile App Features
 
-
 #### App and API
+
 **On Error API should return error message**
-- Error Response:
+
+-   Error Response:
+
 ```json
 {
     "error": "You are already logged in on another device"
 }
 ```
 
-- Login:
-    - Login with any parent contact and PRN number	
-    - `/login?contact=<contact>&prn=<prn>`
-    - Success: Student Data, School Data
+-   Login:
+    -   Login with any parent contact and PRN number
+    -   `/login?contact=<contact>&prn=<prn>`
+    -   Success: Student Data, School Data
     ```json
     {
         "student": {
@@ -421,60 +435,61 @@ Have ability to export these reports as excel or pdf
         }
     }
     ```
-- Dashboard:
-    - Student Picture with name and buttons to all the screens ex, attendance, observations, etc
-- Attendance:
-    - Calendar Screen with monthly attendance with dates student is present marked green and red when they were absent if no class took place on that day it wil be white with present/absent percentage
-    - `/attendances/<student-id>/<month:06-2021>`
-    - Success: Student Attendance Data
+-   Dashboard:
+    -   Student Picture with name and buttons to all the screens ex, attendance, observations, etc
+-   Attendance:
+    -   Calendar Screen with monthly attendance with dates student is present marked green and red when they were absent if no class took place on that day it wil be white with present/absent percentage
+    -   `/attendances/<student-id>/<month:06-2021>`
+    -   Success: Student Attendance Data
     ```json
     {
         "month": "06-2021"
     }
     ```
-- Observations (Performance Reports):
-    - Monthly observation reports filled by teachers can be seen here
-- Classwork (Syllabus Completion Status):
-    - What topics has been taught to this date with search feature
+-   Observations (Performance Reports):
+    -   Monthly observation reports filled by teachers can be seen here
+-   Classwork (Syllabus Completion Status):
 
-- Homework:
-    - Check the assigned homework to students divisions	
-- Notice Board:
-    - Teachers/ School sent notices to particular students from a division to be seen here
-    - `/notices/<student-id>/<month:06-2021>`
-    - Success: List of Notices 
-- Fees:
-    - View and download invoices and receipts and check remaining due amount to pay	
-    - `/fees/<student-id>`
-    - Success: Receipt and Invoice Data
-- Profile:
-    - Students data can be viewed here
-    - `/student/<student-id>`
-    - Success: Student Data
-- Activities:
-    - Year wise activities/events school will take can be seen here	
-    - `/activities`
-- Messages:
-    - Chat between division teacher and parents to raise a query or notify
-    - GET `chats/<student-id>`
-    - Success: List of Messages
-    - POST `chats/<student-id>`, BODY Params: `message`
-    - Success: List of Messages
-- Gallery:
-    - Gallery of images (In discussion)	
-    - `/gallery`
-- Holiday List:
-    - View holidays added by school in list format
-    - `/holidays/<school-id>`
-    - Success: List of holidays
+    -   What topics has been taught to this date with search feature
+
+-   Homework:
+    -   Check the assigned homework to students divisions
+-   Notice Board:
+    -   Teachers/ School sent notices to particular students from a division to be seen here
+    -   `/notices/<student-id>/<month:06-2021>`
+    -   Success: List of Notices
+-   Fees:
+    -   View and download invoices and receipts and check remaining due amount to pay
+    -   `/fees/<student-id>`
+    -   Success: Receipt and Invoice Data
+-   Profile:
+    -   Students data can be viewed here
+    -   `/student/<student-id>`
+    -   Success: Student Data
+-   Activities:
+    -   Year wise activities/events school will take can be seen here
+    -   `/activities`
+-   Messages:
+    -   Chat between division teacher and parents to raise a query or notify
+    -   GET `chats/<student-id>`
+    -   Success: List of Messages
+    -   POST `chats/<student-id>`, BODY Params: `message`
+    -   Success: List of Messages
+-   Gallery:
+    -   Gallery of images (In discussion)
+    -   `/gallery`
+-   Holiday List:
+    -   View holidays added by school in list format
+    -   `/holidays/<school-id>`
+    -   Success: List of holidays
 
 ## School Panels
 
-- Login Lock Reset: As students account can only be logged in once if needed to login on other device school/teacher can reset lock from previous login so new login can be done	
-- Observation: Ability to add monthly observations reports by teacher and then approved by center-head or owner then can be seen by parents inside the app	
-- Homework: Ability to assign homework to all the students of a division	
-- Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division	
-- Activities: Add/Manage custom activities for center-head/owner, which then can be seen by parents inside the app:  	
-- Messages: Chat for teachers between them and parents	
-- Gallery: Upload and manage gallery for images	
-- Holiday List: Manage/View Holiday List which can be seen by parents	
+-   Login Lock Reset: As students account can only be logged in once if needed to login on other device school/teacher can reset lock from previous login so new login can be done
+-   Observation: Ability to add monthly observations reports by teacher and then approved by center-head or owner then can be seen by parents inside the app
+-   Homework: Ability to assign homework to all the students of a division
+-   Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division
+-   Activities: Add/Manage custom activities for center-head/owner, which then can be seen by parents inside the app:
+-   Messages: Chat for teachers between them and parents
+-   Gallery: Upload and manage gallery for images
+-   Holiday List: Manage/View Holiday List which can be seen by parents

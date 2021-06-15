@@ -6,7 +6,6 @@ use App\Models\Admission;
 use Illuminate\Database\Eloquent\Collection;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Label;
 use Orchid\Screen\Fields\Switcher;
 use Orchid\Screen\Layouts\Listener;
@@ -43,9 +42,9 @@ class AttendanceListener extends Listener
             Layout::rows([
                 Group::make([
                     Label::make('ignore_1')
-                        ->title('Student Name'),
+                        ->title('Student'),
                     Label::make('ignore_2')
-                        ->title('Present/Absent'),
+                        ->title('Attendance'),
                 ]),
                 ...$this->makeStudentList($this->query->get('admissions')),
             ]),
@@ -62,7 +61,7 @@ class AttendanceListener extends Listener
             fn (Admission $admission) => Group::make([
                 Label::make('name.' . $admission->id)
                     ->value($admission->student->name . ' (' . $admission->student->prn . ')'),
-                Switcher::make('is_present.' . $admission->id)
+                CheckBox::make('is_present.' . $admission->id)
                     ->sendTrueOrFalse(),
             ]),
         )->toArray();

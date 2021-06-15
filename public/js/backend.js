@@ -14784,7 +14784,8 @@ __webpack_require__.r(__webpack_exports__);
       this.syllabus.push(JSON.parse(JSON.stringify({
         name: "",
         type: "subject",
-        children: []
+        children: [],
+        program: 'Playgroup'
       })));
     },
     deleteAt: function deleteAt(index) {
@@ -14924,7 +14925,32 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "d-flex flex-fill align-items-center"
 };
-var _hoisted_3 = {
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "Playgroup"
+}, "Playgroup", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "Nursery"
+}, "Nursery", -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "Junior KG"
+}, "Junior KG", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "Senior KG"
+}, "Senior KG", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = {
   key: 0,
   "class": "ms-4 mb-2"
 };
@@ -14940,25 +14966,40 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "text",
-    "class": "form-control flex-fill my-1 me-2",
+    "class": "form-control my-1 me-2",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $props.item.name = $event;
     }),
+    style: {
+      "max-width": "350px"
+    },
     placeholder: 'Enter a ' + $props.item.type + ' title'
   }, null, 8
   /* PROPS */
-  , ["placeholder"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.item.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [$props.item.type != 'subtopic' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    key: 0
+  , ["placeholder"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $props.item.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [$props.item.type == 'subject' ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("select", {
+    key: 0,
+    name: "program",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $props.item.program = $event;
+    }),
+    "class": "form-control my-1 me-2",
+    style: {
+      "max-width": "130px"
+    }
+  }, [_hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6], 512
+  /* NEED_PATCH */
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $props.item.program]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $props.item.type != 'subtopic' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-sm rounded-pill btn-primary",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.add();
     })
   }, " + " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.addText), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-sm btn-dark rounded-pill ms-1",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return _ctx.isVisible = !_ctx.isVisible;
     })
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.toggleText), 513
@@ -14967,7 +15008,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* STABLE_FRAGMENT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-sm btn-danger ms-auto rounded-pill",
-    onClick: _cache[4] || (_cache[4] = function ($event) {
+    onClick: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.$emit('deleteAt', $props.index);
     })
   }, " - Delete ")])], 2
@@ -14976,7 +15017,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     name: "smooth"
   }, {
     "default": _withId(function () {
-      return [$props.item.children && $props.item.children.length > 0 ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.item.children, function (child, childIndex) {
+      return [$props.item.children && $props.item.children.length > 0 ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_7, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.item.children, function (child, childIndex) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_syllabus_item, {
           key: child,
           item: child,

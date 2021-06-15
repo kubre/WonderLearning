@@ -38,7 +38,7 @@ class Syllabus extends Model
     public const SUBTOPIC = 'subtopic';
 
     protected $fillable = [
-        'name', 'type',
+        'program', 'name', 'type',
     ];
 
     protected static function boot()
