@@ -75,6 +75,7 @@ export default {
             name: "",
             type: childType[this.item.type],
             children: [],
+            program: this.item.program
           })
         )
       );

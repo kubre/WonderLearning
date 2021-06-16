@@ -40,6 +40,7 @@ class StudentResource extends JsonResource
                 'kit_assigned' => (bool) $this->admission->assigned_kit,
             ],
             'school' => [
+                'id' => $this->school->id,
                 'name' => $this->school->name,
                 'logo' => \secure_url($this->school->logo),
                 'contact' => $this->school->contact,

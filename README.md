@@ -101,6 +101,7 @@
 -   (15/jun 11:35am) Timezone issues fixed, Fixed Division Attendance not scoping based on school
 -   (15/jun 05:20pm) Added Login and Error API added
 -   (16/jun 04:25pm) Added Attendance API
+-   (16/jun 10:40pm) Added Classwork API
 
 ## Admin Dashboard
 
@@ -463,32 +464,36 @@ Have ability to export these reports as excel or pdf
     ```
 -   Observations (Performance Reports):
     -   Monthly observation reports filled by teachers can be seen here
--   Classwork (Syllabus Completion Status):
+-   (16/jun 10:40pm) Classwork (Syllabus Completion Status):
 
     -   What topics has been taught to this date with search feature
     -   Success:
 
     ```json
-    {
-        "Jun-2020": [
-            {
-                "date": 3,
-                "subtopic": "Sub Topic",
-                "topic": "Topic",
-                "chapter": "Chapter",
-                "book": "Book",
-                "subject": "Subject"
-            },
-            {
-                "date": 5,
-                "subtopic": "Sub Topic",
-                "topic": "Topic",
-                "chapter": "Chapter",
-                "book": "Book",
-                "subject": "Subject"
-            }
-        ]
-    }
+    [
+        {
+            "date": "05-Jun-2021",
+            "day": 5,
+            "month": "Jun",
+            "year": 2021,
+            "subtopic": "Sub Topic",
+            "topic": "Topic",
+            "chapter": "Chapter",
+            "book": "Book",
+            "subject": "Subject"
+        },
+        {
+            "date": "05-Jun-2021",
+            "day": 5,
+            "month": "Jun",
+            "year": 2021,
+            "subtopic": "Sub Topic",
+            "topic": "Topic",
+            "chapter": "Chapter",
+            "book": "Book",
+            "subject": "Subject"
+        }
+    ]
     ```
 
 -   Homework:

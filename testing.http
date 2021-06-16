@@ -25,3 +25,27 @@ GET {{ url }}/attendances/1 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
+
+# @name getClasswork
+GET {{ url }}/classwork/1?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name liveLogin
+GET https://wonderlearning.in/api/login?contact=9090909090&prn=TSS/0002/2122 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getLiveAttendance
+GET https://wonderlearning.in/api/attendances/8 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getLiveClasswork
+GET https://wonderlearning.in/api/classwork/8?school_id=2 HTTP/1.1
+Accept: application/json
+IsApi: true
+###

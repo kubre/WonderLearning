@@ -14831,7 +14831,8 @@ var childType = {
       this.item.children.push(JSON.parse(JSON.stringify({
         name: "",
         type: childType[this.item.type],
-        children: []
+        children: [],
+        program: this.item.program
       })));
     },
     deleteAt: function deleteAt(index) {

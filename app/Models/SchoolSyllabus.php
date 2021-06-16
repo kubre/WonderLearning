@@ -24,8 +24,24 @@ class SchoolSyllabus extends Pivot
 
     public function getCompletedAtAttribute($value)
     {
-        return \date('d M y', \strtotime($value));
+        return \date('d-M-Y', \strtotime($value));
     }
+
+    public function getDayAttribute()
+    {
+        return \substr($this->completed_at, 0, 2);
+    }
+
+    public function getMonthAttribute()
+    {
+        return \substr($this->completed_at, 3, 3);
+    }
+
+    public function getYearAttribute()
+    {
+        return \substr($this->completed_at, 7, 4);
+    }
+
 
     public function approval(): MorphOne
     {
