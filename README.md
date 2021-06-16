@@ -100,6 +100,7 @@
 -   (14/jun 11:59pm) Second page of print is not visible Declaration, Declaration Button on Admission List Screen
 -   (15/jun 11:35am) Timezone issues fixed, Fixed Division Attendance not scoping based on school
 -   (15/jun 05:20pm) Added Login and Error API added
+-   (16/jun 04:25pm) Added Attendance API
 
 ## Admin Dashboard
 
@@ -438,32 +439,58 @@ Have ability to export these reports as excel or pdf
     ```
 -   Dashboard:
     -   Student Picture with name and buttons to all the screens ex, attendance, observations, etc
--   Attendance:
+-   (16/jun 04:25pm) Attendance:
     -   Calendar Screen with monthly attendance with dates student is present marked green and red when they were absent if no class took place on that day it wil be white with present/absent percentage
     -   `/attendances/<student-id>`
     -   Success: Student Attendance Data
     ```json
-    {
-        "06-2021": {
-            "1": "p",
-            "3": "a"
+    [
+        {
+            "date": "03-Jun-2021",
+            "day": 3,
+            "month": "Jun",
+            "year": 2021,
+            "attendance": "P"
         },
-        "07-2021": {
-            "1": "p",
-            "3": "a"
-        },
-        "01-2022": {
-            "1": "p",
-            "3": "a"
-        },
-        "02-2022": {},
-        "05-2022": {}
-    }
+        {
+            "date": "05-Jun-2021",
+            "day": 5,
+            "month": "Jun",
+            "year": 2021,
+            "attendance": "A"
+        }
+    ]
     ```
 -   Observations (Performance Reports):
     -   Monthly observation reports filled by teachers can be seen here
 -   Classwork (Syllabus Completion Status):
+
     -   What topics has been taught to this date with search feature
+    -   Success:
+
+    ```json
+    {
+        "Jun-2020": [
+            {
+                "date": 3,
+                "subtopic": "Sub Topic",
+                "topic": "Topic",
+                "chapter": "Chapter",
+                "book": "Book",
+                "subject": "Subject"
+            },
+            {
+                "date": 5,
+                "subtopic": "Sub Topic",
+                "topic": "Topic",
+                "chapter": "Chapter",
+                "book": "Book",
+                "subject": "Subject"
+            }
+        ]
+    }
+    ```
+
 -   Homework:
     -   Check the assigned homework to students divisions
 -   Notice Board:

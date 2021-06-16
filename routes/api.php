@@ -26,4 +26,4 @@ Route::get('/getSyllabus', [AdminController::class, 'get']);
 
 // API for mobile app
 Route::get('/login', LoginController::class);
-Route::get('/attendance/{admission}', AttendanceController::class);
+Route::get('/attendances/{admission}', AttendanceController::class);

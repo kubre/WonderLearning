@@ -21,7 +21,7 @@ IsApi: true
 
 
 # @name getAttendance
-GET {{ url }}/attendance/2 HTTP/1.1
+GET {{ url }}/attendances/1 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###

@@ -37,7 +37,12 @@ class DivisionAttendance extends Model
 
     public function getMonthAttribute()
     {
-        return \substr($this->date_at, 3);
+        return \substr($this->date_at, 3, 3);
+    }
+
+    public function getYearAttribute()
+    {
+        return \substr($this->date_at, 7, 4);
     }
 
     public function division(): BelongsTo
