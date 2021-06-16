@@ -102,6 +102,7 @@
 -   (15/jun 05:20pm) Added Login and Error API added
 -   (16/jun 04:25pm) Added Attendance API
 -   (16/jun 10:40pm) Added Classwork API
+-   (17/jun 00:05am) Added Logout API and migrations for it
 
 ## Admin Dashboard
 
@@ -438,6 +439,7 @@ Have ability to export these reports as excel or pdf
         }
     }
     ```
+-   (17/jun 00:05am) Logout: Logout with parent contact and student-id
 -   Dashboard:
     -   Student Picture with name and buttons to all the screens ex, attendance, observations, etc
 -   (16/jun 04:25pm) Attendance:

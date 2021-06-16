@@ -83,6 +83,10 @@ class AdmissionListLayout extends Table
                                 ->confirm('Once assigned a kit cannot be reassigned back and will deduct 1 count from kits available for this programme, Are you sure?')
                                 ->parameters(['admission' => $a->id])
                                 ->canSee(!$a->assigned_kit && $this->user->hasAccess('school.users')),
+                            // Button::make('Reset Father Login')
+                            //     ->icon('book-open')
+                            //     ->method('resetLogin')
+                            //     ->parameters(['student' => $a->student_id, 'parent' => 'father']),
                             Link::make('Graduate To')
                                 ->icon('action-redo')
                                 ->canSee($a->program !== 'Senior KG' && $this->user->hasAccess('school.users'))

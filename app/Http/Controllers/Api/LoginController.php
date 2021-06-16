@@ -26,6 +26,21 @@ class LoginController extends Controller
         $request->merge([
             'school_id' => $student->school_id,
         ]);
+
+        if ($student->father_contact == $request->contact) {
+            if (!is_null($student->father_logged_at)) {
+                return \api_error('Already logged in on another device!');
+            }
+            $student->father_logged_at = \now();
+        } else {
+            if (!is_null($student->mother_logged_at)) {
+                return \api_error('Already logged in on another device!');
+            }
+            $student->mother_logged_at = \now();
+        }
+
+        $student->save();
+
         return new StudentResource($student);
     }
 }

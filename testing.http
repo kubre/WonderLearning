@@ -13,6 +13,12 @@ Accept: application/json
 IsApi: true
 ###
 
+# @name Logout
+GET {{ url }}/logout/1/9999999999 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
 # @name failedLogin
 GET {{ url }}/login?contact=8989056890&prn=WLS/0010/2021 HTTP/1.1
 Accept: application/json
