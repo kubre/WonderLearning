@@ -23,6 +23,11 @@ class Attendance extends Model
         return $this->belongsTo(Admission::class);
     }
 
+    public function divisionAttendance()
+    {
+        return $this->belongsTo(DivisionAttendance::class);
+    }
+
     public $timestamps = false;
 
     public $incrementing = false;

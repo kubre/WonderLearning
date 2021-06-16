@@ -19,8 +19,8 @@ class DivisionAttendance extends Model
         'date_at',
     ];
 
-    public $casts = [
-        'date_at' => 'date',
+    public $dates = [
+        'date_at',
     ];
 
     public $timestamps = false;
@@ -28,6 +28,16 @@ class DivisionAttendance extends Model
     public function getDateAtAttribute($value)
     {
         return (new Carbon($value))->format('d-M-Y');
+    }
+
+    public function getDayAttribute()
+    {
+        return \substr($this->date_at, 0, 2);
+    }
+
+    public function getMonthAttribute()
+    {
+        return \substr($this->date_at, 3);
     }
 
     public function division(): BelongsTo

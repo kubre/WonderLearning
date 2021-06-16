@@ -14,6 +14,7 @@ class StudentResource extends JsonResource
      */
     public function toArray($request)
     {
+        $academicYear = \get_academic_year(\today(), $this->school);
         return [
             'student' => [
                 'id' => $this->id,
@@ -28,13 +29,14 @@ class StudentResource extends JsonResource
                 'mother_name' => $this->mother_name,
                 'mother_contact' => $this->mother_contact,
                 'mother_email' => $this->mother_email,
-                'admission_at' => $this->admission->admission_at,
+                'admission_at' => $this->admission->admission_at->format('d-M-Y'),
                 'program' => $this->admission->program,
                 'discount' => $this->admission->discount,
                 'batch' => $this->admission->batch,
                 'is_transportation_required' => $this->admission->is_transportation_required,
-                'division_id' => $this->admission->division->id ?? 0,
-                'division_title' => $this->admission->division->title ?? 'No Division Assigned',
+                'admission_id' => $this->admission->id,
+                'division_id' => $this->admission->division->id ?? null,
+                'division_title' => $this->admission->division->title ?? '-- No Division Assigned --',
                 'kit_assigned' => (bool) $this->admission->assigned_kit,
             ],
             'school' => [
@@ -43,8 +45,8 @@ class StudentResource extends JsonResource
                 'contact' => $this->school->contact,
                 'email' => $this->school->email,
                 'address' => $this->school->address,
-                'academic_start' => explode('|', $this->school->academic_year)[0],
-                'academic_end' => explode('|', $this->school->academic_year)[1],
+                'academic_start' => $academicYear[0]->format('M-Y'),
+                'academic_end' => $academicYear[1]->format('M-Y'),
                 'is_suspended' => !\is_null($this->school->is_suspended),
             ],
         ];

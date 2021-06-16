@@ -26,8 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        JsonResource::withoutWrapping();
-
         LayoutFactory::macro('stats', function (string $title, array $metrics) {
             return new class($title, $metrics) extends Layout
             {

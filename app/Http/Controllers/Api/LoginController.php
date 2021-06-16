@@ -12,9 +12,6 @@ class LoginController extends Controller
 {
     public function __invoke(Request $request)
     {
-        request()->merge([
-            'is_api' => true,
-        ]);
         try {
             $code = \explode('/', $request->prn)[1];
             $student = Student::whereCode($code)
