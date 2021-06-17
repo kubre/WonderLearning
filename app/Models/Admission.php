@@ -165,7 +165,14 @@ class Admission extends Model
 
     public function school_fees_receipts(): HasMany
     {
-        return $this->hasMany(Receipt::class)->where('receipts.for', Receipt::SCHOOL_FEES);
+        return $this->hasMany(Receipt::class)
+            ->where('receipts.for', Receipt::SCHOOL_FEES);
+    }
+
+    public function general_receipts(): HasMany
+    {
+        return $this->hasMany(Receipt::class)
+            ->where('receipts.for', '!=', Receipt::SCHOOL_FEES);
     }
 
     public function reports(): HasMany

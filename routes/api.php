@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\ClassworkController;
+use App\Http\Controllers\Api\FeesController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use Illuminate\Http\Request;
@@ -34,3 +35,5 @@ Route::get('/logout/{student}/{contact}', LogoutController::class);
 Route::get('/attendances/{admission}', AttendanceController::class);
 
 Route::get('/classwork/{admission}', ClassworkController::class);
+
+Route::get('/fees/{admission}', FeesController::class);

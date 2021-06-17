@@ -150,7 +150,7 @@ if (!function_exists('get_months')) {
     /*
     * Get valid month list ex. Jun-2020, Jul-2020 to May-2021
     */
-    function get_months(array $academicYear): array
+    function get_months(array $academicYear, string $format = 'd-M-Y'): array
     {
         $monthList = [];
         list($start, $end) = $academicYear;
@@ -158,7 +158,7 @@ if (!function_exists('get_months')) {
         $endMonth = $end->copy();
 
         for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
-            $monthList[$i->format('d-M-Y')] = $i->format('M Y');
+            $monthList[$i->format($format)] = $i->format('M Y');
         }
 
         return $monthList;

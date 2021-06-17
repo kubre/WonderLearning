@@ -13,7 +13,7 @@ Accept: application/json
 IsApi: true
 ###
 
-# @name Logout
+# @name logout
 GET {{ url }}/logout/1/9999999999 HTTP/1.1
 Accept: application/json
 IsApi: true
@@ -38,8 +38,20 @@ Accept: application/json
 IsApi: true
 ###
 
+# @name getFees
+GET {{ url }}/fees/1?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
 # @name liveLogin
 GET https://wonderlearning.in/api/login?contact=9090909090&prn=TSS/0002/2122 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name logout
+GET https://wonderlearning.in/api/logout/8/9090909090 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
@@ -55,3 +67,9 @@ GET https://wonderlearning.in/api/classwork/8?school_id=2 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
+
+# @name getLiveFees
+GET https://wonderlearning.in/api/fees/8?school_id=2 HTTP/1.1
+Accept: application/json
+IsApi: true
+##

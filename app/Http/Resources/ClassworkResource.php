@@ -15,6 +15,7 @@ class ClassworkResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             "date" => $this->completed_at,
             "day" => (int) $this->day,
             "month" => $this->month,

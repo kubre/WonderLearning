@@ -103,6 +103,7 @@
 -   (16/jun 04:25pm) Added Attendance API
 -   (16/jun 10:40pm) Added Classwork API
 -   (17/jun 00:05am) Added Logout API and migrations for it
+-   (17/jun 05:10pm) Added Fees API, added id in classwork api response
 
 ## Admin Dashboard
 
@@ -504,7 +505,7 @@ Have ability to export these reports as excel or pdf
     -   Teachers/ School sent notices to particular students from a division to be seen here
     -   `/notices/<student-id>/<month:06-2021>`
     -   Success: List of Notices
--   Fees:
+-   (17/jun 05:10pm) Fees:
     -   View and download invoices and receipts and check remaining due amount to pay
     -   `/fees/<student-id>`
     -   Success: Receipt and Invoice Data
