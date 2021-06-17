@@ -7,6 +7,7 @@ use App\Models\Division;
 use App\Models\Fees;
 use App\Models\KitStock;
 use App\Models\Scopes\AcademicYearScope;
+use App\Models\Student;
 use App\Orchid\Layouts\Account\ProgramSelectionLayout;
 use App\Orchid\Layouts\School\AdmissionListLayout;
 use App\Orchid\Layouts\School\DivisionRow;
@@ -128,6 +129,14 @@ class AdmissionListScreen extends Screen
             'admission' => $admission_id,
             'parent' => request('parent'),
         ]);
+    }
+
+    public function resetLogin(Student $student, string $parent)
+    {
+        $student->fill([$parent . '_logged_at' => null])
+            ->save();
+        Toast::info("Reset $parent's login successfully");
+        return redirect()->route('school.admission.list');
     }
 
     public function assignKit(Admission $admission)

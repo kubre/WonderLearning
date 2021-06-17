@@ -16,7 +16,7 @@ class Student extends Model
 
 
     protected $fillable = [
-        'name', 'photo', 'dob_at', 'gender', 'code', 'father_name', 'father_contact', 'father_occupation', 'father_email', 'father_organization_name', 'mother_name', 'mother_contact', 'mother_occupation', 'mother_email', 'mother_organization_name', 'previous_school', 'siblings', 'address', 'city', 'state', 'postal_code', 'nationality', 'school_id', 'created_at'
+        'name', 'photo', 'dob_at', 'gender', 'code', 'father_name', 'father_contact', 'father_occupation', 'father_email', 'father_organization_name', 'mother_name', 'mother_contact', 'mother_occupation', 'mother_email', 'mother_organization_name', 'previous_school', 'siblings', 'address', 'city', 'state', 'postal_code', 'nationality', 'school_id', 'created_at', 'father_logged_at', 'mother_logged_at',
     ];
 
 

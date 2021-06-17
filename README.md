@@ -105,6 +105,7 @@
 -   (17/jun 00:05am) Added Logout API and migrations for it
 -   (17/jun 05:10pm) Added Fees API, added id in classwork api response
 -   (17/jun 10:55pm) Added Monthly present percentage to Attendance API, Added parents to syllabus topics/subtopics, Added invoice no, total fees, etc to Fees API
+-   (17/jun 11:35pm) Added Parent Login Lock reset
 
 ## Admin Dashboard
 
@@ -405,42 +406,6 @@ Have ability to export these reports as excel or pdf
     -   Login with any parent contact and PRN number
     -   `/login?contact=<contact>&prn=<prn>`
     -   Success: Student Data, School Data
-    ```json
-    {
-        "student": {
-            "id": 1,
-            "name": "Vaibhav Kubre",
-            "photo": "https://wonderlearning.in/storage/jslALJj9asdH",
-            "dob_at": "03-12-2017",
-            "gender": "Male",
-            "prn": "WLS/0001/20201",
-            "father_name": "Satish Kubre",
-            "father_contact": "9090898956",
-            "father_email": "satish@kubre.in",
-            "mother_name": "Savita Kubre",
-            "mother_contact": "899889899",
-            "mother_email": "savita@kubre.in",
-            "admission_at": "06-05-2020",
-            "program": "Playgroup",
-            "discount": 3000,
-            "batch": "Morning",
-            "is_transportation_required": true,
-            "division_id": 1,
-            "division_title": "Sunflower",
-            "kit_assigned": true
-        },
-        "school": {
-            "name": "Wonder School",
-            "logo": "https://wonderlearning.in/storage/jslAL8sd7",
-            "contact": "8989787867",
-            "email": "wonder@wonder.in",
-            "address": "Pune, \nMaharashtra",
-            "academic_start": "01-06-2020",
-            "academic_end": "31-05-2021",
-            "is_suspended": false
-        }
-    }
-    ```
 -   (17/jun 00:05am) Logout: Logout with parent contact and student-id
 -   Dashboard:
     -   Student Picture with name and buttons to all the screens ex, attendance, observations, etc
@@ -448,58 +413,11 @@ Have ability to export these reports as excel or pdf
     -   Calendar Screen with monthly attendance with dates student is present marked green and red when they were absent if no class took place on that day it wil be white with present/absent percentage
     -   `/attendances/<student-id>`
     -   Success: Student Attendance Data
-    ```json
-    [
-        {
-            "date": "03-Jun-2021",
-            "day": 3,
-            "month": "Jun",
-            "year": 2021,
-            "attendance": "P"
-        },
-        {
-            "date": "05-Jun-2021",
-            "day": 5,
-            "month": "Jun",
-            "year": 2021,
-            "attendance": "A"
-        }
-    ]
-    ```
 -   Observations (Performance Reports):
     -   Monthly observation reports filled by teachers can be seen here
 -   (16/jun 10:40pm) Classwork (Syllabus Completion Status):
-
     -   What topics has been taught to this date with search feature
     -   Success:
-
-    ```json
-    [
-        {
-            "date": "05-Jun-2021",
-            "day": 5,
-            "month": "Jun",
-            "year": 2021,
-            "subtopic": "Sub Topic",
-            "topic": "Topic",
-            "chapter": "Chapter",
-            "book": "Book",
-            "subject": "Subject"
-        },
-        {
-            "date": "05-Jun-2021",
-            "day": 5,
-            "month": "Jun",
-            "year": 2021,
-            "subtopic": "Sub Topic",
-            "topic": "Topic",
-            "chapter": "Chapter",
-            "book": "Book",
-            "subject": "Subject"
-        }
-    ]
-    ```
-
 -   Homework:
     -   Check the assigned homework to students divisions
 -   Notice Board:
@@ -533,7 +451,7 @@ Have ability to export these reports as excel or pdf
 
 ## School Panels
 
--   Login Lock Reset: As students account can only be logged in once if needed to login on other device school/teacher can reset lock from previous login so new login can be done
+-   (17/jun 11:35pm) Login Lock Reset: As students account can only be logged in once if needed to login on other device school/teacher can reset lock from previous login so new login can be done
 -   Observation: Ability to add monthly observations reports by teacher and then approved by center-head or owner then can be seen by parents inside the app
 -   Homework: Ability to assign homework to all the students of a division
 -   Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division
