@@ -21,9 +21,10 @@ class ClassworkResource extends JsonResource
             "month" => $this->month,
             "year" => (int) $this->year,
             "title" => $this->syllabus->name,
-            // "chapter"=> "Chapter",
-            // "book"=> "Book",
-            // "subject"=> "Subject"
+            "type" => $this->syllabus->type,
+            "from" => $this->syllabus->ancestors->mapWithKeys(
+                fn ($node) => [$node->type => $node->name]
+            ),
         ];
     }
 }

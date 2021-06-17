@@ -25,6 +25,10 @@ class FeesController extends Controller
                 'fees' => ReceiptResource::collection($admission->school_fees_receipts),
                 'receipts' => ReceiptResource::collection($admission->general_receipts),
                 'installments' => InstallmentResource::collection($admission->installments),
+                'invoice_number' => $admission->invoice_no,
+                'total_amount' => $admission->total_fees,
+                'received_amount' => $admission->paid_fees,
+                'balance_amount' => $admission->balance_amount,
             ],
         ];
     }

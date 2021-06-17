@@ -19,7 +19,7 @@ class ClassworkController extends Controller
     public function __invoke(Admission $admission)
     {
         return ClassworkResource::collection(
-            SchoolSyllabus::with('syllabus')
+            SchoolSyllabus::with('syllabus.ancestors')
                 ->whereSchoolId($admission->school_id)
                 ->whereHas('syllabus', function ($query) use ($admission) {
                     $query->where('program', $admission->program);

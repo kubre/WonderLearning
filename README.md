@@ -104,6 +104,7 @@
 -   (16/jun 10:40pm) Added Classwork API
 -   (17/jun 00:05am) Added Logout API and migrations for it
 -   (17/jun 05:10pm) Added Fees API, added id in classwork api response
+-   (17/jun 10:55pm) Added Monthly present percentage to Attendance API, Added parents to syllabus topics/subtopics, Added invoice no, total fees, etc to Fees API
 
 ## Admin Dashboard
 
