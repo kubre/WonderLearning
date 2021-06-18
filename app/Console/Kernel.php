@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Storage;
+use Orchid\Attachment\Models\Attachment;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +27,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $query =
+                Attachment::whereIn('group', [
+                    'homework',
+                ])
+                ->whereDate('created_at', '<=', \today()->subDay(15));
+            Storage::disk('temp')->delete($query->get()->map->physicalPath()->toArray());
+            $query->delete();
+        })->daily();
     }
 
     /**
@@ -34,7 +45,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

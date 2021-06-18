@@ -34,7 +34,11 @@ class DivisionFilter extends Filter
      */
     public function run(Builder $builder): Builder
     {
-        return $builder;
+        return $builder->when($this->request->get('division') != 0, function ($query) {
+            $query->where('division_id', $this->request->get('division'));
+        })->when($this->request->get('month') != 0, function ($query) {
+            $query->whereBetween('date_at', \explode('|', $this->request->get('month')));
+        });
     }
 
     /**
@@ -54,14 +58,13 @@ class DivisionFilter extends Filter
 
         $query = Division::when(
             !auth()->user()->hasAccess('school.users'),
-            fn ($query, $isTeacher) => $query->ofTeacher(auth()->id())
+            fn ($query) => $query->ofTeacher(auth()->id())
         )->selectRaw("id, concat(title, ' (', program, ')') as name");
-
         return [
             Select::make('division')
                 ->title('Division')
                 ->empty('Select Division', 0)
-                ->value($this->request->get('division', 0))
+                ->value($this->request->get('division'))
                 ->fromQuery($query, 'name')
                 ->required(),
             Select::make('month')

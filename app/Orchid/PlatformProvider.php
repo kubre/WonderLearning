@@ -175,6 +175,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('teacher.subjects')
                 ->route('teacher.subjects'),
 
+            Menu::make('Homework')
+                ->icon('pencil')
+                ->permission('teacher.subjects')
+                ->route('teacher.homework'),
+
             Menu::make('Attendance')
                 ->icon('table')
                 ->permission('teacher.student')

@@ -39,6 +39,8 @@ use App\Orchid\Screens\Student\InvoicePrintScreen;
 use App\Orchid\Screens\Teacher\AttendanceEditScreen;
 use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
+use App\Orchid\Screens\Teacher\HomeworkEditScreen;
+use App\Orchid\Screens\Teacher\HomeworkListScreen;
 use App\Orchid\Screens\Teacher\PerformanceReportEditScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\Teacher\SubjectListScreen;
@@ -261,6 +263,22 @@ Route::screen('subjects', SubjectListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Subjects'), route('teacher.subjects'))
+    );
+
+Route::screen('homework/{homework?}', HomeworkEditScreen::class)
+    ->name('teacher.homework.edit')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('teacher.homework')
+            ->push(__('Add Homework'), route('teacher.homework.edit'))
+    );
+
+Route::screen('homework-list', HomeworkListScreen::class)
+    ->name('teacher.homework')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Homework'), route('teacher.homework'))
     );
 
 Route::screen('subject/{syllabus}', BookListScreen::class)

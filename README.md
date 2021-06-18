@@ -106,6 +106,7 @@
 -   (17/jun 05:10pm) Added Fees API, added id in classwork api response
 -   (17/jun 10:55pm) Added Monthly present percentage to Attendance API, Added parents to syllabus topics/subtopics, Added invoice no, total fees, etc to Fees API
 -   (17/jun 11:35pm) Added Parent Login Lock reset
+-   (18/jun 12:40pm) Homework facility and automatic deletion of pics older than 15 days
 
 ## Admin Dashboard
 
@@ -453,9 +454,10 @@ Have ability to export these reports as excel or pdf
 
 -   (17/jun 11:35pm) Login Lock Reset: As students account can only be logged in once if needed to login on other device school/teacher can reset lock from previous login so new login can be done
 -   Observation: Ability to add monthly observations reports by teacher and then approved by center-head or owner then can be seen by parents inside the app
--   Homework: Ability to assign homework to all the students of a division
+-   (18/jun 12:40pm) Homework: Ability to assign homework to all the students of a division
 -   Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division
 -   Activities: Add/Manage custom activities for center-head/owner, which then can be seen by parents inside the app:
 -   Messages: Chat for teachers between them and parents
 -   Gallery: Upload and manage gallery for images
 -   Holiday List: Manage/View Holiday List which can be seen by parents
+-   (18/jun 12:40pm) Automatic delete of pics older than 15 days

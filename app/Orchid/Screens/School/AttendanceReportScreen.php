@@ -39,7 +39,7 @@ class AttendanceReportScreen extends Screen
         $days = days_in_month(1, 2000);
         $classes = collect();
 
-        if ($request->has('division') && $request->has('month')) {
+        if ($request->get('division') != 0 && $request->get('month') != 0) {
             $period = \explode('|', $request->get('month'));
 
             $classes = DivisionAttendance::with('attendances.admission.student.school')
