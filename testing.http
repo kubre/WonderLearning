@@ -53,7 +53,7 @@ IsApi: true
 GET {{ url }}/homework/3?school_id={{school_id}} HTTP/1.1
 Accept: application/json
 IsApi: true
-##
+###
 
 # @name liveLogin
 GET https://wonderlearning.in/api/login?contact=9090909090&prn=TSS/0002/2122 HTTP/1.1
@@ -81,6 +81,12 @@ IsApi: true
 
 # @name getLiveFees
 GET https://wonderlearning.in/api/fees/8?school_id=2 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getLiveHomework
+GET https://wonderlearning.in/api/homework/5?school_id=2 HTTP/1.1
 Accept: application/json
 IsApi: true
 ##

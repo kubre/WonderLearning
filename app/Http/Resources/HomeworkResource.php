@@ -18,7 +18,7 @@ class HomeworkResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
-            'date_at' => $this->date_at,
+            'date_at' => $this->date_at->format('d-M-Y'),
             'day' => $this->date_at->format('d'),
             'month' => $this->date_at->format('m'),
             'attachment' => optional($this->attachment()->first())->url(),
