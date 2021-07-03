@@ -107,7 +107,7 @@
 -   (17/jun 10:55pm) Added Monthly present percentage to Attendance API, Added parents to syllabus topics/subtopics, Added invoice no, total fees, etc to Fees API
 -   (17/jun 11:35pm) Added Parent Login Lock reset
 -   (18/jun 12:40pm) Homework facility and automatic deletion of pics older than 15 days
-
+-   (03/jul 10:40am) Added version update and homework api
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**

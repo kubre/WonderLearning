@@ -63,4 +63,9 @@ class Division extends Model
     {
         return $this->hasMany(PerformanceReport::class);
     }
+
+    public function homeworks()
+    {
+        return $this->hasMany(Homework::class);
+    }
 }

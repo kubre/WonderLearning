@@ -43,6 +43,18 @@ Accept: application/json
 IsApi: true
 ###
 
+# @name getVersion
+GET {{ url }}/version HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getHomework
+GET {{ url }}/homework/3?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+##
+
 # @name liveLogin
 GET https://wonderlearning.in/api/login?contact=9090909090&prn=TSS/0002/2122 HTTP/1.1
 Accept: application/json
