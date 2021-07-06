@@ -24,7 +24,7 @@ class SchoolSyllabus extends Pivot
 
     public function getCompletedAtAttribute($value)
     {
-        return \date('d-M-Y', \strtotime($value));
+        return is_null($value) ? $value : \date('d-M-Y', \strtotime($value));
     }
 
     public function getDayAttribute()

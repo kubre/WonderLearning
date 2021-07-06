@@ -32,6 +32,11 @@ class ApprovalService
     /** @return bool|null */
     public function cancel(Approval $approval)
     {
+        if ($approval->approval_type === Syllabus::class) {
+            SchoolSyllabus::where('school_id', $approval->school_id)
+                ->where('syllabus_id', $approval->approval_id)
+                ->delete();
+        }
         return $approval->delete();
     }
 
@@ -61,9 +66,10 @@ class ApprovalService
 
     private function markSyllabus(Approval $approval): void
     {
-        SchoolSyllabus::create([
+        SchoolSyllabus::updateOrCreate([
             'school_id' => $approval->school_id,
             'syllabus_id' => $approval->approval_id,
+        ], [
             'completed_at' => $approval->data['completed_at'],
         ]);
     }

@@ -19,8 +19,8 @@ class DivisionAttendance extends Model
         'date_at',
     ];
 
-    public $dates = [
-        'date_at',
+    public $casts = [
+        'date_at' => 'datetime:d-m-y',
     ];
 
     public $timestamps = false;

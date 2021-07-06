@@ -56,13 +56,13 @@ IsApi: true
 ###
 
 # @name liveLogin
-GET https://wonderlearning.in/api/login?contact=9090909090&prn=TSS/0002/2122 HTTP/1.1
+GET https://wonderlearning.in/api/login?contact=7070707070&prn=TSS/0003/2122 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
 
-# @name logout
-GET https://wonderlearning.in/api/logout/8/9090909090 HTTP/1.1
+# @name liveLogout
+GET https://wonderlearning.in/api/logout/13/7070707080 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
@@ -74,7 +74,7 @@ IsApi: true
 ###
 
 # @name getLiveClasswork
-GET https://wonderlearning.in/api/classwork/8?school_id=2 HTTP/1.1
+GET https://wonderlearning.in/api/classwork/13?school_id=2 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
@@ -86,7 +86,13 @@ IsApi: true
 ###
 
 # @name getLiveHomework
-GET https://wonderlearning.in/api/homework/5?school_id=2 HTTP/1.1
+GET https://wonderlearning.in/api/homework/8?school_id=2 HTTP/1.1
 Accept: application/json
 IsApi: true
-##
+###
+
+# @name getLiveVersion
+GET https://wonderlearning.in/api/version HTTP/1.1
+Accept: application/json
+IsApi: true
+###

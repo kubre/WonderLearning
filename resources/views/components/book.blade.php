@@ -7,8 +7,13 @@
             <div>
                 @if ($item->children->isEmpty() && $item->type !== 'chapter')
                     @if ($item->covered)
-                        <span class="badge rounded-pill bg-dark text-light">Completed:
-                            {{ $item->covered->completed_at }}</span>
+                        <span class="badge rounded-pill bg-dark text-light">
+                            @if (is_null($item->covered->completed_at))
+                                Pending Approval
+                            @else
+                                Completed: {{ $item->covered->completed_at }}
+                            @endif
+                        </span>
                     @else
                         <button type="button" data-item="{{ $item->toJson() }}" data-bs-toggle="modal"
                             data-bs-target="#markModal" class="btn btn-default rounded-pill btn-sm">
@@ -56,16 +61,14 @@
     <script>
         var url = "{{ route('teacher.subjects.book', ['method' => 'markComplete', 'syllabus' => $book_id]) }}";
 
-        document.body.onload = function init() {
-            var markModal = document.getElementById('markModal');
-            markModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
+        var markModal = document.getElementById('markModal');
+        markModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
 
-                item = JSON.parse(button.getAttribute('data-item'));
-                document.getElementById('markModalLabel').innerText = 'Mark ' + item.name + ' as complete';
-                document.getElementById('syllabus_id').value = item.id;
-            })
-        }
+            item = JSON.parse(button.getAttribute('data-item'));
+            document.getElementById('markModalLabel').innerText = 'Mark ' + item.name + ' as complete';
+            document.getElementById('syllabus_id').value = item.id;
+        });
 
         function markCompleted() {
             document.getElementById('btnSubmit').setAttribute('disabled', 'true');

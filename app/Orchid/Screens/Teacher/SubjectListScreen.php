@@ -4,10 +4,13 @@ namespace App\Orchid\Screens\Teacher;
 
 use App\Models\ProgramSubject;
 use App\Models\Syllabus;
+use App\Orchid\Filters\ProgramFilter;
+use App\Orchid\Layouts\Teacher\ProgramSelectionLayout;
 use App\Orchid\Layouts\Teacher\SubjectListLayout;
 use Illuminate\Support\Facades\DB;
 use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
 
 class SubjectListScreen extends Screen
 {
@@ -36,6 +39,9 @@ class SubjectListScreen extends Screen
     {
         $subjects = Syllabus::subjectsForTeacher(auth()->id())
             ->with('children')
+            ->when(request()->has('program') && \request()->get('program') !== 'All', function ($query) {
+                $query->where('syllabi.program', \request()->get('program'));
+            })
             ->simplePaginate();
         return compact('subjects');
     }
@@ -58,6 +64,7 @@ class SubjectListScreen extends Screen
     public function layout(): array
     {
         return [
+            ProgramSelectionLayout::class,
             SubjectListLayout::class,
         ];
     }

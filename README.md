@@ -108,6 +108,8 @@
 -   (17/jun 11:35pm) Added Parent Login Lock reset
 -   (18/jun 12:40pm) Homework facility and automatic deletion of pics older than 15 days
 -   (03/jul 10:40am) Added version update and homework api
+-   (06/jul 11:25pm) Fixed mark syllabus first time error bug, added pending approval state after marking syllabus, fixed attendance date, Program Filter for book selection, fixed gapping for book button in teacher subject screen.
+
 ## Admin Dashboard
 
 -   (17/apr 12:50pm) **Exports**

@@ -29,18 +29,23 @@ class SubjectListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('name', 'Name'),
+            TD::make('name', 'Name')
+                ->width(200),
+            TD::make('program')
+                ->width(100),
             TD::make('books', 'Books')
                 ->render(
-                    fn (Syllabus $s) => Group::make(
-                        $s->children->map(fn (Syllabus $s) =>
-                        Link::make($s->name)
-                            ->icon('book-open')
-                            ->type(Color::ERROR())
-                            ->route('teacher.subjects.book', ['syllabus' => $s->id]))
-                            ->toArray()
-                    )->autoWidth()
+                    fn (Syllabus $subject) => '<div style="display: grid; grid-template-columns: auto auto; grid-row-gap: 10px; grid-column-gap: 10px">' .
+                    ($this->getBookList($subject))
+                    . '</div>'
                 ),
         ];
+    }
+
+    public function getBookList($subject)
+    {
+        return $subject->children->map(fn (Syllabus $s) => '<a class=\'btn btn-danger\' href=\'' . route("teacher.subjects.book", ['syllabus' => $s->id ]) . '\'>' .
+            $s->name
+        . '</a>')->join('');
     }
 }
