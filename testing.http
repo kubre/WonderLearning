@@ -26,7 +26,7 @@ IsApi: true
 ###
 
 # @name getAttendance
-GET {{ url }}/attendances/7 HTTP/1.1
+GET {{ url }}/attendances/1 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
@@ -56,7 +56,7 @@ IsApi: true
 ###
 
 # @name liveLogin
-GET https://wonderlearning.in/api/login?contact=7070707070&prn=TSS/0003/2122 HTTP/1.1
+GET https://wonderlearning.in/api/login?contact=7070707080&prn=TSS/0003/2122 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
@@ -68,7 +68,7 @@ IsApi: true
 ###
 
 # @name getLiveAttendance
-GET https://wonderlearning.in/api/attendances/8 HTTP/1.1
+GET https://wonderlearning.in/api/attendances/13 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###

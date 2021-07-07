@@ -20,13 +20,21 @@ class AttendanceController extends Controller
         $attendance = Attendance::with('divisionAttendance')
             ->whereAdmissionId($admissionId)
             ->get();
+
         $percentage = $attendance->groupBy('divisionAttendance.month')
             ->map(fn ($item) => $item->countBy('is_present'))
-            ->map(fn ($status, $month) => [
-                'month' => $month,
-                'percentage' => \round($status[1] / ($status[0] + $status[1]) * 100, 2),
-            ])
-            ->values();
+            ->map(
+                function ($status, $month) {
+                    $presentCount = $status[1] ?? 0;
+                    $absentCount = $status[0] ?? 0;
+                    $percentage = ($presentCount === 0 && $absentCount === 0)
+                    ? 0 : \round($presentCount / ($absentCount + $presentCount) * 100, 2);
+                    return [
+                        'month' => $month,
+                        'percentage' => $percentage,
+                    ];
+                }
+            )->values();
         return [
             'data' => [
                 'attendance' => AttendanceResource::collection($attendance),
