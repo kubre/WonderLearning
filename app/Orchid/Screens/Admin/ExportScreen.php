@@ -11,6 +11,8 @@ use App\Exports\{
     UsersExport,
     KitStockExport,
 };
+use App\Models\Admission;
+use App\Orchid\Layouts\ExportListener;
 use Maatwebsite\Excel\Facades\Excel;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\DateTimer;
@@ -19,6 +21,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 use Illuminate\Http\Request;
 use Orchid\Support\Color;
+use Storage;
 
 class ExportScreen extends Screen
 {
@@ -34,7 +37,7 @@ class ExportScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'Data Export Screen';
+    public $description = 'Data Export Screen for current working year';
 
     public const EXPORT_INDEX = [
         'users' => UsersExport::class,
@@ -82,27 +85,17 @@ class ExportScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::rows([
-                Select::make('model')
-                    ->title('Data Model')
-                    ->options([
-                        'users' => 'Users',
-                        'schools' => 'Schools',
-                        'enquiries' => 'Enquiries',
-                        'admissions' => 'Admissions',
-                        'fees' => 'School Fees',
-                        'receipts' => 'Receipts',
-                        'kits' => 'Kit Stocks',
-                    ]),
-                DateTimer::make('from_date')
-                    ->format('Y-m-d')
-                    ->help('Optional: If not provided Data from Beginning will be downloaded')
-                    ->title('From Date'),
-                DateTimer::make('to_date')
-                    ->format('Y-m-d')
-                    ->help('Optional: If not provided Data till today will be downloaded')
-                    ->title('Up To Date'),
-            ])
+            ExportListener::class,
+            // Layout::rows([
+            //     DateTimer::make('from_date')
+            //         ->format('Y-m-d')
+            //         ->help('Optional: If not provided Data from Beginning will be downloaded')
+            //         ->title('From Date'),
+            //     DateTimer::make('to_date')
+            //         ->format('Y-m-d')
+            //         ->help('Optional: If not provided Data till today will be downloaded')
+            //         ->title('Up To Date'),
+            // ])
         ];
     }
 
@@ -111,9 +104,58 @@ class ExportScreen extends Screen
         $model = static::EXPORT_INDEX[$request->model] ?? null;
         abort_if(is_null($model), 404, 'Data Model Not Found');
 
-        return Excel::download(
-            new $model($request->from_date, $request->to_date),
-            $request->get('model') . '_' . now()->toDateTimeString() . '.xlsx'
+        $exportObj = new $model(...\working_year());
+
+        if ($request->model !== 'admissions') {
+            return Excel::download(
+                $exportObj,
+                $request->get('model') . '_' . now()->toDateTimeString() . '.xlsx'
+            );
+        }
+
+        $excel = 'excel.xlsx';
+        $zipFile = Storage::disk('temp')->path('student_data.zip');
+
+        Excel::store($exportObj, $excel, 'temp');
+
+        $admissions = Admission::with('student.school')
+            ->when(
+                !is_null($request->school_id),
+                function ($query) use ($request) {
+                    $query->where('school_id', $request->school_id);
+                }
+            )
+            ->whereHas('student', function ($query) {
+                $query->whereNotNull('photo');
+            })
+            ->get();
+
+        $zip = new \ZipArchive();
+        $zip->open(
+            $zipFile,
+            \ZipArchive::CREATE | \ZipArchive::OVERWRITE
         );
+
+        $zip->addFile(Storage::disk('temp')->path($excel), 'data.xlsx');
+        $admissions->each(function (Admission $admission) use ($zip) {
+            $tmp = \explode('.', $admission->student->photo);
+            $extension = end($tmp);
+            $zip->addFile(
+                public_path($admission->student->photo),
+                str_replace('/', '-', $admission->student->prn) . '.' . $extension
+            );
+        });
+
+        $zip->close();
+
+        return Storage::disk('temp')->download('student_data.zip');
+    }
+
+
+    public function asyncUpdatedModel(Request $request)
+    {
+        return [
+            'model' => $request->model,
+        ];
     }
 }
