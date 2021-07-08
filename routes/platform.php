@@ -24,6 +24,8 @@ use App\Orchid\Screens\School\AdmissionListScreen;
 use App\Orchid\Screens\School\AttendanceReportScreen;
 use App\Orchid\Screens\School\DivisionScreen;
 use App\Orchid\Screens\School\GraduationScreen;
+use App\Orchid\Screens\School\HolidayEditScreen;
+use App\Orchid\Screens\School\HolidayListScreen;
 use App\Orchid\Screens\School\KitStockScreen;
 use App\Orchid\Screens\School\PerformanceReportApprovalScreen;
 use App\Orchid\Screens\School\ReceiptPrintScreen;
@@ -279,6 +281,22 @@ Route::screen('homework-list', HomeworkListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Homework'), route('teacher.homework'))
+    );
+
+Route::screen('holiday/{holiday?}', HolidayEditScreen::class)
+    ->name('school.holiday.edit')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('school.holiday')
+            ->push(__('Add Holiday'), route('school.holiday.edit'))
+    );
+
+Route::screen('holidays', HolidayListScreen::class)
+    ->name('school.holiday')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Manage Holidays'), route('school.holiday'))
     );
 
 Route::screen('subject/{syllabus}', BookListScreen::class)

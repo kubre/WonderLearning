@@ -164,6 +164,11 @@ class PlatformProvider extends OrchidServiceProvider
                         ->route('reports.performance.approval'),
                 ]),
 
+            Menu::make('Holidays')
+                ->icon('calendar')
+                ->permission('school.users')
+                ->route('school.holiday'),
+
             // Options for Teacher
             Menu::make('Students')
                 ->icon('people')

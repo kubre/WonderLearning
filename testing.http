@@ -55,6 +55,14 @@ Accept: application/json
 IsApi: true
 ###
 
+# @name getHoliday
+GET {{ url }}/holidays?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+##########  LIVE TESTS  ############
+
 # @name liveLogin
 GET https://wonderlearning.in/api/login?contact=7070707080&prn=TSS/0003/2122 HTTP/1.1
 Accept: application/json
