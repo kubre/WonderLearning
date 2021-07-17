@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
             $query =
                 Attachment::whereIn('group', [
                     'homework',
+                    'album',
                 ])
                 ->whereDate('created_at', '<=', \today()->subDay(15));
             Storage::disk('temp')->delete($query->get()->map->physicalPath()->toArray());

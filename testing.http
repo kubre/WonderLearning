@@ -61,6 +61,12 @@ Accept: application/json
 IsApi: true
 ###
 
+# @name getGallery
+GET {{ url }}/gallery/4?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
 ##########  LIVE TESTS  ############
 
 # @name liveLogin
@@ -101,6 +107,18 @@ IsApi: true
 
 # @name getLiveVersion
 GET https://wonderlearning.in/api/version HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getLiveHoliday
+GET https://wonderlearning.in/api/holidays?school_id=2 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getLiveGallery
+GET https://wonderlearning.in/api/gallery/4?school_id={{school_id}} HTTP/1.1
 Accept: application/json
 IsApi: true
 ###

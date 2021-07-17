@@ -111,6 +111,7 @@
 -   (06/jul 11:25pm) Fixed mark syllabus first time error bug, added pending approval state after marking syllabus, fixed attendance date, Program Filter for book selection, fixed gapping for book button in teacher subject screen.
 -   (07/jul 11:20am) Added student data export with images as zip
 -   (08/jul 10:50am) Holiday List: Manage/View Holiday List, Holiday API
+-   (17/jul 06:15pm) Gallery: Manage/View Albums List, Gallery API
 
 ## Admin Dashboard
 
@@ -462,6 +463,6 @@ Have ability to export these reports as excel or pdf
 -   Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division
 -   Activities: Add/Manage custom activities for center-head/owner, which then can be seen by parents inside the app:
 -   Messages: Chat for teachers between them and parents
--   Gallery: Upload and manage gallery for images
+-   (17/jun 06:15pm) Gallery: Upload and manage gallery for images
 -   (08/jul 10:50am) Holiday List: Manage/View Holiday List which can be seen by parents
--   (18/jun 12:40pm) Automatic delete of pics older than 15 days
+-   (17/jun 12:40pm) Automatic delete of pics older than 15 days

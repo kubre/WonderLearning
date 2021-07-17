@@ -169,6 +169,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('school.users')
                 ->route('school.holiday'),
 
+            Menu::make('Gallery')
+                ->icon('picture')
+                ->permission('school.users')
+                ->route('school.gallery'),
+
             // Options for Teacher
             Menu::make('Students')
                 ->icon('people')

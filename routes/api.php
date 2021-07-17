@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\ClassworkController;
 use App\Http\Controllers\Api\FeesController;
+use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\HolidayController;
 use App\Http\Controllers\Api\HomeworkController;
 use App\Http\Controllers\Api\LoginController;
@@ -49,3 +50,5 @@ Route::get('/fees/{admission}', FeesController::class);
 Route::get('/homework/{division}', HomeworkController::class);
 
 Route::get('/holidays', HolidayController::class);
+
+Route::get('/gallery/{division}', GalleryController::class);

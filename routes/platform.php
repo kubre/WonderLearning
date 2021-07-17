@@ -23,6 +23,8 @@ use App\Orchid\Screens\School\AdmissionEditScreen;
 use App\Orchid\Screens\School\AdmissionListScreen;
 use App\Orchid\Screens\School\AttendanceReportScreen;
 use App\Orchid\Screens\School\DivisionScreen;
+use App\Orchid\Screens\School\GalleryEditScreen;
+use App\Orchid\Screens\School\GalleryListScreen;
 use App\Orchid\Screens\School\GraduationScreen;
 use App\Orchid\Screens\School\HolidayEditScreen;
 use App\Orchid\Screens\School\HolidayListScreen;
@@ -297,6 +299,22 @@ Route::screen('holidays', HolidayListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Manage Holidays'), route('school.holiday'))
+    );
+
+Route::screen('gallery/{gallery?}', GalleryEditScreen::class)
+    ->name('school.gallery.edit')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('school.gallery')
+            ->push(__('Add Collection'), route('school.gallery.edit'))
+    );
+
+Route::screen('galleries', GalleryListScreen::class)
+    ->name('school.gallery')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Manage Gallery'), route('school.gallery'))
     );
 
 Route::screen('subject/{syllabus}', BookListScreen::class)
