@@ -190,10 +190,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('teacher.subjects')
                 ->route('teacher.homework'),
 
-            Menu::make('Attendance')
-                ->icon('table')
-                ->permission('teacher.student')
-                ->route('teacher.attendance.list'),
+            Menu::make('Notice Board')
+                ->icon('bell')
+                ->permission('menu.report')
+                ->route('teacher.notice'),
 
             Menu::make('Sign Out')
                 ->icon('logout')

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\HolidayController;
 use App\Http\Controllers\Api\HomeworkController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
+use App\Http\Controllers\Api\NoticeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,5 @@ Route::get('/homework/{division}', HomeworkController::class);
 Route::get('/holidays', HolidayController::class);
 
 Route::get('/gallery/{division}', GalleryController::class);
+
+Route::get('/notices/{division}', NoticeController::class);

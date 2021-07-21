@@ -67,16 +67,22 @@ Accept: application/json
 IsApi: true
 ###
 
+# @name getNotice
+GET {{ url }}/notices/3?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
 ##########  LIVE TESTS  ############
 
 # @name liveLogin
-GET https://wonderlearning.in/api/login?contact=7070707080&prn=TSS/0003/2122 HTTP/1.1
+GET https://wonderlearning.in/api/login?contact=7264809024&prn=DEM/0006/2122 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
 
 # @name liveLogout
-GET https://wonderlearning.in/api/logout/13/7070707080 HTTP/1.1
+GET https://wonderlearning.in/api/logout/11/7264809024 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
@@ -118,7 +124,13 @@ IsApi: true
 ###
 
 # @name getLiveGallery
-GET https://wonderlearning.in/api/gallery/4?school_id={{school_id}} HTTP/1.1
+GET https://wonderlearning.in/api/gallery/6?school_id=3 HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+# @name getLiveNotice
+GET  https://wonderlearning.in/api/notices/6?school_id=3 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###

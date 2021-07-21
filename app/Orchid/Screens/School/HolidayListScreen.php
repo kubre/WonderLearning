@@ -34,7 +34,8 @@ class HolidayListScreen extends Screen
     public function query(): array
     {
         $holidays = Holiday::filters()
-            ->simplePaginate();
+            ->orderBy('start_at', 'DESC')
+            ->simplePaginate(20);
         return \compact('holidays');
     }
 

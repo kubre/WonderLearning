@@ -45,6 +45,8 @@ use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
 use App\Orchid\Screens\Teacher\HomeworkEditScreen;
 use App\Orchid\Screens\Teacher\HomeworkListScreen;
+use App\Orchid\Screens\Teacher\NoticeEditScreen;
+use App\Orchid\Screens\Teacher\NoticeListScreen;
 use App\Orchid\Screens\Teacher\PerformanceReportEditScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\Teacher\SubjectListScreen;
@@ -315,6 +317,22 @@ Route::screen('galleries', GalleryListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Manage Gallery'), route('school.gallery'))
+    );
+
+Route::screen('notice/{notice?}', NoticeEditScreen::class)
+    ->name('teacher.notice.edit')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('teacher.notice')
+            ->push(__('Issue Notice'), route('teacher.notice.edit'))
+    );
+
+Route::screen('notices', NoticeListScreen::class)
+    ->name('teacher.notice')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Notice Board'), route('teacher.notice'))
     );
 
 Route::screen('subject/{syllabus}', BookListScreen::class)

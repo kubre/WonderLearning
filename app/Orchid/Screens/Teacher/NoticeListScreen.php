@@ -1,30 +1,29 @@
 <?php
 
-namespace App\Orchid\Screens\School;
+namespace App\Orchid\Screens\Teacher;
 
-use App\Models\Gallery;
-use App\Orchid\Layouts\School\DivisionSelectionLayout;
-use App\Orchid\Layouts\School\GalleryListLayout;
+use App\Models\Notice;
+use App\Orchid\Layouts\Teacher\NoticeListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Toast;
 
-class GalleryListScreen extends Screen
+class NoticeListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Gallery';
+    public $name = 'Notice Board';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Warning: Images will only retained for 15 days maximum. This gallery is only to share pictures with parents.';
+    public $description = 'Issued notice will be visible to parents in respective division.';
 
     /**
      * Query data.
@@ -34,10 +33,9 @@ class GalleryListScreen extends Screen
     public function query(): array
     {
         return [
-            'albums' => Gallery::with('division')
-                ->withCount('attachment')
+            'notices' => Notice::with('division', 'user')
                 ->filters()
-                ->orderBy('date_at', 'DESC')
+                ->orderBy('id', 'DESC')
                 ->simplePaginate(20),
         ];
     }
@@ -50,10 +48,10 @@ class GalleryListScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('New Album')
+            Link::make('Issue a Notice')
                 ->icon('plus')
                 ->type(Color::PRIMARY())
-                ->route('school.gallery.edit'),
+                ->route('teacher.notice.edit'),
         ];
     }
 
@@ -65,14 +63,14 @@ class GalleryListScreen extends Screen
     public function layout(): array
     {
         return [
-            GalleryListLayout::class,
+            NoticeListLayout::class,
         ];
     }
 
-    public function remove(Gallery $gallery)
+    public function remove(Notice $notice)
     {
-        $gallery->delete();
-        Toast::info('Removed album from gallery successfully!');
-        return \redirect()->route('school.gallery');
+        $notice->delete();
+        Toast::info('Removed the notice successfully!');
+        return \redirect()->route('teacher.notice');
     }
 }
