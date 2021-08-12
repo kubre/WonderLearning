@@ -33,7 +33,7 @@ Route::get('/getSyllabus', [AdminController::class, 'get']);
 
 Route::get('/version', function () {
     return [
-        'data' => 1,
+        'data' => 2,
     ];
 });
 
