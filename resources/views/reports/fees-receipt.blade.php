@@ -37,7 +37,7 @@
         </div>
         <div class="col-4">
             <strong class='col-3'>Date: </strong>
-            <span class='col-4 text-right'>{{ $receipt->receipt_at->format('d-m-Y') }}</span>
+            <span class='col-4 text-right'>{{ optional($receipt->receipt_at)->format('d-m-Y') }}</span>
         </div>
     </div>
 
@@ -91,7 +91,8 @@
 
             @endif
             <div class="col">
-                <strong>Dated: </strong> <span class='px-2 b-b'> {{ $receipt->paid_at->format('d-m-Y') }} </span>
+                <strong>Dated: </strong> <span class='px-2 b-b'> {{ optional($receipt->paid_at)->format('d-m-Y') }}
+                </span>
             </div>
         @endif
     </div>

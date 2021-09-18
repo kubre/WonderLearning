@@ -36,8 +36,8 @@ class EnquiryListLayout extends Table
         return [
             // TD::make('id'),
             TD::make('name', 'Name')->filter(TD::FILTER_TEXT),
-            TD::make('enquirer_name', 'Contact'),
-            TD::make('enquirer_contact', 'Enquirer Name'),
+            TD::make('enquirer_name', 'Enquirer Name'),
+            TD::make('enquirer_contact', 'Contact'),
             TD::make('program', 'Program')
                 ->filter(TD::FILTER_TEXT),
             TD::make('follow_up_at', 'Follow Up Date')
