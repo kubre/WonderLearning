@@ -73,4 +73,9 @@ class Student extends Model
     {
         return $this->hasMany(Receipt::class);
     }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
 }

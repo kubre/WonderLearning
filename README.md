@@ -113,6 +113,10 @@
 -   (08/jul 10:50am) Holiday List: Manage/View Holiday List, Holiday API
 -   (17/jul 06:15pm) Gallery: Manage/View Albums List, Gallery API
 -   (21/jul 12:05pm) Notice Board: Manage/View, API
+-   (23/sep 09:00pm) Messages: Mdoel, migration
+-   () Messages: Chat List UI
+-   () Messages: Chat window for teacher
+-   () Messages: Chat API
 
 ## Admin Dashboard
 

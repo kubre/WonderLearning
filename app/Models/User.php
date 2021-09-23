@@ -92,4 +92,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Division::class, 'teacher_id');
     }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
 }
