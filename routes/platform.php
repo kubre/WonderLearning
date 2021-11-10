@@ -43,6 +43,7 @@ use App\Orchid\Screens\Student\InvoicePrintScreen;
 use App\Orchid\Screens\Teacher\AttendanceEditScreen;
 use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
+use App\Orchid\Screens\Teacher\ChatListScreen;
 use App\Orchid\Screens\Teacher\HomeworkEditScreen;
 use App\Orchid\Screens\Teacher\HomeworkListScreen;
 use App\Orchid\Screens\Teacher\NoticeEditScreen;
@@ -261,6 +262,15 @@ Route::screen('students', StudentListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Student List'), route('teacher.students.list'))
+    );
+
+
+Route::screen('chats', ChatListScreen::class)
+    ->name('teacher.chats.list')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Chats'), route('teacher.chats.list'))
     );
 
 Route::screen('subjects', SubjectListScreen::class)
