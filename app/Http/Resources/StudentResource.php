@@ -15,6 +15,7 @@ class StudentResource extends JsonResource
     public function toArray($request)
     {
         $academicYear = \get_academic_year(\today(), $this->school);
+        $teacher = optional($this->admission->division)->teacher;
         return [
             'student' => [
                 'id' => $this->id,
@@ -36,6 +37,10 @@ class StudentResource extends JsonResource
                 'is_transportation_required' => $this->admission->is_transportation_required,
                 'admission_id' => $this->admission->id,
                 'division_id' => $this->admission->division->id ?? null,
+                'teacher' => [
+                    'id' => optional($teacher)->id,
+                    'name' => optional($teacher)->name
+                ],
                 'division_title' => $this->admission->division->title ?? '-- No Division Assigned --',
                 'kit_assigned' => (bool) $this->admission->assigned_kit,
             ],

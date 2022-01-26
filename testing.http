@@ -14,7 +14,7 @@ IsApi: true
 ###
 
 # @name logout
-GET {{ url }}/logout/1/9999999999 HTTP/1.1
+GET {{ url }}/logout/1/8989056890 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###

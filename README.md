@@ -118,6 +118,7 @@
 - 2022
 -   (26/jan 07:13pm) Messages: Chat window for teacher
 -   (26/jan 07:13pm) Messages: Chat API
+-   (26/jan 08:05pm) Login API returns teacher data
 
 ## Admin Dashboard
 
