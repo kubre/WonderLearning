@@ -25,6 +25,7 @@ class CreateMessagesTable extends Migration
                 ->cascadeOnUpdate();
             $table->string('body', 500);
             $table->timestamp('sent_at')->useCurrent();
+            $table->boolean('is_teacher');
             $table->timestamps();
         });
     }

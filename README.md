@@ -115,8 +115,9 @@
 -   (21/jul 12:05pm) Notice Board: Manage/View, API
 -   (23/sep 09:00pm) Messages: Model, migration
 -   (10/nov 04:20pm) Messages: Chat List UI
--   () Messages: Chat window for teacher
--   () Messages: Chat API
+- 2022
+-   (26/jan 07:13pm) Messages: Chat window for teacher
+-   (26/jan 07:13pm) Messages: Chat API
 
 ## Admin Dashboard
 

@@ -16,6 +16,7 @@ class AcademicYearScope implements Scope
                 'created_at',
                 \get_academic_year(\today(), School::findOrFail(\request()->school_id))
             );
+        } elseif (\request()->hasHeader('UniqueIdentity')) {
         } else {
             $builder->whereBetween('created_at', working_year());
         }

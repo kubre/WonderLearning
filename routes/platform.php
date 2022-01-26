@@ -44,6 +44,7 @@ use App\Orchid\Screens\Teacher\AttendanceEditScreen;
 use App\Orchid\Screens\Teacher\AttendanceListScreen;
 use App\Orchid\Screens\Teacher\BookListScreen;
 use App\Orchid\Screens\Teacher\ChatListScreen;
+use App\Orchid\Screens\Teacher\ChatUIScreen;
 use App\Orchid\Screens\Teacher\HomeworkEditScreen;
 use App\Orchid\Screens\Teacher\HomeworkListScreen;
 use App\Orchid\Screens\Teacher\NoticeEditScreen;
@@ -264,6 +265,16 @@ Route::screen('students', StudentListScreen::class)
             ->push(__('Student List'), route('teacher.students.list'))
     );
 
+Route::screen('chats/{student}', ChatUIScreen::class)
+    ->name('teacher.chats.screen')
+    ->breadcrumbs(
+        fn (Trail $trail, $student) => $trail
+            ->parent('teacher.chats.list')
+            ->push(
+                __("Chat with {$student->name}'s Parent's"),
+                route('teacher.chats.screen', compact('student'))
+            )
+    );
 
 Route::screen('chats', ChatListScreen::class)
     ->name('teacher.chats.list')

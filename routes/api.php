@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Api\AttendanceController;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\ClassworkController;
 use App\Http\Controllers\Api\FeesController;
 use App\Http\Controllers\Api\GalleryController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\Api\HomeworkController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\NoticeController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,3 +56,7 @@ Route::get('/holidays', HolidayController::class);
 Route::get('/gallery/{division}', GalleryController::class);
 
 Route::get('/notices/{division}', NoticeController::class);
+
+Route::get('/chats', [ChatController::class, 'get']);
+
+Route::post('/chats', [ChatController::class, 'create']);

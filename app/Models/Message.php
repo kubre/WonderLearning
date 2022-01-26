@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'user_id', 'student_id', 'body'
+        'user_id', 'student_id', 'body', 'is_teacher'
+    ];
+
+    protected $casts = [
+        'sent_at' => 'datetime',
     ];
 
     protected static function boot()

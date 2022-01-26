@@ -12,6 +12,7 @@ class SchoolScope implements Scope
     {
         if (\request()->hasHeader('IsApi')) {
             $builder->where('school_id', \request()->school_id);
+        } elseif (\request()->hasHeader('UniqueIdentity')) {
         } else {
             $user = auth()->user();
             if (!$user->hasAccess('admin.school')) {

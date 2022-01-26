@@ -73,6 +73,13 @@ Accept: application/json
 IsApi: true
 ###
 
+
+# @name getChats
+GET {{ url }}/chats/?teacher=5&student=1 HTTP/1.1
+Accept: application/json
+UniqueIdentity: true
+###
+
 ##########  LIVE TESTS  ############
 
 # @name liveLogin

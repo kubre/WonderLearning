@@ -47,6 +47,7 @@ class ChatListLayout extends Table
                         Link::make('Go To Chat')
                         ->type(Color::INFO())
                         ->icon('cursor')
+                        ->route('teacher.chats.screen', ['student' => $a->student->id])
                         ->parameters([
                             'id' => $a->student->id,
                         ]);
