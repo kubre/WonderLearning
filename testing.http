@@ -148,3 +148,9 @@ GET  https://wonderlearning.in/api/notices/6?school_id=3 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###
+
+# @name liveObservation
+GET https://wonderlearning.in/api/observations/11?school_id=3 HTTP/1.1
+Accept: application/json
+IsApi: true
+###

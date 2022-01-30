@@ -127,6 +127,11 @@ class PerformanceReportEditScreen extends Screen
             ->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]])
             ->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]))
             ->toJson();
+        $t1 = collect($request->except('_token'));
+        $t2 = $t1->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]]);
+        $t3 = $t2->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]));
+        
+        dd($t1, $t2, $t3);
 
         $dateAt = Carbon::createFromFormat('d-M-Y', $month)->startOfMonth();
 
