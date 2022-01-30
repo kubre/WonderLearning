@@ -265,6 +265,11 @@ class PerformanceReport extends Model
         return \json_decode($value, true) ?? static::$templates[$this->admission->program];
     }
 
+    public function getMonthAttribute()
+    {
+        return \substr($this->attributes['date_at'], 3, 3);
+    }
+
     public function admission(): BelongsTo
     {
         return $this->belongsTo(Admission::class);

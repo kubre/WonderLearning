@@ -119,6 +119,7 @@
 -   (26/jan 07:13pm) Messages: Chat window for teacher
 -   (26/jan 07:13pm) Messages: Chat API
 -   (26/jan 08:05pm) Login API returns teacher data
+-   (30/jan 05:40pm) Observation API added
 
 ## Admin Dashboard
 
@@ -469,7 +470,7 @@ Have ability to export these reports as excel or pdf
 -   (18/jun 12:40pm) Homework: Ability to assign homework to all the students of a division
 -   (21/jul 12:05pm) Notice Board: Ability to create notices for divisions and send them to all the parents of students in that division
 -   Activities: Add/Manage custom activities for center-head/owner, which then can be seen by parents inside the app:
--   Messages: Chat for teachers between them and parents
+-   (26/jan) Messages: Chat for teachers between them and parents
 -   (17/jul 06:15pm) Gallery: Upload and manage gallery for images
 -   (08/jul 10:50am) Holiday List: Manage/View Holiday List which can be seen by parents
 -   (17/jun 12:40pm) Automatic delete of pics older than 15 days

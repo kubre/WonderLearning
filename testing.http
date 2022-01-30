@@ -80,6 +80,13 @@ Accept: application/json
 UniqueIdentity: true
 ###
 
+# @name getObservation
+GET {{ url }}/observations/1?school_id={{school_id}} HTTP/1.1
+Accept: application/json
+IsApi: true
+###
+
+
 ##########  LIVE TESTS  ############
 
 # @name liveLogin

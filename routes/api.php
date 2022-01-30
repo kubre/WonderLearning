@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\HomeworkController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\LogoutController;
 use App\Http\Controllers\Api\NoticeController;
+use App\Http\Controllers\Api\ObservationController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,3 +61,5 @@ Route::get('/notices/{division}', NoticeController::class);
 Route::get('/chats', [ChatController::class, 'get']);
 
 Route::post('/chats', [ChatController::class, 'create']);
+
+Route::get('/observations/{admission_id}', ObservationController::class);
