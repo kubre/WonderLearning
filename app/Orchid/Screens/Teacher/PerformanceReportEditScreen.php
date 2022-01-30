@@ -36,6 +36,8 @@ class PerformanceReportEditScreen extends Screen
 
     public array $template;
 
+    public bool $isOld;
+
     /**
      * Query data.
      *
@@ -47,6 +49,8 @@ class PerformanceReportEditScreen extends Screen
             ->reports()
             ->whereDateAt(Carbon::createFromFormat('d-M-Y', $month)->startOfMonth())
             ->firstOrNew();
+
+        $this->isOld = $report->exists;
         $this->template = $report->performance;
         $this->name .= $admission->student->name . ': ' .  substr($month, 3);
         return compact('admission', 'report');
@@ -63,6 +67,7 @@ class PerformanceReportEditScreen extends Screen
             Button::make('Save')
                 ->icon('save')
                 ->type(Color::PRIMARY())
+                ->canSee(!$this->isOld)
                 ->method('save'),
         ];
     }
@@ -80,6 +85,7 @@ class PerformanceReportEditScreen extends Screen
                 Button::make('Save')
                     ->icon('save')
                     ->type(Color::PRIMARY())
+                    ->canSee(!$this->isOld)
                     ->method('save'),
             ]),
         ];
@@ -100,16 +106,16 @@ class PerformanceReportEditScreen extends Screen
         return collect($criterion)
             ->map(
                 fn ($value, $criteria) => Group::make([
-                    TextArea::make($criteria)
+                    TextArea::make($this->isOld ? $criteria : $criteria . '[]')
                         ->readonly()
                         ->class('form-control-plaintext label')
                         ->value($criteria),
-                    Input::make($criteria)
+                    Input::make($this->isOld ? $criteria : $criteria . '[]')
                         ->clear()
                         ->hidden()
                         ->class('w-0')
                         ->value($title),
-                    RadioButtons::make($criteria)
+                    RadioButtons::make($this->isOld ? $criteria : $criteria . '[]')
                         ->value($value)
                         ->options([
                             'Needs Encouragement' => 'Needs Encouragement',
@@ -127,11 +133,11 @@ class PerformanceReportEditScreen extends Screen
             ->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]])
             ->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]))
             ->toJson();
-        $t1 = collect($request->except('_token'));
-        $t2 = $t1->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]]);
-        $t3 = $t2->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]));
-        
-        dd($t1, $t2, $t3);
+        // $t1 = collect($request->except('_token'));
+        // $t2 = $t1->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]]);
+        // $t3 = $t2->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]));
+
+        // dd($t1, $t2, $t3);
 
         $dateAt = Carbon::createFromFormat('d-M-Y', $month)->startOfMonth();
 
