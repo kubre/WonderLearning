@@ -29,8 +29,7 @@ class ApprovalService
         return class_exists($model) && method_exists($this, $method);
     }
 
-    /** @return bool|null */
-    public function cancel(Approval $approval)
+    public function cancel(Approval $approval): ?bool
     {
         if ($approval->approval_type === Syllabus::class) {
             SchoolSyllabus::where('school_id', $approval->school_id)

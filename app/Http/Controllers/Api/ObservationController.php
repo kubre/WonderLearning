@@ -14,6 +14,7 @@ class ObservationController extends Controller
     {
         return ObservationResource::collection(
             PerformanceReport::whereAdmissionId($admission_id)
+                ->whereNotNull('approved_at')
                 ->get()
         );
     }
