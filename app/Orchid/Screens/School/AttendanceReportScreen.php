@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\School;
 
 use App\Models\DivisionAttendance;
-use App\Orchid\Layouts\School\DivisionSelectionLayout;
+use App\Orchid\Layouts\School\DivisionAndYearMonthSelectionLayout;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
@@ -110,7 +110,7 @@ class AttendanceReportScreen extends Screen
     public function layout(): array
     {
         return [
-            DivisionSelectionLayout::class,
+            DivisionAndYearMonthSelectionLayout::class,
             Layout::view('reports.attendance'),
         ];
     }

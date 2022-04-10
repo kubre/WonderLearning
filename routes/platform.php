@@ -50,6 +50,7 @@ use App\Orchid\Screens\Teacher\HomeworkListScreen;
 use App\Orchid\Screens\Teacher\NoticeEditScreen;
 use App\Orchid\Screens\Teacher\NoticeListScreen;
 use App\Orchid\Screens\Teacher\PerformanceReportEditScreen;
+use App\Orchid\Screens\Teacher\PerformanceReportFillingScreen;
 use App\Orchid\Screens\Teacher\StudentListScreen;
 use App\Orchid\Screens\Teacher\SubjectListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -263,6 +264,14 @@ Route::screen('students', StudentListScreen::class)
         fn (Trail $trail) => $trail
             ->parent('platform.index')
             ->push(__('Student List'), route('teacher.students.list'))
+    );
+
+Route::screen('performance/filling', PerformanceReportFillingScreen::class)
+    ->name('teacher.performance.filling')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Performance Report Filling'), route('teacher.performance.filling'))
     );
 
 Route::screen('chats/{student}', ChatUIScreen::class)

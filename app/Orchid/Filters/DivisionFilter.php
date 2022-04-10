@@ -16,7 +16,6 @@ class DivisionFilter extends Filter
      */
     public $parameters = [
         'division',
-        'month',
     ];
 
     /**
@@ -24,7 +23,7 @@ class DivisionFilter extends Filter
      */
     public function name(): string
     {
-        return 'Divisions';
+        return 'Division';
     }
 
     /**
@@ -36,8 +35,6 @@ class DivisionFilter extends Filter
     {
         return $builder->when($this->request->get('division') != 0, function ($query) {
             $query->where('division_id', $this->request->get('division'));
-        })->when($this->request->get('month') != 0, function ($query) {
-            $query->whereBetween('date_at', \explode('|', $this->request->get('month')));
         });
     }
 
@@ -46,16 +43,6 @@ class DivisionFilter extends Filter
      */
     public function display(): array
     {
-        $monthList = [];
-
-        list($start, $end) = working_year();
-        $startMonth = $start->copy();
-        $endMonth = $end->copy();
-
-        for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
-            $monthList[$i->format('y-m-d') . '|' . $i->copy()->endOfMonth()->format('y-m-d')] = $i->format('M-y');
-        }
-
         $query = Division::when(
             !auth()->user()->hasAccess('school.users'),
             fn ($query) => $query->ofTeacher(auth()->id())
@@ -63,16 +50,10 @@ class DivisionFilter extends Filter
         return [
             Select::make('division')
                 ->title('Division')
-                ->empty('Select Division', 0)
+                ->empty('All Divisions', 0)
                 ->value($this->request->get('division'))
                 ->fromQuery($query, 'name')
-                ->required(),
-            Select::make('month')
-                ->title('Month')
-                ->empty('Select Month', 0)
-                ->value($this->request->get('month', 0))
-                ->options($monthList)
-                ->required(),
+                ->required()
         ];
     }
 }

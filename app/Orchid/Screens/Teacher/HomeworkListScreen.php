@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Teacher;
 
 use App\Models\Homework;
+use App\Orchid\Layouts\School\DivisionAndYearMonthSelectionLayout;
 use App\Orchid\Layouts\School\DivisionSelectionLayout;
 use App\Orchid\Layouts\Teacher\HomeworkListLayout;
 use DB;
@@ -40,7 +41,7 @@ class HomeworkListScreen extends Screen
         return [
             'homeworks' => Homework::with('division', 'attachment')
                 ->filters()
-                ->filtersApplySelection(DivisionSelectionLayout::class)
+                ->filtersApplySelection(DivisionAndYearMonthSelectionLayout::class)
                 ->simplePaginate(30),
         ];
     }
@@ -68,7 +69,7 @@ class HomeworkListScreen extends Screen
     public function layout(): array
     {
         return [
-            DivisionSelectionLayout::class,
+            DivisionAndYearMonthSelectionLayout::class,
             HomeworkListLayout::class,
         ];
     }

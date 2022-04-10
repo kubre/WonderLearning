@@ -158,6 +158,10 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('table')
                         ->permission('menu.report')
                         ->route('reports.attendance.monthly'),
+                    Menu::make('Performance Report Filling')
+                        ->icon('people')
+                        ->permission('teacher.subjects')
+                        ->route('teacher.performance.filling'),
                     Menu::make('Performance Report Approval')
                         ->icon('check')
                         ->permission('school.users')
