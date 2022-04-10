@@ -11,6 +11,7 @@ use App\Models\{
     Enquiry,
     Fees,
     Installment,
+    PerformanceReport,
     Receipt,
     Student,
     Syllabus,
@@ -158,6 +159,18 @@ class PlatformScreen extends Screen
         if ($this->user->hasAccess('school.approvals') && $this->hasApprovals) {
             $views[] = Layout::view('components.title', ['title' => 'Approvals']);
             $views[] = ApprovalListLayout::class;
+
+            // For performance reports
+            $divisions = \school()->divisions()->select('id')->get()->pluck('id')->toArray();
+            $reportsToApprove = PerformanceReport::whereIn('division_id', $divisions)
+            ->whereNull('approved_at')
+            ->count();
+            if ($reportsToApprove !== 0) {
+                $views[] = Layout::view("components.message", [
+                    'message' => "<strong>From all divisions <kbd>$reportsToApprove</kbd> number of reports needs approval</strong>",
+                    "route" => "reports.performance.approval"
+                ]);
+            }
         }
 
         if ($this->user->hasAccess('school.year')) {

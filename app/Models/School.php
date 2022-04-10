@@ -128,4 +128,9 @@ class School extends Model
         return $this->belongsToMany(Syllabus::class)
             ->withPivot('id', 'completed_at');
     }
+
+    public function divisions(): HasMany
+    {
+        return $this->hasMany(Division::class);
+    }
 }
