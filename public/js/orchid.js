@@ -28,7 +28,7 @@ function printReport(name, domain) {
 // Table CSV Exports
 var table = document.querySelector('table.table.table-striped.table-bordered');
 
-if (table) {
+// if (table) {
     function exportCsv()
     {
         var table = document.querySelector('table.table.table-striped.table-bordered');
@@ -52,4 +52,4 @@ if (table) {
         table.id = 'print-report';
         window.print();
     }
-}
+// }
