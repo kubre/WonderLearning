@@ -3,6 +3,8 @@
 namespace App\Orchid\Layouts;
 
 use App\Models\Division;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Label;
@@ -10,6 +12,7 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\Switcher;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Layouts\Listener;
+use Orchid\Support\Color;
 
 class ApprovalListener extends Listener
 {
@@ -70,7 +73,9 @@ class ApprovalListener extends Listener
                     Label::make('')
                         ->title('Approval (Check to approve)'),
                     Label::make('')
-                        ->value(''),
+                        ->title(''),
+                    Label::make('Actions (Click to view the report)')
+                        ->title('Actions'),
                 ]),
                 ...$this->buildApprovals($this->query->get('reports'))
             ])
@@ -84,6 +89,8 @@ class ApprovalListener extends Listener
             return [];
         }
 
+        $month = $this->query->get('month');
+
         return $reports->map(
             fn ($report) => Group::make([
                 Label::make('label.' . $report->admission->id)
@@ -94,6 +101,13 @@ class ApprovalListener extends Listener
                 Input::make('admissionId.' . $report->admission->id)
                     ->hidden()
                     ->value($report->admission_id),
+                Link::make('ViewReport')
+                    ->icon('bar-chart')
+                    ->type(Color::PRIMARY())
+                    ->href(route('reports.performance.fill', [
+                        'admissionId' => $report->admission_id,
+                        'month' => $month,
+                    ]))
             ])
         )->toArray();
     }

@@ -32,7 +32,7 @@ class PerformanceReportEditScreen extends Screen
      */
     public $description = 'Individual student\'s performance report form filling.';
 
-    public $permission = 'teacher.student';
+    // public $permission = '';
 
     public array $template;
 
