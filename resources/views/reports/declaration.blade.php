@@ -13,7 +13,7 @@
             <table class="w-100 table table-bordered table-black">
                 <tr>
                     <th>Center Head</th>
-                    <td>{{ auth()->user()->name }}</td>
+                    <td>{{ $admission->student->school->users->first->inRole('school-owner')->name }}</td>
                 </tr>
                 <tr>
                     <th>Address</th>
