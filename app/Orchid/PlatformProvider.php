@@ -180,6 +180,11 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('teacher.student')
                 ->route('teacher.students.list'),
 
+            Menu::make('Attendance')
+                ->icon('calendar')
+                ->permission('teacher.subjects')
+                ->route('teacher.attendance.list'),
+
             Menu::make('Chats')
                 ->icon('envelope')
                 ->permission('teacher.student')
