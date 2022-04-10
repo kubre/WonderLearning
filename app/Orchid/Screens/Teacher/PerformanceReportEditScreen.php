@@ -36,6 +36,8 @@ class PerformanceReportEditScreen extends Screen
 
     public array $template;
 
+    public bool $isApproved;
+
     public bool $isOld;
 
     /**
@@ -50,6 +52,7 @@ class PerformanceReportEditScreen extends Screen
             ->whereDateAt(Carbon::createFromFormat('d-M-Y', $month)->startOfMonth())
             ->firstOrNew();
 
+        $this->isApproved = !is_null($report->approved_at);
         $this->isOld = $report->exists;
         $this->template = $report->performance;
         $this->name .= $admission->student->name . ': ' .  substr($month, 3);
@@ -67,8 +70,13 @@ class PerformanceReportEditScreen extends Screen
             Button::make('Save')
                 ->icon('save')
                 ->type(Color::PRIMARY())
-                ->canSee(!$this->isOld)
+                ->canSee(!$this->isApproved)
                 ->method('save'),
+            Button::make('Report has been approved(Cannot edit)')
+                ->icon('exclamation')
+                ->disabled()
+                ->type(Color::WARNING())
+                ->canSee($this->isApproved),
         ];
     }
 
@@ -85,7 +93,7 @@ class PerformanceReportEditScreen extends Screen
                 Button::make('Save')
                     ->icon('save')
                     ->type(Color::PRIMARY())
-                    ->canSee(!$this->isOld)
+                    ->canSee(!$this->isApproved)
                     ->method('save'),
             ]),
         ];
@@ -133,11 +141,6 @@ class PerformanceReportEditScreen extends Screen
             ->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]])
             ->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]))
             ->toJson();
-        // $t1 = collect($request->except('_token'));
-        // $t2 = $t1->mapToGroups(fn ($input) => [$input[1] => [$input[0], $input[2]]]);
-        // $t3 = $t2->map(fn ($skill) => $skill->mapWithKeys(fn ($item) => [$item[0] => $item[1]]));
-
-        // dd($t1, $t2, $t3);
 
         $dateAt = Carbon::createFromFormat('d-M-Y', $month)->startOfMonth();
 
@@ -153,6 +156,6 @@ class PerformanceReportEditScreen extends Screen
 
         Toast::info('Saved performance observations successfully!');
 
-        return redirect()->route('teacher.students.list');
+        return redirect()->route('teacher.performance.filling');
     }
 }

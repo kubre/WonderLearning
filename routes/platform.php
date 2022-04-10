@@ -415,7 +415,7 @@ Route::screen('report/performance/{admissionId}/{month}', PerformanceReportEditS
     ->name('reports.performance.fill')
     ->breadcrumbs(
         fn (Trail $trail, int $admissionId, string $month) => $trail
-            ->parent('teacher.students.list')
+            ->parent('teacher.performance.filling')
             ->push(
                 __('Monthly Performance Report'),
                 route('reports.performance.fill', compact('admissionId', 'month'))
