@@ -117,6 +117,7 @@ class AdmissionListLayout extends Table
                                 ->route('school.admission.edit', $a->id),
                             Link::make('Declaration Form')
                                 ->icon('eye')
+                                ->canSee($this->user->hasAccess('school.users'))
                                 ->route('reports.declaration.form', $a->id),
                         ]),
                 )
