@@ -38,6 +38,8 @@ class PerformanceReportEditScreen extends Screen
 
     public bool $isApproved;
 
+    public bool $isCorrupted;
+
     public bool $isOld;
 
     /**
@@ -54,6 +56,7 @@ class PerformanceReportEditScreen extends Screen
 
         $this->isApproved = !is_null($report->approved_at);
         $this->isOld = $report->exists;
+        $this->isCorrupted = $report->isCorrupted;
         $this->template = $report->performance;
         $this->name .= $admission->student->name . ': ' .  substr($month, 3);
         return compact('admission', 'report');
@@ -67,6 +70,11 @@ class PerformanceReportEditScreen extends Screen
     public function commandBar(): array
     {
         return [
+            Button::make('Corrupted Data (Please fill the student data again)')
+                ->icon('exclamation')
+                ->disabled()
+                ->type(Color::DANGER())
+                ->canSee($this->isCorrupted),
             Button::make('Save')
                 ->icon('save')
                 ->type(Color::PRIMARY())
@@ -114,16 +122,16 @@ class PerformanceReportEditScreen extends Screen
         return collect($criterion)
             ->map(
                 fn ($value, $criteria) => Group::make([
-                    TextArea::make($this->isOld ? $criteria : $criteria . '[]')
+                    TextArea::make(strpos($criteria, '[]') !== false ? $criteria : $criteria . '[]')
                         ->readonly()
                         ->class('form-control-plaintext label')
                         ->value($criteria),
-                    Input::make($this->isOld ? $criteria : $criteria . '[]')
+                    Input::make(strpos($criteria, '[]') !== false ? $criteria : $criteria . '[]')
                         ->clear()
                         ->hidden()
                         ->class('w-0')
                         ->value($title),
-                    RadioButtons::make($this->isOld ? $criteria : $criteria . '[]')
+                    RadioButtons::make(strpos($criteria, '[]') !== false ? $criteria : $criteria . '[]')
                         ->value($value)
                         ->options([
                             'Needs Encouragement' => 'Needs Encouragement',

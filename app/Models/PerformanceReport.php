@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Screen\AsSource;
+use Str;
 
 class PerformanceReport extends Model
 {
@@ -262,7 +263,18 @@ class PerformanceReport extends Model
 
     public function getPerformanceAttribute($value)
     {
-        return \json_decode($value, true) ?? static::$templates[$this->admission->program];
+        $report = \json_decode($value, true);
+
+        if (\is_null($report) || Str::length($value) < 50) {
+            return static::$templates[$this->admission->program];
+        }
+
+        return $report;
+    }
+
+    public function getIsCorruptedAttribute()
+    {
+        return isset($this->attributes['performance']) && is_string($this->attributes['performance']) && Str::length($this->attributes['performance']) < 50;
     }
 
     public function getMonthAttribute()
