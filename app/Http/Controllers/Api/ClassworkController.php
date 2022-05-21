@@ -24,7 +24,7 @@ class ClassworkController extends Controller
                 ->whereHas('syllabus', function ($query) use ($admission) {
                     $query->where('program', $admission->program);
                 })
-                ->doesntHave('approval')
+                ->whereHas('approval')
                 ->get()
         );
     }
