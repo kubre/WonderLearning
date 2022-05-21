@@ -18,7 +18,7 @@ class ClassworkResource extends JsonResource
             'id' => $this->id,
             "date" => $this->completed_at,
             "day" => (int) $this->day,
-            "month" => $this->month,
+            "month" => (string) $this->month,
             "year" => (int) $this->year,
             "title" => $this->syllabus->name,
             "type" => $this->syllabus->type,
