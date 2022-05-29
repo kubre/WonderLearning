@@ -21,7 +21,6 @@ class Installment extends Model
     protected $casts = [
         'amount' => 'integer',
         'due_amount' => 'integer',
-        'month' => 'integer',
     ];
 
 
@@ -33,12 +32,20 @@ class Installment extends Model
 
     public function getMonthNameAttribute(): string
     {
-        return date('F', mktime(0, 0, 0, $this->month));
+        list($month, $year) = \explode(" ", $this->month);
+        return date('F', mktime(0, 0, 0, (int)$month, 1, (int)$year));
+    }
+
+    public function getMonthNameAndYearAttribute(): string
+    {
+        list($month, $year) = \explode(" ", $this->month);
+        return date('F Y', mktime(0, 0, 0, (int)$month, 1, (int)$year));
     }
 
     public function getShortMonthNameAttribute(): string
     {
-        return date('M', mktime(0, 0, 0, $this->month));
+        list($month, $year) = \explode(" ", $this->month);
+        return date('M', mktime(0, 0, 0, (int)$month, 1, $year));
     }
 
 

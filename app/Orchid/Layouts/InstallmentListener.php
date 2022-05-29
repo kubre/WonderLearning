@@ -40,11 +40,12 @@ class InstallmentListener extends Listener
         $monthList = [];
 
         list($start, $end) = working_year();
-        $startMonth = $start->copy();
+        $startMonth = $start->copy()->subMonths(12);
         $endMonth = $end->copy();
+        // \dd($startMonth->format('d M Y'), $endMonth->format('d M Y'));
 
         for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
-            $monthList[$i->format('m')] = $i->format('M Y');
+            $monthList[$i->format('n Y')] = $i->format('M Y');
         }
 
         $this->monthList = $monthList;

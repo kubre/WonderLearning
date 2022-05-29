@@ -43,11 +43,11 @@ class DeclarationFormScreen extends Screen
         $monthList = [];
 
         list($start, $end) = working_year();
-        $startMonth = $start->copy();
+        $startMonth = $start->copy()->subMonths(12);
         $endMonth = $end->copy();
 
         for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
-            $monthList[(int)$i->format('m')] = $i->format('M Y');
+            $monthList[$i->format('n Y')] = $i->format('M Y');
         }
 
         return compact('admission', 'parent', 'monthList');

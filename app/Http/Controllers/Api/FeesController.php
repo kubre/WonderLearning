@@ -18,7 +18,14 @@ class FeesController extends Controller
      */
     public function __invoke(Admission $admission, Request $request)
     {
-        $months = \get_months(\get_academic_year(\today(), $admission->school), 'n');
+        list($start, $end) = get_academic_year(\today(), $admission->school);
+        $startMonth = $start->copy()->subMonths(12);
+        $endMonth = $end->copy();
+
+        for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
+            $months[$i->format('n Y')] = $i->format('M Y');
+        }
+
         $request->merge(\compact('months'));
         return [
             'data' => [

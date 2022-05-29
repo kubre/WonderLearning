@@ -38,7 +38,7 @@ IsApi: true
 ###
 
 # @name getFees
-GET {{ url }}/fees/1?school_id={{school_id}} HTTP/1.1
+GET {{ url }}/fees/3?school_id=3 HTTP/1.1
 Accept: application/json
 IsApi: true
 ###

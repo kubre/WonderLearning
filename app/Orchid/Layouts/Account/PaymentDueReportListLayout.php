@@ -30,8 +30,8 @@ class PaymentDueReportListLayout extends Table
         return [
             TD::make('prn', 'PRN')
                 ->align(TD::ALIGN_CENTER),
-            TD::make('admission_at', 'Admission Date')
-                ->align(TD::ALIGN_CENTER),
+            // TD::make('admission_at', 'Admission Date')
+            //     ->align(TD::ALIGN_CENTER),
             TD::make('student_name', 'Name')
                 ->align(TD::ALIGN_CENTER)
                 ->render(fn (Admission $a) => wordwrap($a->student->name, 15, '<br>')),

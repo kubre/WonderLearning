@@ -9,7 +9,7 @@
         @foreach ($installments as $installment)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $installment->month_name }}</td>
+                <td>{{ $installment->month_name_and_year }}</td>
                 <td style="text-align: right">
                     {{ $installment->amount }}</td>
                 <td style="text-align: right">{{ $installment->due_amount ?: 'Nil' }}</td>
