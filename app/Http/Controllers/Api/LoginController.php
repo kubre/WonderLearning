@@ -41,6 +41,10 @@ class LoginController extends Controller
 
         $student->save();
 
+        if (is_null($student->admission)) {
+            return \api_error('No admission found in current year!');
+        }
+
         return new StudentResource($student);
     }
 }
