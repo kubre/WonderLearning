@@ -36,12 +36,12 @@ class StudentResource extends JsonResource
                 'batch' => $this->admission->batch,
                 'is_transportation_required' => $this->admission->is_transportation_required,
                 'admission_id' => $this->admission->id,
-                'division_id' => $this->admission->division->id ?? null,
+                'division_id' => optional(optional($this->admission)->division)->id ?? null,
                 'teacher' => [
                     'id' => optional($teacher)->id,
                     'name' => optional($teacher)->name
                 ],
-                'division_title' => $this->admission->division->title ?? '-- No Division Assigned --',
+                'division_title' => optional(optional($this->admission)->division)->title ?? 'NA',
                 'kit_assigned' => (bool) $this->admission->assigned_kit,
             ],
             'school' => [
