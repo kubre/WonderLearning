@@ -199,15 +199,20 @@
             <span>Fees Payable (in words): </span>
             <strong class="b-b">
                 {{ \strtoupper(inr_format($admission->installments->sum('amount'))) }}
-                RUPEES ONLY
-                /-
+                RUPEES ONLY/-
             </strong>
         </span>
     </div>
     <div style="min-height: 50px"></div>
     <div class="row mt-5">
+        <span class="col-3" style="border-top: 1px solid black; margin-left: 20px; max-width: 200px">
+            Principal Signature
+        </span>
         <strong class="col text-end text-right">
-            Parent Signature<br>({{ now()->format('d-M-Y') }}&nbsp;&nbsp;&nbsp;)
+            Parent Signature<br>
+            <span class="text-center">
+                ({{ now()->format('d-M-Y') }})
+            </span>
         </strong>
     </div>
 </div>
