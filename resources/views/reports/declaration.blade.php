@@ -205,8 +205,11 @@
     </div>
     <div style="min-height: 50px"></div>
     <div class="row mt-5">
-        <span class="col-3" style="border-top: 1px solid black; margin-left: 20px; max-width: 200px">
-            Principal Signature
+        <span class="col-3" style="margin-left: 20px; max-width: 200px; font-weight: bold">
+            Principal Signature<br>
+            <span class="text-center">
+                ({{ now()->format('d-M-Y') }})
+            </span>
         </span>
         <strong class="col text-end text-right">
             Parent Signature<br>
