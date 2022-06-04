@@ -45,6 +45,7 @@ class EnquiryListScreen extends Screen
 
         return [
             'enquiries' => Enquiry::filters()
+                ->orderByDesc('id')
                 ->simplePaginate(),
             'count' => Enquiry::select('program', DB::raw('COUNT(id) as count'))
                 ->groupBy('program')
