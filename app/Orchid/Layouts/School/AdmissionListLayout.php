@@ -93,7 +93,7 @@ class AdmissionListLayout extends Table
                                 ->parameters(['student' => $a->student_id, 'parent' => 'mother']),
                             Link::make('Graduate To')
                                 ->icon('action-redo')
-                                ->canSee($a->program !== 'Senior KG' && $this->user->hasAccess('school.users'))
+                                ->canSee($this->user->hasAccess('school.users'))
                                 ->route('school.graduation.edit', [
                                     'admission' => $a->id,
                                 ]),

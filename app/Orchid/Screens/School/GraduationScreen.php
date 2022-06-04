@@ -41,6 +41,7 @@ class GraduationScreen extends Screen
         'Playgroup' => 'Nursery',
         'Nursery' => 'Junior KG',
         'Junior KG' => 'Senior KG',
+        'Senior KG' => 'Senior KG',
     ];
 
     protected const GRADUATIONS = [
@@ -55,6 +56,9 @@ class GraduationScreen extends Screen
         'Junior KG' => [
             'Senior KG' => 'Senior KG',
             'Junior KG' => 'Junior KG',
+        ],
+        'Senior KG' => [
+            'Senior KG' => 'Senior KG',
         ],
     ];
 
