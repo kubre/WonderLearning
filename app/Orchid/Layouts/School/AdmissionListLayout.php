@@ -121,7 +121,7 @@ class AdmissionListLayout extends Table
                                 ->route('reports.declaration.form', $a->id),
                             ModalToggle::make('Delete')
                                 ->icon('trash')
-                                ->canSee($this->user->hasAccess('admission.edit'))
+                                ->canSee($this->user->hasAccess('receipt.delete'))
                                 ->modal('deleteAdmissionModal')
                                 ->modalTitle('Delete Admission')
                                 ->method('deleteAdmission')
