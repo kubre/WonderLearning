@@ -119,6 +119,13 @@ class AdmissionListLayout extends Table
                                 ->icon('eye')
                                 ->canSee($this->user->hasAccess('school.users'))
                                 ->route('reports.declaration.form', $a->id),
+                            ModalToggle::make('Delete')
+                                ->icon('trash')
+                                ->canSee($this->user->hasAccess('admission.edit'))
+                                ->modal('deleteAdmissionModal')
+                                ->modalTitle('Delete Admission')
+                                ->method('deleteAdmission')
+                                ->parameters(['admission_id' => $a->id]),
                         ]),
                 )
         ];

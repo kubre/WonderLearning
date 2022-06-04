@@ -18,6 +18,7 @@ use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Orchid\Screen\Fields\Label;
 
 class AdmissionListScreen extends Screen
 {
@@ -99,6 +100,12 @@ class AdmissionListScreen extends Screen
                 ->applyButton('Assign')
                 ->closeButton('Cancel')
                 ->async('asyncGetDivisions'),
+            Layout::modal('deleteAdmissionModal', [
+                Layout::rows([Label::make('deleteadmission')
+                ->title('Should only be used if no receipts for the admission has been released')])
+            ])
+            ->applyButton('Delete')
+            ->closeButton('Cancel')
         ];
     }
 
@@ -162,5 +169,11 @@ class AdmissionListScreen extends Screen
 
         Toast::info('Assigned kit to the student.');
         return redirect()->route('school.admission.list');
+    }
+
+    public function deleteAdmission(int $admission_id)
+    {
+        $admission = Admission::withoutGlobalScopes()->find($admission_id);
+        optional($admission)->delete();
     }
 }
