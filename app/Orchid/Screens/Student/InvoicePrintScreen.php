@@ -32,10 +32,14 @@ class InvoicePrintScreen extends Screen
      *
      * @return array
      */
-    public function query(Admission $admission, string $parent): array
+    public function query($admission, string $parent): array
     {
-        $this->fileName .= $admission->student->name . '_' . $admission->invoice_no;
-        return compact('admission', 'parent');
+        $admissionObj = Admission::withoutGlobalScopes()->findOrFail($admission);
+        $this->fileName .= $admissionObj->student->name . '_' . $admissionObj->invoice_no;
+        return [
+            'admission' => $admissionObj,
+            'parent' => $parent
+        ];
     }
 
     /**

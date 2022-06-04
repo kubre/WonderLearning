@@ -36,10 +36,14 @@ class InstallmentEditScreen extends Screen
      *
      * @return array
      */
+
     public function query(int $admission): array
     {
-        $admission = Admission::withoutGlobalScopes()->findOrFail($admission);
-        return compact('admission');
+        $admissionObj = Admission::withoutGlobalScopes()->findOrFail($admission);
+        return [
+            'admission' => $admissionObj,
+            'created_at_ref' => $admissionObj->created_at->timestamp
+        ];
     }
 
     /**
@@ -87,8 +91,8 @@ class InstallmentEditScreen extends Screen
         $amounts = $request->input('amount');
         $total_amount = array_sum($amounts);
 
-        $admission = Admission::withoutGlobalScopes()->findOrFail($admission);
-        $expected_fees = $admission->total_fees;
+        $admissionObj = Admission::withoutGlobalScopes()->findOrFail($admission);
+        $expected_fees = $admissionObj->total_fees;
 
         if ($total_amount !== $expected_fees) {
             return back()->withErrors([
@@ -101,20 +105,25 @@ class InstallmentEditScreen extends Screen
             'month' => $month,
             'amount' => $amount,
             'due_amount' => $amount,
-            'admission_id' => $admission->id,
-            'school_id' => $admission->school_id,
-            'created_at' => $admission->created_at,
+            'admission_id' => $admissionObj->id,
+            'school_id' => $admissionObj->school_id,
+            'created_at' => $admissionObj->created_at,
             'updated_at' => $now,
         ], $months, $amounts);
 
         Installment::insert($data);
 
         Toast::info('Installments has been assigned to the student!');
-        return redirect()->route('reports.declaration.form', compact('admission'));
+        return redirect()->route('reports.declaration.form', [
+            'admission' => $admissionObj->id
+        ]);
     }
 
-    public function asyncInstallmentCount(int $installment_count)
+    public function asyncInstallmentCount(int $installment_count, $created_at_ref)
     {
-        return compact('installment_count');
+        return [
+            'installment_count' => $installment_count,
+            'created_at_ref' => $created_at_ref
+        ];
     }
 }

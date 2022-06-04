@@ -27,7 +27,7 @@ class AdmissionRequest extends FormRequest
         return [
             "photo" => "nullable",
             "admission_at" => "required",
-            "created_at" => "required",
+            // "created_at" => "required",
             "name" => "required",
             "gender" => "required",
             "code" => "required|integer",

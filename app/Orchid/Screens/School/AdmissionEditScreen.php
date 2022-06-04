@@ -95,7 +95,7 @@ class AdmissionEditScreen extends Screen
         }
 
         $this->working_year = working_year();
-        $this->current_year_start = (string) $this->working_year[0];
+        $this->current_year_start = $this->working_year[0]->toString();
         $this->current_year = get_academic_year_formatted($this->working_year);
         // if (today()->isBetween(...$this->working_year)) {
         //     $academic_year = get_academic_year(today()->addYear());
@@ -149,14 +149,14 @@ class AdmissionEditScreen extends Screen
             Layout::rows([
                 Group::make([
                     Input::make('prn')
-                        ->title('PRN')
+                        ->title('PR Number')
                         ->canSee($this->exists)
                         ->readonly(),
                     Input::make('enquirer_id')
                         ->hidden(),
                     Input::make('code')
                         ->hidden(),
-                    Input::make('created_at')
+                    Input::make('created_at_proxy')
                         ->hidden()
                         ->value($this->current_year_start),
                 ]),
@@ -286,14 +286,17 @@ class AdmissionEditScreen extends Screen
         $student = new Student();
         $newAdmission = !$admission->exists;
 
+        $request->merge(['created_at' => $request->created_at_proxy]);
+        $reqData = $request->except('created_at_proxy');
         if ($admission->exists) {
             $student = $admission->student;
+            $reqData = $request->except('created_at');
         }
 
-        $student->fill($request->input())->save();
+        $student->fill($reqData)->save();
 
         $student->admission()->save(
-            $admission->fill($request->input())
+            $admission->fill($reqData)
         );
 
         if (!is_null($request->input('enquirer_id'))) {

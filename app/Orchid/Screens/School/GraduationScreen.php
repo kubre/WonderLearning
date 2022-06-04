@@ -74,18 +74,19 @@ class GraduationScreen extends Screen
      *
      * @return array
      */
-    public function query(Admission $admission): array
+    public function query($admission): array
     {
-        $student = $admission->student->toArray();
-        $student['prn'] = $admission->student->prn;
+        $admissionObj = Admission::withoutGlobalScopes()->findOrFail($admission);
+        $student = $admissionObj->student->toArray();
+        $student['prn'] = $admissionObj->student->prn;
 
-        $academic_year = get_academic_year(today()->addYear());
+        $academic_year = get_academic_year($admissionObj->created_at->addYear());
 
         $fees = Fees::withoutGlobalScope(AcademicYearScope::class)
             ->whereBetween('created_at', $academic_year)
             ->first();
-        $program_fees = optional($fees)->{$admission->fees_total_column};
-        $graduate_fees = optional($fees)->{Str::of(static::GRADUATIONS_MAP[$admission->program])
+        $program_fees = optional($fees)->{$admissionObj->fees_total_column};
+        $graduate_fees = optional($fees)->{Str::of(static::GRADUATIONS_MAP[$admissionObj->program])
             ->lower()->snake() . '_total'};
 
         if (
@@ -98,17 +99,17 @@ class GraduationScreen extends Screen
             Toast::error("Please add fees rate card for next year first!");
         }
 
-        $admission = $admission->toArray();
+        $admissionObj = $admissionObj->toArray();
 
-        $admission['discount'] = null;
-        $admission['is_transportation_required'] = null;
-        $this->program = $admission['program'];
-        $admission['program'] = static::GRADUATIONS_MAP[$this->program];
+        $admissionObj['discount'] = null;
+        $admissionObj['is_transportation_required'] = null;
+        $this->program = $admissionObj['program'];
+        $admissionObj['program'] = static::GRADUATIONS_MAP[$this->program];
 
-        $admission['created_at'] = $academic_year[0];
-        $admission['created_at_dummy'] = get_academic_year_formatted($academic_year);
+        $admissionObj['created_at'] = $academic_year[0];
+        $admissionObj['created_at_dummy'] = get_academic_year_formatted($academic_year);
 
-        return array_merge($student, $admission);
+        return array_merge($student, $admissionObj);
     }
 
     /**
@@ -124,7 +125,7 @@ class GraduationScreen extends Screen
                 ->method('graduate')
                 ->disabled($this->disable_graduate)
                 ->type(Color::PRIMARY()),
-        ];;
+        ];
     }
 
     /**
@@ -137,7 +138,7 @@ class GraduationScreen extends Screen
         return [
             Layout::rows([
                 Input::make('prn')
-                    ->title('PRN')
+                    ->title('PR Number')
                     ->readonly(),
                 Input::make('created_at')
                     ->hidden(),
@@ -258,7 +259,7 @@ class GraduationScreen extends Screen
                     ->fields(['sibling_dob' => DateTimer::make('')->format('d-m-Y')])
                     ->maxRows(5)
             ])->title('Other Details'),
-        ];;
+        ];
     }
 
 
@@ -275,7 +276,7 @@ class GraduationScreen extends Screen
         Toast::info('Student graduated to next programme successfully!');
 
         return redirect()->route('school.installment.edit', [
-            'admission' => $admission->id,
+            'admission' => $admission->id
         ]);
     }
 }

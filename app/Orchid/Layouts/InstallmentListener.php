@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Layouts;
 
+use Illuminate\Support\Carbon;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
@@ -17,6 +18,7 @@ class InstallmentListener extends Listener
      */
     protected $targets = [
         'installment_count',
+        'created_at_ref',
     ];
 
     /**
@@ -38,18 +40,25 @@ class InstallmentListener extends Listener
     protected function layouts(): array
     {
         $monthList = [];
-
-        list($start, $end) = working_year();
+        list($start, $end) = \get_academic_year(
+            Carbon::createFromTimestamp($this->query->get('created_at_ref'))
+        );
         $startMonth = $start->copy()->subMonths(12);
         $endMonth = $end->copy();
-        // \dd($startMonth->format('d M Y'), $endMonth->format('d M Y'));
 
         for ($i = $startMonth; $i <= $endMonth; $i->addMonth()) {
             $monthList[$i->format('n Y')] = $i->format('M Y');
         }
 
         $this->monthList = $monthList;
+
         return [
+            Layout::rows([Group::make([
+            Input::make('created_at_ref')
+                ->type('number')
+                ->value($this->query->get('created_at_ref'))
+                ->hidden()]
+            )]),
             Layout::rows(
                 $this->makeInstallments($this->query->get('installment_count') ?? 1),
             )

@@ -35,10 +35,11 @@ class DeclarationFormScreen extends Screen
      *
      * @return array
      */
-    public function query(Admission $admission): array
+    public function query(int $admission): array
     {
-        $parent = request()->query('parent') ?? $this->getGuardianOfParent($admission);
-        $this->fileName .= $admission->student->name . '_' . $admission->invoice_no;
+        $admissionObj = Admission::withoutGlobalScopes()->findOrFail($admission);
+        $parent = request()->query('parent') ?? $this->getGuardianOfParent($admissionObj);
+        $this->fileName .= $admissionObj->student->name . '_' . $admissionObj->invoice_no;
 
         $monthList = [];
 
@@ -50,7 +51,11 @@ class DeclarationFormScreen extends Screen
             $monthList[$i->format('n Y')] = $i->format('M Y');
         }
 
-        return compact('admission', 'parent', 'monthList');
+        return [
+            'admission' => $admissionObj,
+            'parent' => $parent,
+            'monthList' => $monthList
+        ];
     }
 
     /**
