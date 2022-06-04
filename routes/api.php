@@ -35,7 +35,7 @@ Route::get('/getSyllabus', [AdminController::class, 'get']);
 
 Route::get('/version', function () {
     return [
-        'data' => 3,
+        'data' => 4,
     ];
 });
 
