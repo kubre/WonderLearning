@@ -48,6 +48,11 @@ class UserListLayout extends Table
                         ]);
                 }),
 
+                TD::make('school.name', __('School'))
+                ->sort()
+                ->cantHide()
+                ->filter(TD::FILTER_TEXT),
+
             TD::make('updated_at', __('Last edit'))
                 ->sort()
                 ->render(function (User $user) {

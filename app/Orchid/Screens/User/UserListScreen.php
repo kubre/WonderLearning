@@ -10,6 +10,8 @@ use App\Orchid\Layouts\User\UserListLayout;
 use Illuminate\Http\Request;
 // use Orchid\Platform\Models\User;
 use App\Models\User;
+use App\Orchid\Filters\SchoolFilter;
+use App\Orchid\Layouts\SchoolSelection;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
@@ -46,8 +48,8 @@ class UserListScreen extends Screen
         return [
             'users' => User::with('roles')
                 ->filters()
-                ->filtersApplySelection(UserFiltersLayout::class)
-                ->defaultSort('id', 'desc')
+                ->with('school')
+                ->filtersApplySelection(SchoolSelection::class)
                 ->paginate(),
         ];
     }
@@ -74,9 +76,9 @@ class UserListScreen extends Screen
     public function layout(): array
     {
         return [
-            UserFiltersLayout::class,
+            SchoolSelection::class,
+            // UserFiltersLayout::class,
             UserListLayout::class,
-
             Layout::modal('oneAsyncModal', UserEditLayout::class)
                 ->async('asyncGetUser'),
         ];
