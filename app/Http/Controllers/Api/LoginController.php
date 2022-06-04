@@ -39,11 +39,11 @@ class LoginController extends Controller
             $student->mother_logged_at = \now();
         }
 
-        $student->save();
-
         if (is_null($student->admission)) {
             return \api_error('No admission found in current year!');
         }
+
+        $student->save();
 
         return new StudentResource($student);
     }
