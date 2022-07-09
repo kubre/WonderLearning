@@ -36,6 +36,75 @@ class AdmissionListLayout extends Table
         $f = $this->query->get('fees');
         $this->user = auth()->user();
         return [
+            TD::make('actions', 'Actions')
+            ->render(
+            fn (Admission $a) =>
+            DropDown::make()
+                ->icon('options-vertical')
+                ->list([
+                    Link::make('Receipt')
+                        ->icon('money')
+                        ->canSee($this->user->hasAccess('school.users'))
+                        ->route('school.receipt.list', ['admission_id' => $a->id]),
+                    ModalToggle::make('Assign Division')
+                        ->icon('layers')
+                        ->modal('asyncAssignDivision')
+                        ->modalTitle('Assign division to a student')
+                        ->method('assignDivision')
+                        ->parameters(['admission' => $a->id])
+                        ->canSee($this->user->hasAccess('school.users'))
+                        ->asyncParameters(['admission' => $a->id, 'program' => $a->program]),
+                    Button::make('Assign Kit')
+                        ->icon('book-open')
+                        ->method('assignKit')
+                        ->confirm('Once assigned a kit cannot be reassigned back and will deduct 1 count from kits available for this programme, Are you sure?')
+                        ->parameters(['admission' => $a->id])
+                        ->canSee(!$a->assigned_kit && $this->user->hasAccess('school.users')),
+                    Button::make('Reset Father\'s Login')
+                        ->icon('lock-open')
+                        ->method('resetLogin')
+                        ->parameters(['student' => $a->student_id, 'parent' => 'father']),
+                    Button::make('Reset Mother\'s Login')
+                        ->icon('lock-open')
+                        ->method('resetLogin')
+                        ->parameters(['student' => $a->student_id, 'parent' => 'mother']),
+                    Link::make('Graduate To')
+                        ->icon('action-redo')
+                        ->canSee($this->user->hasAccess('school.users'))
+                        ->route('school.graduation.edit', [
+                            'admission' => $a->id,
+                        ]),
+                    ModalToggle::make('Invoice')
+                        ->icon('doc')
+                        ->modal('chooseInvoiceReceiversName')
+                        ->modalTitle('Print Invoice')
+                        ->method('issueInvoice')
+                        ->canSee($this->user->hasAccess('school.users'))
+                        ->asyncParameters(['admission_id' => $a->id]),
+                    ModalToggle::make('Performance Report')
+                        ->icon('bar-chart')
+                        ->modal('preparePerformanceReport')
+                        ->modalTitle('Fill details')
+                        ->method('prepareReport')
+                        ->canSee($this->user->hasAccess('teacher.student'))
+                        ->asyncParameters(['admission_id' => $a->id]),
+                    Link::make('Edit')
+                        ->icon('note')
+                        ->canSee($this->user->hasAccess('admission.edit'))
+                        ->route('school.admission.edit', $a->id),
+                    Link::make('Declaration Form')
+                        ->icon('eye')
+                        ->canSee($this->user->hasAccess('school.users'))
+                        ->route('reports.declaration.form', $a->id),
+                    ModalToggle::make('Delete')
+                        ->icon('trash')
+                        ->canSee($this->user->hasAccess('receipt.delete'))
+                        ->modal('deleteAdmissionModal')
+                        ->modalTitle('Delete Admission')
+                        ->method('deleteAdmission')
+                        ->parameters(['admission_id' => $a->id]),
+                ]),
+            ),
             TD::make('prn', 'PRN')
                 ->render(fn (Admission $a) => $a->student->prn),
             TD::make('admission_at', 'Admission Date')
@@ -59,75 +128,6 @@ class AdmissionListLayout extends Table
             TD::make('total_fees', 'Total Fees')
                 ->render(fn (Admission $a) => $f->{$a->fees_total_column} - $a->discount),
             TD::make('batch', 'Batch'),
-            TD::make('actions', 'Actions')
-                ->render(
-                    fn (Admission $a) =>
-                    DropDown::make()
-                        ->icon('options-vertical')
-                        ->list([
-                            Link::make('Receipt')
-                                ->icon('money')
-                                ->canSee($this->user->hasAccess('school.users'))
-                                ->route('school.receipt.list', ['admission_id' => $a->id]),
-                            ModalToggle::make('Assign Division')
-                                ->icon('layers')
-                                ->modal('asyncAssignDivision')
-                                ->modalTitle('Assign division to a student')
-                                ->method('assignDivision')
-                                ->parameters(['admission' => $a->id])
-                                ->canSee($this->user->hasAccess('school.users'))
-                                ->asyncParameters(['admission' => $a->id, 'program' => $a->program]),
-                            Button::make('Assign Kit')
-                                ->icon('book-open')
-                                ->method('assignKit')
-                                ->confirm('Once assigned a kit cannot be reassigned back and will deduct 1 count from kits available for this programme, Are you sure?')
-                                ->parameters(['admission' => $a->id])
-                                ->canSee(!$a->assigned_kit && $this->user->hasAccess('school.users')),
-                            Button::make('Reset Father\'s Login')
-                                ->icon('lock-open')
-                                ->method('resetLogin')
-                                ->parameters(['student' => $a->student_id, 'parent' => 'father']),
-                            Button::make('Reset Mother\'s Login')
-                                ->icon('lock-open')
-                                ->method('resetLogin')
-                                ->parameters(['student' => $a->student_id, 'parent' => 'mother']),
-                            Link::make('Graduate To')
-                                ->icon('action-redo')
-                                ->canSee($this->user->hasAccess('school.users'))
-                                ->route('school.graduation.edit', [
-                                    'admission' => $a->id,
-                                ]),
-                            ModalToggle::make('Invoice')
-                                ->icon('doc')
-                                ->modal('chooseInvoiceReceiversName')
-                                ->modalTitle('Print Invoice')
-                                ->method('issueInvoice')
-                                ->canSee($this->user->hasAccess('school.users'))
-                                ->asyncParameters(['admission_id' => $a->id]),
-                            ModalToggle::make('Performance Report')
-                                ->icon('bar-chart')
-                                ->modal('preparePerformanceReport')
-                                ->modalTitle('Fill details')
-                                ->method('prepareReport')
-                                ->canSee($this->user->hasAccess('teacher.student'))
-                                ->asyncParameters(['admission_id' => $a->id]),
-                            Link::make('Edit')
-                                ->icon('note')
-                                ->canSee($this->user->hasAccess('admission.edit'))
-                                ->route('school.admission.edit', $a->id),
-                            Link::make('Declaration Form')
-                                ->icon('eye')
-                                ->canSee($this->user->hasAccess('school.users'))
-                                ->route('reports.declaration.form', $a->id),
-                            ModalToggle::make('Delete')
-                                ->icon('trash')
-                                ->canSee($this->user->hasAccess('receipt.delete'))
-                                ->modal('deleteAdmissionModal')
-                                ->modalTitle('Delete Admission')
-                                ->method('deleteAdmission')
-                                ->parameters(['admission_id' => $a->id]),
-                        ]),
-                )
         ];
     }
 }
