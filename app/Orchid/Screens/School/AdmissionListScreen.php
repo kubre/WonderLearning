@@ -51,7 +51,7 @@ class AdmissionListScreen extends Screen
                 ->filters()
                 ->filtersApplySelection(ProgramSelectionLayout::class)
                 ->with(['student.school', 'division'])
-                ->simplePaginate(50),
+                ->paginate(50),
             'fees' => Fees::first(),
             'count' => Admission::select('program', DB::raw('COUNT(id) as count'))
                 ->groupBy('program')
