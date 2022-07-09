@@ -60,7 +60,7 @@
             <strong>Sum of (in digits) </strong><span class="pl-2 b-b">₹ {{ $receipt->amount }}/- </span>
         </div>
         <div class="px-2">
-            <strong>on account of </strong><span class="b-b pl-2">{{ $receipt->for }}</span>
+            <strong>on account of </strong><span class="b-b pl-2">{{ $receipt->print_reason ?? $receipt->for }}</span>
         </div>
         <div><strong>in words:</strong> &nbsp;&nbsp; (<span class='b-b w-100'>
                 {{ strtoupper(inr_format($receipt->amount)) }}RUPEES ONLY</span>

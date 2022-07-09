@@ -19,6 +19,7 @@ class Receipt extends Model
         'receipt_at',
         'amount',
         'for',
+        'print_reason',
         'payment_mode',
         'bank_name',
         'bank_branch',

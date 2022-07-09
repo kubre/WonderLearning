@@ -137,11 +137,14 @@ class ReceiptEditScreen extends Screen
                     ->tabindex(2)
                     ->format('Y-m-d')
                     ->enableTime(false),
-                Input::make('for')
-                    ->title('Receipt For')
-                    ->help('ex. Event, Trip, etc., NOTE: Do not add School Fees from here')
+                Input::make('print_reason')
+                    ->title($this->is_school_fees_receipt ? 'Receit For' : '')
                     ->tabindex(3)
-                    ->readonly($this->is_school_fees_receipt)
+                    ->hidden(!$this->is_school_fees_receipt),
+                Input::make('for')
+                    ->title($this->is_school_fees_receipt ? "" : 'Receit For')
+                    ->tabindex(3)
+                    ->hidden($this->is_school_fees_receipt)
                     ->required(),
                 Select::make('payment_mode')
                     ->tabindex(4)
@@ -160,6 +163,7 @@ class ReceiptEditScreen extends Screen
             'receipt_no' => 'required|integer',
             'amount' => 'required|integer|min:1',
             'for' => 'required',
+            'print_reason' => 'nullable',
             'payment_mode' => 'required|in:c,o,b',
             'bank_name' => 'nullable',
             'bank_branch' => 'nullable',
