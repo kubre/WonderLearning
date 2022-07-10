@@ -191,7 +191,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Chats')
                 ->icon('envelope')
-                ->permission('teacher.student')
+                ->permission('menu.report')
                 ->route('teacher.chats.list'),
 
             Menu::make('Subjects')

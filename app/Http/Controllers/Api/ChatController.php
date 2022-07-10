@@ -12,7 +12,7 @@ class ChatController extends Controller
     public function get(Request $request)
     {
         return MessageResource::collection(Message::query()
-            ->where('user_id', $request->teacher)
+            // ->where('user_id', $request->teacher)
             ->where('student_id', $request->student)
             ->orderBy('sent_at', 'desc')
             ->limit(20)

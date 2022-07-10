@@ -273,6 +273,14 @@ Route::screen('performance/filling', PerformanceReportFillingScreen::class)
             ->parent('platform.index')
             ->push(__('Performance Report Filling'), route('teacher.performance.filling'))
     );
+  
+Route::screen('chats', ChatListScreen::class)
+    ->name('teacher.chats.list')
+    ->breadcrumbs(
+        fn (Trail $trail) => $trail
+            ->parent('platform.index')
+            ->push(__('Chats'), route('teacher.chats.list'))
+    );
 
 Route::screen('chats/{student}', ChatUIScreen::class)
     ->name('teacher.chats.screen')
@@ -283,14 +291,6 @@ Route::screen('chats/{student}', ChatUIScreen::class)
                 __("Chat with {$student->name}'s Parent's"),
                 route('teacher.chats.screen', compact('student'))
             )
-    );
-
-Route::screen('chats', ChatListScreen::class)
-    ->name('teacher.chats.list')
-    ->breadcrumbs(
-        fn (Trail $trail) => $trail
-            ->parent('platform.index')
-            ->push(__('Chats'), route('teacher.chats.list'))
     );
 
 Route::screen('subjects', SubjectListScreen::class)

@@ -43,14 +43,23 @@ class ChatListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->render(function (Admission $a) {
-                    return
+                    return '<div style="display: flex; justify-content: end">'.
                         Link::make('Go To Chat')
                         ->type(Color::INFO())
                         ->icon('cursor')
                         ->route('teacher.chats.screen', ['student' => $a->student->id])
                         ->parameters([
                             'id' => $a->student->id,
-                        ]);
+                        ]).
+                        '<div style="width: 10px"></div>'.
+                        Button::make('Export Chat')
+                        ->type(Color::SUCCESS())
+                        ->icon('bubbles')
+                        ->method('exportChat')
+                        ->parameters([
+                            'id' => $a->student->id,
+                        ])->rawClick()
+                    .'</div>';
                 }),
         ];
     }

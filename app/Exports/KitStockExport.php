@@ -25,6 +25,7 @@ class KitStockExport extends FromToExportable implements
     WithColumnFormatting,
     WithStrictNullComparison
 {
+    private $id;
 
     public function __construct(?string $from_date, ?string $to_date)
     {

@@ -4,10 +4,13 @@ namespace App\Orchid\Screens\Teacher;
 
 use App\Models\Admission;
 use App\Models\Student;
+use App\Models\Message;
+use App\Exports\ChatExport;
 use App\Orchid\Layouts\Teacher\ChatListLayout;
 use App\Orchid\Layouts\Teacher\ProgramSelectionLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ChatListScreen extends Screen
 {
@@ -25,7 +28,7 @@ class ChatListScreen extends Screen
      */
     public $description = 'See chats from all the parents in current year here.';
 
-    public $permission = 'teacher.student';
+    public $permission = 'menu.report';
 
 
     /**
@@ -35,14 +38,16 @@ class ChatListScreen extends Screen
      */
     public function query(): array
     {
-        $divisions = auth()->user()->divisions->pluck('id')->toArray();
         return [
             'students' => Admission::query()
                 ->filters()
                 ->filtersApplySelection(ProgramSelectionLayout::class)
-                ->whereIn('division_id', $divisions)
+                ->when(auth()->user()->inRole('teacher'), function ($query) {
+                    $divisions = auth()->user()->divisions->pluck('id')->toArray();
+                    return $query->whereIn('division_id', $divisions);
+                })
                 ->with(['student.school', 'division'])
-                ->simplePaginate(15),
+                ->paginate(15),
         ];
     }
 
@@ -53,11 +58,7 @@ class ChatListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [
-            Link::make(__('New Chat'))
-                ->icon('plus')
-                ->href(route('platform.systems.roles.create')),
-        ];
+        return [];
     }
 
     /**
@@ -71,5 +72,13 @@ class ChatListScreen extends Screen
             ProgramSelectionLayout::class,
             ChatListLayout::class,
         ];
+    }
+    
+    public function exportChat($id)
+    {
+        return Excel::download(
+            new ChatExport($id),
+            'Chat_Export_' . $id . '_' . now()->toDateTimeString() . '.xlsx'
+        );
     }
 }

@@ -16,8 +16,7 @@ class MessageResource extends JsonResource
     {
         return [
             'body' => $this->body,
-            'sent_at' => $this->sent_at->isToday() ? $this->sent_at->format("h:i A")
-            : $this->sent_at->format("d-M-Y h:i A"),
+            'sent_at' => $this->sent_at->setTimezone('Asia/Kolkata')->format("d-M-Y h:i A"),
             'is_teacher' => $this->is_teacher
         ];
     }
