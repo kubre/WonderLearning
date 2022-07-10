@@ -138,11 +138,11 @@ class ReceiptEditScreen extends Screen
                     ->format('Y-m-d')
                     ->enableTime(false),
                 Input::make('print_reason')
-                    ->title($this->is_school_fees_receipt ? 'Receit For' : '')
+                    ->title($this->is_school_fees_receipt ? 'Receipt For' : '')
                     ->tabindex(3)
                     ->hidden(!$this->is_school_fees_receipt),
                 Input::make('for')
-                    ->title($this->is_school_fees_receipt ? "" : 'Receit For')
+                    ->title($this->is_school_fees_receipt ? "" : 'Receipt For')
                     ->tabindex(3)
                     ->hidden($this->is_school_fees_receipt)
                     ->required(),
@@ -196,6 +196,9 @@ class ReceiptEditScreen extends Screen
         }
 
         Toast::success('Issued the Receipt');
+        if (session()->has('last_page_from_receipt')) {
+            return redirect(session()->get('last_page_from_receipt'));
+        }
         return redirect()->route('school.receipt.list', $data);
     }
 

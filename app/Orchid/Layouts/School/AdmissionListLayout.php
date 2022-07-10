@@ -122,7 +122,8 @@ class AdmissionListLayout extends Table
             TD::make('parent_contact', 'Contacts')
                 ->filter(TD::FILTER_TEXT)
                 ->render(fn (Admission $a) =>
-                join('/', array_filter([$a->student->father_contact, $a->student->mother_contact]))),
+                join('/', array_filter([$a->student->father_contact, $a->student->mother_contact])))
+                ->canSee($this->user->hasAccess('school.users')),
             TD::make('program', 'Programme'),
             TD::make('division.title', 'Division'),
             TD::make('total_fees', 'Total Fees')

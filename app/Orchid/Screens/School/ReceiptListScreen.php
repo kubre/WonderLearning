@@ -16,6 +16,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Illuminate\Support\Str;
 
 class ReceiptListScreen extends Screen
 {
@@ -104,6 +105,14 @@ class ReceiptListScreen extends Screen
      */
     public function layout(): array
     {
+        // Used to redirect back from receipt edit screen to Admissions page on correct index
+        $hasLastAdmissionPage = Str::contains(url()->previous(), '/admin/admissions');
+        if ($hasLastAdmissionPage) {
+            session(['last_page_from_receipt' => url()->previous()]);
+        } else {
+            session()->forget('last_page_from_receipt');
+        }
+
         $views = [];
         if (!is_null($this->admission)) {
             $views['School Fees Details'] = Layout::component(AdmissionReceipt::class);
