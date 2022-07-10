@@ -32,7 +32,7 @@ class ChatExport implements
 
     public function query(): Builder
     {
-      return Message::where('student_id', $this->id)->with('user');
+      return Message::where('student_id', $this->id)->with('user')->withoutGlobalScopes();
     }
 
     public function map($message): array
