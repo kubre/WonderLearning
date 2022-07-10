@@ -51,13 +51,16 @@ class AdmissionListScreen extends Screen
                 ->filters()
                 ->filtersApplySelection(ProgramSelectionLayout::class)
                 ->with(['student.school', 'division'])
+                ->when(request('filter.deleted'), function ($query) {
+                    return $query->onlyTrashed();
+                })
                 ->paginate(50),
             'fees' => Fees::first(),
             'count' => Admission::select('program', DB::raw('COUNT(id) as count'))
                 ->groupBy('program')
                 ->get()
                 ->mapWithKeys(fn ($item) => [$item->program => $item->count])
-                ->toArray(),
+                ->toArray() + ['deleted' => Admission::onlyTrashed()->count()],
             'route' => 'school.admission.list',
         ];
     }
