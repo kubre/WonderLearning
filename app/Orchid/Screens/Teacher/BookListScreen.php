@@ -36,10 +36,11 @@ class BookListScreen extends Screen
     public function query(Syllabus $book): array
     {
         $this->name = $book->name;
+        $items = $book->descendants()
+            ->with('children', 'covered')
+            ->get();
         return [
-            'items' => $book->descendants()
-                ->with('children', 'covered')
-                ->get(),
+            'items' => $items,
             'book_id' => $book->id,
         ];
     }

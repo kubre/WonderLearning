@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\SchoolScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -22,6 +23,11 @@ class SchoolSyllabus extends Pivot
         'completed_at',
     ];
 
+    protected static function booted()
+    {
+        static::addGlobalScope(new SchoolScope());
+    }
+
     public function getCompletedAtAttribute($value)
     {
         return is_null($value) ? $value : \date('d-M-Y', \strtotime($value));
@@ -41,7 +47,6 @@ class SchoolSyllabus extends Pivot
     {
         return \substr($this->completed_at, 7, 4);
     }
-
 
     public function approval(): MorphOne
     {
