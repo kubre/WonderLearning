@@ -62,7 +62,7 @@ class PaymentDueReportListLayout extends Table
         return [
             TD::make('total')
                 ->align(TD::ALIGN_RIGHT)
-                ->colspan(6)
+                ->colspan(5)
                 ->render(fn () => 'Total:'),
 
             TD::make('total_invoice_amount')

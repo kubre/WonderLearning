@@ -40,6 +40,10 @@ class HomeworkListScreen extends Screen
     {
         return [
             'homeworks' => Homework::with('division', 'attachment')
+                ->when(!request()->has('division'), function ($query) {
+                    $divisions_ids = optional(optional(auth()->user())->divisions())->pluck('id');
+                    $query->whereIn('division_id', $divisions_ids);
+                })
                 ->filters()
                 ->filtersApplySelection(DivisionAndYearMonthSelectionLayout::class)
                 ->simplePaginate(30),
