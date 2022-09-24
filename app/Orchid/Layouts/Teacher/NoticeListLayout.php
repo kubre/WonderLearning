@@ -39,9 +39,9 @@ class NoticeListLayout extends Table
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
-                            Link::make('Edit')
-                                ->route('teacher.notice.edit', $notice->id)
-                                ->icon('note'),
+                            // Link::make('Edit')
+                            //     ->route('teacher.notice.edit', $notice->id)
+                            //     ->icon('note'),
 
                             Button::make('Remove')
                                 ->icon('trash')
